@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building the OPAE Intel FPGA driver (in-tree) &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="OPAE" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/userclk/userclk.html">userclk</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OPAE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Building the OPAE Intel FPGA driver (in-tree)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/docs/build_chain/fpga_driver/driver_build.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-the-opae-intel-fpga-driver-in-tree">
+<h1>Building the OPAE Intel FPGA driver (in-tree)<a class="headerlink" href="#building-the-opae-intel-fpga-driver-in-tree" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone ssh://«Place your username here»@git-amr-1.devtools.intel.com:29418/cpt_sys_sw-intel-fpga
+<span class="nb">cd</span> cpt_sys_sw-intel-fpga
+git config user.name <span class="s2">&quot;«Place your name here»&quot;</span>
+git config user.email <span class="s2">&quot;«Place your email here»&quot;</span>
+curl -k https://git-amr-1.devtools.intel.com/gerrit/tools/hooks/commit-msg -o .git/hooks/commit-msg
+git checkout fpga-all
+git pull
+
+make oldconfig
+make prepare
+make modules <span class="nv">SUBDIRS</span><span class="o">=</span>drivers/fpga
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Kernel modules built using in-tree building cannot <em>insmod’d</em> or
+<em>modprobe’d</em> into the currently running kernel (e.g. in-tree building
+the Intel FPGA driver when running on a workstation with different
+kernel); unless the currently running kernel is the same than kernel on
+Intel FPGA driver repository.</p>
+</div>
+</div>
+<div class="section" id="building-the-opae-intel-fpga-driver-out-of-tree">
+<h1>Building the OPAE Intel FPGA driver (out-of-tree)<a class="headerlink" href="#building-the-opae-intel-fpga-driver-out-of-tree" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Fetch the Intel FPGA kernel repository</li>
+<li>Fetch the Intel FPGA internal tools repository</li>
+<li>Configure the Intel FPGA internal tools project</li>
+<li>Build the driver</li>
+<li>Build distribution package (tarball)</li>
+<li>Build RPM package (RPM)</li>
+<li>Insert the driver into currently running kernel</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The resulting kernel objects has only been tested for correct functionality
+between kernel 3.10 up to kernel 4.10.</p>
+</div>
+</div>
+<div class="section" id="fetch-the-intel-fpga-kernel-repository">
+<h2>Fetch the Intel FPGA kernel repository<a class="headerlink" href="#fetch-the-intel-fpga-kernel-repository" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone ssh://«Place your username here»@git-amr-1.devtools.intel.com:29418/cpt_sys_sw-intel-fpga
+<span class="nb">cd</span> cpt_sys_sw-intel-fpga
+git config user.name <span class="s2">&quot;«Place your name here»&quot;</span>
+git config user.email <span class="s2">&quot;«Place your email here»&quot;</span>
+curl -k https://git-amr-1.devtools.intel.com/gerrit/tools/hooks/commit-msg -o .git/hooks/commit-msg
+git checkout feature/cmake
+git pull
+</pre></div>
+</div>
+</div>
+<div class="section" id="fetch-the-intel-fpga-internal-tools-repository">
+<h2>Fetch the Intel FPGA internal tools repository<a class="headerlink" href="#fetch-the-intel-fpga-internal-tools-repository" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone ssh://«Place your username here»@git-amr-1.devtools.intel.com:29418/cpt_sys_sw-fpga-internal
+<span class="nb">cd</span> cpt_sys_sw-fpga-internal
+git config user.name <span class="s2">&quot;«Place your name here»&quot;</span>
+git config user.email <span class="s2">&quot;«Place your email here»&quot;</span>
+curl -k https://git-amr-1.devtools.intel.com/gerrit/tools/hooks/commit-msg -o .git/hooks/commit-msg
+git checkout develop
+git pull
+</pre></div>
+</div>
+</div>
+<div class="section" id="configure-the-intel-fpga-internal-tools-project">
+<h2>Configure the Intel FPGA internal tools project<a class="headerlink" href="#configure-the-intel-fpga-internal-tools-project" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> cpt_sys_sw-fpga-internal
+<span class="nb">cd</span> fpga_driver/fpga-kernel
+mkdir mybuild
+<span class="nb">cd</span> mybuild
+cmake .. «user configuration flags»
+</pre></div>
+</div>
+<p>Valid «user configuration flags» are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="17%" />
+<col width="21%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">cmake flag</th>
+<th class="head">Optional or mandatory</th>
+<th class="head">Purpose</th>
+<th class="head">Default value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>-DINTEL_FPGA_DRIVER_VER_MAJOR</td>
+<td>Optional</td>
+<td>Driver major version</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>-DINTEL_FPGA_DRIVER_VER_MINOR</td>
+<td>Optional</td>
+<td>Driver minor version</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>-DINTEL_FPGA_DRIVER_VER_REV</td>
+<td>Optional</td>
+<td>Driver revision version</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>-DKERNEL_SOURCE_DIR=«path to the root of the FPGA kernel repository»</td>
+<td>Mandatory</td>
+<td>Path for driver source code</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="build-the-driver">
+<h2>Build the driver<a class="headerlink" href="#build-the-driver" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> cpt_sys_sw-fpga-internal
+<span class="nb">cd</span> fpga_driver/fpga_kernel
+<span class="nb">cd</span> mybuild <span class="c1"># (created during previous step)</span>
+make «user target»
+</pre></div>
+</div>
+<p>Valid «user targets» are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">make target</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>make</td>
+<td>Compiles the driver</td>
+</tr>
+<tr class="row-odd"><td>make dist</td>
+<td>Creates distributable driver tarball intel-fpga-dkms_0.1.0.tar.gz</td>
+</tr>
+<tr class="row-even"><td>make intel-fpga-dkms-deb</td>
+<td>Create Debian DKMS-enabled driver installer package: intel-fpga-dkms_0.1.0_amd64.deb</td>
+</tr>
+<tr class="row-odd"><td>make intel-fpga-dkms-rpm</td>
+<td>Create Redhat DKMS-enabled driver installer package</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="inserting-the-driver-into-currently-running-kernel">
+<h2>Inserting the driver into currently running kernel<a class="headerlink" href="#inserting-the-driver-into-currently-running-kernel" title="Permalink to this headline">¶</a></h2>
+<p>After building the driver (previous step), driver can be inserted into
+the currently running kernel.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> cpt_sys_sw-fpga-internal
+<span class="nb">cd</span> fpga_driver/fpga_kernel
+<span class="nb">cd</span> mybuild <span class="c1"># (created during previous step)</span>
+sudo insmod ./drivers/fpga/fpga-mgr-mod.ko
+sudo insmod ./drivers/fpga/intel/intel-fpga-pci.ko
+sudo insmod ./drivers/fpga/intel/intel-fpga-afu.ko
+sudo insmod ./drivers/fpga/intel/intel-fpga-fme.ko
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Before running applications; system administrator should request OS to enable allocation of 2,048kB memory pages. System adminitrator (‘root’) should run following command for such purpose:</p>
+<p class="last">echo 20 &gt; /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.9.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

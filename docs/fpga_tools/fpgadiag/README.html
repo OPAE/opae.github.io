@@ -1,0 +1,618 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fpgadiag &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="OPAE" href="../../../index.html"/>
+        <link rel="next" title="mmlink" href="../mmlink/mmlink.html"/>
+        <link rel="prev" title="fpgad" href="../fpgad/fpgad.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">fpgadiag</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">OPTIONS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-options">Common options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lpbk1-test-options"><strong>lpbk1</strong> test options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#read-test-options"><strong>read</strong> test options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#write-test-options"><strong>write</strong> test options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trput-test-options"><strong>trput</strong> test options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sw-test-options"><strong>sw</strong> test options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">TROUBLESHOOTING</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OPAE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>fpgadiag</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/docs/fpga_tools/fpgadiag/README.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fpgadiag">
+<h1>fpgadiag<a class="headerlink" href="#fpgadiag" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">fpgadiag [-m | --mode=] &lt;mode&gt; [-t | --target=] &lt;target&gt; [options]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="description">
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><em>fpgadiag</em> includes several tests to diagnose, test and report on the
+FPGA hardware.</p>
+<p><code class="docutils literal"><span class="pre">&lt;mode&gt;</span></code> chooses which test to run. <code class="docutils literal"><span class="pre">&lt;target&gt;</span></code> specifies on what
+platform to run the test. <code class="docutils literal"><span class="pre">&lt;target&gt;</span></code> can be either <code class="docutils literal"><span class="pre">fpga</span></code> or
+<code class="docutils literal"><span class="pre">ase</span></code>, where <code class="docutils literal"><span class="pre">ase</span></code> stands for “AFU Simulation Environment”.</p>
+<p>The tests that can be selected by <code class="docutils literal"><span class="pre">&lt;mode&gt;</span></code> include:</p>
+<p><strong>lpbk1</strong></p>
+<blockquote>
+<div><p>The test performs loopback test on the number of cachelines specified with
+the <cite>BEGIN</cite> option. _fpgadiag_ sets up source and  destination buffers in
+main memory. The FPGA then performs a memcpy from a source buffer to the
+destination buffer, one cacheline at a time.</p>
+<p>A cacheline is 64 bytes. When <cite>BEGIN = END</cite>, you perform one iteration. When
+<cite>BEGIN = END + x</cite>, you perform <cite>x</cite> iterations. The first iteration consists
+of copying <cite>BEGIN</cite> cachelines; the second iteration consists of copying
+<cite>BEGIN+1</cite> cache lines; the third iteration consists of copying <cite>BEGIN+3</cite>
+cache lines, etc.</p>
+<p>The latency is shown as the number of clock ticks.</p>
+<p>When you specify <cite>MULTI-CL</cite>, you copy <cite>MULTI-CL</cite> cache lines at a time.
+There is always a WrFence. <cite>WR-FENCE</cite> chooses what virtual channel the
+WrFence occurs on.</p>
+<p>If you specify continuous mode with <cite>–cont</cite>, the program runs an iteration
+until the timeout specified in <cite>TIMEOUT</cite> completes.</p>
+</div></blockquote>
+<p><strong>read</strong></p>
+<blockquote>
+<div>This test performs only a read, not a memcpy. It is used to measure read
+bandwidth.</div></blockquote>
+<p><strong>write</strong></p>
+<blockquote>
+<div>This test is used to measure write bandwidth.</div></blockquote>
+<p><strong>trput</strong></p>
+<blockquote>
+<div>This test measures both read and write bandwidth by performing 50% read and
+50% write tests.</div></blockquote>
+<p><strong>sw</strong></p>
+<blockquote>
+<div>This is a send-and-respond (ping-pong) test where one side sends data and
+waits for answer.</div></blockquote>
+<p>Each test requires presence of one of these bitstreams, as documented
+below. Before running a test, make sure its required bitstream is
+properly configured on the platform.</p>
+<ul class="simple">
+<li><strong>nlb mode 0</strong> for the <code class="docutils literal"><span class="pre">lpbk1</span></code> test.</li>
+<li><strong>nlb mode 3</strong> for the <code class="docutils literal"><span class="pre">trput</span></code>, <code class="docutils literal"><span class="pre">read</span></code>, and <code class="docutils literal"><span class="pre">write</span></code> tests.</li>
+<li><strong>nlb mode 7</strong> for the <code class="docutils literal"><span class="pre">sw</span></code> test.</li>
+</ul>
+</div>
+<div class="section" id="options">
+<h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="common-options">
+<h3>Common options<a class="headerlink" href="#common-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">--help,</span> <span class="pre">-h</span></code></p>
+<blockquote>
+<div>Print help information and exit.</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--target=,</span> <span class="pre">-t</span></code></p>
+<blockquote>
+<div>Values accepted for this switch are fpga or ase. Default=fpga</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--mode=,</span> <span class="pre">-m</span></code></p>
+<blockquote>
+<div>The test to run. Values accepted for this switch are <cite>lpbk1</cite>, <cite>read</cite>,
+<cite>write</cite>, <cite>trput</cite>, <cite>sw</cite></div></blockquote>
+<p><code class="docutils literal"><span class="pre">--config=,</span> <span class="pre">-c</span></code></p>
+<blockquote>
+<div>A configuration file in the JSON format that specifies options for a test.
+If an option is specified both in the configuration file and on the command
+line, the value in the configuration file prevails</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--socket-id=,</span> <span class="pre">-s</span></code></p>
+<blockquote>
+<div>Socket ID encoded in BBS. Default=0</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--bus-number=,</span> <span class="pre">-B</span></code></p>
+<blockquote>
+<div>Bus number of the PCIe device. Default=0</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--device=,</span> <span class="pre">-D</span></code></p>
+<blockquote>
+<div>Device number of the PCIe device. Default=0</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--function=,</span> <span class="pre">-F</span></code></p>
+<blockquote>
+<div>Function number of the PCIe device. Default=0</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--freq=,</span> <span class="pre">-T</span></code></p>
+<blockquote>
+<div>Clock frequency in Hz. Default=400 MHz</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--suppress-hdr,</span> <span class="pre">-S</span></code></p>
+<blockquote>
+<div>Suppress column headers for text output. Default=off</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--csv,</span> <span class="pre">-V</span></code></p>
+<blockquote>
+<div>Comma separated value format. Default=off</div></blockquote>
+</div>
+<div class="section" id="lpbk1-test-options">
+<h3><strong>lpbk1</strong> test options<a class="headerlink" href="#lpbk1-test-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">--guid=,</span> <span class="pre">-g</span></code></p>
+<blockquote>
+<div>AFC ID to enumerate. Default=D8424DC4-A4A3-C413-F89E-433683F9040B</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--begin=B,</span> <span class="pre">-b</span></code></p>
+<blockquote>
+<div>1 &lt;= B &lt;= 65535. Default=1, B = number of cache lines</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--end=E,</span> <span class="pre">-e</span></code></p>
+<blockquote>
+<div>1 &lt;= E &lt;= 65535. Default=B, B and E designate number of cache lines</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--multi-cl=M,</span> <span class="pre">-U</span></code></p>
+<blockquote>
+<div>M can equal 1, 2, or 4. Default=1</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cont,</span> <span class="pre">-L</span></code></p>
+<blockquote>
+<div>Continuous mode. Default=off</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--timeout-usec=,</span> <span class="pre">--timeout-msec=,</span> <span class="pre">--timeout-sec=,</span> <span class="pre">--timeout-min=,</span> <span class="pre">--timeout-hour=</span></code></p>
+<blockquote>
+<div>timeout for –cont mode (microseconds portion default=0; milliseconds
+portion default=0; seconds portion default=1; minutes portion default=0;
+hours portion default=0)</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cache-policy=,</span> <span class="pre">-p</span></code></p>
+<blockquote>
+<div>Can be wrline-I, wrline-M, or wrpush-I Default=wrline-M</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cache-hint=,</span> <span class="pre">-i</span></code></p>
+<blockquote>
+<div>Can be rdline-I or rdline-S. Default=rdline-I</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--read-vc=,</span> <span class="pre">-r</span></code></p>
+<blockquote>
+<div>Can be auto, vl0, vh0, vh1, random. Default=auto</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--write-vc=,</span> <span class="pre">-w</span></code></p>
+<blockquote>
+<div>Can be auto, vl0, vh0, vh1, random. Default=auto</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--wrfence-vc=,</span> <span class="pre">-f</span></code></p>
+<blockquote>
+<div>Can be auto, vl0, vh0, vh1. Default=auto</div></blockquote>
+</div>
+<div class="section" id="read-test-options">
+<h3><strong>read</strong> test options<a class="headerlink" href="#read-test-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">--guid=,</span> <span class="pre">-g</span></code></p>
+<blockquote>
+<div>AFC ID to enumerate. Default=F7DF405C-BD7A-CF72-22F1-44B0B93ACD18</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--begin=B,</span> <span class="pre">-b</span></code></p>
+<blockquote>
+<div>1 &lt;= B &lt;= 65535. Default=1, B = number of cache lines</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--end=E,</span> <span class="pre">-e</span></code></p>
+<blockquote>
+<div>1 &lt;= E &lt;= 65535. Default=B, B and E designate number of cache lines</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--multi-cl=M,</span> <span class="pre">-u</span></code></p>
+<blockquote>
+<div>M can equal 1, 2, or 4. Default=1</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--strided-access=S,</span> <span class="pre">-a</span></code></p>
+<blockquote>
+<div>1&lt;= S &lt;= 64. Default=1</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cont,</span> <span class="pre">-L</span></code></p>
+<blockquote>
+<div>Continuous mode. Default=off</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--timeout-usec=,</span> <span class="pre">--timeout-msec=,</span> <span class="pre">--timeout-sec=,</span> <span class="pre">--timeout-min=,</span> <span class="pre">--timeout-hour=</span></code></p>
+<blockquote>
+<div>timeout for –cont mode (microseconds portion default=0; milliseconds
+portion default=0; seconds portion default=1; minutes portion default=0;
+hours portion default=0)</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cache-hint=,</span> <span class="pre">-i</span></code></p>
+<blockquote>
+<div>Can be rdline-I or rdline-S. Default=rdline-I</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--warm-fpga-cache</span> <span class="pre">-H;</span> <span class="pre">--cool-fpga-cache</span> <span class="pre">-M</span></code></p>
+<blockquote>
+<div>Attempt to prime the cache with hits. Default=off, Attempt to prime the
+cache with misses. Default=off</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cool-cpu-cache,</span> <span class="pre">-C</span></code></p>
+<blockquote>
+<div>Attempt to prime the cpu cache with misses. Default=off</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--read-vc=,</span> <span class="pre">-r</span></code></p>
+<blockquote>
+<div>Can be auto, vl0, vh0, vh1, random. Default=auto</div></blockquote>
+</div>
+<div class="section" id="write-test-options">
+<h3><strong>write</strong> test options<a class="headerlink" href="#write-test-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">--guid=,</span> <span class="pre">-g</span></code></p>
+<blockquote>
+<div>AFC ID to enumerate. Default=F7DF405C-BD7A-CF72-22F1-44B0B93ACD18</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--begin=B,</span> <span class="pre">-b</span></code></p>
+<blockquote>
+<div>1 &lt;= E &lt;= 65535. Default=B, B and E designate number of cache lines</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--multi-cl=M,</span> <span class="pre">-u</span></code></p>
+<blockquote>
+<div>M can equal 1, 2, or 4. Default=1</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--strided-access=S,</span> <span class="pre">-a</span></code></p>
+<blockquote>
+<div>1&lt;= S &lt;= 64. Default=1</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cont,</span> <span class="pre">-L</span></code></p>
+<blockquote>
+<div>Continuous mode. Default=off</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--timeout-usec=,</span> <span class="pre">--timeout-msec=,</span> <span class="pre">--timeout-sec=,</span> <span class="pre">--timeout-min=,</span> <span class="pre">--timeout-hour=</span></code></p>
+<blockquote>
+<div>timeout for –cont mode (microseconds portion default=0; milliseconds
+portion default=0; seconds portion default=1; minutes portion default=0;
+hours portion default=0)</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cache-policy=,</span> <span class="pre">-p</span></code></p>
+<blockquote>
+<div>Can be wrline-I, wrline-M, or wrpush-I Default=wrline-M</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--warm-fpga-cache</span> <span class="pre">-H;</span> <span class="pre">--cool-fpga-cache</span> <span class="pre">-M</span></code></p>
+<blockquote>
+<div>Attempt to prime the cache with hits. Default=off, Attempt to prime the
+cache with misses. Default=off</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cool-cpu-cache,</span> <span class="pre">-C</span></code></p>
+<blockquote>
+<div>Attempt to prime the cpu cache with misses. Default=off</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--write-vc=,</span> <span class="pre">-w</span></code></p>
+<blockquote>
+<div>Can be auto, vl0, vh0, vh1, random. Default=auto</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--wrfence-vc=,</span> <span class="pre">-f</span></code></p>
+<blockquote>
+<div>Can be auto, vl0, vh0, vh1, random. Default=`WRITE-VC`</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--alt-wr-pattern,</span> <span class="pre">-l</span></code></p>
+<blockquote>
+<div>Alternate Write Pattern. Default=off</div></blockquote>
+</div>
+<div class="section" id="trput-test-options">
+<h3><strong>trput</strong> test options<a class="headerlink" href="#trput-test-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">--guid=,</span> <span class="pre">-g</span></code></p>
+<blockquote>
+<div>AFC ID to enumerate. Default=F7DF405C-BD7A-CF72-22F1-44B0B93ACD18</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--begin=B,</span> <span class="pre">-b</span></code></p>
+<blockquote>
+<div>1 &lt;= B &lt;= 65535. Default=1, B = number of cache lines</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--end=E,</span> <span class="pre">-e</span></code></p>
+<blockquote>
+<div>1 &lt;= E &lt;= 65535. Default=B, B and E designate number of cache lines</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--multi-cl=M,</span> <span class="pre">-u</span></code></p>
+<blockquote>
+<div>M can equal 1, 2, or 4. Default=1</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--strided-access=S,</span> <span class="pre">-a</span></code></p>
+<blockquote>
+<div>1&lt;= S &lt;= 64. Default=1</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cont,</span> <span class="pre">-L</span></code></p>
+<blockquote>
+<div>Continuous mode. Default=off</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--timeout-usec=,</span> <span class="pre">--timeout-msec=,</span> <span class="pre">--timeout-sec=,</span> <span class="pre">--timeout-min=,</span> <span class="pre">--timeout-hour=</span></code></p>
+<blockquote>
+<div>timeout for –cont mode (microseconds portion default=0; milliseconds
+portion default=0; seconds portion default=1; minutes portion default=0;
+hours portion default=0)</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cache-policy=,</span> <span class="pre">-p</span></code></p>
+<blockquote>
+<div>Can be wrline-I, wrline-M, or wrpush-I Default=wrline-M</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cache-hint=,</span> <span class="pre">-i</span></code></p>
+<blockquote>
+<div>Can be rdline-I or rdline-S. Default=rdline-I</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--read-vc=,</span> <span class="pre">-r</span></code></p>
+<blockquote>
+<div>Can be auto, vl0, vh0, vh1, random. Default=auto</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--write-vc=,</span> <span class="pre">-w</span></code></p>
+<blockquote>
+<div>Can be auto, vl0, vh0, vh1, random. Default=auto</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--wrfence-vc=,</span> <span class="pre">-f</span></code></p>
+<blockquote>
+<div>Can be  auto, vl0, vh0, vh1. Default=`WRITE-VC`</div></blockquote>
+</div>
+<div class="section" id="sw-test-options">
+<h3><strong>sw</strong> test options<a class="headerlink" href="#sw-test-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">--guid=,</span> <span class="pre">-g</span></code></p>
+<blockquote>
+<div>AFC ID to enumerate. Default=7BAF4DEA-A57C-E91E-168A-455D9BDA88A3</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--begin=B,</span> <span class="pre">-b</span></code></p>
+<blockquote>
+<div>1 &lt;= B &lt;= 65535. Default=1, B = number of cache lines</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--end=E,</span> <span class="pre">-e</span></code></p>
+<blockquote>
+<div>1 &lt;= E &lt;= 65535. Default=B, B and E designate number of cache lines</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--multi-cl=M,</span> <span class="pre">-u</span></code></p>
+<blockquote>
+<div>M can equal 1, 2, or 4. Default=1</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--strided-access=S,</span> <span class="pre">-a</span></code></p>
+<blockquote>
+<div>1&lt;= S &lt;= 64. Default=1</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cache-policy=,</span> <span class="pre">-p</span></code></p>
+<blockquote>
+<div>Can be wrline-I, wrline-M, or wrpush-I. Default=wrline-M</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--cache-hint=</span> <span class="pre">-i</span></code></p>
+<blockquote>
+<div>Can be rdline-I or rdline-S. Default=rdline-I</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--read-vc=,</span> <span class="pre">-r</span></code></p>
+<blockquote>
+<div>Can be auto, vl0, vh0, vh1, random Default=auto</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--write-vc=,</span> <span class="pre">-w</span></code></p>
+<blockquote>
+<div>Can be auto, vl0, vh0, vh1, random Default=auto</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--wrfence-vc=,</span> <span class="pre">-f</span></code></p>
+<blockquote>
+<div>Can be auto, vl0, vh0, vh1. Default=`WRITE-VC`</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--notice=,</span> <span class="pre">-N</span></code></p>
+<blockquote>
+<div>Can be poll, csr-write, umsg-data, or umsg-hint. Default=poll</div></blockquote>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>This command starts an <code class="docutils literal"><span class="pre">lpbk1</span></code> test on the FPGA on bus <code class="docutils literal"><span class="pre">0x5e</span></code>. The
+test copies 57535, 57536, 57537, …, up to 65535 cache lines, one line
+at a time. The test output is printed in the CSV format with header
+suppressed.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">./fpgadiag --mode=lpbk1 --target=fpga -SV --bus-number=0x5e --begin=57535</span>
+<span class="go">--end=65535 --cache-hint=rdline-I --cache-policy=wrpush-I --multi-cl=1</span>
+<span class="go">--write-vc=vl0 --read-vc=vh1 --wrfence-vc=auto</span>
+</pre></div>
+</div>
+<p>This command starts a <code class="docutils literal"><span class="pre">read</span></code> test on the FPGA located on bus <code class="docutils literal"><span class="pre">0xbe</span></code>.
+The test reads 2045 cache lines in the continuous mode with a 15-second
+timeout period. Data is accessed with a strided pattern with a 10-byte
+stride length.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">./fpgadiag --mode=read --target=fpga -SV --bus-number=0xbe --begin=2045 --cont</span>
+<span class="go">--timeout-sec=15   --cache-hint=rdline-I --multi-cl=1 -a=10 --write-vc=vh1</span>
+<span class="go">--read-vc=auto --wrfence-vc=auto</span>
+</pre></div>
+</div>
+<p>This command starts an <code class="docutils literal"><span class="pre">sw</span></code> test on the FPGA located on bus <code class="docutils literal"><span class="pre">0xbe</span></code>.
+The test notifies completion using a CSR write.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">./fpgadiag --mode=sw --target=fpga -SV --bus-number=0xbe --begin=4 --end=8192</span>
+<span class="go">--cache-hint=rdline-I --cache-policy=wrline-I --notice=csr-write --write-vc=vl0</span>
+<span class="go">--wrfence-vc=auto --read-vc=random</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>TROUBLESHOOTING<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>When a test fails to run or gives errors, check the following:</p>
+<ul class="simple">
+<li>Is Intel FPGA driver properly installed? See <a class="reference external" href="/fpga-doc/docs/install_guide/installation_guide.html">Installation
+Guide</a> for
+driver installation instructions.</li>
+<li>Are FPGA port permissions set properly? Check the permission bits of
+the port, for example, <code class="docutils literal"><span class="pre">/dev/intel-fpga-port-0</span></code>. Users need READ
+and WRITE permissions to run <code class="docutils literal"><span class="pre">fpgadiag</span></code> tests.</li>
+<li>Is hugepage properly configured on the system? See <a class="reference external" href="/fpga-doc/docs/install_guide/installation_guide.html">Installation
+Guide</a> for
+hugepage configuration steps. In particular, <code class="docutils literal"><span class="pre">fpgadiag</span></code> requires a
+few 1GB pages to be available.</li>
+<li>Is the required bitstream loaded? See <a class="reference external" href="#description">DESCRIPTION</a>
+for information about what bitstream is required by which test.</li>
+<li>Are <code class="docutils literal"><span class="pre">--begin</span></code> and <code class="docutils literal"><span class="pre">--end</span></code> values set properly? <code class="docutils literal"><span class="pre">--end</span></code> must be
+no smaller than the <code class="docutils literal"><span class="pre">--begin</span></code>. Also, <code class="docutils literal"><span class="pre">--begin</span></code> must be a multiple
+of the <code class="docutils literal"><span class="pre">--multi-cl</span></code> value.</li>
+<li>The <code class="docutils literal"><span class="pre">--warm-fpga-cache</span></code> and <code class="docutils literal"><span class="pre">--cool-fpga-cache</span></code> options in the
+<code class="docutils literal"><span class="pre">read</span></code> and <code class="docutils literal"><span class="pre">write</span></code> tests are mutually exclusive.</li>
+<li>The timeout options are only meaningful for the continuous mode (with
+the <code class="docutils literal"><span class="pre">--cont</span></code> option).</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mmlink/mmlink.html" class="btn btn-neutral float-right" title="mmlink" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../fpgad/fpgad.html" class="btn btn-neutral" title="fpgad" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.9.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
