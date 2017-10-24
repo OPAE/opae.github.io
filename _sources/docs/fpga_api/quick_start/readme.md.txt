@@ -16,7 +16,7 @@ software programs running on the host.
 
 These features include the acceleration logic preconfigured on the
 device, as well as functions to manage and reconfigure the
-device. Hence, the library is able to enalbe user applications to
+device. Hence, the library is able to enable user applications to
 transparently and seamlessly leverage FPGA-based acceleration.
 
 In this document, we will explore the initial steps on how to setup
@@ -391,12 +391,12 @@ Done
   $ grep pse /proc/cpuinfo | uniq
   flags : ... pse ...
 
-  If this commands returns a non-empty string, 2MB pages are supported:
+  If this command returns a non-empty string, 2MB pages are supported:
 
   $ grep pse /proc/cpuinfo | uniq
   flags : ... pdpe1gb ...
 
-  If this commands returns a non-empty string, 1GB pages are supported:
+  If this command returns a non-empty string, 1GB pages are supported:
 
 ```
 
