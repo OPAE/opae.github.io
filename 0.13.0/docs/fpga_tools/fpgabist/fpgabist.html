@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fpgabist &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="OPAE" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.13.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_api/api_build.html">Building the OPAE C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_config/readme.html">hssi_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_loopback/readme.html">hssi_loopback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_tuner/readme.html">hssi_tuner</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OPAE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>fpgabist</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/docs/fpga_tools/fpgabist/fpgabist.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fpgabist">
+<h1>fpgabist<a class="headerlink" href="#fpgabist" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">fpgabist</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="n">device_id</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">bus</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">device</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="n">function</span><span class="p">]</span> <span class="p">[</span><span class="n">path_to_gbs1</span> <span class="n">path_to_gbs2</span> <span class="p">...]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="description">
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>The fpgabist tool performs self-diagnostic tests on supported FPGA
+platforms.</p>
+<p>The tool accepts one or more Accelerator Function (AF) binaries from a
+predetermined set of AFs. Depending on the available binaries, the tool
+runs appropriate tests and reports hardware issues.</p>
+<p>fpgabist always uses fpgainfo to report system information before
+running any hardware tests.</p>
+<p>Currently, fpgabist accepts the following AFs: 1. nlb_mode_3 = host
+memory interface checking 2. dma = local memory interface checking</p>
+<p>The platform includes the AF files, but you can also compile the AFs
+from the source.</p>
+<p>If there are multiple devices, use -b, -d, -f to specify the BDF for the
+specific device. If you do not specify a BDF, fpgabist tests all cards.</p>
+</div>
+<div class="section" id="positional-arguments">
+<h2>POSITIONAL ARGUMENTS<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">[path_to_gbs1</span> <span class="pre">path_to_gbs2</span> <span class="pre">...]</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Paths</span> <span class="n">to</span> <span class="n">GBS</span> <span class="n">files</span> <span class="n">of</span> <span class="n">AFs</span> <span class="n">being</span> <span class="n">used</span><span class="p">.</span>
+</pre></div>
+</div>
+<div class="section" id="optional-arguments">
+<h3>OPTIONAL ARGUMENTS<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">usage</span> <span class="n">information</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-i</span> <span class="pre">device_id,</span> <span class="pre">--device-id</span> <span class="pre">device_id</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="n">ID</span> <span class="k">for</span> <span class="n">Intel</span> <span class="n">FPGA</span><span class="p">.</span> <span class="n">Deafult</span> <span class="nl">is</span><span class="p">:</span> <span class="mh">0x09c4</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-b</span> <span class="pre">bus,</span> <span class="pre">--bus</span> <span class="pre">bus</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Bus</span> <span class="n">number</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">FPGA</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-d</span> <span class="pre">device,</span> <span class="pre">--device</span> <span class="pre">device</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="n">number</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">FPGA</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-f</span> <span class="pre">function,</span> <span class="pre">--function</span> <span class="pre">function</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Function</span> <span class="n">number</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">FPGA</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">fpgabist</span> <span class="pre">&lt;path_to_gbs_files&gt;/dma_afu.gbs</span> <span class="pre">&lt;path_to_gbs_files&gt;/nlb_3.gbs</span></code></p>
+<p>Runs fpgabist on any platforms in the system that match the default
+device ID. This command runs both the DMA and NLB_MODE_3 tests.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.13.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

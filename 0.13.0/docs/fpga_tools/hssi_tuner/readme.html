@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>hssi_tuner &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="OPAE" href="../../../index.html"/>
+        <link rel="prev" title="hssi_loopback" href="../hssi_loopback/readme.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.13.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_api/api_build.html">Building the OPAE C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hssi_config/readme.html">hssi_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_loopback/readme.html">hssi_loopback</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">hssi_tuner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#name">NAME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">PREREQUISITES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build">BUILD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#synoposis">SYNOPOSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#common-options">COMMON OPTIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hssi-tuner-options">HSSI_TUNER OPTIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hssi-tuner-commands">HSSI_TUNER COMMANDS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-example">USAGE EXAMPLE</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OPAE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>hssi_tuner</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/docs/fpga_tools/hssi_tuner/readme.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hssi-tuner">
+<h1>hssi_tuner<a class="headerlink" href="#hssi-tuner" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="name">
+<h2>NAME<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
+<p><em>hssi_tuner</em> - Arria and Alaska transceivers tuner</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>PREREQUISITES<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Operating system RHEL 7.3 with kernel 3.10.</li>
+<li>CPU SKX+FPGA H0/B0.</li>
+<li>Platform Purley-FPGA.</li>
+<li>cmake version &gt;=2.8.12</li>
+<li>boost library version &gt;=1.53</li>
+</ul>
+</div>
+<div class="section" id="build">
+<h2>BUILD<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h2>
+<div class="code console highlight-c"><div class="highlight"><pre><span></span>$ tar -xf PACKAGE_PATH/hssi_config.tar.gz
+$ cd hssi_config
+$ mkdir build ; cd build
+$ cmake -DCMAKE_BUILD_TYPE=Release ..
+$ make install DESTDIR=INSTALL_DIR
+</pre></div>
+</div>
+<p>Output binaries are located in&nbsp;<code class="docutils literal"><span class="pre">INSTALL_DIR</span></code>.</p>
+</div>
+<div class="section" id="synoposis">
+<h2>SYNOPOSIS<a class="headerlink" href="#synoposis" title="Permalink to this headline">¶</a></h2>
+<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="cp"># hssi_tuner --pci_device resource_path [--platform kind] --xcvr_config arria config_path --xcvr_config alaska config_path --sweep options [--sweep options]... [OPTION]...</span>
+<span class="cp"># hssi_tuner --pci_device resource_path [--platform kind] --dump_cfg device kind config_path</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="description">
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>hssi_tuner tunes the HSSI link between the Intel Arria 10 device and the
+Alaska card. The tool sets initial parameters for transceivers on boths
+sides of the link. It performs a cartesian product of specified
+parameter sweeps. Please refer to “Intel(R) FPGA IP High-Speed Link
+Tuning Using Signal Conditioning Circuitry in Intel(R) Arria(R) 10
+Transceivers” document for more details on the tuning procedure.
+hssi_tuner only runs on the Integrated FPGA Platform. You cannot run it
+on the PCIe accelerator card (PAC).</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Tuning requires <cite>lfsr_with_mdio</cite> GBS to be loaded.</p>
+</div>
+<p>The sweep procedure includes the following steps:</p>
+<ol class="arabic simple">
+<li>Configure all devices according to <code class="docutils literal"><span class="pre">--xcvr_config</span></code> files.</li>
+<li>Step a single parameter according to specified <code class="docutils literal"><span class="pre">--sweep</span></code> parameter.</li>
+<li>Reset all transceivers.</li>
+<li>Start PRBS on all TX and RX interfaces.</li>
+<li>Wait for lock (up to <code class="docutils literal"><span class="pre">lock_timeout</span></code> seconds).</li>
+<li>Check if lock is stable (up to <code class="docutils literal"><span class="pre">lock_timeout</span></code> seconds).</li>
+<li>Reset error counters.</li>
+<li>Wait for <code class="docutils literal"><span class="pre">ber_timeout</span></code> seconds and note measured BER on all
+receivers.</li>
+<li>Go back to step 2.</li>
+</ol>
+</div>
+<div class="section" id="common-options">
+<h2>COMMON OPTIONS<a class="headerlink" href="#common-options" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">--help</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Print</span> <span class="n">help</span> <span class="n">information</span> <span class="n">and</span> <span class="n">exit</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--pci_device</span> <span class="pre">resource_path</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>`path`: path to resource0 of fpga device for example, `/sys/devices/pci0000:5e/0000:5e:00.0/resource0`
+
+Use `lspci` to find path to the PCIe device.
+</pre></div>
+</div>
+<div class="code console highlight-c"><div class="highlight"><pre><span></span>$ lspci -d 8086:bcc0
+5e:00.0 Processing accelerators: Intel Corporation Device bcc0
+be:00.0 Processing accelerators: Intel Corporation Device bcc0
+$ readlink -e $(lspci -nd 8086:bcc0 | awk &#39;{print &quot;/sys/bus/pci/devices/*&quot;$1&quot;/resource0&quot;}&#39;)
+/sys/devices/pci0000:5e/0000:5e:00.0/resource0
+/sys/devices/pci0000:be/0000:be:00.0/resource0
+</pre></div>
+</div>
+</div>
+<div class="section" id="hssi-tuner-options">
+<h2>HSSI_TUNER OPTIONS<a class="headerlink" href="#hssi-tuner-options" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">--platform</span> <span class="pre">kind</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>`kind`: nc (NeonCity) or bmp (BlueMountainPass) (default: bmp)
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><cite>–xcvr_config</cite>, <cite>–out</cite>, <cite>–lock_tout</cite>, <cite>–ber_tout</cite>, <cite>–ber</cite>, <cite>–link</cite> options are strictly related to <cite>sweep</cite> command, for <cite>dump_cfg</cite> command these options are ignored.</p>
+</div>
+<p><code class="docutils literal"><span class="pre">--xcvr_config</span> <span class="pre">device</span> <span class="pre">file</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>`device`: arria or alaska
+
+`file`: filename to device initial configuration
+
+Arria configuration file requires set of parameters for every link.
+
+Arria configuration supports parameters in the following order:
+
+    - vod (default: 31)
+    - pre_emp_1st_post_tap (default: 0)
+    - pre_emp_2nd_post_tap (default: 0)
+    - pre_emp_1st_pre_tap (default: 0)
+    - pre_emp_2nd_pre_tap (default: 0)
+    - equalizer_engine (default: 4)
+    - dc_gain (default: 1)
+    - ac_gain (default: 7)
+    - vga (default: 5)
+
+Config file consist of header with parameters name and rows with values for corresponding link.
+
+Example of arria config file (only comma &#39;,&#39; is allowed as separator):
+</pre></div>
+</div>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">vod,pre_emp_1st_post_tap,pre_emp_2nd_post_tap,pre_emp_1st_pre_tap,pre_emp_2nd_pre_tap,eq_engine,dc_gain,ac_gain,vga</span>
+<span class="l l-Scalar l-Scalar-Plain">31,0,0,0,0,4,1,7,5</span>
+<span class="l l-Scalar l-Scalar-Plain">31,0,0,0,0,4,1,7,5</span>
+<span class="l l-Scalar l-Scalar-Plain">31,0,0,0,0,4,1,7,5</span>
+<span class="l l-Scalar l-Scalar-Plain">31,0,0,0,0,4,1,7,5</span>
+<span class="l l-Scalar l-Scalar-Plain">31,0,0,0,0,4,1,7,5</span>
+<span class="l l-Scalar l-Scalar-Plain">31,0,0,0,0,4,1,7,5</span>
+<span class="l l-Scalar l-Scalar-Plain">31,0,0,0,0,4,1,7,5</span>
+<span class="l l-Scalar l-Scalar-Plain">31,0,0,0,0,4,1,7,5</span>
+<span class="l l-Scalar l-Scalar-Plain">31,0,0,0,0,4,1,7,5</span>
+<span class="l l-Scalar l-Scalar-Plain">31,0,0,0,0,4,1,7,5</span>
+</pre></div>
+</div>
+<blockquote>
+<div>Example for alaska:</div></blockquote>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">pre_cursor,attenuation,post_cursor</span>
+<span class="l l-Scalar l-Scalar-Plain">0,0,0</span>
+<span class="l l-Scalar l-Scalar-Plain">0,0,0</span>
+<span class="l l-Scalar l-Scalar-Plain">0,0,0</span>
+<span class="l l-Scalar l-Scalar-Plain">0,0,0</span>
+<span class="l l-Scalar l-Scalar-Plain">0,0,0</span>
+<span class="l l-Scalar l-Scalar-Plain">0,0,0</span>
+<span class="l l-Scalar l-Scalar-Plain">0,0,0</span>
+<span class="l l-Scalar l-Scalar-Plain">0,0,0</span>
+<span class="l l-Scalar l-Scalar-Plain">0,0,0</span>
+<span class="l l-Scalar l-Scalar-Plain">0,0,0</span>
+</pre></div>
+</div>
+<blockquote>
+<div>For default, use “-“.</div></blockquote>
+<p><code class="docutils literal"><span class="pre">--link</span> <span class="pre">value</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>`value`: arria transceiver link 0..9|all (default: 0)
+
+Links can be numbered differently for arria and alaska transceivers.
+
+Given value is arria tranceiver link - corresponding alaska transceiver link is decoded internally.
+
+Additionally `all` runs the same sweep command simultaneously on all links.
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--out</span> <span class="pre">file</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>`file`: filename to save sweep results. (default = none, write to stdout)
+
+Output file contains parameters under test and other gathered information to determine signal integrity.
+
+Appends results to an existing file.
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--lock_tout</span> <span class="pre">lock_timeout</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>`lock_timeout`: time to lock link in secs 1..60 (default 1)
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--ber_tout</span> <span class="pre">ber_timeout</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>`ber_timeout`: time to measure ber in secs 1..600 (default 1)
+</pre></div>
+</div>
+</div>
+<div class="section" id="hssi-tuner-commands">
+<h2>HSSI_TUNER COMMANDS<a class="headerlink" href="#hssi-tuner-commands" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">--dump_cfg</span> <span class="pre">device</span> <span class="pre">kind</span> <span class="pre">file</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>`device`: arria or alaska
+
+`kind`: default or current
+
+`file`: filename to save configuration
+
+Dump device configuration and exit.
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--sweep</span> <span class="pre">device</span> <span class="pre">channel</span> <span class="pre">param</span> <span class="pre">min</span> <span class="pre">max</span> <span class="pre">interval</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>`device`: arria or alaska
+
+`param`: parameter to be swept
+
+`channel`: tx or rx
+
+`min`: minimal value of parameter
+
+`max`: maximal value of parameter
+
+`interval`: sweep interval of parameter
+
+Multiple sweep commands are accepted for app execution.
+
+In case of invalid values an error is reported.
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage-example">
+<h2>USAGE EXAMPLE<a class="headerlink" href="#usage-example" title="Permalink to this headline">¶</a></h2>
+<p>Usage example</p>
+<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="cp"># ./hssi_tuner --pci_device /sys/devices/pci0000:de/0000:de:00.0/resource0 --xcvr_config arria ../cfg/arria.cfg --xcvr_config alaska ../cfg/alaska.cfg --link 0 --sweep arria rx ac_gain 0 20 1 --out ac_gain_0_0_20.csv</span>
+</pre></div>
+</div>
+<p>This command sweeps the <code class="docutils literal"><span class="pre">ac_gain</span></code> parameter of the Arria 10 device
+link 0 receiver over values <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">..,</span> <span class="pre">20]</span></code>. It measures the impact
+on BER for all receivers in the network.</p>
+<p><a class="reference download internal" href="../../../_downloads/ac_gain_0_0_20.csv" download=""><code class="xref download docutils literal"><span class="pre">See</span> <span class="pre">example</span> <span class="pre">result</span></code></a></p>
+<div class="figure">
+<img alt="Tuning" src="../../../_images/ac_gain_0_0_20.png" />
+</div>
+<p>Sample python script used for the plot above (requires <code class="docutils literal"><span class="pre">pandas</span></code> and
+<code class="docutils literal"><span class="pre">matplotlib</span></code> python packages):</p>
+<div class="code python highlight-c"><div class="highlight"><pre><span></span>import pandas as pd
+import matplotlib.pyplot as plt
+
+arr = pd.read_csv(&#39;ac_gain_0_0_20.csv&#39;, index_col=(&#39;ac_gain0&#39;))
+
+ber = pd.DataFrame(arr, columns=[col for col in arr.columns
+                                   if col.startswith(&#39;arria_ber&#39;)])
+ber.plot(logy=True, xticks=ber.index)
+plt.show()
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../hssi_loopback/readme.html" class="btn btn-neutral" title="hssi_loopback" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.13.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
