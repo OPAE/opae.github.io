@@ -134,13 +134,17 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgabist/fpgabist.html">fpgabist</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgaconf/fpgaconf.html">fpgaconf</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgaflash/fpgaflash.html">fpgaflash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/userclk/userclk.html">userclk</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
@@ -565,7 +569,7 @@ manual</a>.</p>
 e</th>
 <th class="head">Function
 s</th>
-<th class="head">not
+<th class="head">Not
 e</th>
 </tr>
 </thead>
@@ -1020,7 +1024,7 @@ le
 ra
 to
 r</th>
-<th class="head">not
+<th class="head">Not
 e</th>
 </tr>
 </thead>
@@ -1463,9 +1467,11 @@ snippets.</p>
 <p>The user-code first populates an <code class="docutils literal"><span class="pre">fpga_properties</span></code> object with desired
 properties. Afterwards, <code class="docutils literal"><span class="pre">fpgaEnumerate()</span></code> is accessed to search for
 matching resources.</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span>`fpgaEnumerate()` may return more than one matching resources.
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="n">note</span><span class="o">::</span>
 </pre></div>
 </div>
+<p><code class="docutils literal"><span class="pre">fpgaEnumerate()</span></code> may return more than one matching resources.</p>
+<p>```</p>
 <div class="code c highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;fpga/fpga.h&quot;</span><span class="cp"></span>
 
 <span class="n">fpga_guid</span>               <span class="n">guid</span><span class="p">;</span>
