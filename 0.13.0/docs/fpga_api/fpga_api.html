@@ -162,7 +162,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_config/readme.html">hssi_config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_loopback/readme.html">hssi_loopback</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_tuner/readme.html">hssi_tuner</a></li>
 </ul>
 
             
@@ -1882,9 +1881,8 @@ If the caller passes in NULL for mmio_ptr, no mapping will be performed, and no 
 <dt id="_CPPv214fpgaGetUmsgPtr11fpga_handlePP8uint64_t">
 <span id="fpgaGetUmsgPtr__fpga_handle.uint64_tPP"></span><span class="target" id="d0/d99/umsg_8h_1a97cca523fe1142578f3927ae452f4db9"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetUmsgPtr</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint64_t **<em>umsg_ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214fpgaGetUmsgPtr11fpga_handlePP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Access UMsg memory directly</p>
-<p>This function will return a pointer to the memory allocated for low latency accelerator notifications (UMsgs). <dl class="docutils">
-<dt><strong>Note</strong></dt>
-<dd>This call is only supported by hardware targets, not by ASE simulation. Use <a class="reference internal" href="#d0/d99/umsg_8h_1a9cc53b7511c056c86425eb8f451ac69d"><span class="std std-ref">fpgaTriggerUmsg()</span></a> if you need ASE simulation capabilities.</dd>
+<p>This function will return a pointer to the memory allocated for low latency accelerator notifications (UMsgs).</p>
+<p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>FPGA_OK on success. FPGA_INVALID_PARAM if input parameter combination is not valid. FPGA_EXCEPTION if input parameter fpga handle is not valid. FPGA_NO_MEMORY if memory allocation fails or system doesn’t configure huge pages. </dd>
 <dt><strong>Parameters</strong></dt>

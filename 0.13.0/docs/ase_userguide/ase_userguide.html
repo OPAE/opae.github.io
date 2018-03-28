@@ -109,12 +109,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#helper-scripts-in-ase">Helper Scripts in ASE</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#set-up-simulation-tools">Set Up Simulation Tools</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ase-environment-check">ASE Environment Check</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#create-empty-ase-environment">Create Empty ASE Environment</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#generate-ase-environment-script">Generate ASE Environment Script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulate-an-afu-using-ase">Simulate an AFU using ASE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#afu-sim-setup">afu_sim_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rtl-src-config">rtl_src_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generate-ase-environment-py">generate_ase_environment.py</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#clean-ase-environment">Clean ASE Environment</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#sample-configurations">Sample Configurations</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#ase-usage">ASE Usage</a><ul>
@@ -127,10 +128,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#recommendations-list">Recommendations List</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#ase-examples">ASE Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#running-sample-nlb-in-acceleration-stack-for-intel-xeon-processor-with-integrated-fpga-configuration">Running Sample NLB in Acceleration Stack for Intel Xeon Processor with Integrated FPGA Configuration</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#ase-example">ASE Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#operation-reference">Operation Reference</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ase-simulator-makefile-switches">ASE Simulator Makefile Switches</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#ase-makefile-build-flow">ASE Makefile Build Flow</a></li>
@@ -177,7 +175,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_config/readme.html">hssi_config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_loopback/readme.html">hssi_loopback</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_tuner/readme.html">hssi_tuner</a></li>
 </ul>
 
             
@@ -289,12 +286,7 @@ simulate either of the two platforms.</p>
 <img alt="Supported" src="../../_images/platform_rev1.PNG" />
 </div>
 <p>The Acceleration Stack for Intel® Xeon® Processor with Integrated FPGA
-platform provides coherent accelerator attachment to an Intel platform
-via Intel® Ultra Path Interconnect (UPI) and two PCIe channels. In this
-case the FPGA Interface Manager (FIM) realized on the FPGA hosts a
-proprietary UPI Protocol layer and PCIe fabric in FPGA logic (registers,
-slices, LUTs, etc.). This FIM incorporates a Caching Agent (CA) that
-participates in Intel® Xeon® caching activities.</p>
+platform provides coherent accelerator attachment to an Intel platform.</p>
 <div class="section" id="afu-simulation-environment-ase-overview">
 <h3>AFU Simulation Environment (ASE) Overview<a class="headerlink" href="#afu-simulation-environment-ase-overview" title="Permalink to this headline">¶</a></h3>
 <p>ASE is a unified environment that aims to reduce time-to-market AFU
@@ -433,13 +425,14 @@ platform-specific implementation of the OPAE API.</p>
 software release. The current OPAE ASE release support both Acceleration
 Stack for Intel® Xeon® Processor with Integrated FPGA and Acceleration
 Stack for Intel® Xeon® CPU with FPGAs platforms. ASE does not require an
-FPGA in the platform, and uses the AF in source form. Bitstream
-configurations cannot be simulated in ASE.</p>
-<p>ASE is supported only on 64-bit Linux operating systems. ASE requires a
-64-bit RTL simulator, either Synopsys* VCS-MX or Mentor Graphics*
-QuestaSim/ModelSim-SE. The RTL simulator specific requirements are not
-listed here. Consult with your RTL simulator vendor for Synopsys* or
-Mentor Graphics* specific requirements.</p>
+FPGA in the platform. Bitstream configurations cannot be simulated in
+ASE.</p>
+<p>ASE is supported only on 64-bit Linux operating systems. ASE performs
+best on a 64-bit RTL simulator, either Synopsys* VCS-MX or Mentor
+Graphics* QuestaSim/ModelSim-SE, though support for 32-bit ModelSim is
+available. The RTL simulator-specific requirements are not listed here.
+Consult with your RTL simulator vendor for Synopsys* or Mentor
+Graphics* specific requirements.</p>
 <p>The following RTL Simulators versions are supported in the current
 version of ASE:</p>
 <ul class="simple">
@@ -478,10 +471,7 @@ process</li>
 </li>
 <li><strong>Cmake</strong>: version 2.8 or above</li>
 <li><strong>GLIBC</strong>: version 2.19 or above</li>
-<li><strong>Python</strong>: This is optional, but is used by
-<code class="docutils literal"><span class="pre">ase/scripts/generate_ase_environment.py</span></code> script. However, the
-functions of the script can be performed manually. Python &gt;=2.7 is
-recommended.</li>
+<li><strong>Python</strong>: version 2.7 or above</li>
 <li><strong>Intel® Quartus® Prime Pro Edition</strong>: If you are simulating the
 provided NLB sample, ASE needs to find the
 <code class="docutils literal"><span class="pre">$QUARTUS_HOME/eda/sim_lib/</span></code> directory supplied with Intel®
@@ -501,19 +491,15 @@ simulators from Synopsys* or Mentor Graphics*.</p>
 </div>
 <div class="section" id="package-description">
 <h2>Package Description<a class="headerlink" href="#package-description" title="Permalink to this headline">¶</a></h2>
-<p>ASE implementation of OPAE API may be downloaded either in RPM format
-(see Download instructions) or as a source.</p>
-<p>The source form directory tree is as following:</p>
+<p>ASE may be downloaded either in RPM format (see Download instructions)
+or as source.</p>
+<p>The source directory tree is:</p>
 <div class="code shell highlight-console"><div class="highlight"><pre><span></span><span class="go">OPAE_BASEDIR</span>
 <span class="go">  |-- ase</span>
 <span class="go">  | |-- api</span>
 <span class="go">  | |   `-- src</span>
 <span class="go">  | |-- rtl</span>
 <span class="go">  | |   `-- dcp_emif_model</span>
-<span class="go">  | |-- sample_config</span>
-<span class="go">  | |   `-- mcp_nlb0</span>
-<span class="go">  | |       |-- config</span>
-<span class="go">  | |       `-- rtl</span>
 <span class="go">  | |-- scripts</span>
 <span class="go">  | `-- sw</span>
 <span class="go">  |</span>
@@ -525,6 +511,7 @@ simulators from Synopsys* or Mentor Graphics*.</p>
 <span class="go">  | `-- utils</span>
 <span class="go">  |-- doc</span>
 <span class="go">  |-- libopae</span>
+<span class="go">  |-- platforms</span>
 <span class="go">  |-- samples</span>
 <span class="go">  |-- tests</span>
 <span class="go">  `-- tools</span>
@@ -547,9 +534,6 @@ DDR memory model. This must be compiled for all programmable
 FPGA acceleration card mode simulation model.</li>
 </ul>
 </li>
-<li><code class="docutils literal"><span class="pre">sample_config</span></code>: Contains sample configurations of different
-AFUS. These are described in <a class="reference external" href="#sample-configurations">Sample
-Configurations</a> Section.</li>
 <li><code class="docutils literal"><span class="pre">scripts</span></code>: Contains several helper scripts. These are described
 in <a class="reference external" href="#helper-scripts-in-ase">Helper Scripts in ASE</a> Section.</li>
 <li><code class="docutils literal"><span class="pre">sw</span></code>: Software components of ASE. These are required for all
@@ -559,6 +543,8 @@ simulations of ASE, and are compiled using GNU Compiler Collection
 </li>
 <li><code class="docutils literal"><span class="pre">common</span></code>: This directory contains the OPAE library definitions, and
 defines various macros for access to an FPGA in an OPAE context.</li>
+<li><code class="docutils literal"><span class="pre">platforms</span></code>: Contains scripts and RTL for managing the connection
+between a platform and an AFU’s top-level interface.</li>
 <li><code class="docutils literal"><span class="pre">samples</span></code>: Contains a sample that will run on Native Loopback (NLB)
 RTL AFU.</li>
 <li><code class="docutils literal"><span class="pre">libopae</span></code>: Intel platfrom specific implementation of the OPAE API.</li>
@@ -571,21 +557,11 @@ with setting up tools, and even cleanup of an existing ASE simulation
 environment.</p>
 <div class="section" id="set-up-simulation-tools">
 <h4>Set Up Simulation Tools<a class="headerlink" href="#set-up-simulation-tools" title="Permalink to this headline">¶</a></h4>
-<p>To set up the tools required, use <code class="docutils literal"><span class="pre">ase/scripts/ase_setup.sh</span></code> as a
-template script. The script has many empty placeholders that are site
-and environment specific. Consult your Electronic Design Automation
+<p>To set up the tools required, use <code class="docutils literal"><span class="pre">ase/scripts/ase_setup_template.sh</span></code>
+as a template script. The script has many empty placeholders that are
+site and environment specific. Consult your Electronic Design Automation
 (EDA) tools administrator, and/or the RTL simulator User Guides for help
 setting up the tools.</p>
-<div class="code bash highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> This file must be edited before sourcing it.
-<span class="gp">$</span> emacs ase/scripts/ase_setup.sh
-<span class="go">.</span>
-<span class="go">.</span>
-<span class="go">.</span>
-
-<span class="gp">#</span> Source tools script
-<span class="gp">$</span> <span class="nb">source</span> ase/scripts/ase_setup.sh
-</pre></div>
-</div>
 </div>
 <div class="section" id="ase-environment-check">
 <h4>ASE Environment Check<a class="headerlink" href="#ase-environment-check" title="Permalink to this headline">¶</a></h4>
@@ -597,68 +573,69 @@ version, etc.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="create-empty-ase-environment">
-<h4>Create Empty ASE Environment<a class="headerlink" href="#create-empty-ase-environment" title="Permalink to this headline">¶</a></h4>
-<p>The simulator for ASE execution may be built either in-tree or
-out-of-tree. Choice of either approach does not affect user experience
-or simulator capabilities. An out-of-tree build may be useful if the
-OPAE package has been installed in a read-only location and is shared
-across the file-system.</p>
-<p>For this reason, an ASE environment create/clone script is made
-available. This script will generate only an empty ASE environment, and
-does not take any inputs.</p>
-<div class="code bash highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> Change directory to target date
-<span class="gp">$</span> <span class="nb">cd</span> &lt;work-dir&gt;
-
-<span class="gp">#</span> Run clone script
-<span class="gp">$</span> &lt;install-path&gt;/opae/ase/scripts/create_ase_simbuild_env.sh
-<span class="gp">#</span><span class="c1">################################################################</span>
-<span class="gp">#</span>                                                               <span class="c1">#</span>
-<span class="gp">#</span>             OPAE Intel<span class="o">(</span>R<span class="o">)</span> Xeon<span class="o">(</span>R<span class="o">)</span> + FPGA Library              <span class="c1">#</span>
-<span class="gp">#</span>               AFU Simulation Environment <span class="o">(</span>ASE<span class="o">)</span>                <span class="c1">#</span>
-<span class="gp">#</span>                                                               <span class="c1">#</span>
-<span class="gp">#</span><span class="c1">################################################################</span>
-<span class="go">Script running from: /tmp/opae/ase/scripts/</span>
-<span class="go">ASE Sources found... will proceed to create directory</span>
-<span class="go">ASE Source directory: /tmp/opae/ase</span>
-
-<span class="go">ASE simulator build environment created</span>
-<span class="go">Next steps: This simulation environment must be configured for an AFU</span>
-<span class="go">            See ASE Documentation on usage steps</span>
-
-
-
-<span class="gp">#</span> Empty ASE directory created
-<span class="gp">$</span> ls
-<span class="go">ase ...</span>
-<span class="gp">$</span> tree ase
-<span class="go">ase</span>
-<span class="go">|-- ase.cfg</span>
-<span class="go">|-- ase_regress.sh</span>
-<span class="go">`-- Makefile</span>
-
-<span class="go">0 directories, 3 files</span>
-
-<span class="gp">$</span>
-</pre></div>
+<div class="section" id="simulate-an-afu-using-ase">
+<h4>Simulate an AFU using ASE<a class="headerlink" href="#simulate-an-afu-using-ase" title="Permalink to this headline">¶</a></h4>
+<p>An ASE environment for simulating a particular AFU is generated by
+replicating the ASE source tree and adding AFU-specific configuration.
+Several scripts are provided to accomplish this. The primary script is
+<code class="docutils literal"><span class="pre">afu_sim_setup</span></code>, which is installed in the OPAE <code class="docutils literal"><span class="pre">bin</span></code> directory.
+Before attempting to configure ASE, follow the instructions for building
+the OPAE SDK and ensure that either the OPAE installed <code class="docutils literal"><span class="pre">bin</span></code> or the
+OPAE build tree’s <code class="docutils literal"><span class="pre">bin</span></code> directory is on your shell’s <code class="docutils literal"><span class="pre">PATH</span></code>.</p>
+<p>See the <a class="reference external" href="#ase-example">ASE Example</a> section below for a sample
+workload definition and execution flow.</p>
 </div>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">The ``ase/scripts/create_ase_simbuild_env.sh`` will not generate any AFU specific configuration files. Either you have to provide these files or use the ``generate_ase_environment.py`` script.</span>
+<div class="section" id="afu-sim-setup">
+<h4>afu_sim_setup<a class="headerlink" href="#afu-sim-setup" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal"><span class="pre">afu_sim_setup</span></code> script consumes a file containing a list of RTL
+sources and constructs an ASE tree to compile and simulate them. Consult
+<code class="docutils literal"><span class="pre">afu_sim_setup</span> <span class="pre">--help</span></code> for a list of arguments. The only required
+argument is the directory in which to construct the new environment. The
+<code class="docutils literal"><span class="pre">--platform</span></code> argument sets the platform class to simulate
+(e.g.&nbsp;integrated Xeon+FPGA with a coherent FPGA-side cache or a discrete
+PCIe-attached FPGA). <code class="docutils literal"><span class="pre">afu_sim_setup</span></code> is a wrapper for other scripts,
+described below. It invokes <code class="docutils literal"><span class="pre">rtl_src_config</span></code> to transform the list of
+RTL sources into simulator configuration files.
+<code class="docutils literal"><span class="pre">generate_ase_environment.py</span></code> is invoked to instantiate a simulated
+platform configuration. Users could choose to invoke these scripts
+directly, though interacting only with <code class="docutils literal"><span class="pre">afu_sim_setup</span></code> should satisfy
+most requirements.</p>
+<div class="code bash highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> afu_sim_setup --sources<span class="o">=</span>&lt;rtl_sources.txt&gt; &lt;target dir&gt;
 </pre></div>
 </div>
 </div>
-<div class="section" id="generate-ase-environment-script">
-<h4>Generate ASE Environment Script<a class="headerlink" href="#generate-ase-environment-script" title="Permalink to this headline">¶</a></h4>
-<p>ASE supplies a Generate ASE Environment helper script that does a
-brute-force check of supplied AFU RTL directories. The script is
-imperfect and lists every file ending in an <code class="docutils literal"><span class="pre">.sv,</span> <span class="pre">.vs,</span> <span class="pre">.vhd,</span> <span class="pre">.v</span></code> file
-and directories separated by <code class="docutils literal"><span class="pre">+</span></code>.</p>
+<div class="section" id="rtl-src-config">
+<h4>rtl_src_config<a class="headerlink" href="#rtl-src-config" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal"><span class="pre">rtl_src_config</span></code> script maps a simple text file containing a list
+of RTL source files into either an ASE configuration file for simulation
+or a Quartus configuration file for synthesis. In addition to sources,
+preprocessor variables may be defined. Source configuration files may be
+hierarchical, with one file including another. Scripts are provided for
+constructing either ASE-based simulation trees or Quartus build trees,
+driven by <code class="docutils literal"><span class="pre">rtl_src_config</span></code>. Run <code class="docutils literal"><span class="pre">rtl_src_config</span> <span class="pre">--help</span></code> for a list
+of options and for documentation of the expected source specification
+syntax.</p>
+</div>
+<div class="section" id="generate-ase-environment-py">
+<h4>generate_ase_environment.py<a class="headerlink" href="#generate-ase-environment-py" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal"><span class="pre">generate_ase_environment.py</span></code> script is invoked by
+<code class="docutils literal"><span class="pre">afu_sim_setup</span></code> to generate a number of platform configuration files.
+We recommend that most users use a list of RTL sources through
+<code class="docutils literal"><span class="pre">afu_sim_setup</span></code> and allow that script to invoke
+<code class="docutils literal"><span class="pre">generate_ase_environment.py</span></code> in the background. A legacy mode in
+<code class="docutils literal"><span class="pre">generate_ase_environment.py</span></code> does a brute-force check of supplied AFU
+RTL directories, attempting to define a compilation. The script is
+imperfect and lists every file ending in <code class="docutils literal"><span class="pre">.sv,</span> <span class="pre">.vs,</span> <span class="pre">.vhd,</span> <span class="pre">or</span> <span class="pre">.v</span></code> and
+directories separated by <code class="docutils literal"><span class="pre">+</span></code>. It also may fail when compilation is
+order-dependent.</p>
+<p>Invoke <code class="docutils literal"><span class="pre">generate_ase_environment.py</span> <span class="pre">--help</span></code> for a list of options.</p>
 <ul class="simple">
 <li><strong>Mandatory Option</strong>: The script requires a directory path to RTL
 AFU.</li>
 <li><strong>Optional -t</strong>: By default the tool option selected is <code class="docutils literal"><span class="pre">VCS</span></code>. If
 Mentor* tools are used, supply the <code class="docutils literal"><span class="pre">QUESTA</span></code> option.</li>
 <li><strong>Optional -p</strong>: By default Acceleration Stack for Intel Xeon
-Processor with Integrated FPGA <code class="docutils literal"><span class="pre">skxp</span></code> option is selected. If
+Processor with Integrated FPGA <code class="docutils literal"><span class="pre">intg_xeon</span></code> option is selected. If
 Acceleration Stack for Intel Xeon CPU with FPGAs is used, supply the
 <code class="docutils literal"><span class="pre">discrete</span></code> option.</li>
 <li><strong>Optional -x</strong>: Exclsions for path searches can be supplied using
@@ -687,30 +664,6 @@ for building and running the simulator.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">You must manually check this file for correctness before using it in the simulation.</span>
 </pre></div>
 </div>
-<div class="code bash highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> ./scripts/generate_ase_environment.py  --help
-<span class="gp">#</span><span class="c1">################################################################</span>
-<span class="gp">#</span>                                                               <span class="c1">#</span>
-<span class="gp">#</span>             OPAE Intel<span class="o">(</span>R<span class="o">)</span> Xeon<span class="o">(</span>R<span class="o">)</span> + FPGA Library              <span class="c1">#</span>
-<span class="gp">#</span>               AFU Simulation Environment <span class="o">(</span>ASE<span class="o">)</span>                <span class="c1">#</span>
-<span class="gp">#</span>                                                               <span class="c1">#</span>
-<span class="gp">#</span><span class="c1">################################################################</span>
-<span class="go">usage: generate_ase_environment.py [-h] [-t {VCS,QUESTA}] [-p {intg_xeon,discrete}]</span>
-<span class="go">                                 [-x EXCLUDE]</span>
-<span class="go">                 dirlist [dirlist ...]</span>
-
-<span class="go">positional arguments:</span>
-<span class="go">  dirlist               list of directories to scan</span>
-
-<span class="go">optional arguments:</span>
-<span class="go">  -h, --help            show this help message and exit</span>
-<span class="go">  -t {VCS,QUESTA}, --tool {VCS,QUESTA}</span>
-<span class="go">                      simulator tool to use, default is VCS</span>
-<span class="go">    -p {intg_xeon,discrete}, --plat {intg_xeon,discrete}</span>
-<span class="go">                      FPGA Platform to simulate</span>
-<span class="go">    -x EXCLUDE, --exclude EXCLUDE</span>
-<span class="go">                    file name pattern to exclude</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="clean-ase-environment">
 <h4>Clean ASE Environment<a class="headerlink" href="#clean-ase-environment" title="Permalink to this headline">¶</a></h4>
@@ -731,19 +684,6 @@ by failed simulation processes or crashes.</p>
 <span class="gp">$</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="sample-configurations">
-<h3>Sample Configurations<a class="headerlink" href="#sample-configurations" title="Permalink to this headline">¶</a></h3>
-<p>ASE has a copy of the sample Native LoopBack (NLB) RTL AFU inside the
-<code class="docutils literal"><span class="pre">ase/sample_config/mcp_nlb0</span></code> directory. This NLB RTL can be simulated
-in ASE using the <code class="docutils literal"><span class="pre">opae/samples/hello_fpga.c</span></code> example. Specific steps
-to achieve this is described in <a class="reference external" href="#running-sample-nlb-in-acceleration-stack-for-intel-xeon-processor-with-integrated-fpga-configuration">Running Sample NLB in Acceleration
-Stack for Intel Xeon Processor with Integrated FPGA
-Configuration</a>
-section.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">This sample configuration is only valid for Acceleration Stack for Intel Xeon Processor with Integrated FPGA. For Acceleration Stack for Intel Xeon CPU with FPGAs, use the NLB under ``hw/samples/nlb_mode_0``.</span>
-</pre></div>
 </div>
 </div>
 </div>
@@ -936,98 +876,52 @@ configuration based on that.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">ASE_PLATFOR</span>
-<span class="pre">M</span></code></td>
-<td>This is the
-platform
-differentia
-tor
-must be set
-in
-<code class="docutils literal"><span class="pre">ase_sourc</span>
-<span class="pre">es.mk</span></code>
-to point to
-the
-required
-simulator
-features.
-<code class="docutils literal"><span class="pre">FPGA_PL</span>
-<span class="pre">ATFORM_INTG</span>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ASE_PLATFORM</span></code></td>
+<td>This is the platform
+differentiator must be
+set in
+<code class="docutils literal"><span class="pre">ase_sources.mk</span></code> to
+point to the required
+simulator features.
+<code class="docutils literal"><span class="pre">FPGA_PLATFORM_INTG</span>
 <span class="pre">_XEON</span></code>
 and
-<code class="docutils literal"><span class="pre">FPGA_PLAT</span>
-<span class="pre">FORM_DISCRE</span>
+<code class="docutils literal"><span class="pre">FPGA_PLATFORM_DISCRE</span>
 <span class="pre">TE</span></code>
-are the
-only legal
+are the only legal
 values.</td>
-<td><code class="docutils literal"><span class="pre">FPGA_</span>
-<span class="pre">PLATFOR</span>
-<span class="pre">M_INTG_</span>
-<span class="pre">XEON</span></code></td>
+<td><code class="docutils literal"><span class="pre">FPGA_PLATFOR</span>
+<span class="pre">M_INTG_XEON</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">SIMULATOR</span></code></td>
-<td>This must
-be set in
-<code class="docutils literal"><span class="pre">ase_sourc</span>
-<span class="pre">es.mk</span></code>
-to point to
-the correct
-kind of RTL
-simulator.
-Currently
-Synopsys*
-VCS-MX and
-Modelsim-SE
-(Questasim)
-simulator
-builds are
-supported
-in ASE.
-Only 64-bit
-configurati
-ons
-are
-supported.
-<code class="docutils literal"><span class="pre">VCS</span></code>
-and
-<code class="docutils literal"><span class="pre">QUESTA</span></code>
-are the
-only legal
-values.</td>
+<td>This must be set in
+<code class="docutils literal"><span class="pre">ase_sources.mk</span></code> to
+point to the correct
+kind of RTL simulator.
+Currently Synopsys*
+VCS-MX and Modelsim-SE
+(Questasim) simulator
+builds are supported
+in ASE. Only 64-bit
+configurations are
+supported. <code class="docutils literal"><span class="pre">VCS</span></code>
+and <code class="docutils literal"><span class="pre">QUESTA</span></code> are the
+only legal values.</td>
 <td><code class="docutils literal"><span class="pre">VCS</span></code></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">DUT_VLOG_SR</span>
-<span class="pre">C_LIST</span></code>,
-<code class="docutils literal"><span class="pre">DUT_VHDL_SR</span>
-<span class="pre">C_LIST</span></code>,
-and
-<a href="#id1"><span class="problematic" id="id2">``</span></a>DUT_INCDIR`
-`</td>
-<td>These
-options
-point to
-AFU
-Verilog,
-VHDL and
-include
-path
-settings
-required
-for RTL
-simulators
-to build
-the
-simulation
-model
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">DUT_VLOG_SRC_LIST</span></code>,
+<code class="docutils literal"><span class="pre">DUT_VHDL_SRC_LIST</span></code>, and
+<code class="docutils literal"><span class="pre">DUT_INCDIR</span></code></td>
+<td>These options point to
+AFU Verilog, VHDL and
+include path settings
+required for RTL
+simulators to build
+the simulation model
 correctly</td>
-<td>None
-supplie
-d
-— You
-must
-fill
-this.</td>
+<td>None supplied
+— You must
+fill this.</td>
 </tr>
 </tbody>
 </table>
@@ -1339,144 +1233,20 @@ errors are logged into <code class="docutils literal"><span class="pre">$ASE_WOR
 ASE.</p>
 </div>
 </div>
-<div class="section" id="ase-examples">
-<h2>ASE Examples<a class="headerlink" href="#ase-examples" title="Permalink to this headline">¶</a></h2>
-<p>For Acceleration Stack for Intel Xeon CPU with FPGAs sample
-applications, refer to Accelerator Functional Unit (AFU) Simulation
-Environment (ASE) Quick Start User Guide.</p>
-<div class="section" id="running-sample-nlb-in-acceleration-stack-for-intel-xeon-processor-with-integrated-fpga-configuration">
-<h3>Running Sample NLB in Acceleration Stack for Intel Xeon Processor with Integrated FPGA Configuration<a class="headerlink" href="#running-sample-nlb-in-acceleration-stack-for-intel-xeon-processor-with-integrated-fpga-configuration" title="Permalink to this headline">¶</a></h3>
-<p>Open two terminals, use <strong>Terminal 1</strong> to run the ASE simulator, and
-<strong>Terminal 2</strong> to OPAE software application.</p>
-<ol class="arabic simple">
-<li>In <strong>Terminal 2</strong>, build the OPAE software stack as described
-<a class="reference external" href="#ase-application-client-build-instructions">here</a></li>
-</ol>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">* The ```make``` process also builds the ```hello_fpga.c``` example located in ```/tmp/opae/samples/hello_fpga.c``` and creates an executable in the build directory. In this case, the location of the built binary is located here:</span>
-
-<span class="go">```</span>
-
-<span class="go">  /tmp/opae/mybuild/bin/hello_fpga</span>
-<span class="go">```</span>
-
-<span class="go">* When executing this binary, it dynamically links to the ```libopae-c-ase.so```</span>
-
-<span class="go">```{.bash}</span>
-
-<span class="gp">  $</span> ldd /tmp/opae/mybuild/bin/hello_fpga
-<span class="go">    linux-vdso.so.1 =&gt;  (0x00007ffe44860000)</span>
-<span class="go">    libuuid.so.1 =&gt; /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007f23cac8f000)</span>
-<span class="go">    libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f23caa71000)</span>
-<span class="go">    libopae-c.so.0 =&gt; /tmp/opae/mybuild/lib/libopae-c.so.0 (0x00007f23ca830000)</span>
-<span class="go">    libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f23ca468000)</span>
-<span class="go">    /lib64/ld-linux-x86-64.so.2 (0x00007f23cae94000)</span>
-<span class="go">    libjson-c.so.2 =&gt; /lib/x86_64-linux-gnu/libjson-c.so.2 (0x00007f23ca25d000)</span>
-
-<span class="go">```</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="2">
-<li>On <strong>Terminal 1</strong>, open the ASE directory. If you are using an
-out-of-tree build flow, use steps located
-<a class="reference external" href="#create-empty-ase-environment">here</a> for steps to create an empty
-ASE project directory.<ul>
-<li>A sample NLB RTL and configuration is located in the
-<code class="docutils literal"><span class="pre">&lt;install-prefix&gt;/opae/ase/sample_config/mcp_nlb0/</span></code> directory.
-The RTL is located in the <code class="docutils literal"><span class="pre">rtl</span></code> directory. A pre-made
-configuration is available in the <code class="docutils literal"><span class="pre">config</span></code> directory. For this
-experiment, we will build a configuration from scratch using the
-<code class="docutils literal"><span class="pre">scripts/generate_ase_environment.py</span></code> script.</li>
-<li>The example shows <code class="docutils literal"><span class="pre">VCS</span></code> usage but the steps may be used for
-<code class="docutils literal"><span class="pre">QUESTA</span></code> as well.</li>
-<li>The example can only be used in the
-<code class="docutils literal"><span class="pre">ASE_PLATFORM=FPGA_PLATFORM_INTG_XEON</span></code> configuration. Using the
-<code class="docutils literal"><span class="pre">FPGA_PLATFORM_DISCRETE</span></code> configuration will cause compilation
-failures.</li>
-</ul>
-</li>
-</ol>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">```{.bash}</span>
-
-<span class="gp">  #</span> Change to the <span class="s1">&#39;ase&#39;</span> directory
-<span class="gp">  $</span> <span class="nb">cd</span> &lt;work-path&gt;/ase/
-
-<span class="gp">  #</span> Generate the ASE path
-<span class="gp">  $</span> /tmp/opae/ase/scripts/generate_ase_environment.py -t VCS -p intg_xeon /tmp/opae/ase/sample_config/mcp_nlb0/rtl/
-
-
-<span class="gp">  #</span> INSTRUCTIONS TO USER
-<span class="gp">  #</span> --------------------
-<span class="gp">  #</span> ase_sources.mk, vlog_files.list, and other simulation settings are generated&gt;
-<span class="gp">  #</span> Read the generated files <span class="k">for</span> content
-<span class="gp">  #</span>
-<span class="gp">  #</span> Add the following line to ase_sources.mk file
-<span class="gp">  #</span> This switch will allow add the following switch
-<span class="gp">  #</span>
-
-<span class="gp">  $</span> <span class="nb">echo</span> <span class="s2">&quot;SNPS_VLOGAN_OPT = +define+VENDOR_ALTERA +define+TOOL_QUARTUS +define+NUM_AFUS=1 +define+NLB400_MODE_0&quot;</span> &gt;&gt; ase_sources.mk
-
-<span class="gp">  #</span> If QUESTA is being used, <span class="nb">set</span> the following switch
-<span class="gp">  #</span> $ <span class="nb">echo</span> <span class="s2">&quot;MENT_VLOG_OPT = +define+VENDOR_ALTERA +define+TOOL_QUARTUS +define+NUM_AFUS=1 +define+NLB400_MODE_0&quot;</span> &gt;&gt; ase_sources.mk
-
-<span class="gp">  #</span> Build the simulator
-<span class="gp">  $</span> make <span class="nv">ASE_PLATFORM</span><span class="o">=</span>FPGA_PLATFORM_INTG_XEON
-
-
-<span class="go">```</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="3">
-<li>On <strong>Terminal 1</strong>, we will invoke the simulator</li>
-</ol>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">```{.bash}</span>
-
-<span class="gp">  $</span> make sim
-
-<span class="go">  &lt;wait until simulator starts and prints &quot;Ready for Simulation&quot;&gt;</span>
-
-<span class="go">```</span>
-
-<span class="go">* As a reference, see [ASE Runtime Instructions](#ase-runtime-instructions) for clues on what the simulation will look like.</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="4">
-<li>Switch back to <strong>Terminal 2</strong>: We will invoke the <code class="docutils literal"><span class="pre">hello_fpga</span></code>
-application.</li>
-</ol>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">```</span>
-<span class="gp">  #</span> Change directory to build directory <span class="s1">&#39;bin&#39;</span>
-<span class="gp">  $</span> <span class="nb">cd</span> /tmp/opae/mybuild/bin/
-
-<span class="gp">  #</span> Set LD_LIBRARY_PATH environment variable
-<span class="gp">  #</span>
-<span class="gp">  #</span> Depending on the install method used, this path may be different
-<span class="gp">  #</span>
-<span class="gp">  $</span> <span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/tmp/opae/myinst/lib
-
-<span class="gp">  #</span> Set the ASE_WORKDIR environment variable
-<span class="gp">  #</span>
-<span class="gp">  #</span> Copy this environment variable from Terminal <span class="m">1</span> simulator run <span class="o">(</span>Green text<span class="o">)</span>
-<span class="gp">  #</span>
-<span class="gp">  $</span> <span class="nb">export</span> <span class="nv">ASE_WORKDIR</span><span class="o">=</span>&lt;work-path&gt;/ase/work/
-
-<span class="gp">  #</span> Run the application
-<span class="gp">  $</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span>libopae-c-ase.so ./hello_fpga
-
-
-<span class="go">```</span>
-<span class="go">* Wait for Simulation to end, and application to exit.</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="5">
-<li>In <strong>Terminal 1</strong>, issue a <code class="docutils literal"><span class="pre">CTRL-C</span></code> to close the simulator.</li>
-</ol>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">* When exiting, the ASE simulator prints out transaction counts seen during the session.</span>
-<span class="go">* Run ```make wave``` to open the waveform viewer.</span>
-<span class="go">* Open ```work/ccip_transactions.tsv``` in a text viewer to see the actual transactions. The timestamps may be checked in the wavefor viewer.</span>
-</pre></div>
-</div>
+<div class="section" id="ase-example">
+<h2>ASE Example<a class="headerlink" href="#ase-example" title="Permalink to this headline">¶</a></h2>
+<p>A tutorial for CCI-P systems is available in a separate <a class="reference external" href="https://github.com/OPAE/intel-fpga-bbb">Basic Building
+Blocks repository</a> in the
+<a class="reference external" href="https://github.com/OPAE/intel-fpga-bbb/tree/master/samples/tutorial">samples/tutorial</a>
+tree. The first example,
+<a class="reference external" href="https://github.com/OPAE/intel-fpga-bbb/tree/master/samples/tutorial/01_hello_world">01_hello_world</a>
+follows the <code class="docutils literal"><span class="pre">afu_sim_setup</span></code> flow described above. Start with the
+tutorial’s
+<a class="reference external" href="https://github.com/OPAE/intel-fpga-bbb/blob/master/samples/tutorial/README">README</a>
+file for configuration and execution instructions. The example defines a
+set of sources and walks users through the process of creating an ASE
+tree, running the simulator and connecting it to a host program.</p>
 <!-- ### Using Basic Building Blocks (BBB) in ASE ### --><!-- #### Using CCI-P Asynchronous Shim in ASE #### --><!-- #### Using Memory Protocol Factory (MPF) in ASE #### --></div>
-</div>
 <div class="section" id="operation-reference">
 <h2>Operation Reference<a class="headerlink" href="#operation-reference" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="ase-simulator-makefile-switches">
@@ -1538,86 +1308,53 @@ using the Synopsys* or Mentor utilities.</li>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">all</span></code></td>
-<td>Default
-build
-target,
-attempts a
-simulator
-build in
-Synopsys*
+<td>Default build target,
+attempts a simulator
+build in Synopsys*
 VCS-MX</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">header</span></code></td>
-<td>Print
-version and
+<td>Print version and
 preamble</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">check</span></code></td>
-<td>Environment
-check</td>
+<td>Environment check</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">sw_build</span></code></td>
-<td>Build
-<code class="docutils literal"><span class="pre">ase/sw/</span></code>
-components
-into
-software
-library.
-<a href="#id3"><span class="problematic" id="id4">``</span></a>SIM_SIDE`
-`
-switch is
-used to
-build the
-simulator
-software
+<td>Build <code class="docutils literal"><span class="pre">ase/sw/</span></code>
+components into software
+library. <code class="docutils literal"><span class="pre">SIM_SIDE</span></code>
+switch is used to build
+the simulator software
 components</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">help</span></code></td>
-<td>Print help
-information</td>
+<td>Print help information</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">vcs_build</span></code></td>
-<td>Synopsys*
-VCS-MX
-template
-build flow</td>
+<td>Synopsys* VCS-MX
+template build flow</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">questa_build</span></code></td>
-<td>Mentor
-Graphics*
-Modelsim-SE
-/Questasim
-template
-build flow</td>
+<td>Mentor Graphics*
+Modelsim-SE/Questasim
+template build flow</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">sim</span></code></td>
-<td>Start the
-ASE
-Simulator</td>
+<td>Start the ASE Simulator</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">wave</span></code></td>
-<td>Open
-Selected
-RTL
-Waveform
-Viewer</td>
+<td>Open Selected RTL
+Waveform Viewer</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">clean</span></code></td>
-<td>Clean
-build,
-simulation,
-and log
-files</td>
+<td>Clean build, simulation,
+and log files</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">distclean</span></code></td>
-<td>Clean
-distributio
-n
-- removes
-the AFU
-configurati
-on
-files as
+<td>Clean distribution -
+removes the AFU
+configuration files as
 well</td>
 </tr>
 </tbody>
@@ -1627,8 +1364,8 @@ well</td>
 <h4>ASE Makefile Variables<a class="headerlink" href="#ase-makefile-variables" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
-<col width="42%" />
-<col width="27%" />
+<col width="43%" />
+<col width="26%" />
 <col width="31%" />
 </colgroup>
 <thead valign="bottom">
@@ -1641,68 +1378,49 @@ well</td>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">VCS_HOME</span></code></td>
 <td>Synopsys*
 VCS-MX
-installatio
-n
+installation
 path</td>
-<td>Tool
-Installation
+<td>Tool Installation
 Specific</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">MTI_HOME</span></code></td>
 <td>Mentor
-installatio
-n
+installation
 path</td>
-<td>Tool
-Installation
+<td>Tool Installation
 Specific</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">QUARTUS_HOME</span></code></td>
-<td>Intel®
-Quartus®
-Pro
-installatio
-n
+<td>Intel® Quartus®
+Pro installation
 path</td>
-<td>Tool
-Installation
+<td>Tool Installation
 Specific</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">ASE_PLATFORM</span></code></td>
 <td>Platform
 selection
-switch:
-Either
-tightly-cou
-pled
+switch: Either
+tightly-coupled
 FPGA or
-programmabl
-e
+programmable
 FPGA
-acceleratio
-n
+acceleration
 card may be
-selected
-using
-<code class="docutils literal"><span class="pre">FPGA_PLAT</span>
-<span class="pre">FORM_INTG_X</span>
-<span class="pre">EON</span></code>
+selected using
+<code class="docutils literal"><span class="pre">FPGA_PLATFORM_</span>
+<span class="pre">INTG_XEON</span></code>
 and
-<code class="docutils literal"><span class="pre">FPGA_PLAT</span>
-<span class="pre">FORM_DISCRE</span>
-<span class="pre">TE</span></code>
-respectivel
-y</td>
-<td><a href="#id5"><span class="problematic" id="id6">``</span></a>FPGA_PLATFO
-RM_INTG_XEON`
-`</td>
+<code class="docutils literal"><span class="pre">FPGA_PLATFORM_</span>
+<span class="pre">DISCRETE</span></code>
+respectively</td>
+<td><code class="docutils literal"><span class="pre">FPGA_PLATFORM_INT</span>
+<span class="pre">G_XEON</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">SIMULATOR</span></code></td>
-<td>Simulator
-Key to
+<td>Simulator Key to
 environment
-Allowed
-values
+Allowed values
 <code class="docutils literal"><span class="pre">VCS</span></code> or
 <code class="docutils literal"><span class="pre">QUESTA</span></code></td>
 <td><code class="docutils literal"><span class="pre">VCS</span></code></td>
@@ -1710,19 +1428,16 @@ values
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">ASE_SRCDIR</span></code></td>
 <td>ASE Source
 location</td>
-<td>Current
-source path</td>
+<td>Current source path</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">ASE_WORKDIR</span></code></td>
-<td>Location
-where ASE
-runs
+<td>Location where
+ASE runs
 (usually
-<code class="docutils literal"><span class="pre">$ASE_SRCD</span>
-<span class="pre">IR/work</span></code>)</td>
+<code class="docutils literal"><span class="pre">$ASE_SRCDIR/wo</span>
+<span class="pre">rk</span></code>)</td>
 <td>Environment
-specific
-execution
+specific execution
 path</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">WORK</span></code></td>
@@ -1732,293 +1447,221 @@ compilation
 location</td>
 <td><code class="docutils literal"><span class="pre">work</span></code></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">ASE_DISABLE_LOGG</span>
-<span class="pre">ER</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ASE_DISABLE_LOGGER</span></code></td>
 <td>Switch to
-disable
-logger
+disable logger
 build</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">ASE_DISABLE_CHEC</span>
-<span class="pre">KER</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">ASE_DISABLE_CHECKER</span></code></td>
 <td>Switch to
-disable
-checker
+disable checker
 build
-<a href="#id7"><span class="problematic" id="id8">**</span></a>WARNING
-<a href="#id9"><span class="problematic" id="id10">**</span></a>:
-This can
-have side
-effects on
+<strong>WARNING</strong>:
+This can have
+side effects on
 protocol
 correctness</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">GLS_SIM</span></code></td>
 <td>Enable gate
-simulation
-build</td>
+simulation build</td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
 </tr>
-<tr class="row-odd"><td><a href="#id11"><span class="problematic" id="id12">``</span></a>GLS_VERILOG_OPT`
-`</td>
-<td>Libraries
-that enable
-Altera gate
-simulation</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">GLS_VERILOG_OPT</span></code></td>
+<td>Libraries that
+enable Altera
+gate simulation</td>
 <td>Quartus EDA
-Simulation
-library paths</td>
+Simulation library
+paths</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">ASE_CONFIG</span></code></td>
-<td>ASE
-Run-time
-configurati
-on
-file
-(described
-<a class="reference external" href="#ase-runtime-configuration-options">here</a>
-_)</td>
-<td><code class="docutils literal"><span class="pre">$ASE_SRCDIR</span>
-<span class="pre">/ase.cfg</span></code></td>
+<td>ASE Run-time
+configuration
+file (described
+<a class="reference external" href="#ase-runtime-configuration-options">here</a>)</td>
+<td><code class="docutils literal"><span class="pre">$ASE_SRCDIR/ase.c</span>
+<span class="pre">fg</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">ASE_SCRIPT</span></code></td>
-<td>ASE
-Regression
+<td>ASE Regression
 script path</td>
-<td><code class="docutils literal"><span class="pre">$ASE_SRCDIR</span>
-<span class="pre">/ase_regress.</span>
-<span class="pre">sh</span></code></td>
+<td><code class="docutils literal"><span class="pre">$ASE_SRCDIR/ase_r</span>
+<span class="pre">egress.sh</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">TIMESCALE</span></code></td>
 <td>Simulator
 timescale</td>
 <td><code class="docutils literal"><span class="pre">1ps/1ps</span></code></td>
 </tr>
-<tr class="row-odd"><td><a href="#id13"><span class="problematic" id="id14">``</span></a>ASEHW_FILE_LIST`
-`</td>
-<td>ASE RTL
-File list</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">ASEHW_FILE_LIST</span></code></td>
+<td>ASE RTL File
+list</td>
 <td>see
-<code class="docutils literal"><span class="pre">ase/Makefil</span>
-<span class="pre">e</span></code></td>
+<code class="docutils literal"><span class="pre">ase/Makefile</span></code></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">ASE_MEM_FILE_LIS</span>
-<span class="pre">T</span></code></td>
-<td>ASE RTL
-file list
-for
-programmabl
-e
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ASE_MEM_FILE_LIST</span></code></td>
+<td>ASE RTL file
+list for
+programmable
 FPGA
-acceleratio
-n
-card mode
-memory</td>
+acceleration
+card mode memory</td>
 <td>see
-<code class="docutils literal"><span class="pre">ase/Makefil</span>
-<span class="pre">e</span></code></td>
+<code class="docutils literal"><span class="pre">ase/Makefile</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">ASE_INCDIR</span></code></td>
 <td>ASE Include
-directory
-paths</td>
+directory paths</td>
 <td>see
-<code class="docutils literal"><span class="pre">ase/Makefil</span>
-<span class="pre">e</span></code></td>
+<code class="docutils literal"><span class="pre">ase/Makefile</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">ASE_TOP</span></code></td>
-<td>ASE top
-level
-entity
-(must not
+<td>ASE top level
+entity (must not
 be changed)</td>
 <td><code class="docutils literal"><span class="pre">ase_top</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">CC_OPT</span></code></td>
-<td>ASE
-Software
-Library
-compiler
-build
-options</td>
-<td><a href="#id15"><span class="problematic" id="id16">``</span></a>-g -m64 -fP
-IC -D SIM_SID
-E=1 -I $(<a href="#id31"><span class="problematic" id="id32">ASE_</span></a>
-SRCDIR)/sw/ -
-D SIMULATOR=V
-CS -D $(ASE_P
-LATFORM) -Wal
-l -I $(VCS_HO
-ME)/include/`
-`</td>
+<td>ASE Software
+Library compiler
+build options</td>
+<td><p class="first"><a href="#id1"><span class="problematic" id="id2">``</span></a>-g -m64 -fPIC -D
+SIM_SIDE=1 -I $(ASE
+_SRCDIR)/sw/ -D SIM
+ULATOR=VCS -D $(ASE
+_PLATFORM) -Wall -I</p>
+<blockquote>
+<div>$(VCS_HOME)/includ</div></blockquote>
+<p class="last">e/``</p>
+</td>
 </tr>
-<tr class="row-even"><td><a href="#id17"><span class="problematic" id="id18">``</span></a>ASE_LD_SWITCHES`
-`</td>
-<td>ASE
-Software
-Linker
-switches</td>
-<td><code class="docutils literal"><span class="pre">-lrt</span> <span class="pre">-lpthr</span>
-<span class="pre">ead</span> <span class="pre">-lstdc++</span>
-<span class="pre">-luuid</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ASE_LD_SWITCHES</span></code></td>
+<td>ASE Software
+Linker switches</td>
+<td><code class="docutils literal"><span class="pre">-lrt</span> <span class="pre">-lpthread</span> <span class="pre">-l</span>
+<span class="pre">stdc++</span> <span class="pre">-luuid</span></code></td>
 </tr>
-<tr class="row-odd"><td><a href="#id19"><span class="problematic" id="id20">``</span></a>SNPS_VHDLAN_OPT`
-`</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">SNPS_VHDLAN_OPT</span></code></td>
 <td>Synopsys*
 VCS-MX VHDL
-compile
-options
-(extra
-options may
-be added
+compile options
+(extra options
+may be added
 into
-<code class="docutils literal"><span class="pre">ase_sourc</span>
-<span class="pre">es.mk</span></code>)</td>
+<a href="#id3"><span class="problematic" id="id4">``</span></a>ase_sources.mk
+<a href="#id5"><span class="problematic" id="id6">``</span></a>)</td>
 <td>see
-<code class="docutils literal"><span class="pre">ase/Makefil</span>
-<span class="pre">e</span></code></td>
+<code class="docutils literal"><span class="pre">ase/Makefile</span></code></td>
 </tr>
-<tr class="row-even"><td><a href="#id21"><span class="problematic" id="id22">``</span></a>SNPS_VLOGAN_OPT`
-`</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">SNPS_VLOGAN_OPT</span></code></td>
 <td>Synopsys*
 VCS-MX
-{System}Ver
-ilog
-compile
-options
-(extra
-options may
-be added
+{System}Verilog
+compile options
+(extra options
+may be added
 into
-<code class="docutils literal"><span class="pre">ase_sourc</span>
-<span class="pre">es.mk</span></code>)</td>
+<a href="#id7"><span class="problematic" id="id8">``</span></a>ase_sources.mk
+<a href="#id9"><span class="problematic" id="id10">``</span></a>)</td>
 <td>see
-<code class="docutils literal"><span class="pre">ase/Makefil</span>
-<span class="pre">e</span></code></td>
+<code class="docutils literal"><span class="pre">ase/Makefile</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">SNPS_VCS_OPT</span></code></td>
 <td>Synopsys*
-VCS-MX
-options for
-building
+VCS-MX options
+for building
 simulator
 executable
-(extra
-options may
-be added
+(extra options
+may be added
 into
-<code class="docutils literal"><span class="pre">ase_sourc</span>
-<span class="pre">es.mk</span></code>)</td>
+<a href="#id11"><span class="problematic" id="id12">``</span></a>ase_sources.mk
+<a href="#id13"><span class="problematic" id="id14">``</span></a>)</td>
 <td>see
-<code class="docutils literal"><span class="pre">ase/Makefil</span>
-<span class="pre">e</span></code></td>
+<code class="docutils literal"><span class="pre">ase/Makefile</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">SNPS_SIM_OPT</span></code></td>
 <td>Synopsys*
 VCS-MX
 Simulation
-options
-(extra
-options may
-be added
-into
-<code class="docutils literal"><span class="pre">ase_sourc</span>
-<span class="pre">es.mk</span></code>)</td>
+options (extra
+options may be
+added into
+<a href="#id15"><span class="problematic" id="id16">``</span></a>ase_sources.mk
+<a href="#id17"><span class="problematic" id="id18">``</span></a>)</td>
 <td>see
-<code class="docutils literal"><span class="pre">ase/Makefil</span>
-<span class="pre">e</span></code></td>
+<code class="docutils literal"><span class="pre">ase/Makefile</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">MENT_VCOM_OPT</span></code></td>
 <td>Mentor*
-Modelsim-SE
-/Questasim
-VHDL
-compile
-options
-(extra
-options may
-be added
-into
-<code class="docutils literal"><span class="pre">ase_sourc</span>
-<span class="pre">es.mk</span></code>)</td>
+Modelsim-SE/Ques
+tasim
+VHDL compile
+options (extra
+options may be
+added into
+<a href="#id19"><span class="problematic" id="id20">``</span></a>ase_sources.mk
+<a href="#id21"><span class="problematic" id="id22">``</span></a>)</td>
 <td>see
-<code class="docutils literal"><span class="pre">ase/Makefil</span>
-<span class="pre">e</span></code></td>
+<code class="docutils literal"><span class="pre">ase/Makefile</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">MENT_VLOG_OPT</span></code></td>
 <td>Mentor*
-Modelsim-SE
-/Questasim
-{System}Ver
-ilog
-compile
-options
-(extra
-options may
-be added
+Modelsim-SE/Ques
+tasim
+{System}Verilog
+compile options
+(extra options
+may be added
 into
-<code class="docutils literal"><span class="pre">ase_sourc</span>
-<span class="pre">es.mk</span></code>)</td>
+<a href="#id23"><span class="problematic" id="id24">``</span></a>ase_sources.mk
+<a href="#id25"><span class="problematic" id="id26">``</span></a>)</td>
 <td>see
-<code class="docutils literal"><span class="pre">ase/Makefil</span>
-<span class="pre">e</span></code></td>
+<code class="docutils literal"><span class="pre">ase/Makefile</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">MENT_VSIM_OPT</span></code></td>
 <td>Mentor*
-Modelsim-SE
-/Questasim
-VHDL
-simulation
-options
-(extra
-options may
-be added
-into
-<code class="docutils literal"><span class="pre">ase_sourc</span>
-<span class="pre">es.mk</span></code>)</td>
+Modelsim-SE/Ques
+tasim
+VHDL simulation
+options (extra
+options may be
+added into
+<a href="#id27"><span class="problematic" id="id28">``</span></a>ase_sources.mk
+<a href="#id29"><span class="problematic" id="id30">``</span></a>)</td>
 <td>see
-<code class="docutils literal"><span class="pre">ase/Makefil</span>
-<span class="pre">e</span></code></td>
+<code class="docutils literal"><span class="pre">ase/Makefile</span></code></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">DUT_VLOG_SRC_LIS</span>
-<span class="pre">T</span></code></td>
-<td>Points to a
-text file
-listing AFU
-{System}Ver
-ilog
-files
-(usually
-<code class="docutils literal"><span class="pre">vlog_file</span>
-<span class="pre">s.list</span></code>)</td>
-<td>User
-Generated</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">DUT_VLOG_SRC_LIST</span></code></td>
+<td>Points to a text
+file listing AFU
+{System}Verilog
+files (usually
+<code class="docutils literal"><span class="pre">vlog_files.lis</span>
+<span class="pre">t</span></code>)</td>
+<td>User Generated</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">DUT_VHDL_SRC_LIS</span>
-<span class="pre">T</span></code></td>
-<td>Points to a
-text file
-listing AFU
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">DUT_VHDL_SRC_LIST</span></code></td>
+<td>Points to a text
+file listing AFU
 VHDL files
 (usually
-<code class="docutils literal"><span class="pre">vhdl_file</span>
-<span class="pre">s.list</span></code></td>
-<td>User
-Generated</td>
+<code class="docutils literal"><span class="pre">vhdl_files.lis</span>
+<span class="pre">t</span></code></td>
+<td>User Generated</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">DUT_INCDIR</span></code></td>
 <td>Lists AFU
 include
 directories
-separated
-by a ‘+’
-(usually in
-<code class="docutils literal"><span class="pre">ase_sourc</span>
-<span class="pre">es.mk</span></code>)</td>
-<td>User
-Generated</td>
+separated by a
+‘+’ (usually in
+<a href="#id31"><span class="problematic" id="id32">``</span></a>ase_sources.mk
+<a href="#id33"><span class="problematic" id="id34">``</span></a>)</td>
+<td>User Generated</td>
 </tr>
 </tbody>
 </table>
@@ -2170,7 +1813,7 @@ of the
 simulatio
 n,
 a
-<a href="#id23"><span class="problematic" id="id24">``</span></a>$ASE_WO
+<a href="#id35"><span class="problematic" id="id36">``</span></a>$ASE_WO
 RKDIR/ase
 _seed.txt
 ``
@@ -2309,8 +1952,8 @@ environment using
 If this fails, clean
 the distribution
 with
-<a href="#id25"><span class="problematic" id="id26">``</span></a>$ ./distclean.sh
-<a href="#id27"><span class="problematic" id="id28">``</span></a>Then
+<a href="#id37"><span class="problematic" id="id38">``</span></a>$ ./distclean.sh
+<a href="#id39"><span class="problematic" id="id40">``</span></a>Then
 rebuild the
 simulation.</td>
 </tr>
@@ -2375,7 +2018,7 @@ to print:
 <span class="pre">on</span></code></td>
 </tr>
 <tr class="row-even"><td><dl class="first last docutils">
-<dt><a href="#id29"><span class="problematic" id="id30">``</span></a>ase_sources.mk: No such</dt>
+<dt><a href="#id41"><span class="problematic" id="id42">``</span></a>ase_sources.mk: No such</dt>
 <dd>file or directory``</dd>
 </dl>
 </td>
@@ -2387,12 +2030,8 @@ listing (in
 <code class="docutils literal"><span class="pre">vlog_files.list</span></code>
 and
 <code class="docutils literal"><span class="pre">ase_sources.mk</span></code>)
-configuration. See
-<code class="docutils literal"><span class="pre">ase/sample_configs</span>
-<span class="pre">``</span>
-<span class="pre">for</span> <span class="pre">sample</span>
-<span class="pre">configurations.</span>
-<span class="pre">``ase/scripts/genera</span>
+configuration.
+<code class="docutils literal"><span class="pre">ase/scripts/genera</span>
 <span class="pre">te_ase_environment.p</span>
 <span class="pre">y</span></code>
 may be used for this

@@ -45,9 +45,8 @@ release's version number.
 ```
 
 For Redhat and Centos:
-```eval_rst
-.. code-block:: console
-    $ sudo yum install opae-intel-fpga-drv-<release>-1.x86_64.rpm
+```console
+$ sudo yum install opae-intel-fpga-drv-<release>-1.x86_64.rpm
 ```
 
 ## Installing the OPAE SDK from rpm packages ##

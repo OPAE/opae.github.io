@@ -174,7 +174,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_config/readme.html">hssi_config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_loopback/readme.html">hssi_loopback</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_tuner/readme.html">hssi_tuner</a></li>
 </ul>
 
             
@@ -316,6 +315,14 @@ calling the reconfiguration IOCTL.</p>
 <ol class="arabic simple">
 <li>Unload the driver from the guest</li>
 <li>Unplug the VF from the guest</li>
+</ol>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">NOTE: Unplugging the VF from the guest while an application on the guest is</span>
+<span class="go">still accessing its resources may lead to VM instabilities. We recommend</span>
+<span class="go">closing all applications accessing the VF in the guest before unplugging the</span>
+<span class="go">VF.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
 <li>Disable SR-IOV</li>
 <li>Perform Partial Reconfiguration</li>
 <li>Enable SR-IOV</li>
@@ -1028,9 +1035,9 @@ tream_md</td>
 <table border="1" class="docutils">
 <colgroup>
 <col width="18%" />
-<col width="37%" />
+<col width="36%" />
 <col width="12%" />
-<col width="32%" />
+<col width="33%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">sysfs file</th>
@@ -1112,13 +1119,14 @@ int</td>
 <p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/power_mgmt/</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="18%" />
+<col width="17%" />
 <col width="33%" />
 <col width="17%" />
-<col width="32%" />
+<col width="33%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">sysfs file</th>
+<tr class="row-odd"><th class="head">sysfs
+file</th>
 <th class="head">mmio field</th>
 <th class="head">type</th>
 <th class="head">access</th>
@@ -1132,7 +1140,8 @@ sumed</td>
 uint64_t</td>
 <td>Read-only</td>
 </tr>
-<tr class="row-odd"><td>threshold1</td>
+<tr class="row-odd"><td>threshold
+1</td>
 <td>power.threshold.thre
 shold1</td>
 <td>hex
@@ -1140,7 +1149,8 @@ uint64_t</td>
 <td>User: Read-only
 Root: Read-write</td>
 </tr>
-<tr class="row-even"><td>threshold2</td>
+<tr class="row-even"><td>threshold
+2</td>
 <td>power.threshold.thre
 shold2</td>
 <td>hex
@@ -1148,16 +1158,16 @@ uint64_t</td>
 <td>User: Read-only
 Root: Read-write</td>
 </tr>
-<tr class="row-odd"><td>threshold1
-_status</td>
+<tr class="row-odd"><td>threshold
+1_status</td>
 <td>power.threshold.thre
 shold1_status</td>
 <td>decimal
 unsigned</td>
 <td>Read-only</td>
 </tr>
-<tr class="row-even"><td>threshold2
-_status</td>
+<tr class="row-even"><td>threshold
+2_status</td>
 <td>power.threshold.thre
 shold2_status</td>
 <td>decimal
@@ -1281,8 +1291,8 @@ uint64_t</td>
 <p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/pr/</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="17%" />
-<col width="56%" />
+<col width="15%" />
+<col width="58%" />
 <col width="15%" />
 <col width="12%" />
 </colgroup>
@@ -1295,8 +1305,8 @@ file</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>interface
-_id</td>
+<tr class="row-even"><td>interfac
+e_id</td>
 <td>pr.fme_pr_intfc_id0_h,
 pr.fme_pre_intfc_id0_l</td>
 <td>hex
@@ -1336,10 +1346,10 @@ nly</td>
 Acceleration Stack for Intel® Xeon® CPU with FPGAs)</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="32%" />
-<col width="38%" />
+<col width="33%" />
+<col width="39%" />
 <col width="15%" />
-<col width="14%" />
+<col width="12%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">sysfs file</th>
@@ -1353,77 +1363,75 @@ Acceleration Stack for Intel® Xeon® CPU with FPGAs)</p>
 <td>gperf.ch_ctl.freeze</td>
 <td>decimal
 int</td>
-<td>Read-wr
-ite</td>
+<td>Read-w
+rite</td>
 </tr>
 <tr class="row-odd"><td>read_hit</td>
 <td>gperf.CACHE_RD_HIT</td>
 <td>hex
 uint64_t</td>
-<td>Read-on
-ly</td>
+<td>Read-o
+nly</td>
 </tr>
 <tr class="row-even"><td>read_miss</td>
 <td>gperf.CACHE_RD_MISS</td>
 <td>hex
 uint64_t</td>
-<td>Read-on
-ly</td>
+<td>Read-o
+nly</td>
 </tr>
 <tr class="row-odd"><td>write_hit</td>
 <td>gperf.CACHE_WR_HIT</td>
 <td>hex
 uint64_t</td>
-<td>Read-on
-ly</td>
+<td>Read-o
+nly</td>
 </tr>
 <tr class="row-even"><td>write_miss</td>
 <td>gperf.CACHE_WR_MISS</td>
 <td>hex
 uint64_t</td>
-<td>Read-on
-ly</td>
+<td>Read-o
+nly</td>
 </tr>
 <tr class="row-odd"><td>hold_request</td>
 <td>gperf.CACHE_HOLD_REQ</td>
 <td>hex
 uint64_t</td>
-<td>Read-on
-ly</td>
+<td>Read-o
+nly</td>
 </tr>
 <tr class="row-even"><td>tx_req_stall</td>
-<td>gperf.CACHE_TX_REQ_STAL
-L</td>
+<td>gperf.CACHE_TX_REQ_STALL</td>
 <td>hex
 uint64_t</td>
-<td>Read-on
-ly</td>
+<td>Read-o
+nly</td>
 </tr>
 <tr class="row-odd"><td>rx_req_stall</td>
-<td>gperf.CACHE_RX_REQ_STAL
-L</td>
+<td>gperf.CACHE_RX_REQ_STALL</td>
 <td>hex
 uint64_t</td>
-<td>Read-on
-ly</td>
+<td>Read-o
+nly</td>
 </tr>
-<tr class="row-even"><td>data_write_port_con
-tention</td>
-<td>gperf.CACHE_DATA_WR_POR
-T_CONTEN</td>
-<td>hex
-uint64_t</td>
-<td>Read-on
-ly</td>
-</tr>
-<tr class="row-odd"><td>tag_write_port_cont
+<tr class="row-even"><td>data_write_port_cont
 ention</td>
-<td>gperf.CACHE_TAG_WR_PORT
+<td>gperf.CACHE_DATA_WR_PORT
 _CONTEN</td>
 <td>hex
 uint64_t</td>
-<td>Read-on
-ly</td>
+<td>Read-o
+nly</td>
+</tr>
+<tr class="row-odd"><td>tag_write_port_conte
+ntion</td>
+<td><a href="#id7"><span class="problematic" id="id8">gperf.CACHE_TAG_WR_PORT_</span></a>
+CONTEN</td>
+<td>hex
+uint64_t</td>
+<td>Read-o
+nly</td>
 </tr>
 </tbody>
 </table>

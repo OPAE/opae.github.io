@@ -99,6 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#driver-installation-with-dkms-rpm-package">Driver installation with DKMS rpm package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#driver-build-installation-with-driver-source-package">Driver build/installation with driver source package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-driver-build-from-rpm-package">Manual Driver build from RPM package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#opae-sdk-build-installation-from-opae-sdk-source">OPAE SDK build/installation from OPAE SDK source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-opae-sdk-rpm-packages-from-the-source">Building OPAE SDK rpm packages from the source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#opae-sdk-installation-with-rpm-packages">OPAE SDK installation with rpm packages</a></li>
@@ -141,7 +142,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_config/readme.html">hssi_config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_loopback/readme.html">hssi_loopback</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_tuner/readme.html">hssi_tuner</a></li>
 </ul>
 
             
@@ -327,6 +327,21 @@ the above command is executed.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="manual-driver-build-from-rpm-package">
+<h2>Manual Driver build from RPM package<a class="headerlink" href="#manual-driver-build-from-rpm-package" title="Permalink to this headline">¶</a></h2>
+<p>Use the following command to extract the driver source files from the
+rpm:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir opae-intel-fpga-driver-&lt;release&gt;
+<span class="gp">$</span> <span class="nb">cd</span> opae-intel-fpga-driver-&lt;release&gt;
+<span class="gp">$</span> rpm2cpio ../opae-intel-fpga-driver-&lt;release&gt;.rpm <span class="p">|</span> cpio -idmv
+</pre></div>
+</div>
+<p>Build the fpga driver from source with the following procedure:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> ./usr/src/intel-fpga-&lt;release&gt;
+<span class="gp">$</span> make
+</pre></div>
+</div>
+</div>
 <div class="section" id="opae-sdk-build-installation-from-opae-sdk-source">
 <h2>OPAE SDK build/installation from OPAE SDK source<a class="headerlink" href="#opae-sdk-build-installation-from-opae-sdk-source" title="Permalink to this headline">¶</a></h2>
 <p>Using the following command to untar the source tar ball:</p>
@@ -374,7 +389,7 @@ instead of <code class="docutils literal"><span class="pre">make</span> <span cl
 <p>This will generate the following rpm packages. The names of the packages
 may be different, depending on the cmake version used.</p>
 <ul class="simple">
-<li>If cmake version is between 2.8.11 and 3.0.0:</li>
+<li>If cmake version is between 2.8.12 and 3.0.0:</li>
 </ul>
 <div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">opae-&lt;release&gt;-1.x86_64-libs.rpm    (libopae-c and samples)</span>
 <span class="go">opae-&lt;release&gt;-1.x86_64-tools.rpm   (tools)</span>
@@ -396,7 +411,7 @@ may be different, depending on the cmake version used.</p>
 <h2>OPAE SDK installation with rpm packages<a class="headerlink" href="#opae-sdk-installation-with-rpm-packages" title="Permalink to this headline">¶</a></h2>
 <p>The rpm packages generated in the previous step can be installed using
 these commands (This example assumes the cmake version used to generate
-these packages was 2.8.11):</p>
+these packages was 2.8.12):</p>
 <div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum install opae-&lt;release&gt;-1.x86_64-libs.rpm
 <span class="gp">$</span> sudo yum install opae-&lt;release&gt;-1.x86_64-tools.rpm
 <span class="gp">$</span> sudo yum install opae-&lt;release&gt;-1.x86_64-devel.rpm

@@ -119,7 +119,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#fpgainfo-commands">FPGAINFO COMMANDS</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#optional-arguments">OPTIONAL ARGUMENTS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#optional-arguments">OPTIONAL ARGUMENTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#common-arguments">COMMON ARGUMENTS</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#errors-arguments">ERRORS ARGUMENTS</a></li>
 </ul>
 </li>
@@ -140,7 +141,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../hssi_config/readme.html">hssi_config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hssi_loopback/readme.html">hssi_loopback</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hssi_tuner/readme.html">hssi_tuner</a></li>
 </ul>
 
             
@@ -208,17 +208,20 @@
 <h1>fpgainfo<a class="headerlink" href="#fpgainfo" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">fpgainfo</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span> <span class="o">|</span> <span class="o">--</span><span class="n">help</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="o">&lt;</span><span class="n">bus</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">device</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">args</span><span class="o">&gt;</span><span class="p">]</span>
+<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">fpgainfo</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span> <span class="o">|</span> <span class="o">--</span><span class="n">help</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">args</span><span class="o">&gt;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>fpgainfo displays FPGA information derived from sysfs files. The command
-argument is one of the following: errors, power, or temp. Some commands
-may also have other arguments or options that control the behavior.</p>
-<p>For systems with multiple devices, specify the BDF of the target device
-with -b, -d and -f.</p>
+argument is one of the following: errors, power, temp, port or fme. Some
+commands may also have other arguments or options that control their
+behavior.</p>
+<p>For systems with multiple FPGA devices, the BDF (or bus, device,
+function) may be specified to limit the output to the FPGA resource with
+the corresponding PCIe configuration. If not specified, information will
+be displayed for all resources for the given command.</p>
 <div class="section" id="fpgainfo-commands">
 <h3>FPGAINFO COMMANDS<a class="headerlink" href="#fpgainfo-commands" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal"><span class="pre">errors</span></code></p>
@@ -250,20 +253,24 @@ with -b, -d and -f.</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">help</span> <span class="n">information</span> <span class="n">and</span> <span class="n">exit</span><span class="p">.</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="common-arguments">
+<h2>COMMON ARGUMENTS<a class="headerlink" href="#common-arguments" title="Permalink to this headline">¶</a></h2>
+<p>The following arguments are common to all commands and are optional.</p>
 <p><code class="docutils literal"><span class="pre">-b,</span> <span class="pre">--bus</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">bus</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">bus</span> <span class="n">number</span> <span class="n">of</span> <span class="n">resource</span><span class="p">.</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">-d,</span> <span class="pre">--device</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">device</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">device</span> <span class="n">number</span> <span class="n">of</span> <span class="n">resource</span><span class="p">.</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">-f,</span> <span class="pre">--function</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">function</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">function</span> <span class="n">number</span> <span class="n">of</span> <span class="n">resource</span><span class="p">.</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">--clear,</span> <span class="pre">-c</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Clear</span> <span class="n">errors</span> <span class="k">for</span> <span class="n">the</span> <span class="n">given</span> <span class="n">FPGA</span> <span class="n">resource</span><span class="p">.</span>
+<p><code class="docutils literal"><span class="pre">--json</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Display</span> <span class="n">information</span> <span class="n">as</span> <span class="n">JSON</span> <span class="n">string</span><span class="p">.</span>
 </pre></div>
 </div>
 <div class="section" id="errors-arguments">
@@ -280,6 +287,10 @@ type. It must be one of the following: <code class="docutils literal"><span clas
 </div>
 <p><code class="docutils literal"><span class="pre">all</span></code></p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Show</span><span class="o">/</span><span class="n">clear</span> <span class="n">errors</span> <span class="k">for</span> <span class="n">all</span> <span class="n">resources</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--clear,</span> <span class="pre">-c</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Clear</span> <span class="n">errors</span> <span class="k">for</span> <span class="n">the</span> <span class="n">given</span> <span class="n">FPGA</span> <span class="n">resource</span><span class="p">.</span>
 </pre></div>
 </div>
 </div>
@@ -300,6 +311,10 @@ type. It must be one of the following: <code class="docutils literal"><span clas
 </div>
 <p>This command clears all errors on all resources:</p>
 <div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">fpgainfo</span> <span class="n">errors</span> <span class="n">all</span> <span class="o">-</span><span class="n">c</span>
+</pre></div>
+</div>
+<p>This command shows information of the FME on bus 0x5e</p>
+<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">fpgainfo</span> <span class="n">fme</span> <span class="o">-</span><span class="n">b</span> <span class="mh">0x5e</span>
 </pre></div>
 </div>
 </div>
