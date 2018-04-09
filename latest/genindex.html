@@ -26,24 +26,17 @@
   
 
   
-  
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="#"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="OPAE" href="index.html"/> 
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -138,7 +131,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">OPAE</a>
@@ -146,9 +139,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -324,7 +318,7 @@
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv223fpgaPropertiesGetDeviceK15fpga_propertiesP7uint8_t">fpgaPropertiesGetDevice (C++ function)</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_api.html#_CPPv225fpgaPropertiesGetDeviceIDK15fpga_propertiesP8uint32_t">fpgaPropertiesGetDeviceID (C++ function)</a>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv225fpgaPropertiesGetDeviceIDK15fpga_propertiesP8uint16_t">fpgaPropertiesGetDeviceID (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv225fpgaPropertiesGetFunctionK15fpga_propertiesP7uint8_t">fpgaPropertiesGetFunction (C++ function)</a>
 </li>
@@ -362,7 +356,7 @@
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv223fpgaPropertiesSetDevice15fpga_properties7uint8_t">fpgaPropertiesSetDevice (C++ function)</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_api.html#_CPPv225fpgaPropertiesSetDeviceID15fpga_properties8uint32_t">fpgaPropertiesSetDeviceID (C++ function)</a>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv225fpgaPropertiesSetDeviceID15fpga_properties8uint16_t">fpgaPropertiesSetDeviceID (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv225fpgaPropertiesSetFunction15fpga_properties7uint8_t">fpgaPropertiesSetFunction (C++ function)</a>
 </li>
@@ -422,9 +416,7 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -437,7 +429,7 @@
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -456,6 +448,7 @@
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
             VERSION:'0.13.0',
+            LANGUAGE:'en',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -473,14 +466,13 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
