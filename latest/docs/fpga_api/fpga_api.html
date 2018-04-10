@@ -126,6 +126,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#utils-h">utils.h</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#samples">Samples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hello-fpga-c">hello_fpga.c</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hello-events-c">hello_events.c</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -255,6 +260,11 @@ sections:</p>
 </li>
 <li><a class="reference internal" href="#utilities" id="id17">Utilities</a><ul>
 <li><a class="reference internal" href="#utils-h" id="id18">utils.h</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#samples" id="id19">Samples</a><ul>
+<li><a class="reference internal" href="#hello-fpga-c" id="id20">hello_fpga.c</a></li>
+<li><a class="reference internal" href="#hello-events-c" id="id21">hello_events.c</a></li>
 </ul>
 </li>
 </ul>
@@ -2016,6 +2026,243 @@ provided by the utilities API.</p>
 </dd></dl>
 
 </div>
+</div>
+</div>
+<div class="section" id="samples">
+<h2><a class="toc-backref" href="#id19">Samples</a><a class="headerlink" href="#samples" title="Permalink to this headline">¶</a></h2>
+<p>Code samples demonstrate how to use OPAE C API.</p>
+<div class="section" id="hello-fpga-c">
+<h3><a class="toc-backref" href="#id20">hello_fpga.c</a><a class="headerlink" href="#hello-fpga-c" title="Permalink to this headline">¶</a></h3>
+<p>A code sample illustrates the basic usage of the OPAE C API. </p>
+<p>The sample is a host application that demonstrates the basic steps of interacting with FPGA using the OPAE library. These steps include:</p>
+<p><ul class="simple">
+<li>FPGA enumeration</li>
+<li>Resource acquiring and releasing</li>
+<li>Managing shared memory buffer</li>
+<li>MMIO read and write</li>
+</ul>
+</p>
+<p>The sample also demonstrates OPAE’s object model, such as tokens, handles, and properties.</p>
+<p>The sample requires a native loopback mode (NLB) test image to be loaded on the FPGA. Refer to <a class="reference external" href="https://opae.github.io/docs/fpga_api/quick_start/readme.html">Quick Start Guide</a> for full instructions on building, configuring, and running this code sample. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="macro">
+<dt id="c.CL">
+<span class="target" id="d7/d5a/hello__fpga_8c_1acda3b44286ccc5e1924198027f28a8c5"></span><code class="descname">CL</code><span class="sig-paren">(</span>x<span class="sig-paren">)</span><a class="headerlink" href="#c.CL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.LOG2_CL">
+<span class="target" id="d7/d5a/hello__fpga_8c_1adf30d050a3289b6d043824dfd97c81f1"></span><code class="descname">LOG2_CL</code><a class="headerlink" href="#c.LOG2_CL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.MB">
+<span class="target" id="d7/d5a/hello__fpga_8c_1a44d2b171cc92225ec0a76ef70fc9b531"></span><code class="descname">MB</code><span class="sig-paren">(</span>x<span class="sig-paren">)</span><a class="headerlink" href="#c.MB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CACHELINE_ALIGNED_ADDR">
+<span class="target" id="d7/d5a/hello__fpga_8c_1ad3542630f57f4e7073dbd18dd41c9e9a"></span><code class="descname">CACHELINE_ALIGNED_ADDR</code><span class="sig-paren">(</span>p<span class="sig-paren">)</span><a class="headerlink" href="#c.CACHELINE_ALIGNED_ADDR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.LPBK1_BUFFER_SIZE">
+<span class="target" id="d7/d5a/hello__fpga_8c_1aaa5caa9ebd221b79ab0d6f8c5568e855"></span><code class="descname">LPBK1_BUFFER_SIZE</code><a class="headerlink" href="#c.LPBK1_BUFFER_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.LPBK1_BUFFER_ALLOCATION_SIZE">
+<span class="target" id="d7/d5a/hello__fpga_8c_1a680d7d8ff687719f3dfd4a1cf7d04cfe"></span><code class="descname">LPBK1_BUFFER_ALLOCATION_SIZE</code><a class="headerlink" href="#c.LPBK1_BUFFER_ALLOCATION_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.LPBK1_DSM_SIZE">
+<span class="target" id="d7/d5a/hello__fpga_8c_1a01a171b6816e2e3681ee0bea0fd74b70"></span><code class="descname">LPBK1_DSM_SIZE</code><a class="headerlink" href="#c.LPBK1_DSM_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_SRC_ADDR">
+<span class="target" id="d7/d5a/hello__fpga_8c_1a3346cda33cdc35d5d5b42cd489c75aa0"></span><code class="descname">CSR_SRC_ADDR</code><a class="headerlink" href="#c.CSR_SRC_ADDR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_DST_ADDR">
+<span class="target" id="d7/d5a/hello__fpga_8c_1a8fc5dce1142497274a335a84489be3d4"></span><code class="descname">CSR_DST_ADDR</code><a class="headerlink" href="#c.CSR_DST_ADDR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_CTL">
+<span class="target" id="d7/d5a/hello__fpga_8c_1acbe346f9bf5608488adb1b6ad68809b2"></span><code class="descname">CSR_CTL</code><a class="headerlink" href="#c.CSR_CTL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_CFG">
+<span class="target" id="d7/d5a/hello__fpga_8c_1a21f1970d1fcd3dee94bf0ab5aeb54fbd"></span><code class="descname">CSR_CFG</code><a class="headerlink" href="#c.CSR_CFG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_NUM_LINES">
+<span class="target" id="d7/d5a/hello__fpga_8c_1ab1c7049b0e183020bdabcaaec8f20e49"></span><code class="descname">CSR_NUM_LINES</code><a class="headerlink" href="#c.CSR_NUM_LINES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.DSM_STATUS_TEST_COMPLETE">
+<span class="target" id="d7/d5a/hello__fpga_8c_1ac77542e2d0512964e9a065d647b14639"></span><code class="descname">DSM_STATUS_TEST_COMPLETE</code><a class="headerlink" href="#c.DSM_STATUS_TEST_COMPLETE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_AFU_DSM_BASEL">
+<span class="target" id="d7/d5a/hello__fpga_8c_1a4502164cd63bc6b91df80c619468e479"></span><code class="descname">CSR_AFU_DSM_BASEL</code><a class="headerlink" href="#c.CSR_AFU_DSM_BASEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_AFU_DSM_BASEH">
+<span class="target" id="d7/d5a/hello__fpga_8c_1ae4d60cb421c5268892dae615cdbf7614"></span><code class="descname">CSR_AFU_DSM_BASEH</code><a class="headerlink" href="#c.CSR_AFU_DSM_BASEH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.NLB0_AFUID">
+<span class="target" id="d7/d5a/hello__fpga_8c_1a326496be663d917e61f22100670026b9"></span><code class="descname">NLB0_AFUID</code><a class="headerlink" href="#c.NLB0_AFUID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.ON_ERR_GOTO">
+<span class="target" id="d7/d5a/hello__fpga_8c_1a7635d12a96b25dd1760b4bc44130eed9"></span><code class="descname">ON_ERR_GOTO</code><span class="sig-paren">(</span>res, label, desc<span class="sig-paren">)</span><a class="headerlink" href="#c.ON_ERR_GOTO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv26usleepj">
+<span id="usleep__unsigned"></span><span class="target" id="d7/d5a/hello__fpga_8c_1a300ec1c0f7befcbb990985d36d56d8c9"></span>int <code class="descname">usleep</code><span class="sig-paren">(</span>unsigned<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv26usleepj" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv29print_errPKc11fpga_result">
+<span id="print_err__cCP.fpga_result"></span><span class="target" id="d7/d5a/hello__fpga_8c_1aa11f434898b86d619a5ceb6a5d7bf066"></span>void <code class="descname">print_err</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>s</em>, <a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <em>res</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29print_errPKc11fpga_result" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv24mainiA_Pc">
+<span id="main__i.cPA"></span><span class="target" id="d7/d5a/hello__fpga_8c_1a0ddf1224851353fc92bfbff6f499fa97"></span>int <code class="descname">main</code><span class="sig-paren">(</span>int <em>argc</em>, char *<em>argv</em>[]<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv24mainiA_Pc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv210cache_line">
+<span id="cache_line"></span><span class="target" id="d7/d83/structcache__line"></span><em class="property">struct </em><code class="descname">cache_line</code><a class="headerlink" href="#_CPPv210cache_line" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N10cache_line4uintE">
+<span id="cache_line::uint__uint32_tA"></span><span class="target" id="d7/d83/structcache__line_1a115df3d786d5e243f8e9439ffe865a8c"></span>uint32_t <code class="descname">uint</code>[16]<a class="headerlink" href="#_CPPv2N10cache_line4uintE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="hello-events-c">
+<h3><a class="toc-backref" href="#id21">hello_events.c</a><a class="headerlink" href="#hello-events-c" title="Permalink to this headline">¶</a></h3>
+<p>A code sample of using OPAE event API. </p>
+<p>This sample starts two processes. One process injects an artificial fatal error to sysfs; while the other tries to asynchronously capture and handle the event. This sample code exercises all major functions of the event API, including creating and destroying event handles, register and unregister events, polling on event file descriptor, and getting the OS object associated with an event. For a full discussion of OPAE event API, refer to event.h. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="macro">
+<dt id="c.FME_SYSFS_INJECT_ERROR">
+<span class="target" id="df/d49/hello__events_8c_1aeed061055cfe359757fdacf8a96a0a81"></span><code class="descname">FME_SYSFS_INJECT_ERROR</code><a class="headerlink" href="#c.FME_SYSFS_INJECT_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt>
+<span class="target" id="df/d49/hello__events_8c_1a7635d12a96b25dd1760b4bc44130eed9"></span><code class="descname">ON_ERR_GOTO</code><span class="sig-paren">(</span>res, label, desc<span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv26usleepj">
+<span class="target" id="df/d49/hello__events_8c_1a300ec1c0f7befcbb990985d36d56d8c9"></span>int <code class="descname">usleep</code><span class="sig-paren">(</span>unsigned<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv26usleepj" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv29print_errPKc11fpga_result">
+<span class="target" id="df/d49/hello__events_8c_1aa11f434898b86d619a5ceb6a5d7bf066"></span>void <code class="descname">print_err</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>s</em>, <a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <em>res</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29print_errPKc11fpga_result" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222inject_ras_fatal_error10fpga_token7uint8_t">
+<span id="inject_ras_fatal_error__fpga_token.uint8_t"></span><span class="target" id="df/d49/hello__events_8c_1a3e4148e96751de422105e1715e39cf82"></span><em class="property">static</em> <a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">inject_ras_fatal_error</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>token</em>, uint8_t <em>err</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222inject_ras_fatal_error10fpga_token7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv24mainiA_Pc">
+<span class="target" id="df/d49/hello__events_8c_1a0ddf1224851353fc92bfbff6f499fa97"></span>int <code class="descname">main</code><span class="sig-paren">(</span>int <em>argc</em>, char *<em>argv</em>[]<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv24mainiA_Pc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv216ras_inject_error">
+<span id="ras_inject_error"></span><span class="target" id="d4/dae/structras__inject__error"></span><em class="property">struct </em><code class="descname">ras_inject_error</code><a class="headerlink" href="#_CPPv216ras_inject_error" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt>
+<span class="target" id="d4/dae/structras__inject__error_1a4c896e6127af21a14bea9b9290d86d57"></span><code class="descname">union ras_inject_error::&#64;0 ras_inject_error::&#64;1</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="type">
+<dt>
+<span class="target" id="d4/d16/unionras__inject__error_8____unnamed____"></span><em class="property">union </em></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt>
+<span class="target" id="d4/d16/unionras__inject__error_8____unnamed_____1a1f8c50db95e9ead5645e32f8df5baa7b"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt>
+<span class="target" id="d4/d16/unionras__inject__error_8____unnamed_____1a1378d7d8767899287b0407055215aa4e"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="d0/d63/structras__inject__error_8____unnamed_____8____unnamed____"></span><em class="property">struct </em></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt>
+<span class="target" id="d0/d63/structras__inject__error_8____unnamed_____8____unnamed_____1a2a0e5bc9b5c01998865d21cfc6acdd8b"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt>
+<span class="target" id="d0/d63/structras__inject__error_8____unnamed_____8____unnamed_____1a248d7cd65b618004dbd5f44e96b8cd61"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt>
+<span class="target" id="d0/d63/structras__inject__error_8____unnamed_____8____unnamed_____1a8da0039b80fc69ebb6f5f263320816ed"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt>
+<span class="target" id="d0/d63/structras__inject__error_8____unnamed_____8____unnamed_____1aa799822e734135bf270e704b72c08764"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
 </div>
 </div>
 </div>
