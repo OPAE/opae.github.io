@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OPAE Installation Guide &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="OPAE" href="../../index.html"/>
+        <link rel="next" title="OPAE C API Programming Guide" href="../fpga_api/prog_guide/readme.html"/>
+        <link rel="prev" title="Quick Start Guide" href="../fpga_api/quick_start/readme.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.13.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OPAE Installation Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#system-compatibility">System compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-download-the-opae-sdk">How to download the OPAE SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#driver-installation-with-dkms-rpm-package">Driver installation with DKMS rpm package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#driver-build-installation-with-driver-source-package">Driver build/installation with driver source package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opae-sdk-build-installation-from-opae-sdk-source">OPAE SDK build/installation from OPAE SDK source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-opae-sdk-rpm-packages-from-the-source">Building OPAE SDK rpm packages from the source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opae-sdk-installation-with-rpm-packages">OPAE SDK installation with rpm packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fpga-device-access-permissions">FPGA Device Access Permissions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memlock-limit">Memlock limit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hupgepage-settings">Hupgepage Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_api/api_build.html">Building the OPAE C Library</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgabist/fpgabist.html">fpgabist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaflash/fpgaflash.html">fpgaflash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/packager/packager.html">packager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/userclk/userclk.html">userclk</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_config/readme.html">hssi_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_loopback/readme.html">hssi_loopback</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OPAE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>OPAE Installation Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/docs/install_guide/installation_guide.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opae-installation-guide">
+<h1>OPAE Installation Guide<a class="headerlink" href="#opae-installation-guide" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="system-compatibility">
+<h2>System compatibility<a class="headerlink" href="#system-compatibility" title="Permalink to this headline">¶</a></h2>
+<p>The OPAE SDK has been tested on the following configurations.</p>
+<ul class="simple">
+<li>Hardware: tightly coupled FPGA products and programmable FPGA
+acceleration cards for Intel® Xeon® processors (to be released)</li>
+<li>Operating System: tested on RedHat 7.3, Linux kernels 3.10 through
+4.7</li>
+<li>FIM (FPGA Interface Manager): 6.3.0</li>
+</ul>
+</div>
+<div class="section" id="how-to-download-the-opae-sdk">
+<h2>How to download the OPAE SDK<a class="headerlink" href="#how-to-download-the-opae-sdk" title="Permalink to this headline">¶</a></h2>
+<p>OPAE SDK releases are available on
+<a class="reference external" href="https://github.com/OPAE/opae-sdk/releases">GitHub</a>. There, you can
+also find the driver source code and DKMS packages for the respective
+SDK release.</p>
+<p>The various componentes of OPAE are available via the following
+compressed tar files and RPM packages.</p>
+<ul class="simple">
+<li>Source packages for the SDK and the drivers</li>
+</ul>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">opae-sdk-&lt;release&gt;.tar.gz                   (BSD License)   (all src for libopae-c, tools, samples, headers and ASE)</span>
+<span class="go">opae-sdk-&lt;release&gt;.zip                      (BSD License)   (ZIP archive, same content as opae-sdk-&lt;release&gt;.tar.gz)</span>
+<span class="go">opae-intel-fpga-driver-&lt;release&gt;.tar.gz     (GPLv2 License) (driver sources)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Binary package for the drivers</li>
+</ul>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">opae-intel-fpga-drv-&lt;release&gt;-1.x86_64.rpm  (GPLv2 License) (dkms and driver src to generate \*.ko at installation)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="software-requirements">
+<h2>Software requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h2>
+<p>For building the kernel driver, the kernel development environment is
+required.</p>
+<ul class="simple">
+<li>gcc &gt;= 4.8.5</li>
+<li>cmake &gt;= 2.8</li>
+<li>dkms.noarch (Release is tested with 2.2.0.3-34)</li>
+</ul>
+<p>For building libopae-c, tools and samples, the following dependences are
+required:</p>
+<ul class="simple">
+<li>libuuid-devel.x86_64: (tested with 2.23.2-33.el7)</li>
+<li>libuuid.x86_64: (tested with 2.23.2-33.el7)</li>
+<li>json-c-devel.x86_64: json-c-devel-0.11-4.el7_0.x86_64.rpm</li>
+<li>json-c.x86_64: (tested with 0.11-4.el7_0)</li>
+<li>cmake.x86_64: (tested with 2.8.12.2-2.el7)</li>
+<li>boost.x86_64: (tested with 1.53.0-26.el7)</li>
+<li>boost-devel.x86_64: (tested with 1.53.0-26.el7)</li>
+</ul>
+</div>
+<div class="section" id="driver-installation-with-dkms-rpm-package">
+<h2>Driver installation with DKMS rpm package<a class="headerlink" href="#driver-installation-with-dkms-rpm-package" title="Permalink to this headline">¶</a></h2>
+<p>Install:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum install opae-intel-fpga-drv-&lt;release&gt;.rpm
+</pre></div>
+</div>
+<p>Uninsall:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum remove opae-intel-fpga-drv-&lt;release&gt;
+</pre></div>
+</div>
+<p>During the rpm installation process, the tool will compile the driver
+from source then install the driver automatically. Driver installed by
+rpm package will be automatically install again after system reboot.</p>
+</div>
+<div class="section" id="driver-build-installation-with-driver-source-package">
+<h2>Driver build/installation with driver source package<a class="headerlink" href="#driver-build-installation-with-driver-source-package" title="Permalink to this headline">¶</a></h2>
+<p>Using the following command to untar the source tar ball:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> tar zxvf opae-intel-fpga-driver-&lt;release&gt;.tar.gz
+</pre></div>
+</div>
+<p>Following directory shall be extracted at the working directory where
+the above command is executed.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">opae-intel-fpga-driver-&lt;release&gt;</span></code></li>
+</ul>
+<p>Build the fpga driver from source with following procedures:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> opae-intel-fpga-driver-&lt;release&gt;
+<span class="gp">$</span> make
+</pre></div>
+</div>
+<p>Following kernel modules shall be generated from source:</p>
+<ul class="simple">
+<li>fpga-mgr-mod.ko</li>
+<li>intel-fpga-afu.ko</li>
+<li>intel-fpga-fme.ko</li>
+<li>intel-fpga-pci.ko</li>
+</ul>
+<p>Install the above modules in the following order:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo insmod fpga-mgr-mod.ko
+<span class="gp">$</span> sudo insmod intel-fpga-pci.ko
+<span class="gp">$</span> sudo insmod intel-fpga-fme.ko
+<span class="gp">$</span> sudo insmod intel-fpga-afu.ko
+</pre></div>
+</div>
+<p>Use lsmod to check if all 4 modules are installed correctly or not:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> lsmod <span class="p">|</span> grep fpga
+</pre></div>
+</div>
+<p>Output should look like:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">intel_fpga_fme         36864  0</span>
+<span class="go">intel_fpga_afu         28672  0</span>
+<span class="go">intel_fpga_pci         28672  2 intel_fpga_afu,intel_fpga_fme</span>
+<span class="go">fpga_mgr_mod           16384  1 intel_fpga_fme</span>
+</pre></div>
+</div>
+<p>Remove the driver modules in the following order:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo rmmod intel-fpga-afu
+<span class="gp">$</span> sudo rmmod intel-fpga-fme
+<span class="gp">$</span> sudo rmmod intel-fpga-pci
+<span class="gp">$</span> sudo rmmod fpga-mgr-mod
+</pre></div>
+</div>
+</div>
+<div class="section" id="opae-sdk-build-installation-from-opae-sdk-source">
+<h2>OPAE SDK build/installation from OPAE SDK source<a class="headerlink" href="#opae-sdk-build-installation-from-opae-sdk-source" title="Permalink to this headline">¶</a></h2>
+<p>Using the following command to untar the source tar ball:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> tar zxvf opae-sdk-&lt;release&gt;.tar.gz
+</pre></div>
+</div>
+<p>Following directory shall be created at the working directory where the
+above command is executed.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">opae-sdk-&lt;release&gt;</span></code></li>
+</ul>
+<p>Build the OPAE C library (libopae-c), samples, tools, and the AFU
+Simulation Environment (ASE) library (libopae-c-ase) with the following
+commands:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> opae-sdk-&lt;release&gt;
+<span class="gp">$</span> mkdir mybuild
+<span class="gp">$</span> <span class="nb">cd</span> mybuild
+<span class="gp">$</span> cmake .. -DBUILD_ASE<span class="o">=</span><span class="m">1</span>
+<span class="gp">$</span> make
+</pre></div>
+</div>
+<p>By default, the OPAE SDK will install into <code class="docutils literal"><span class="pre">/usr/local</span></code> if you also
+issue the following:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make install
+</pre></div>
+</div>
+<p>You can change this installation prefix from <code class="docutils literal"><span class="pre">/usr/local</span></code> into
+something else by adding <code class="docutils literal"><span class="pre">-DCMAKE_INSTALL_PREFIX=&lt;new</span> <span class="pre">prefix&gt;</span></code> to the
+<code class="docutils literal"><span class="pre">cmake</span></code> command above.</p>
+<p>Please see Quick Start Guide on how to run the hello_fpga sample to
+verify libopae-c &amp; driver are built correctly.</p>
+</div>
+<div class="section" id="building-opae-sdk-rpm-packages-from-the-source">
+<h2>Building OPAE SDK rpm packages from the source<a class="headerlink" href="#building-opae-sdk-rpm-packages-from-the-source" title="Permalink to this headline">¶</a></h2>
+<p>In addition to building and installation from the source, users can also
+generate rpm packages for the SDK. The generated rpm packages can then
+be distributed to other users for easy installation. The advantage of
+this approach is that the other users do not need to have the build
+toolchain on their systems to install the OPAE SDK.</p>
+<p>Follow the instructions in the previous steps. But in the last step,
+instead of <code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code>, do</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make package
+</pre></div>
+</div>
+<p>This will generate the following rpm packages. The names of the packages
+may be different, depending on the cmake version used.</p>
+<ul>
+<li><p class="first">If cmake version is between 2.8.12 and 3.0.0:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">opae-&lt;release&gt;-1.x86_64-libs.rpm    (libopae-c and samples)</span>
+<span class="go">opae-&lt;release&gt;-1.x86_64-tools.rpm   (tools)</span>
+<span class="go">opae-&lt;release&gt;-1.x86_64-devel.rpm   (headers)</span>
+<span class="go">opae-&lt;release&gt;-1.x86_64-ase.rpm     (libopae-c-ase)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If cmake version is 3.0.0 and above:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">opae-libs-&lt;release&gt;-1.x86_64.rpm    (libopae-c and samples)</span>
+<span class="go">opae-tools-&lt;release&gt;-1.x86_64.rpm   (tools)</span>
+<span class="go">opae-devel-&lt;release&gt;-1.x86_64.rpm   (headers)</span>
+<span class="go">opae-ase-&lt;release&gt;-1.x86_64.rpm     (libopae-c-ase)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="opae-sdk-installation-with-rpm-packages">
+<h2>OPAE SDK installation with rpm packages<a class="headerlink" href="#opae-sdk-installation-with-rpm-packages" title="Permalink to this headline">¶</a></h2>
+<p>The rpm packages generated in the previous step can be installed using
+these commands (This example assumes the cmake version used to generate
+these packages was 2.8.12):</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum install opae-&lt;release&gt;-1.x86_64-libs.rpm
+<span class="gp">$</span> sudo yum install opae-&lt;release&gt;-1.x86_64-tools.rpm
+<span class="gp">$</span> sudo yum install opae-&lt;release&gt;-1.x86_64-devel.rpm
+<span class="gp">$</span> sudo yum install opae-&lt;release&gt;-1.x86_64-ase.rpm
+</pre></div>
+</div>
+<p>To uninstall:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum remove opae-&lt;release&gt;-1.x86_64-libs
+<span class="gp">$</span> sudo yum remove opae-&lt;release&gt;-1.x86_64-tools
+<span class="gp">$</span> sudo yum remove opae-&lt;release&gt;-1.x86_64-devel
+<span class="gp">$</span> sudo yum remove opae-&lt;release&gt;-1.x86_64-ase
+</pre></div>
+</div>
+</div>
+<div class="section" id="fpga-device-access-permissions">
+<h2>FPGA Device Access Permissions<a class="headerlink" href="#fpga-device-access-permissions" title="Permalink to this headline">¶</a></h2>
+<p>Access to FPGA accelerators and devices is controlled using file access
+permissions on the Intel® FPGA device files, <code class="docutils literal"><span class="pre">/dev/intel-fpga-fme.*</span></code>
+and <code class="docutils literal"><span class="pre">/dev/intel-fpga-port.*</span></code>, as well as to the files reachable
+through <code class="docutils literal"><span class="pre">/sys/class/fpga/</span></code>.</p>
+<p>In order to allow regular (non-root) users to access accelerators, you
+need to grant them read and write permissions on
+<code class="docutils literal"><span class="pre">/dev/intel/fpga-port.*</span></code> (with <code class="docutils literal"><span class="pre">*</span></code> denoting the respective socket,
+i.e. 0 or 1). E.g.:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo chmod a+rw /dev/intel-fpga-port.0
+</pre></div>
+</div>
+</div>
+<div class="section" id="memlock-limit">
+<h2>Memlock limit<a class="headerlink" href="#memlock-limit" title="Permalink to this headline">¶</a></h2>
+<p>Depending on the requirements of your application, you may also want to
+increase the maximum amount of memory a user process is allowed to lock.
+The exact way to do this depends on your Linux distribution.</p>
+<p>You can check the current memlock limit using</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">ulimit</span> -l
+</pre></div>
+</div>
+<p>A way to permanently remove the limit for locked memory for a regular
+user is to add the following lines to your /etc/security/limits.conf:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">user1    hard   memlock           unlimited</span>
+<span class="go">user1    soft   memlock           unlimited</span>
+</pre></div>
+</div>
+<p>This removes the limit on locked memory for user <code class="docutils literal"><span class="pre">user1</span></code>. To remove it
+for all users, you can replace <code class="docutils literal"><span class="pre">user1</span></code> with <code class="docutils literal"><span class="pre">*</span></code>:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">*    hard   memlock           unlimited</span>
+<span class="go">*    soft   memlock           unlimited</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="hupgepage-settings">
+<h2>Hupgepage Settings<a class="headerlink" href="#hupgepage-settings" title="Permalink to this headline">¶</a></h2>
+<p>Users need to configure system hugepage to reserve 2MB-hugepages or
+1GB-hugepages. For example, the ‘hello_fpga’ sample requires several
+2MB-hugepages. And the <em>fpgadiag</em> tool requires several 1GB-hugepages.</p>
+<p>The command below reserves 20 2M-hugepages:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo sh -c <span class="s1">&#39;echo 20 &gt; /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages&#39;</span>
+</pre></div>
+</div>
+<p>The command below reserves 4 1GB-hugepages:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo sh -c <span class="s1">&#39;echo 4 &gt; /sys/kernel/mm/hugepages/hugepages-1048576kB/nr_hugepages&#39;</span>
+</pre></div>
+</div>
+<p>For x86_64 architecture processors, user can use following command to
+find out avaiable hugepage sizes:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> grep pse /proc/cpuinfo <span class="p">|</span> uniq
+<span class="go">flags : ... pse ...</span>
+</pre></div>
+</div>
+<p>If this commands returns a non-empty string, 2MB pages are supported.</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> grep pse /proc/cpuinfo <span class="p">|</span> uniq
+<span class="go">flags : ... pdpe1gb ...</span>
+</pre></div>
+</div>
+<p>If this commands returns a non-empty string, 1GB pages are supported.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../fpga_api/prog_guide/readme.html" class="btn btn-neutral float-right" title="OPAE C API Programming Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../fpga_api/quick_start/readme.html" class="btn btn-neutral" title="Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.13.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
