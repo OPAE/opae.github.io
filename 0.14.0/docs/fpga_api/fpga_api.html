@@ -1,0 +1,2348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OPAE C API Reference &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="OPAE" href="../../index.html"/>
+        <link rel="next" title="OPAE Intel® FPGA Linux Device Driver Architecture" href="../drv_arch/drv_arch.html"/>
+        <link rel="prev" title="Building the OPAE C Library" href="../build_chain/fpga_api/api_build.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.14.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_api/api_build.html">Building the OPAE C Library</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OPAE C API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#types">Types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#types-h">types.h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#types-enum-h">types_enum.h</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#enumeration-api">Enumeration API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enum-h">enum.h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#properties-h">properties.h</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#access-api">Access API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#access-h">access.h</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#event-api">Event API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#event-h">event.h</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mmio-and-shared-memory-apis">MMIO and Shared Memory APIs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mmio-h">mmio.h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#buffer-h">buffer.h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#umsg-h">umsg.h</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#management-api">Management API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manage-h">manage.h</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#utils-h">utils.h</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#samples">Samples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hello-fpga-c">hello_fpga.c</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hello-events-c">hello_events.c</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgabist/fpgabist.html">fpgabist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaflash/fpgaflash.html">fpgaflash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/packager/packager.html">packager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/userclk/userclk.html">userclk</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_config/readme.html">hssi_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_loopback/readme.html">hssi_loopback</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OPAE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>OPAE C API Reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/docs/fpga_api/fpga_api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opae-c-api-reference">
+<h1>OPAE C API Reference<a class="headerlink" href="#opae-c-api-reference" title="Permalink to this headline">¶</a></h1>
+<p>The reference documentation for the OPAE C API is grouped into the following
+sections:</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#types" id="id1">Types</a><ul>
+<li><a class="reference internal" href="#types-h" id="id2">types.h</a></li>
+<li><a class="reference internal" href="#types-enum-h" id="id3">types_enum.h</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#enumeration-api" id="id4">Enumeration API</a><ul>
+<li><a class="reference internal" href="#enum-h" id="id5">enum.h</a></li>
+<li><a class="reference internal" href="#properties-h" id="id6">properties.h</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#access-api" id="id7">Access API</a><ul>
+<li><a class="reference internal" href="#access-h" id="id8">access.h</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#event-api" id="id9">Event API</a><ul>
+<li><a class="reference internal" href="#event-h" id="id10">event.h</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmio-and-shared-memory-apis" id="id11">MMIO and Shared Memory APIs</a><ul>
+<li><a class="reference internal" href="#mmio-h" id="id12">mmio.h</a></li>
+<li><a class="reference internal" href="#buffer-h" id="id13">buffer.h</a></li>
+<li><a class="reference internal" href="#umsg-h" id="id14">umsg.h</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#management-api" id="id15">Management API</a><ul>
+<li><a class="reference internal" href="#manage-h" id="id16">manage.h</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#utilities" id="id17">Utilities</a><ul>
+<li><a class="reference internal" href="#utils-h" id="id18">utils.h</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#samples" id="id19">Samples</a><ul>
+<li><a class="reference internal" href="#hello-fpga-c" id="id20">hello_fpga.c</a></li>
+<li><a class="reference internal" href="#hello-events-c" id="id21">hello_events.c</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="types">
+<h2><a class="toc-backref" href="#id1">Types</a><a class="headerlink" href="#types" title="Permalink to this headline">¶</a></h2>
+<p>The OPAE C API defines a number of types; most prominent are the types
+<cite>fpga_token</cite>, <cite>fpga_handle</cite>, and <cite>fpga_properties</cite>. All regular types are
+defined in [types.h](#types-h), while the values of enumeration types are
+defined in [types_enum.h](#types-enum-h).</p>
+<div class="section" id="types-h">
+<h3><a class="toc-backref" href="#id2">types.h</a><a class="headerlink" href="#types-h" title="Permalink to this headline">¶</a></h3>
+<p>Type definitions for FPGA API. </p>
+<p>OPAE uses the three opaque types fpga_properties, fpga_token, and fpga_handle to create a hierarchy of objects that can be used to enumerate, reference, acquire, and query FPGA resources. This object model is designed to be extensible to account for different FPGA architectures and platforms.</p>
+<p><em>Initialization </em></p>
+<p>OPAEs management of the opaque types <code class="docutils literal"><span class="pre">fpga_properties</span></code>, <code class="docutils literal"><span class="pre">fpga_token</span></code>, and <code class="docutils literal"><span class="pre">fpga_handle</span></code> relies on the proper initialization of variables of these types. In other words, before doing anything with a variable of one of these opaque types, you need to first initialize them.</p>
+<p>The respective functions that initizalize opaque types are:</p>
+<p><ul class="simple">
+<li><a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a> and <a class="reference internal" href="#properties_8h_1ac51c19bdd763a98e143a938c47963905"><span class="std std-ref">fpgaCloneProperties()</span></a> for <code class="docutils literal"><span class="pre">fpga_properties</span></code></li>
+<li><a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> and <a class="reference internal" href="#enum_8h_1a43a84795de460e8288070b672ef90a59"><span class="std std-ref">fpgaCloneToken()</span></a> for <code class="docutils literal"><span class="pre">fpga_token</span></code></li>
+<li><a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a> for <code class="docutils literal"><span class="pre">fpga_handle</span></code></li>
+</ul>
+</p>
+<p>This should intuitively make sense - <a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a> creates <code class="docutils literal"><span class="pre">fpga_properties</span></code> objects, <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> creates <code class="docutils literal"><span class="pre">fpga_token</span></code> objects, <a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a> creates <code class="docutils literal"><span class="pre">fpga_handle</span></code> objects, and <a class="reference internal" href="#properties_8h_1ac51c19bdd763a98e143a938c47963905"><span class="std std-ref">fpgaCloneProperties()</span></a> and <a class="reference internal" href="#enum_8h_1a43a84795de460e8288070b672ef90a59"><span class="std std-ref">fpgaCloneToken()</span></a> clone (create) <code class="docutils literal"><span class="pre">fpga_properties</span></code> and <code class="docutils literal"><span class="pre">fpga_token</span></code> objects, respectively.</p>
+<p>Since these opaque types are interpreted as pointers (they are typedef’d to a <code class="docutils literal"><span class="pre">void</span> <span class="pre">*</span></code>), passing an uninitialized opaque type into any function except the respective initailzation function will result in undefined behaviour, because OPAE will try to follow an invalid pointer. Undefined behaviour in this case may include an unexpected error code, or an application crash. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv215fpga_properties">
+<span id="fpga_properties"></span><span class="target" id="types_8h_1ab868bdeab946a8059abe7e9c114aee56"></span><em class="property">typedef </em>void *<code class="descname">fpga_properties</code><a class="headerlink" href="#_CPPv215fpga_properties" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Object for expressing FPGA resource properties</p>
+<p><code class="docutils literal"><span class="pre">fpga_properties</span></code> objects encapsulate all enumerable information about an FPGA resources. They can be used for two purposes: selective enumeration (discovery) and querying information about existing resources.</p>
+<p>For selective enumeration, usually an empty <code class="docutils literal"><span class="pre">fpga_properties</span></code> object is created (using <a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a>) and then populated with the desired criteria for enumeration. An array of <code class="docutils literal"><span class="pre">fpga_properties</span></code> can then be passed to <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a>, which will return a list of <code class="docutils literal"><span class="pre">fpga_token</span></code> objects matching these criteria.</p>
+<p>For querying properties of existing FPGA resources, <a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a> can also take an <code class="docutils literal"><span class="pre">fpga_token</span></code> and will return an <code class="docutils literal"><span class="pre">fpga_properties</span></code> object populated with information about the resource referenced by that token.</p>
+<p>After use, <code class="docutils literal"><span class="pre">fpga_properties</span></code> objects should be destroyed using fpga_destroyProperties() to free backing memory used by the <code class="docutils literal"><span class="pre">fpga_properties</span></code> object. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv210fpga_token">
+<span id="fpga_token"></span><span class="target" id="types_8h_1a252f538a10fb51d0988ed52946516d9e"></span><em class="property">typedef </em>void *<code class="descname">fpga_token</code><a class="headerlink" href="#_CPPv210fpga_token" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Token for referencing FPGA resources</p>
+<p>An <code class="docutils literal"><span class="pre">fpga_token</span></code> serves as a reference to a specific FPGA resource present in the system. Holding an <code class="docutils literal"><span class="pre">fpga_token</span></code> does not constitute ownership of the FPGA resource - it merely allows the user to query further information about a resource, or to use <a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a> to acquire ownership.</p>
+<p><code class="docutils literal"><span class="pre">fpga_token</span></code>s are usually returned by <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> or <a class="reference internal" href="#properties_8h_1aa3d6d131a85e9c7cff4844c0931c1591"><span class="std std-ref">fpgaPropertiesGetParent()</span></a>, and used by <a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a> to acquire ownership and yield a handle to the resource. Some API calls also take <code class="docutils literal"><span class="pre">fpga_token</span></code>s as arguments if they don’t require ownership of the resource in question. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv211fpga_handle">
+<span id="fpga_handle"></span><span class="target" id="types_8h_1a4ad40f31195233b629bcde187b0556d5"></span><em class="property">typedef </em>void *<code class="descname">fpga_handle</code><a class="headerlink" href="#_CPPv211fpga_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handle to an FPGA resource</p>
+<p>A valid <code class="docutils literal"><span class="pre">fpga_handle</span></code> object, as populated by <a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a>, denotes ownership of an FPGA resource. Note that ownership can be exclusive or shared, depending on the flags used in <a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a>. Ownership can be released by calling <a class="reference internal" href="#access_8h_1ac83789ebb65dc6b2adeae3d7e7fa3e79"><span class="std std-ref">fpgaClose()</span></a>, which will render the underlying handle invalid.</p>
+<p>Many OPAE C API functions require a valid token (which is synonymous with ownership of the resource). </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv29fpga_guid">
+<span id="fpga_guid"></span><span class="target" id="types_8h_1af0b6683499be79fab39ac41db02e7abf"></span><em class="property">typedef </em>uint8_t <code class="descname">fpga_guid</code>[16]<a class="headerlink" href="#_CPPv29fpga_guid" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Globally unique identifier (GUID)</p>
+<p>GUIDs are used widely within OPAE for helping identify FPGA resources. For example, every FPGA resource has a <code class="docutils literal"><span class="pre">guid</span></code> property, which can be (and in the case of FPGA_ACCELERATOR resource primarily is) used for enumerating a resource of a specific type.</p>
+<p><code class="docutils literal"><span class="pre">fpga_guid</span></code> is compatible with libuuid’s uuid_t, so users can use libuuid functions like uuid_parse() to create and work with GUIDs. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv217fpga_event_handle">
+<span id="fpga_event_handle"></span><span class="target" id="types_8h_1acccb4e3dd49efd2b0999b14bf05d5aad"></span><em class="property">typedef </em>void *<code class="descname">fpga_event_handle</code><a class="headerlink" href="#_CPPv217fpga_event_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handle to an event object</p>
+<p>OPAE provides an interface to asynchronous events that can be generated by different FPGA resources. The event API provides functions to register for these events; associated with every event a process has registered for is an <code class="docutils literal"><span class="pre">fpga_event_handle</span></code>, which encapsulates the OS-specific data structure for event objects.</p>
+<p>After use, <code class="docutils literal"><span class="pre">fpga_event_handle</span></code> objects should be destroyed using <a class="reference internal" href="#event_8h_1ab8e748d1c491717d677a96c23dee987b"><span class="std std-ref">fpgaDestroyEventHandle()</span></a> to free backing memory used by the <code class="docutils literal"><span class="pre">fpga_event_handle</span></code> object. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv212fpga_version">
+<span id="fpga_version"></span><span class="target" id="structfpga__version"></span><em class="property">struct </em><code class="descname">fpga_version</code><a class="headerlink" href="#_CPPv212fpga_version" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;types.h&gt;</em><p>Semantic version</p>
+<p>Data structure for expressing version identifiers following the semantic versioning scheme. Used in various properties for tracking component versions. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N12fpga_version5majorE">
+<span id="fpga_version::major__uint8_t"></span><span class="target" id="structfpga__version_1ad7129ea29f56980bf4031b860102565f"></span>uint8_t <code class="descname">major</code><a class="headerlink" href="#_CPPv2N12fpga_version5majorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Major version </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12fpga_version5minorE">
+<span id="fpga_version::minor__uint8_t"></span><span class="target" id="structfpga__version_1a0f3eb4a91ba70d0a60f56174c685b762"></span>uint8_t <code class="descname">minor</code><a class="headerlink" href="#_CPPv2N12fpga_version5minorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Minor version </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12fpga_version5patchE">
+<span id="fpga_version::patch__uint16_t"></span><span class="target" id="structfpga__version_1a3c5b1d07c0628aa9b6f3bd086ed0d962"></span>uint16_t <code class="descname">patch</code><a class="headerlink" href="#_CPPv2N12fpga_version5patchE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Revision or patchlevel </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="types-enum-h">
+<h3><a class="toc-backref" href="#id3">types_enum.h</a><a class="headerlink" href="#types-enum-h" title="Permalink to this headline">¶</a></h3>
+<p>Definitions of enumerated types for the OPAE C API. </p>
+<p>This file defines return and error codes, event and object types, states, and flags as used or reported by OPAE C API functions. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="type">
+<dt id="_CPPv211fpga_result">
+<span id="fpga_result"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6d"></span><em class="property">enum </em><code class="descname">fpga_result</code><a class="headerlink" href="#_CPPv211fpga_result" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OPAE C API function return codes</p>
+<p>Every public API function exported by the OPAE C library will return one of these codes. Usually, FPGA_OK denotes successful completion of the requested operation, while any return code <em>other</em> than FPGA_OK indicates an error or other deviation from the expected behavior. Users of the OPAE C API should always check the return codes of the APIs they call, and not use output parameters of functions that did not execute successfully.</p>
+<p>The <a class="reference internal" href="#utils_8h_1a2a3fc0d8baf294d2da980ba544368b32"><span class="std std-ref">fpgaErrStr()</span></a> function converts error codes into printable messages.</p>
+<p>OPAE also has a logging mechanism that allows a developer to get more information about why a particular call failed with a specific message. If enabled, any function that returns an error code different from FPGA_OK will also print out a message with further details. This mechanism can be enabled by setting the environment variable <code class="docutils literal"><span class="pre">LIBOPAE_LOG</span></code> to 1 before running the respective application. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv27FPGA_OK">
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da727cb0690aa450810ffc8f5371401327"></span><code class="descname">FPGA_OK</code> = 0<a class="headerlink" href="#_CPPv27FPGA_OK" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Operation completed successfully </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv218FPGA_INVALID_PARAM">
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da72e05d22cb414d8a35945301b79302f9"></span><code class="descname">FPGA_INVALID_PARAM</code><a class="headerlink" href="#_CPPv218FPGA_INVALID_PARAM" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Invalid parameter supplied </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv29FPGA_BUSY">
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da7785c48a8a9ab76b21bcd1627832fdd4"></span><code class="descname">FPGA_BUSY</code><a class="headerlink" href="#_CPPv29FPGA_BUSY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Resource is busy </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv214FPGA_EXCEPTION">
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da8527745386f7cea8d8aa64f96f2249a4"></span><code class="descname">FPGA_EXCEPTION</code><a class="headerlink" href="#_CPPv214FPGA_EXCEPTION" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>An exception occurred </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv214FPGA_NOT_FOUND">
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da7aee5958cf7f46e9d80c4ee50d42d86c"></span><code class="descname">FPGA_NOT_FOUND</code><a class="headerlink" href="#_CPPv214FPGA_NOT_FOUND" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A required resource was not found </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv214FPGA_NO_MEMORY">
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da01318ecc0ead885cee673d213bb4eeab"></span><code class="descname">FPGA_NO_MEMORY</code><a class="headerlink" href="#_CPPv214FPGA_NO_MEMORY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Not enough memory to complete operation </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv218FPGA_NOT_SUPPORTED">
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da51eacd9111ef14917f0b958bfeda4f66"></span><code class="descname">FPGA_NOT_SUPPORTED</code><a class="headerlink" href="#_CPPv218FPGA_NOT_SUPPORTED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Requested operation is not supported </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv214FPGA_NO_DRIVER">
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da8b18856fa126c4b659346cf5decda0b5"></span><code class="descname">FPGA_NO_DRIVER</code><a class="headerlink" href="#_CPPv214FPGA_NO_DRIVER" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Driver is not loaded </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv214FPGA_NO_DAEMON">
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6daefcce3ebcef5f12e194f3812b43c7322"></span><code class="descname">FPGA_NO_DAEMON</code><a class="headerlink" href="#_CPPv214FPGA_NO_DAEMON" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>FPGA Daemon (fpgad) is not running </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv214FPGA_NO_ACCESS">
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da6c7a58c1e0907394fe270a539b104b0e"></span><code class="descname">FPGA_NO_ACCESS</code><a class="headerlink" href="#_CPPv214FPGA_NO_ACCESS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Insufficient privileges or permissions </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv217FPGA_RECONF_ERROR">
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da4fe9aead9176152c1e47e600d5415e56"></span><code class="descname">FPGA_RECONF_ERROR</code><a class="headerlink" href="#_CPPv217FPGA_RECONF_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Error while reconfiguring FPGA </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv215fpga_event_type">
+<span id="fpga_event_type"></span><span class="target" id="types__enum_8h_1a6eccf38d4643d14fbc51f34e03131fa6"></span><em class="property">enum </em><code class="descname">fpga_event_type</code><a class="headerlink" href="#_CPPv215fpga_event_type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>FPGA events</p>
+<p>OPAE currently defines the following event types that applications can register for. Note that not all FPGA resources and target platforms may support all event types. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv220FPGA_EVENT_INTERRUPT">
+<span class="target" id="types__enum_8h_1a6eccf38d4643d14fbc51f34e03131fa6a4927c38c144629dfd0ac7b798853d18f"></span><code class="descname">FPGA_EVENT_INTERRUPT</code> = 0<a class="headerlink" href="#_CPPv220FPGA_EVENT_INTERRUPT" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interrupt generated by an accelerator </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv216FPGA_EVENT_ERROR">
+<span class="target" id="types__enum_8h_1a6eccf38d4643d14fbc51f34e03131fa6ae06578392a4b6edada24bb375b05d800"></span><code class="descname">FPGA_EVENT_ERROR</code><a class="headerlink" href="#_CPPv216FPGA_EVENT_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Infrastructure error event </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv224FPGA_EVENT_POWER_THERMAL">
+<span class="target" id="types__enum_8h_1a6eccf38d4643d14fbc51f34e03131fa6ac5bbf42f4aadeb692ba00bc87d2a1d63"></span><code class="descname">FPGA_EVENT_POWER_THERMAL</code><a class="headerlink" href="#_CPPv224FPGA_EVENT_POWER_THERMAL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Infrastructure thermal event </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv222fpga_accelerator_state">
+<span id="fpga_accelerator_state"></span><span class="target" id="types__enum_8h_1a90d0d4dfde2d893585fb72ba51f0bfbe"></span><em class="property">enum </em><code class="descname">fpga_accelerator_state</code><a class="headerlink" href="#_CPPv222fpga_accelerator_state" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>accelerator state </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv225FPGA_ACCELERATOR_ASSIGNED">
+<span class="target" id="types__enum_8h_1a90d0d4dfde2d893585fb72ba51f0bfbeaa1212584ffe16949e0ed25c04a679786"></span><code class="descname">FPGA_ACCELERATOR_ASSIGNED</code> = 0<a class="headerlink" href="#_CPPv225FPGA_ACCELERATOR_ASSIGNED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>accelerator is opened exclusively by another process </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv227FPGA_ACCELERATOR_UNASSIGNED">
+<span class="target" id="types__enum_8h_1a90d0d4dfde2d893585fb72ba51f0bfbea35c1c5720c92650e289c592abfd5e2b8"></span><code class="descname">FPGA_ACCELERATOR_UNASSIGNED</code><a class="headerlink" href="#_CPPv227FPGA_ACCELERATOR_UNASSIGNED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>accelerator is free to be opened </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv212fpga_objtype">
+<span id="fpga_objtype"></span><span class="target" id="types__enum_8h_1a9b2ddb9e533441e79f19d45fa0a24934"></span><em class="property">enum </em><code class="descname">fpga_objtype</code><a class="headerlink" href="#_CPPv212fpga_objtype" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OPAE FPGA resources (objects)</p>
+<p>These are the FPGA resources currently supported by the OPAE object model. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv211FPGA_DEVICE">
+<span class="target" id="types__enum_8h_1a9b2ddb9e533441e79f19d45fa0a24934a91f784c1c357473adbde7188a244219a"></span><code class="descname">FPGA_DEVICE</code> = 0<a class="headerlink" href="#_CPPv211FPGA_DEVICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>FPGA_DEVICE objects represent FPGA devices and their management functionality. These objects can be opened (typically requires a certain privilege level or access permissions) and used for management functions like fpgaReconfigreSlot(). </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv216FPGA_ACCELERATOR">
+<span class="target" id="types__enum_8h_1a9b2ddb9e533441e79f19d45fa0a24934a5c3973a253ffaabddd0a083f05abebc7"></span><code class="descname">FPGA_ACCELERATOR</code><a class="headerlink" href="#_CPPv216FPGA_ACCELERATOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>FPGA_ACCELERATOR objects represent allocatable units for accessing accelerated functions on the FPGA. They are frequently opened for interacting via control registers (MMIO), shared memory, or other, possibly platform-specific functions. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv217fpga_buffer_flags">
+<span id="fpga_buffer_flags"></span><span class="target" id="types__enum_8h_1a99f1b7a7fb02d7fa8e5823749b9005e5"></span><em class="property">enum </em><code class="descname">fpga_buffer_flags</code><a class="headerlink" href="#_CPPv217fpga_buffer_flags" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Buffer flags</p>
+<p>These flags can be passed to the <a class="reference internal" href="#buffer_8h_1aac3ed0146bc42c35f99610a319e87303"><span class="std std-ref">fpgaPrepareBuffer()</span></a> function. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv221FPGA_BUF_PREALLOCATED">
+<span class="target" id="types__enum_8h_1a99f1b7a7fb02d7fa8e5823749b9005e5a625a9b51ada35d27da1079ff747d04db"></span><code class="descname">FPGA_BUF_PREALLOCATED</code> = (1u &lt;&lt; 0)<a class="headerlink" href="#_CPPv221FPGA_BUF_PREALLOCATED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Use existing buffer </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv214FPGA_BUF_QUIET">
+<span class="target" id="types__enum_8h_1a99f1b7a7fb02d7fa8e5823749b9005e5abc99b8f3e50fb4eac1dbbeae4aca7957"></span><code class="descname">FPGA_BUF_QUIET</code> = (1u &lt;&lt; 1)<a class="headerlink" href="#_CPPv214FPGA_BUF_QUIET" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Suppress error messages </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv215fpga_open_flags">
+<span id="fpga_open_flags"></span><span class="target" id="types__enum_8h_1a3a32599a1213352a3217f6e068651fc6"></span><em class="property">enum </em><code class="descname">fpga_open_flags</code><a class="headerlink" href="#_CPPv215fpga_open_flags" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open flags</p>
+<p>These flags can be passed to the <a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a> function. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv216FPGA_OPEN_SHARED">
+<span class="target" id="types__enum_8h_1a3a32599a1213352a3217f6e068651fc6a7eb08309368b559a0ecaf8193053a94c"></span><code class="descname">FPGA_OPEN_SHARED</code> = (1u &lt;&lt; 0)<a class="headerlink" href="#_CPPv216FPGA_OPEN_SHARED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open FPGA resource for shared access </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="enumeration-api">
+<h2><a class="toc-backref" href="#id4">Enumeration API</a><a class="headerlink" href="#enumeration-api" title="Permalink to this headline">¶</a></h2>
+<p>The OPAE enumeration API allows selective discovery of FPGA resources. When
+enumerating resources, a list of filter criteria can be passed to the
+respective function to select a subset of all resources in the system. The
+fpgaEnumerate() function itself then returns a list of fpga_tokens denoting
+resources, which can be used in subsequent API calls.</p>
+<p>Filter criteria are specified using one or more fpga_properties object. These
+objects need to be created using fpgaGetProperties() (defined in
+&lt;opae/properties/h&gt;) before being passed to fpgaEnumerate(). Individual
+attributes of an fpga_properties object are set using specific accessors,
+which are also defined in &lt;opae/properties.h&gt;.</p>
+<div class="section" id="enum-h">
+<h3><a class="toc-backref" href="#id5">enum.h</a><a class="headerlink" href="#enum-h" title="Permalink to this headline">¶</a></h3>
+<p>APIs for resource enumeration and managing tokens. </p>
+<p>These APIs are the first step for any application using OPAE to discover resources that are present on the system. They allow selective enumeration (i.e. getting a list of resources that match a given list of criteria) and methods to manage the lifecycle of tokens generated by <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv213fpgaEnumeratePK15fpga_properties8uint32_tP10fpga_token8uint32_tP8uint32_t">
+<span id="fpgaEnumerate__fpga_propertiesCP.uint32_t.fpga_tokenP.uint32_t.uint32_tP"></span><span class="target" id="enum_8h_1a277ba17f2377895855545bd82c1f901d"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaEnumerate</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> *<em>filters</em>, uint32_t <em>num_filters</em>, <a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> *<em>tokens</em>, uint32_t <em>max_tokens</em>, uint32_t *<em>num_matches</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv213fpgaEnumeratePK15fpga_properties8uint32_tP10fpga_token8uint32_tP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enumerate FPGA resources present in the system</p>
+<p>This call allows the user to query the system for FPGA resources that match a certain set of criteria, e.g. all accelerators that are assigned to a host interface and available, all FPGAs of a specific type, etc.</p>
+<p><a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> will create a number of <code class="docutils literal"><span class="pre">fpga_token</span></code>s to represent the matching resources and populate the array <code class="docutils literal"><span class="pre">tokens</span></code> with these tokens. The <code class="docutils literal"><span class="pre">max_tokens</span></code> argument can be used to limit the number of tokens allocated/returned by <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a>; i.e., the number of tokens in the returned <code class="docutils literal"><span class="pre">tokens</span></code> array will be either <code class="docutils literal"><span class="pre">max_tokens</span></code> or <code class="docutils literal"><span class="pre">num_matches</span></code> (the number of resources matching the filter), whichever is smaller. Use <a class="reference internal" href="#enum_8h_1a150a7a8f46e0d6df12cc329ff7030e21"><span class="std std-ref">fpgaDestroyToken()</span></a> to destroy tokens that are no longer needed.</p>
+<p>To query the number of matches for a particular set of filters (e.g. to allocate a <code class="docutils literal"><span class="pre">tokens</span></code> array of the appropriate size), call <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> with the parameter <code class="docutils literal"><span class="pre">tokens</span></code> set to NULL; this will only return the number of matches in <code class="docutils literal"><span class="pre">num_matches</span></code>.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd><a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> will allocate memory for the created tokens returned in <code class="docutils literal"><span class="pre">tokens</span></code>. It is the responsibility of the using application to free this memory after use by calling <a class="reference internal" href="#enum_8h_1a150a7a8f46e0d6df12cc329ff7030e21"><span class="std std-ref">fpgaDestroyToken()</span></a> for each of the returned tokens.</dd>
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if invalid pointers or objects are passed into the function. FPGA_NO_DRIVER if OPAE can’t find the respective enumeration data structures usually provided by the driver. FPGA_NO_MEMORY if there was not enough memory to create tokens. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">filters</span></code>: Array of <code class="docutils literal"><span class="pre">fpga_properties</span></code> objects describing the properties of the objects that should be returned. A resource is considered matching if its properties match any one of the supplied filters. Passing NULL will match all FPGA resources present in the system. </li>
+<li><code class="docutils literal"><span class="pre">num_filters</span></code>: Number of entries in the <code class="docutils literal"><span class="pre">filters</span></code> array. </li>
+<li><code class="docutils literal"><span class="pre">tokens</span></code>: Pointer to an array of fpga_token variables to be populated. If NULL is supplied, <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> will not create any tokens, but it will return the number of possible matches in <code class="docutils literal"><span class="pre">num_match</span></code>. </li>
+<li><code class="docutils literal"><span class="pre">max_tokens</span></code>: Maximum number of tokens that <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> shall return (length of <code class="docutils literal"><span class="pre">tokens</span></code> array). There may be more or fewer matches than this number; <code class="docutils literal"><span class="pre">num_matches</span></code> is set to the number of actual matches. </li>
+<li><code class="docutils literal"><span class="pre">num_matches</span></code>: Number of resources matching the <code class="docutils literal"><span class="pre">filter</span></code> criteria. This number can be higher than the number of tokens returned in the <code class="docutils literal"><span class="pre">tokens</span></code> array (depending on the value of <code class="docutils literal"><span class="pre">max_tokens</span></code>). </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214fpgaCloneToken10fpga_tokenP10fpga_token">
+<span id="fpgaCloneToken__fpga_token.fpga_tokenP"></span><span class="target" id="enum_8h_1a43a84795de460e8288070b672ef90a59"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaCloneToken</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>src</em>, <a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> *<em>dst</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214fpgaCloneToken10fpga_tokenP10fpga_token" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clone a fpga_token object</p>
+<p>Creates a copy of an fpga_token object.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This call creates a new token object and allocates memory for it. It is the responsibility of the using application to free this memory after use by calling <a class="reference internal" href="#enum_8h_1a150a7a8f46e0d6df12cc329ff7030e21"><span class="std std-ref">fpgaDestroyToken()</span></a> for the cloned token.</dd>
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">src</span></code>: fpga_token object to copy </li>
+<li><code class="docutils literal"><span class="pre">dst</span></code>: New fpga_token object cloned from ‘src’ </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216fpgaDestroyTokenP10fpga_token">
+<span id="fpgaDestroyToken__fpga_tokenP"></span><span class="target" id="enum_8h_1a150a7a8f46e0d6df12cc329ff7030e21"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaDestroyToken</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> *<em>token</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv216fpgaDestroyTokenP10fpga_token" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Destroy a Token</p>
+<p>This function destroys a token created by <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> and frees the associated memory.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">token</span></code>: fpga_token to destroy </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="properties-h">
+<h3><a class="toc-backref" href="#id6">properties.h</a><a class="headerlink" href="#properties-h" title="Permalink to this headline">¶</a></h3>
+<p>Functions for examining and manipulating <code class="docutils literal"><span class="pre">fpga_properties</span></code> objects. </p>
+<p>In OPAE, <code class="docutils literal"><span class="pre">fpga_properties</span></code> objects are used both for obtaining information about resources and for selectively enumerating resources based on their properties. This file provides accessor functions (get/set) to allow reading and writing individual items of an <code class="docutils literal"><span class="pre">fpga_properties</span></code> object. Generally, not all object types supported by OPAE carry all properties. If you call a property accessor method on a <code class="docutils literal"><span class="pre">fpga_properties</span></code> object that does not support this particular property, it will return FPGA_INVALID_PARAM.</p>
+<p><em>Accessor Return Values</em></p>
+<p>In addition to the return values specified in the documentation below, all accessor functions return FPGA_OK on success, FPGA_INVALID_PARAM if you pass NULL or invalid parameters (i.e. non-initialized properties objects), FPGA_EXCEPTION if an internal exception occurred trying to access the properties object, FPGA_NOT_FOUND if the requested property is not part of the supplied properties object. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv217fpgaGetProperties10fpga_tokenP15fpga_properties">
+<span id="fpgaGetProperties__fpga_token.fpga_propertiesP"></span><span class="target" id="properties_8h_1a010d3b6839fc8763e66e4f953682a489"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetProperties</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>token</em>, <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> *<em>prop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217fpgaGetProperties10fpga_tokenP15fpga_properties" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a fpga_properties object</p>
+<p>Initializes the memory pointed at by <code class="docutils literal"><span class="pre">prop</span></code> to represent a properties object, and populates it with the properties of the resource referred to by <code class="docutils literal"><span class="pre">token</span></code>. Individual properties can then be queried using fpgaPropertiesGet*() accessor functions.</p>
+<p>If <code class="docutils literal"><span class="pre">token</span></code> is NULL, an “empty” properties object is created to be used as a filter for <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a>. All individual fields are set to <code class="docutils literal"><span class="pre">don</span></code>t care`, which implies that the fpga_properties object would match all FPGA resources if used for an <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> query. The matching criteria can be further refined by using fpgaSet* functions on the properties object, or the object can be populated with the actual properties of a resource by using <a class="reference internal" href="#properties_8h_1a56a1c04d0c8f8eb1785969934f31a41a"><span class="std std-ref">fpgaUpdateProperties()</span></a>.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd><a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a> will allocate memory for the created properties object returned in <code class="docutils literal"><span class="pre">prop</span></code>. It is the responsibility of the using application to free this memory after use by calling <a class="reference internal" href="#properties_8h_1a6f83533f996cf6bd25274e0b7b9c3050"><span class="std std-ref">fpgaDestroyProperties()</span></a>.</dd>
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_NO_MEMORY if no memory could be allocated to create the <code class="docutils literal"><span class="pre">fpga_properties</span></code> object. FPGA_EXCEPTION if an exception happend while initializing the <code class="docutils literal"><span class="pre">fpga_properties</span></code> object. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">token</span></code>: Token to get properties for. Can be NULL, which will create an empty properties object to be used as a filter for <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a>. </li>
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Pointer to a variable of type fpga_properties </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220fpgaUpdateProperties10fpga_token15fpga_properties">
+<span id="fpgaUpdateProperties__fpga_token.fpga_properties"></span><span class="target" id="properties_8h_1a56a1c04d0c8f8eb1785969934f31a41a"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaUpdateProperties</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>token</em>, <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv220fpgaUpdateProperties10fpga_token15fpga_properties" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Update a fpga_properties object</p>
+<p>Populates the properties object ‘prop’ with properties of the resource referred to by ‘token’. Unlike <a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a>, this call will not create a new properties object or allocate memory for it, but use a previously created properties object.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if <code class="docutils literal"><span class="pre">token</span></code> or <code class="docutils literal"><span class="pre">prop</span></code> are not valid objects. FPGA_NOT_FOUND if the resource referred to by <code class="docutils literal"><span class="pre">token</span></code> was not found. FPGA_NO_DRIVER if not driver is loaded. FPGA_EXCEPTION if an internal exception occured when trying to update <code class="docutils literal"><span class="pre">prop</span></code>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">token</span></code>: Token to retrieve properties for </li>
+<li><code class="docutils literal"><span class="pre">prop</span></code>: fpga_properties object to update </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219fpgaClearProperties15fpga_properties">
+<span id="fpgaClearProperties__fpga_properties"></span><span class="target" id="properties_8h_1a9ef3dc600c085ecf513b9e3f2867ffd6"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaClearProperties</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219fpgaClearProperties15fpga_properties" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clear a fpga_properties object</p>
+<p>Sets all fields of the properties object pointed at by ‘prop’ to ‘don’t care’, which implies that the fpga_properties object would match all FPGA resources if used for an <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> query. The matching criteria can be further refined by using fpgaSet* functions on the properties object.</p>
+<p>Instead of creating a new fpga_properties object every time, this function can be used to re-use fpga_properties objects from previous queries.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if <code class="docutils literal"><span class="pre">prop</span></code> is not a valid object. FPGA_EXCEPTION if an * internal exception occured when trying to access <code class="docutils literal"><span class="pre">prop</span></code>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: fpga_properties object to clear </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219fpgaCloneProperties15fpga_propertiesP15fpga_properties">
+<span id="fpgaCloneProperties__fpga_properties.fpga_propertiesP"></span><span class="target" id="properties_8h_1ac51c19bdd763a98e143a938c47963905"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaCloneProperties</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>src</em>, <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> *<em>dst</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219fpgaCloneProperties15fpga_propertiesP15fpga_properties" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clone a fpga_properties object</p>
+<p>Creates a copy of an fpga_properties object.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This call creates a new properties object and allocates memory for it. Both the ‘src’ and the newly created ‘dst’ objects will eventually need to be destroyed using <a class="reference internal" href="#properties_8h_1a6f83533f996cf6bd25274e0b7b9c3050"><span class="std std-ref">fpgaDestroyProperties()</span></a>.</dd>
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if <code class="docutils literal"><span class="pre">src</span></code> is not a valid object, or if <code class="docutils literal"><span class="pre">dst</span></code> is NULL. FPGA_NO_MEMORY if there was not enough memory to allocate an <code class="docutils literal"><span class="pre">fpga_properties</span></code> object for <code class="docutils literal"><span class="pre">dst</span></code>. FPGA_EXCEPTION if an internal exception occurred either accessing <code class="docutils literal"><span class="pre">src</span></code> or updating <code class="docutils literal"><span class="pre">dst</span></code>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">src</span></code>: fpga_properties object to copy </li>
+<li><code class="docutils literal"><span class="pre">dst</span></code>: New fpga_properties object cloned from ‘src’ </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221fpgaDestroyPropertiesP15fpga_properties">
+<span id="fpgaDestroyProperties__fpga_propertiesP"></span><span class="target" id="properties_8h_1a6f83533f996cf6bd25274e0b7b9c3050"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaDestroyProperties</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> *<em>prop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221fpgaDestroyPropertiesP15fpga_properties" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Destroy a fpga_properties object</p>
+<p>Destroys an existing fpga_properties object that the caller has previously created using <a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a> or <a class="reference internal" href="#properties_8h_1ac51c19bdd763a98e143a938c47963905"><span class="std std-ref">fpgaCloneProperties()</span></a>.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM is <code class="docutils literal"><span class="pre">prop</span></code> is not a valid object. FPGA_EXCEPTION if an internal exception occurrred while trying to access <code class="docutils literal"><span class="pre">prop</span></code>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Pointer to the fpga_properties object to destroy </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223fpgaPropertiesGetParentK15fpga_propertiesP10fpga_token">
+<span id="fpgaPropertiesGetParent__fpga_propertiesC.fpga_tokenP"></span><span class="target" id="properties_8h_1aa3d6d131a85e9c7cff4844c0931c1591"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetParent</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, <a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> *<em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv223fpgaPropertiesGetParentK15fpga_propertiesP10fpga_token" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the token of the parent object</p>
+<p>Returns the token of the parent of the queried resource in ‘*parent’.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_NOT_FOUND if resource does not have a parent (e.g. an FPGA_DEVICE resource does not have parents). Also see “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">parent</span></code>: Pointer to a token variable of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223fpgaPropertiesSetParent15fpga_properties10fpga_token">
+<span id="fpgaPropertiesSetParent__fpga_properties.fpga_token"></span><span class="target" id="properties_8h_1aa395756270c64e2d2e4e03ad37931f2d"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetParent</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, <a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv223fpgaPropertiesSetParent15fpga_properties10fpga_token" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the token of the parent object</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify </li>
+<li><code class="docutils literal"><span class="pre">parent</span></code>: Pointer to a token variable of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227fpgaPropertiesGetObjectTypeK15fpga_propertiesP12fpga_objtype">
+<span id="fpgaPropertiesGetObjectType__fpga_propertiesC.fpga_objtypeP"></span><span class="target" id="properties_8h_1a5e4e034d981c29a65bbeafdd05d2fa87"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetObjectType</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, <a class="reference internal" href="#_CPPv212fpga_objtype" title="fpga_objtype">fpga_objtype</a> *<em>objtype</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv227fpgaPropertiesGetObjectTypeK15fpga_propertiesP12fpga_objtype" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the object type of a resource</p>
+<p>Returns the object type of the queried resource.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">objtype</span></code>: Pointer to an object type variable of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227fpgaPropertiesSetObjectType15fpga_properties12fpga_objtype">
+<span id="fpgaPropertiesSetObjectType__fpga_properties.fpga_objtype"></span><span class="target" id="properties_8h_1a3724caa06200e0d3f0b56611c379d75b"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetObjectType</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, <a class="reference internal" href="#_CPPv212fpga_objtype" title="fpga_objtype">fpga_objtype</a> <em>objtype</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv227fpgaPropertiesSetObjectType15fpga_properties12fpga_objtype" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the object type of a resource</p>
+<p>Sets the object type of the resource. * Currently supported object types are FPGA_DEVICE and FPGA_ACCELERATOR.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify </li>
+<li><code class="docutils literal"><span class="pre">objtype</span></code>: Object type of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220fpgaPropertiesGetBusK15fpga_propertiesP7uint8_t">
+<span id="fpgaPropertiesGetBus__fpga_propertiesC.uint8_tP"></span><span class="target" id="properties_8h_1a29eda789a7322042dfa8d558d13205a1"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetBus</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint8_t *<em>bus</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv220fpgaPropertiesGetBusK15fpga_propertiesP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the PCI bus number of a resource</p>
+<p>Returns the bus number the queried resource.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">bus</span></code>: Pointer to a PCI bus variable of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220fpgaPropertiesSetBus15fpga_properties7uint8_t">
+<span id="fpgaPropertiesSetBus__fpga_properties.uint8_t"></span><span class="target" id="properties_8h_1a3a10650ea23b050090d1b2759c9ec8f7"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetBus</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint8_t <em>bus</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv220fpgaPropertiesSetBus15fpga_properties7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the PCI bus number of a resource</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify </li>
+<li><code class="docutils literal"><span class="pre">bus</span></code>: PCI bus number of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223fpgaPropertiesGetDeviceK15fpga_propertiesP7uint8_t">
+<span id="fpgaPropertiesGetDevice__fpga_propertiesC.uint8_tP"></span><span class="target" id="properties_8h_1abf2d527c4625bfd1558bb722c3c89380"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetDevice</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint8_t *<em>device</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv223fpgaPropertiesGetDeviceK15fpga_propertiesP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the PCI device number of a resource</p>
+<p>Returns the device number the queried resource.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">device</span></code>: Pointer to a PCI device variable of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223fpgaPropertiesSetDevice15fpga_properties7uint8_t">
+<span id="fpgaPropertiesSetDevice__fpga_properties.uint8_t"></span><span class="target" id="properties_8h_1a73ea87129bcea24df9aaabcc2bd40760"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetDevice</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint8_t <em>device</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv223fpgaPropertiesSetDevice15fpga_properties7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the PCI device number of a resource</p>
+<p>Enforces the limitation on the number of devices as specified in the PCI spec.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify </li>
+<li><code class="docutils literal"><span class="pre">device</span></code>: PCI device number of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesGetFunctionK15fpga_propertiesP7uint8_t">
+<span id="fpgaPropertiesGetFunction__fpga_propertiesC.uint8_tP"></span><span class="target" id="properties_8h_1a789a2548aaea9b2069b964f58a931bf6"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetFunction</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint8_t *<em>function</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesGetFunctionK15fpga_propertiesP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the PCI function number of a resource</p>
+<p>Returns the function number the queried resource.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">function</span></code>: Pointer to PCI function variable of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesSetFunction15fpga_properties7uint8_t">
+<span id="fpgaPropertiesSetFunction__fpga_properties.uint8_t"></span><span class="target" id="properties_8h_1a14045d2b80968dda5af4987b6246d17a"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetFunction</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint8_t <em>function</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesSetFunction15fpga_properties7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the PCI function number of a resource</p>
+<p>Enforces the limitation on the number of functions as specified in the PCI spec.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify </li>
+<li><code class="docutils literal"><span class="pre">function</span></code>: PCI function number of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesGetSocketIDK15fpga_propertiesP7uint8_t">
+<span id="fpgaPropertiesGetSocketID__fpga_propertiesC.uint8_tP"></span><span class="target" id="properties_8h_1a9978cb8bc354d2bbd644ed1a96395c8c"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetSocketID</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint8_t *<em>socket_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesGetSocketIDK15fpga_propertiesP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the socket id of a resource</p>
+<p>Returns the socket id of the queried resource.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">socket_id</span></code>: Pointer to a socket id variable of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesSetSocketID15fpga_properties7uint8_t">
+<span id="fpgaPropertiesSetSocketID__fpga_properties.uint8_t"></span><span class="target" id="properties_8h_1a51707174f2df674af9bc1171bde7f1ba"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetSocketID</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint8_t <em>socket_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesSetSocketID15fpga_properties7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the socket id of the resource</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify </li>
+<li><code class="docutils literal"><span class="pre">socket_id</span></code>: Socket id of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesGetDeviceIDK15fpga_propertiesP8uint16_t">
+<span id="fpgaPropertiesGetDeviceID__fpga_propertiesC.uint16_tP"></span><span class="target" id="properties_8h_1ac3237ae88feff35ba0c285e27cac58a5"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetDeviceID</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint16_t *<em>device_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesGetDeviceIDK15fpga_propertiesP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the device id of the resource</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">device_id</span></code>: Pointer to a device id variable of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesSetDeviceID15fpga_properties8uint16_t">
+<span id="fpgaPropertiesSetDeviceID__fpga_properties.uint16_t"></span><span class="target" id="properties_8h_1acfac3eea769b7872c1d6d7102de708aa"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetDeviceID</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint16_t <em>device_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesSetDeviceID15fpga_properties8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the device id of the resource</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify </li>
+<li><code class="docutils literal"><span class="pre">device_id</span></code>: Device id of the resource ‘prop’ is associated with </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesGetNumSlotsK15fpga_propertiesP8uint32_t">
+<span id="fpgaPropertiesGetNumSlots__fpga_propertiesC.uint32_tP"></span><span class="target" id="properties_8h_1ad1a50fcb3a74c0acf89d2f4e75989085"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetNumSlots</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint32_t *<em>num_slots</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesGetNumSlotsK15fpga_propertiesP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of slots of an FPGA resource property</p>
+<p>Returns the number of slots present in an FPGA.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">num_slots</span></code>: Pointer to number of slots variable of the FPGA </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesSetNumSlots15fpga_properties8uint32_t">
+<span id="fpgaPropertiesSetNumSlots__fpga_properties.uint32_t"></span><span class="target" id="properties_8h_1a2338b49011195241a3ba5ad16f85dde8"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetNumSlots</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint32_t <em>num_slots</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesSetNumSlots15fpga_properties8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the number of slots of an FPGA resource property</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">num_slots</span></code>: Number of slots of the FPGA </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222fpgaPropertiesGetBBSIDK15fpga_propertiesP8uint64_t">
+<span id="fpgaPropertiesGetBBSID__fpga_propertiesC.uint64_tP"></span><span class="target" id="properties_8h_1aa387edbec93d9588d6338d11aace653f"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetBBSID</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint64_t *<em>bbs_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222fpgaPropertiesGetBBSIDK15fpga_propertiesP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the BBS ID of an FPGA resource property</p>
+<p>Returns the blue bitstream id of an FPGA.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">bbs_id</span></code>: Pointer to a bbs id variable of the FPGA </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222fpgaPropertiesSetBBSID15fpga_properties8uint64_t">
+<span id="fpgaPropertiesSetBBSID__fpga_properties.uint64_t"></span><span class="target" id="properties_8h_1a456be39e014b2fb03b160ab010ddb189"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetBBSID</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint64_t <em>bbs_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222fpgaPropertiesSetBBSID15fpga_properties8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the BBS ID of an FPGA resource property</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">bbs_id</span></code>: Blue bitstream id of the FPGA resource </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227fpgaPropertiesGetBBSVersionK15fpga_propertiesP12fpga_version">
+<span id="fpgaPropertiesGetBBSVersion__fpga_propertiesC.fpga_versionP"></span><span class="target" id="properties_8h_1a08186263b04a5193471469e9d70ae372"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetBBSVersion</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, <a class="reference internal" href="#_CPPv212fpga_version" title="fpga_version">fpga_version</a> *<em>bbs_version</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv227fpgaPropertiesGetBBSVersionK15fpga_propertiesP12fpga_version" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the BBS Version of an FPGA resource property</p>
+<p>Returns the blue bitstream version of an FPGA.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">bbs_version</span></code>: Pointer to a bbs version variable of the FPGA </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227fpgaPropertiesSetBBSVersion15fpga_properties12fpga_version">
+<span id="fpgaPropertiesSetBBSVersion__fpga_properties.fpga_version"></span><span class="target" id="properties_8h_1a9e3bfec10b26500718ae0afef146f06a"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetBBSVersion</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, <a class="reference internal" href="#_CPPv212fpga_version" title="fpga_version">fpga_version</a> <em>version</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv227fpgaPropertiesSetBBSVersion15fpga_properties12fpga_version" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the BBS Version of an FPGA resource property</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">version</span></code>: Blue bitstream version of the FPGA resource </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesGetVendorIDK15fpga_propertiesP8uint16_t">
+<span id="fpgaPropertiesGetVendorID__fpga_propertiesC.uint16_tP"></span><span class="target" id="properties_8h_1a03408aebf73915938507c529bba6aeb3"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetVendorID</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint16_t *<em>vendor_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesGetVendorIDK15fpga_propertiesP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the vendor id of an FPGA resource property</p>
+<p>Returns the vendor id of an FPGA.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>.</dd>
+<dt><strong>Note</strong></dt>
+<dd>This API is not currently supported. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">vendor_id</span></code>: Pointer to a vendor id variable of the FPGA </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesSetVendorID15fpga_properties8uint16_t">
+<span id="fpgaPropertiesSetVendorID__fpga_properties.uint16_t"></span><span class="target" id="properties_8h_1a1393cac49b4c34fa23e95367bc14d811"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetVendorID</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint16_t <em>vendor_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesSetVendorID15fpga_properties8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the vendor id of an FPGA resource property</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>.</dd>
+<dt><strong>Note</strong></dt>
+<dd>This API is not currently supported. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">vendor_id</span></code>: Vendor id of the FPGA resource </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222fpgaPropertiesGetModelK15fpga_propertiesPc">
+<span id="fpgaPropertiesGetModel__fpga_propertiesC.cP"></span><span class="target" id="properties_8h_1a8c00a2915132284aea5faa0d72dfd5e5"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetModel</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, char *<em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222fpgaPropertiesGetModelK15fpga_propertiesPc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the model of an FPGA resource property</p>
+<p>Returns the model of an FPGA.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>.</dd>
+<dt><strong>Note</strong></dt>
+<dd>This API is not currently supported. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">model</span></code>: Model of the FPGA resource (string of minimum FPGA_MODEL_LENGTH length </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222fpgaPropertiesSetModel15fpga_propertiesPc">
+<span id="fpgaPropertiesSetModel__fpga_properties.cP"></span><span class="target" id="properties_8h_1acd4fc992cbb34efe619e387f923c4c05"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetModel</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, char *<em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222fpgaPropertiesSetModel15fpga_propertiesPc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the model of an FPGA resource property</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>.</dd>
+<dt><strong>Note</strong></dt>
+<dd>This API is not currently supported. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">model</span></code>: Model of the FPGA resource (string of maximum FPGA_MODEL_LENGTH length </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv232fpgaPropertiesGetLocalMemorySizeK15fpga_propertiesP8uint64_t">
+<span id="fpgaPropertiesGetLocalMemorySize__fpga_propertiesC.uint64_tP"></span><span class="target" id="properties_8h_1aeff04e09cc045f314695b4aac0e5516a"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetLocalMemorySize</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint64_t *<em>lms</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv232fpgaPropertiesGetLocalMemorySizeK15fpga_propertiesP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the local memory size of an FPGA resource property</p>
+<p>Returns the local memory size of an FPGA.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>.</dd>
+<dt><strong>Note</strong></dt>
+<dd>This API is not currently supported. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">lms</span></code>: Pointer to a memory size variable of the FPGA </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv232fpgaPropertiesSetLocalMemorySize15fpga_properties8uint64_t">
+<span id="fpgaPropertiesSetLocalMemorySize__fpga_properties.uint64_t"></span><span class="target" id="properties_8h_1af491fd7a2621aa66de5059168afe3792"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetLocalMemorySize</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint64_t <em>lms</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv232fpgaPropertiesSetLocalMemorySize15fpga_properties8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the local memory size of an FPGA resource property</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>.</dd>
+<dt><strong>Note</strong></dt>
+<dd>This API is not currently supported. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">lms</span></code>: Local memory size of the FPGA resource </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv229fpgaPropertiesGetCapabilitiesK15fpga_propertiesP8uint64_t">
+<span id="fpgaPropertiesGetCapabilities__fpga_propertiesC.uint64_tP"></span><span class="target" id="properties_8h_1a9b80ec35fbe0498f332782ca5d8ec2ab"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetCapabilities</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint64_t *<em>capabilities</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv229fpgaPropertiesGetCapabilitiesK15fpga_propertiesP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the capabilities FPGA resource property</p>
+<p>Returns the capabilities of an FPGA. Capabilities is a bitfield value</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>.</dd>
+<dt><strong>Note</strong></dt>
+<dd>This API is not currently supported. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">capabilities</span></code>: Pointer to a capabilities variable of the FPGA </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv229fpgaPropertiesSetCapabilities15fpga_properties8uint64_t">
+<span id="fpgaPropertiesSetCapabilities__fpga_properties.uint64_t"></span><span class="target" id="properties_8h_1a45bad0a5baa2cb1f582af571d6ed3917"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetCapabilities</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint64_t <em>capabilities</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv229fpgaPropertiesSetCapabilities15fpga_properties8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the capabilities of an FPGA resource property</p>
+<p>Capabilities is a bitfield value</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_DEVICE. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>.</dd>
+<dt><strong>Note</strong></dt>
+<dd>This API is not currently supported. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify - must be of type FPGA_DEVICE </li>
+<li><code class="docutils literal"><span class="pre">capabilities</span></code>: Capabilities of the FPGA resource </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221fpgaPropertiesGetGUIDK15fpga_propertiesP9fpga_guid">
+<span id="fpgaPropertiesGetGUID__fpga_propertiesC.fpga_guidP"></span><span class="target" id="properties_8h_1a5728ceaf03173772069df0610b4646d7"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetGUID</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, <a class="reference internal" href="#_CPPv29fpga_guid" title="fpga_guid">fpga_guid</a> *<em>guid</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221fpgaPropertiesGetGUIDK15fpga_propertiesP9fpga_guid" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the GUID of a resource</p>
+<p>Returns the GUID of an FPGA or accelerator object.</p>
+<p>For an accelerator, the GUID uniquely identifies a specific accelerator context type, i.e. different accelerators will have different GUIDs. For an FPGA, the GUID is used to identify a certain instance of an FPGA, e.g. to determine whether a given bitstream would be compatible.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">guid</span></code>: Pointer to a GUID of the slot variable </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221fpgaPropertiesSetGUID15fpga_properties9fpga_guid">
+<span id="fpgaPropertiesSetGUID__fpga_properties.fpga_guid"></span><span class="target" id="properties_8h_1a71ad1e59994b2c8b04ea036a64515117"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetGUID</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, <a class="reference internal" href="#_CPPv29fpga_guid" title="fpga_guid">fpga_guid</a> <em>guid</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221fpgaPropertiesSetGUID15fpga_properties9fpga_guid" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the GUID of a resource</p>
+<p>Sets the GUID of an FPGA or accelerator object.</p>
+<p>For an accelerator, the GUID uniquely identifies a specific accelerator context type, i.e. different accelerators will have different GUIDs. For an FPGA, the GUID is used to identify a certain instance of an FPGA, e.g. to determine whether a given bitstream would be compatible.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify </li>
+<li><code class="docutils literal"><span class="pre">guid</span></code>: Pointer to a GUID of the slot variable </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224fpgaPropertiesGetNumMMIOK15fpga_propertiesP8uint32_t">
+<span id="fpgaPropertiesGetNumMMIO__fpga_propertiesC.uint32_tP"></span><span class="target" id="properties_8h_1a7b70efbf6892e9daaf3700b21cc50f0c"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetNumMMIO</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint32_t *<em>mmio_spaces</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv224fpgaPropertiesGetNumMMIOK15fpga_propertiesP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of mmio spaces</p>
+<p>Returns the number of mmio spaces of an AFU properties structure.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_ACCELERATOR. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query - must be of type FPGA_ACCELERATOR </li>
+<li><code class="docutils literal"><span class="pre">mmio_spaces</span></code>: Pointer to a variable for number of mmio spaces </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224fpgaPropertiesSetNumMMIO15fpga_properties8uint32_t">
+<span id="fpgaPropertiesSetNumMMIO__fpga_properties.uint32_t"></span><span class="target" id="properties_8h_1a1695e0bf61ee5188401bd230db022314"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetNumMMIO</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint32_t <em>mmio_spaces</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv224fpgaPropertiesSetNumMMIO15fpga_properties8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the number of mmio spaces</p>
+<p>Sets the number of mmio spaces of an AFU properties structure.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_ACCELERATOR. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify - must be of type FPGA_ACCELERATOR </li>
+<li><code class="docutils literal"><span class="pre">mmio_spaces</span></code>: Number of MMIO spaces of the accelerator </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv230fpgaPropertiesGetNumInterruptsK15fpga_propertiesP8uint32_t">
+<span id="fpgaPropertiesGetNumInterrupts__fpga_propertiesC.uint32_tP"></span><span class="target" id="properties_8h_1a33ee7ad6994f3df0a044d9052627f8c0"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetNumInterrupts</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint32_t *<em>num_interrupts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv230fpgaPropertiesGetNumInterruptsK15fpga_propertiesP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of interrupts</p>
+<p>Returns the number of interrupts of an accelerator properties structure.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_ACCELERATOR. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query - must be of type FPGA_ACCELERATOR </li>
+<li><code class="docutils literal"><span class="pre">num_interrupts</span></code>: Pointer to a variable for number of interrupts </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv230fpgaPropertiesSetNumInterrupts15fpga_properties8uint32_t">
+<span id="fpgaPropertiesSetNumInterrupts__fpga_properties.uint32_t"></span><span class="target" id="properties_8h_1ace3b67e6acb69bef8d8d8b32dab7a044"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetNumInterrupts</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint32_t <em>num_interrupts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv230fpgaPropertiesSetNumInterrupts15fpga_properties8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the number of interrupts</p>
+<p>Sets the number of interrupts of an accelerator properties structure.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_ACCELERATOR. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify - must be of type FPGA_ACCELERATOR </li>
+<li><code class="docutils literal"><span class="pre">num_interrupts</span></code>: Number of interrupts of the accelerator </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv233fpgaPropertiesGetAcceleratorStateK15fpga_propertiesP22fpga_accelerator_state">
+<span id="fpgaPropertiesGetAcceleratorState__fpga_propertiesC.fpga_accelerator_stateP"></span><span class="target" id="properties_8h_1a1e18fdf7c532bf564576b361874fccf3"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetAcceleratorState</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, <a class="reference internal" href="#_CPPv222fpga_accelerator_state" title="fpga_accelerator_state">fpga_accelerator_state</a> *<em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv233fpgaPropertiesGetAcceleratorStateK15fpga_propertiesP22fpga_accelerator_state" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the state of a accelerator resource property</p>
+<p>Returns the accelerator state of a accelerator.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_ACCELERATOR. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query - must be of type FPGA_ACCELERATOR </li>
+<li><code class="docutils literal"><span class="pre">state</span></code>: Pointer to a accelerator state variable of the accelerator </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv233fpgaPropertiesSetAcceleratorState15fpga_properties22fpga_accelerator_state">
+<span id="fpgaPropertiesSetAcceleratorState__fpga_properties.fpga_accelerator_state"></span><span class="target" id="properties_8h_1a1a3f5725be24b3fc10625dfd604ed86d"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetAcceleratorState</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, <a class="reference internal" href="#_CPPv222fpga_accelerator_state" title="fpga_accelerator_state">fpga_accelerator_state</a> <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv233fpgaPropertiesSetAcceleratorState15fpga_properties22fpga_accelerator_state" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the state of an accelerator resource property</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_INVALID_PARAM if object type is not FPGA_ACCELERATOR. See also “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to modify - must be of type FPGA_ACCELERATOR </li>
+<li><code class="docutils literal"><span class="pre">state</span></code>: accelerator state of the accelerator resource </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesGetObjectIDK15fpga_propertiesP8uint64_t">
+<span id="fpgaPropertiesGetObjectID__fpga_propertiesC.uint64_tP"></span><span class="target" id="properties_8h_1a409e32267db6f5040d881d5d533c36fb"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetObjectID</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint64_t *<em>object_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesGetObjectIDK15fpga_propertiesP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the object ID of a resource</p>
+<p>Returns the object ID of a resource. The object ID is a 64 bit identifier that is unique within a single node or system. It represents a similar concept as the token, but can be used across processes (e.g. passed on the command line).</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">object_id</span></code>: Pointer to a 64bit memory location to store the object ID in </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225fpgaPropertiesSetObjectIDK15fpga_properties8uint64_t">
+<span id="fpgaPropertiesSetObjectID__fpga_propertiesC.uint64_t"></span><span class="target" id="properties_8h_1a022ad3dc80ab2fba7e512c6c2215258a"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetObjectID</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint64_t <em>object_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaPropertiesSetObjectIDK15fpga_properties8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the object ID of a resource</p>
+<p>Sets the object ID of a resource. The object ID is a 64 bit identifier that is unique within a single node or system. It represents a similar concept as the token, but can be used across processes (e.g. passed on the command line).</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">object_id</span></code>: A 64bit value to use as the object ID </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="access-api">
+<h2><a class="toc-backref" href="#id7">Access API</a><a class="headerlink" href="#access-api" title="Permalink to this headline">¶</a></h2>
+<p>The access API provides functions for opening and closing FPGA resources.
+Opening a resource yields an fpga_handle, which denotes ownership and can be
+used in subsequent API calls to interact with a specific resource. Ownership
+can be exclusive or shared.</p>
+<div class="section" id="access-h">
+<h3><a class="toc-backref" href="#id8">access.h</a><a class="headerlink" href="#access-h" title="Permalink to this headline">¶</a></h3>
+<p>Functions to acquire, release, and reset OPAE FPGA resources. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv28fpgaOpen10fpga_tokenP11fpga_handlei">
+<span id="fpgaOpen__fpga_token.fpga_handleP.i"></span><span class="target" id="access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaOpen</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>token</em>, <a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> *<em>handle</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv28fpgaOpen10fpga_tokenP11fpga_handlei" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open an FPGA object</p>
+<p>Acquires ownership of the FPGA resource referred to by ‘token’.</p>
+<p>Most often this will be used to open an accelerator object to directly interact with an accelerator function, or to open an FPGA object to perform management functions.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_NOT_FOUND if the resource for ‘token’ could not be found. FPGA_INVALID_PARAM if ‘token’ does not refer to a resource that can be opened, or if either argument is NULL or invalid. FPGA_EXCEPTION if an internal exception occurred while creating the handle. FPGA_NO_DRIVER if the driver is not loaded. FPGA_BUSY if trying to open a resource that has already been opened in exclusive mode. FPGA_NO_ACCESS if the current process’ privileges are not sufficient to open the resource. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">token</span></code>: Pointer to token identifying resource to acquire ownership of </li>
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Pointer to preallocated memory to place a handle in. This handle will be used in subsequent API calls. </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: One of the following flags:<ul>
+<li>FPGA_OPEN_SHARED allows the resource to be opened multiple times (not supported in ASE) Shared resources (including buffers) are released when all associated handles have been closed (either explicitly with <a class="reference internal" href="#access_8h_1ac83789ebb65dc6b2adeae3d7e7fa3e79"><span class="std std-ref">fpgaClose()</span></a> or by process termination). </li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv29fpgaClose11fpga_handle">
+<span id="fpgaClose__fpga_handle"></span><span class="target" id="access_8h_1ac83789ebb65dc6b2adeae3d7e7fa3e79"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaClose</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29fpgaClose11fpga_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Close a previously opened FPGA object</p>
+<p>Relinquishes ownership of a previously <a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a>ed resource. This enables others to acquire ownership if the resource was opened exclusively. Also deallocates / unmaps MMIO and UMsg memory areas.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if handle does not refer to an acquired resource, or if handle is NULL. FPGA_EXCEPTION if an internal error occurred while accessing the handle. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened FPGA object </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv29fpgaReset11fpga_handle">
+<span id="fpgaReset__fpga_handle"></span><span class="target" id="access_8h_1aa4addba9b864dbc614a1680dfc29dc59"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaReset</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29fpgaReset11fpga_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset an FPGA object</p>
+<p>Performs an accelerator reset.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if handle does not refer to an acquired resource or to a resoure that cannot be reset. FPGA_EXCEPTION if an internal error occurred while trying to access the handle or resetting the resource. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened FPGA object </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="event-api">
+<h2><a class="toc-backref" href="#id9">Event API</a><a class="headerlink" href="#event-api" title="Permalink to this headline">¶</a></h2>
+<p>The event API provides functions and types for handling asynchronous events
+such as errors or AFC interrupts.</p>
+<p>To natively support asynchronous event, the driver for the FPGA platform
+needs to support events natively (in which case the OPAE C library will
+register the event directly with the driver). For some platforms that do not
+support interrupt-driven event delivery, you need to run the FPGA Daemon
+(fpgad) to enable asynchronous OPAE events. fpgad will act as a proxy for the
+application and deliver asynchronous notifications for registered events.</p>
+<div class="section" id="event-h">
+<h3><a class="toc-backref" href="#id10">event.h</a><a class="headerlink" href="#event-h" title="Permalink to this headline">¶</a></h3>
+<p>Functions for registering events and managing the lifecycle for <code class="docutils literal"><span class="pre">fpga_event_handle</span></code>s. </p>
+<p>OPAE provides an interface to asynchronous events that can be generated by different FPGA resources. The event API provides functions to register for these events; associated with every event a process has registered for is an fpga_event_handle, which encapsulates the OS-specific data structure for event objects. On Linux, an fpga_event_handle can be used as a file descriptor and passed to select(), poll(), epoll() and similar functions to wait for asynchronous events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv221fpgaCreateEventHandleP17fpga_event_handle">
+<span id="fpgaCreateEventHandle__fpga_event_handleP"></span><span class="target" id="event_8h_1a54fb1847300ff886b4ad857716075083"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaCreateEventHandle</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv217fpga_event_handle" title="fpga_event_handle">fpga_event_handle</a> *<em>event_handle</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221fpgaCreateEventHandleP17fpga_event_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize an event_handle</p>
+<p>Platform independent way to initialize an event_handle used for notifications from the driver to application. For Linux, this function creates an eventfd and returns the eventfd file descriptor in <code class="docutils literal"><span class="pre">*event_handle</span></code>.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if <code class="docutils literal"><span class="pre">event_handle</span></code> is NULL. FPGA_NOT_SUPPORTED if platform does not support events. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">event_handle</span></code>: Pointer to event handle variable.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222fpgaDestroyEventHandleP17fpga_event_handle">
+<span id="fpgaDestroyEventHandle__fpga_event_handleP"></span><span class="target" id="event_8h_1ab8e748d1c491717d677a96c23dee987b"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaDestroyEventHandle</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv217fpga_event_handle" title="fpga_event_handle">fpga_event_handle</a> *<em>event_handle</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222fpgaDestroyEventHandleP17fpga_event_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Destroy an event_handle</p>
+<p>Destroy handle and free resources. On Linux this corresponds to closing the file descriptor pointed to by handle</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if <code class="docutils literal"><span class="pre">event_handle</span></code> is NULL. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">event_handle</span></code>: Pointer to handle to be destroyed</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv230fpgaGetOSObjectFromEventHandleK17fpga_event_handlePi">
+<span id="fpgaGetOSObjectFromEventHandle__fpga_event_handleC.iP"></span><span class="target" id="event_8h_1a9c38c9cf434a896e7cf02a7df8dc5c2e"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetOSObjectFromEventHandle</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv217fpga_event_handle" title="fpga_event_handle">fpga_event_handle</a> <em>eh</em>, int *<em>fd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv230fpgaGetOSObjectFromEventHandleK17fpga_event_handlePi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get OS object from event handle</p>
+<p>Check validity of event handle, and get the OS object used to subscribe and unsubscribe to events. On Linux, the obkect corresponds to a file descriptor.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if <code class="docutils literal"><span class="pre">event_handle</span></code> is invalid. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">eh</span></code>: Event handle to get the descriptor value from </li>
+<li><code class="docutils literal"><span class="pre">fd</span></code>: integer to store the descriptor value</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217fpgaRegisterEvent11fpga_handle15fpga_event_type17fpga_event_handle8uint32_t">
+<span id="fpgaRegisterEvent__fpga_handle.fpga_event_type.fpga_event_handle.uint32_t"></span><span class="target" id="event_8h_1acee9793072cfe2d18a9603339cf5e8a7"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaRegisterEvent</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, <a class="reference internal" href="#_CPPv215fpga_event_type" title="fpga_event_type">fpga_event_type</a> <em>event_type</em>, <a class="reference internal" href="#_CPPv217fpga_event_handle" title="fpga_event_handle">fpga_event_handle</a> <em>event_handle</em>, uint32_t <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217fpgaRegisterEvent11fpga_handle15fpga_event_type17fpga_event_handle8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register an FPGA event</p>
+<p>This function tells the driver that the caller is interested in notification for the event specified by the type and flags pair.</p>
+<p>The event_handle points to an OS specific mechanism for event notification. An event_handle is associated with only a single event.</p>
+<p>In case of user interrupts, the flags parameter will be used to specify the vector ID. The value of the flags parameter indicates the vector ID, no bit encoding is used.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if handle does not refer to a resource supporting the requested event, or if event_handle is not valid. FPGA_EXCEPTION if an internal exception occurred while accessing the handle or the event_handle. On Linux: FPGA_NO_DAEMON if the driver does not support the requested event and there is no FPGA Daemon (fpgad) running to proxy it. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened FPGA resource. </li>
+<li><code class="docutils literal"><span class="pre">event_type</span></code>: Type of event </li>
+<li><code class="docutils literal"><span class="pre">event_handle</span></code>: Handle to previously opened resource for event notification. </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Optional argument for specifying additional information about event. For example irq number for interrupt events. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219fpgaUnregisterEvent11fpga_handle15fpga_event_type17fpga_event_handle">
+<span id="fpgaUnregisterEvent__fpga_handle.fpga_event_type.fpga_event_handle"></span><span class="target" id="event_8h_1aa9f920468d8ff05e7411c925a176f5cb"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaUnregisterEvent</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, <a class="reference internal" href="#_CPPv215fpga_event_type" title="fpga_event_type">fpga_event_type</a> <em>event_type</em>, <a class="reference internal" href="#_CPPv217fpga_event_handle" title="fpga_event_handle">fpga_event_handle</a> <em>event_handle</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219fpgaUnregisterEvent11fpga_handle15fpga_event_type17fpga_event_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Unregister an FPGA event</p>
+<p>This function tells the driver that the caller is no longer interested in notification for the event associated with the event_handle</p>
+<p>The event_handle points to an OS specific mechanism for event notification. An event_handle is associated with only a single event.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if handle does not refer to a resource supporting the requested event, or if event_handle is not valid. FPGA_EXCEPTION if an internal error occurred accessing the handle or the event_handle. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened FPGA resource. </li>
+<li><code class="docutils literal"><span class="pre">event_type</span></code>: Type of event to unregister. </li>
+<li><code class="docutils literal"><span class="pre">event_handle</span></code>: Handle to previously registered resource for event notification. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="mmio-and-shared-memory-apis">
+<h2><a class="toc-backref" href="#id11">MMIO and Shared Memory APIs</a><a class="headerlink" href="#mmio-and-shared-memory-apis" title="Permalink to this headline">¶</a></h2>
+<p>These APIs feature functions for mapping and accessing control registers
+through memory-mapped IO (mmio.h), allocating and sharing system memory
+buffers with an accelerator (buffer.h), and using low-latency notifications
+(umsg.h).</p>
+<div class="section" id="mmio-h">
+<h3><a class="toc-backref" href="#id12">mmio.h</a><a class="headerlink" href="#mmio-h" title="Permalink to this headline">¶</a></h3>
+<p>Functions for mapping and accessing MMIO space. </p>
+<p>Most FPGA accelerators provide access to control registers through memory-mappable address spaces, commonly referred to as “MMIO spaces”. This file provides functions to map, unmap, read, and write MMIO spaces.</p>
+<p>Note that an accelerator may have multiple MMIO spaces, denoted by the <code class="docutils literal"><span class="pre">mmio_num</span></code> argument of the APIs below. The meaning and properties of each MMIO space are up to the accelerator designer. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv215fpgaWriteMMIO6411fpga_handle8uint32_t8uint64_t8uint64_t">
+<span id="fpgaWriteMMIO64__fpga_handle.uint32_t.uint64_t.uint64_t"></span><span class="target" id="mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaWriteMMIO64</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint64_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv215fpgaWriteMMIO6411fpga_handle8uint32_t8uint64_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write 64 bit value to MMIO space</p>
+<p>This function will write to MMIO space of the target object at a specified offset.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if any of the supplied parameters is invalid. FPGA_EXCEPTION if an internal exception occurred while trying to access the handle. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
+<li><code class="docutils literal"><span class="pre">mmio_num</span></code>: Number of MMIO space to access </li>
+<li><code class="docutils literal"><span class="pre">offset</span></code>: Byte offset into MMIO space </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Value to write (64 bit) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214fpgaReadMMIO6411fpga_handle8uint32_t8uint64_tP8uint64_t">
+<span id="fpgaReadMMIO64__fpga_handle.uint32_t.uint64_t.uint64_tP"></span><span class="target" id="mmio_8h_1a011ba900710ddf70c13ca089c4742187"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaReadMMIO64</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint64_t *<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214fpgaReadMMIO6411fpga_handle8uint32_t8uint64_tP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read 64 bit value from MMIO space</p>
+<p>This function will read from MMIO space of the target object at a specified offset.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if any of the supplied parameters is invalid. FPGA_EXCEPTION if an internal exception occurred while trying to access the handle. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
+<li><code class="docutils literal"><span class="pre">mmio_num</span></code>: Number of MMIO space to access </li>
+<li><code class="docutils literal"><span class="pre">offset</span></code>: Byte offset into MMIO space </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Pointer to memory where read value is returned (64 bit) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215fpgaWriteMMIO3211fpga_handle8uint32_t8uint64_t8uint32_t">
+<span id="fpgaWriteMMIO32__fpga_handle.uint32_t.uint64_t.uint32_t"></span><span class="target" id="mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaWriteMMIO32</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint32_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv215fpgaWriteMMIO3211fpga_handle8uint32_t8uint64_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write 32 bit value to MMIO space</p>
+<p>This function will write to MMIO space of the target object at a specified offset.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if any of the supplied parameters is invalid. FPGA_EXCEPTION if an internal exception occurred while trying to access the handle. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
+<li><code class="docutils literal"><span class="pre">mmio_num</span></code>: Number of MMIO space to access </li>
+<li><code class="docutils literal"><span class="pre">offset</span></code>: Byte offset into MMIO space </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Value to write (32 bit) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214fpgaReadMMIO3211fpga_handle8uint32_t8uint64_tP8uint32_t">
+<span id="fpgaReadMMIO32__fpga_handle.uint32_t.uint64_t.uint32_tP"></span><span class="target" id="mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaReadMMIO32</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint32_t *<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214fpgaReadMMIO3211fpga_handle8uint32_t8uint64_tP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read 32 bit value from MMIO space</p>
+<p>This function will read from MMIO space of the target object at a specified offset.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if any of the supplied parameters is invalid. FPGA_EXCEPTION if an internal exception occurred while trying to access the handle. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
+<li><code class="docutils literal"><span class="pre">mmio_num</span></code>: Number of MMIO space to access </li>
+<li><code class="docutils literal"><span class="pre">offset</span></code>: Byte offset into MMIO space </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Pointer to memory where read value is returned (32 bit) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211fpgaMapMMIO11fpga_handle8uint32_tPP8uint64_t">
+<span id="fpgaMapMMIO__fpga_handle.uint32_t.uint64_tPP"></span><span class="target" id="mmio_8h_1a2903267d37ea5c64522b0addce74da5f"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaMapMMIO</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t **<em>mmio_ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv211fpgaMapMMIO11fpga_handle8uint32_tPP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Map MMIO space</p>
+<p>This function will return a pointer to the specified MMIO space of the target object in process virtual memory, if supported by the target. Some MMIO spaces may be restricted to privileged processes, depending on the used handle and type.</p>
+<p>After mapping the respective MMIO space, you can access it through direct pointer operations (observing supported access sizes and alignments of the target platform and accelerator).</p>
+<p>
+If the caller passes in NULL for mmio_ptr, no mapping will be performed, and no virtual address will be returned, though the call will return <code class="docutils literal"><span class="pre">FPGA_OK</span></code>. This implies that all accesses will be performed through <a class="reference internal" href="#mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"><span class="std std-ref">fpgaReadMMIO32()</span></a>, <a class="reference internal" href="#mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"><span class="std std-ref">fpgaWriteMMIO32()</span></a>, fpgeReadMMIO64(), and <a class="reference internal" href="#mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"><span class="std std-ref">fpgaWriteMMIO64()</span></a>. This is the only supported case for ASE.<dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Some targets (such as the ASE simulator) do not support memory-mapping of IO register spaces and will not return a pointer to an actually mapped space. Instead, they will return <code class="docutils literal"><span class="pre">FPGA_NOT_SUPPORTED</span></code>. Usually, these platforms still allow the application to issue MMIO operations using <a class="reference internal" href="#mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"><span class="std std-ref">fpgaReadMMIO32()</span></a>, <a class="reference internal" href="#mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"><span class="std std-ref">fpgaWriteMMIO32()</span></a>, fpgeReadMMIO64(), and <a class="reference internal" href="#mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"><span class="std std-ref">fpgaWriteMMIO64()</span></a>.</dd>
+</dl>
+</p>
+<p>The number of available MMIO spaces can be retrieved through the num_mmio property (fpgaPropertyGetNumMMIO()).</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if any of the supplied parameters is invalid. FPGA_EXCEPTION if an internal exception occurred while trying to access the handle. FPGA_NO_ACCESS if the process’ permissions are not sufficient to map the requested MMIO space. FPGA_NOT_SUPPORTED if platform does not support memory mapped IO. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened resource </li>
+<li><code class="docutils literal"><span class="pre">mmio_num</span></code>: Number of MMIO space to access </li>
+<li><code class="docutils literal"><span class="pre">mmio_ptr</span></code>: Pointer to memory where a pointer to the MMIO space will be returned. May be NULL, in which case no pointer is returned. Returned address may be NULL if underlying platform does not support memory mapping for register access. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213fpgaUnmapMMIO11fpga_handle8uint32_t">
+<span id="fpgaUnmapMMIO__fpga_handle.uint32_t"></span><span class="target" id="mmio_8h_1a8c8db22506e1fbfd16440c660bfee28f"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaUnmapMMIO</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv213fpgaUnmapMMIO11fpga_handle8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Unmap MMIO space</p>
+<p>This function will unmap a previously mapped MMIO space of the target opject, rendering any pointers to it invalid.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This call is only supported by hardware targets, not by ASE simulation.</dd>
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if any of the supplied parameters is invalid. FPGA_EXCEPTION if an internal exception occurred while trying to access the handle. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened resource </li>
+<li><code class="docutils literal"><span class="pre">mmio_num</span></code>: Number of MMIO space to access </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="buffer-h">
+<h3><a class="toc-backref" href="#id13">buffer.h</a><a class="headerlink" href="#buffer-h" title="Permalink to this headline">¶</a></h3>
+<p>Functions for allocating and sharing system memory with an FPGA accelerator. </p>
+<p>To share memory between a software application and an FPGA accelerator, these functions set up system components (e.g. an IOMMU) to allow accelerator access to a provided memory region.</p>
+<p>There are a number of restrictions on what memory can be shared, depending on platform capabilities. Usually, FPGA accelerators to not have access to virtual address mappings of the CPU, so they can only access physical addresses. To support this, the OPAE C library on Linux uses hugepages to allocate large, contiguous pages of physical memory that can be shared with an accalerator. It also supports sharing memory that has already been allocated by an application, as long as that memory satisfies the requirements of being physically contigous and page-aligned. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv217fpgaPrepareBuffer11fpga_handle8uint64_tPPvP8uint64_ti">
+<span id="fpgaPrepareBuffer__fpga_handle.uint64_t.voidPP.uint64_tP.i"></span><span class="target" id="buffer_8h_1aac3ed0146bc42c35f99610a319e87303"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPrepareBuffer</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint64_t <em>len</em>, void **<em>buf_addr</em>, uint64_t *<em>wsid</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217fpgaPrepareBuffer11fpga_handle8uint64_tPPvP8uint64_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Prepare a shared memory buffer</p>
+<p>Prepares a memory buffer for shared access between an accelerator and the calling process. This may either include allocation of physcial memory, or preparation of already allocated memory for sharing. The latter case is indicated by supplying the FPGA_BUF_PREALLOCATED flag.</p>
+<p>This function will ask the driver to pin the indicated memory (make it non-swappable), and program the IOMMU to allow access from the accelerator. If the buffer was not pre-allocated (flag FPGA_BUF_PREALLOCATED), the function will also allocate physical memory of the requested size and map the memory into the caller’s process’ virtual address space. It returns in ‘wsid’ an fpga_buffer object that can be used to program address registers in the accelerator for shared access to the memory.</p>
+<p>When using FPGA_BUF_PREALLOCATED, the input len must be a non-zero multiple of the page size, else the function returns FPGA_INVALID_PARAM. When not using FPGA_BUF_PREALLOCATED, the input len is rounded up to the nearest multiple of page size.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_NO_MEMORY if the requested memory could not be allocated. FPGA_INVALID_PARAM if invalid parameters were provided, or if the parameter combination is not valid. FPGA_EXCEPTION if an internal exception occurred while trying to access the handle. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
+<li><code class="docutils literal"><span class="pre">len</span></code>: Length of the buffer to allocate/prepare in bytes </li>
+<li><code class="docutils literal"><span class="pre">buf_addr</span></code>: Virtual address of buffer. Contents may be NULL (OS will choose mapping) or non-NULL (OS will take contents as a hint for the virtual address). </li>
+<li><code class="docutils literal"><span class="pre">wsid</span></code>: Handle to the allocated/prepared buffer to be used with other functions </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags. FPGA_BUF_PREALLOCATED indicates that memory pointed at in ‘*buf_addr’ is already allocated an mapped into virtual memory. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217fpgaReleaseBuffer11fpga_handle8uint64_t">
+<span id="fpgaReleaseBuffer__fpga_handle.uint64_t"></span><span class="target" id="buffer_8h_1a3d2302d336bbe5fe05a08a8f534d296b"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaReleaseBuffer</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint64_t <em>wsid</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217fpgaReleaseBuffer11fpga_handle8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Release a shared memory buffer</p>
+<p>Releases a previously prepared shared buffer. If the buffer was allocated using fpgaPrepareBuffer (FPGA_BUF_PREALLOCATED was not specified), this call will deallocate/free that memory. Otherwise, it will only be returned to it’s previous state (pinned/unpinned, cached/non-cached).</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if invalid parameters were provided, or if the parameter combination is not valid. FPGA_EXCEPTION if an internal exception occurred while trying to access the handle. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
+<li><code class="docutils literal"><span class="pre">wsid</span></code>: Handle to the allocated/prepared buffer </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216fpgaGetIOAddress11fpga_handle8uint64_tP8uint64_t">
+<span id="fpgaGetIOAddress__fpga_handle.uint64_t.uint64_tP"></span><span class="target" id="buffer_8h_1aed20b8768e38a5414a331dd09a2aa221"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetIOAddress</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint64_t <em>wsid</em>, uint64_t *<em>ioaddr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv216fpgaGetIOAddress11fpga_handle8uint64_tP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve base IO address for buffer</p>
+<p>This function is used to acquire the physical base address (on some platforms called IO Virtual Address or IOVA) for a shared buffer identified by wsid.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function will disappear once the APIs for secure sharing of buffer addresses is implemented.</dd>
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if invalid parameters were provided, or if the parameter combination is not valid. FPGA_EXCEPTION if an internal exception occurred while trying to access the handle. FPGA_NOT_FOUND if <code class="docutils literal"><span class="pre">wsid</span></code> does not refer to a previously shared buffer. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
+<li><code class="docutils literal"><span class="pre">wsid</span></code>: Buffer handle / workspace ID referring to the buffer for which the IO address is requested </li>
+<li><code class="docutils literal"><span class="pre">ioaddr</span></code>: Pointer to memory where the IO address will be returned </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="umsg-h">
+<h3><a class="toc-backref" href="#id14">umsg.h</a><a class="headerlink" href="#umsg-h" title="Permalink to this headline">¶</a></h3>
+<p>FPGA UMsg API. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv214fpgaGetNumUmsg11fpga_handleP8uint64_t">
+<span id="fpgaGetNumUmsg__fpga_handle.uint64_tP"></span><span class="target" id="umsg_8h_1aedba6aade335067f2dafec0ea92f040a"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetNumUmsg</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint64_t *<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214fpgaGetNumUmsg11fpga_handleP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get number of Umsgs</p>
+<p>Retuns number of umsg supported by AFU.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if input parameter combination is not valid. FPGA_EXCEPTION if input parameter fpga handle is not valid. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Returns number of UMsgs </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221fpgaSetUmsgAttributes11fpga_handle8uint64_t">
+<span id="fpgaSetUmsgAttributes__fpga_handle.uint64_t"></span><span class="target" id="umsg_8h_1aa133e93939c8582925b10516232ef12d"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaSetUmsgAttributes</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint64_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221fpgaSetUmsgAttributes11fpga_handle8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sets Umsg hint</p>
+<p>Writes usmg hint bit.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if input parameter combination is not valid. FPGA_EXCEPTION if input parameter fpga handle is not valid. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Value to use for UMsg hint, Umsg hit is N wide bitvector where N = number of Umsgs. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215fpgaTriggerUmsg11fpga_handle8uint64_t">
+<span id="fpgaTriggerUmsg__fpga_handle.uint64_t"></span><span class="target" id="umsg_8h_1a9cc53b7511c056c86425eb8f451ac69d"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaTriggerUmsg</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint64_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv215fpgaTriggerUmsg11fpga_handle8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Trigger Umsg</p>
+<p>Writes a 64-bit value to trigger low-latency accelerator notification mechanism (UMsgs).</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if input parameter combination is not valid. FPGA_EXCEPTION if input parameter fpga handle is not valid. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Value to use for UMsg </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214fpgaGetUmsgPtr11fpga_handlePP8uint64_t">
+<span id="fpgaGetUmsgPtr__fpga_handle.uint64_tPP"></span><span class="target" id="umsg_8h_1a97cca523fe1142578f3927ae452f4db9"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetUmsgPtr</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint64_t **<em>umsg_ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214fpgaGetUmsgPtr11fpga_handlePP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Access UMsg memory directly</p>
+<p>This function will return a pointer to the memory allocated for low latency accelerator notifications (UMsgs).</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if input parameter combination is not valid. FPGA_EXCEPTION if input parameter fpga handle is not valid. FPGA_NO_MEMORY if memory allocation fails or system doesn’t configure huge pages. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
+<li><code class="docutils literal"><span class="pre">umsg_ptr</span></code>: Pointer to memory where a pointer to the virtual address space will be returned </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="management-api">
+<h2><a class="toc-backref" href="#id15">Management API</a><a class="headerlink" href="#management-api" title="Permalink to this headline">¶</a></h2>
+<p>The management APIs define functions for reconfiguring an FPGA (writing new
+partial bitstreams) as well as assigning accelerators to host interfaces.</p>
+<div class="section" id="manage-h">
+<h3><a class="toc-backref" href="#id16">manage.h</a><a class="headerlink" href="#manage-h" title="Permalink to this headline">¶</a></h3>
+<p>Functions for managing FPGA configurations. </p>
+<p>FPGA accelerators can be reprogrammed at run time by providing new partial bitstreams (“green bitstreams”). This file defines API functions for programming green bitstreams as well as for assigning accelerators to host interfaces for more complex deployment setups, such as virtualized systems. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv225fpgaAssignPortToInterface11fpga_handle8uint32_t8uint32_ti">
+<span id="fpgaAssignPortToInterface__fpga_handle.uint32_t.uint32_t.i"></span><span class="target" id="manage_8h_1aa8b0dd0eba99f99161ad8b726706ce9c"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaAssignPortToInterface</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>fpga</em>, uint32_t <em>interface_num</em>, uint32_t <em>slot_num</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225fpgaAssignPortToInterface11fpga_handle8uint32_t8uint32_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Assign Port to a host interface.</p>
+<p>This function assign Port to a host interface for subsequent use. Only Port that have been assigned to a host interface can be opened by <a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a>.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success FPGA_INVALID_PARAM if input parameter combination is not valid. FPGA_EXCEPTION if an exception occcurred accessing the <code class="docutils literal"><span class="pre">fpga</span></code> handle. FPGA_NOT_SUPPORTED if driver does not support assignment. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">fpga</span></code>: Handle to an FPGA object previously opened that both the host interface and the slot belong to </li>
+<li><code class="docutils literal"><span class="pre">interface_num</span></code>: Host interface number </li>
+<li><code class="docutils literal"><span class="pre">slot_num</span></code>: Slot number </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags (to be defined) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221fpgaAssignToInterface11fpga_handle10fpga_token8uint32_ti">
+<span id="fpgaAssignToInterface__fpga_handle.fpga_token.uint32_t.i"></span><span class="target" id="manage_8h_1a768c0a5d0f2494a69470170a29a76578"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaAssignToInterface</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>fpga</em>, <a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>accelerator</em>, uint32_t <em>host_interface</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221fpgaAssignToInterface11fpga_handle10fpga_token8uint32_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Assign an accelerator to a host interface</p>
+<p>This function assigns an accelerator to a host interface for subsequent use. Only accelerators that have been assigned to a host interface can be opened by <a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a>.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function is currently not supported.</dd>
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">fpga</span></code>: Handle to an FPGA object previously opened that both the host interface and the accelerator belong to </li>
+<li><code class="docutils literal"><span class="pre">accelerator</span></code>: accelerator to assign </li>
+<li><code class="docutils literal"><span class="pre">host_interface</span></code>: Host interface to assign accelerator to </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags (to be defined) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224fpgaReleaseFromInterface11fpga_handle10fpga_token">
+<span id="fpgaReleaseFromInterface__fpga_handle.fpga_token"></span><span class="target" id="manage_8h_1a1ce3163b0a8c0f5c39e1c5acefc049eb"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaReleaseFromInterface</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>fpga</em>, <a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>accelerator</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv224fpgaReleaseFromInterface11fpga_handle10fpga_token" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Unassign a previously assigned accelerator</p>
+<p>This function removes the assignment of an accelerator to an host interface (e.g. to be later assigned to a different host interface). As a consequence, the accelerator referred to by token ‘accelerator’ will be reset during the course of this function.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function is currently not supported.</dd>
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">fpga</span></code>: Handle to an FPGA object previously opened that both the host interface and the accelerator belong to </li>
+<li><code class="docutils literal"><span class="pre">accelerator</span></code>: accelerator to unassign/release </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219fpgaReconfigureSlot11fpga_handle8uint32_tPK7uint8_t6size_ti">
+<span id="fpgaReconfigureSlot__fpga_handle.uint32_t.uint8_tCP.s.i"></span><span class="target" id="manage_8h_1a6e5d00d445c69c94cb122224c47bf735"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaReconfigureSlot</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>fpga</em>, uint32_t <em>slot</em>, <em class="property">const</em> uint8_t *<em>bitstream</em>, size_t <em>bitstream_len</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219fpgaReconfigureSlot11fpga_handle8uint32_tPK7uint8_t6size_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reconfigure a slot</p>
+<p>Sends a green bitstream file to an FPGA to reconfigure a specific slot. This call, if successful, will overwrite the currently programmed AFU in that slot with the AFU in the provided bitstream.</p>
+<p>As part of the reconfiguration flow, all accelerators associated with this slot will be unassigned and reset.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if the provided parameters are not valid. FPGA_EXCEPTION if an internal error occurred accessing the handle or while sending the bitstream data to the driver. FPGA_RECONF_ERROR on errors reported by the driver (such as CRC or protocol errors). </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">fpga</span></code>: Handle to an FPGA object previously opened </li>
+<li><code class="docutils literal"><span class="pre">slot</span></code>: Token identifying the slot to reconfigure </li>
+<li><code class="docutils literal"><span class="pre">bitstream</span></code>: Pointer to memory holding the bitstream </li>
+<li><code class="docutils literal"><span class="pre">bitstream_len</span></code>: Length of the bitstream in bytes </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags (to be defined) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="utilities">
+<h2><a class="toc-backref" href="#id17">Utilities</a><a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<p>Functions for mapping fpga_result values to meaningful error strings are
+provided by the utilities API.</p>
+<div class="section" id="utils-h">
+<h3><a class="toc-backref" href="#id18">utils.h</a><a class="headerlink" href="#utils-h" title="Permalink to this headline">¶</a></h3>
+<p>Utility functions and macros for the FPGA API. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv210fpgaErrStr11fpga_result">
+<span id="fpgaErrStr__fpga_result"></span><span class="target" id="utils_8h_1a2a3fc0d8baf294d2da980ba544368b32"></span><em class="property">const</em> char *<code class="descname">fpgaErrStr</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv210fpgaErrStr11fpga_result" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return human-readable error message</p>
+<p>Returns a pointer to a human-readable error message corresponding to the provided fpga_error error code.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Pointer to a descriptive error message string </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">e</span></code>: Error code (as returned by another FPGA API function </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="samples">
+<h2><a class="toc-backref" href="#id19">Samples</a><a class="headerlink" href="#samples" title="Permalink to this headline">¶</a></h2>
+<p>Code samples demonstrate how to use OPAE C API.</p>
+<div class="section" id="hello-fpga-c">
+<h3><a class="toc-backref" href="#id20">hello_fpga.c</a><a class="headerlink" href="#hello-fpga-c" title="Permalink to this headline">¶</a></h3>
+<p>A code sample illustrates the basic usage of the OPAE C API. </p>
+<p>The sample is a host application that demonstrates the basic steps of interacting with FPGA using the OPAE library. These steps include:</p>
+<p><ul class="simple">
+<li>FPGA enumeration</li>
+<li>Resource acquiring and releasing</li>
+<li>Managing shared memory buffer</li>
+<li>MMIO read and write</li>
+</ul>
+</p>
+<p>The sample also demonstrates OPAE’s object model, such as tokens, handles, and properties.</p>
+<p>The sample requires a native loopback mode (NLB) test image to be loaded on the FPGA. Refer to <a class="reference external" href="https://opae.github.io/docs/fpga_api/quick_start/readme.html">Quick Start Guide</a> for full instructions on building, configuring, and running this code sample. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="macro">
+<dt id="c.CL">
+<span class="target" id="hello__fpga_8c_1acda3b44286ccc5e1924198027f28a8c5"></span><code class="descname">CL</code><span class="sig-paren">(</span>x<span class="sig-paren">)</span><a class="headerlink" href="#c.CL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.LOG2_CL">
+<span class="target" id="hello__fpga_8c_1adf30d050a3289b6d043824dfd97c81f1"></span><code class="descname">LOG2_CL</code><a class="headerlink" href="#c.LOG2_CL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.MB">
+<span class="target" id="hello__fpga_8c_1a44d2b171cc92225ec0a76ef70fc9b531"></span><code class="descname">MB</code><span class="sig-paren">(</span>x<span class="sig-paren">)</span><a class="headerlink" href="#c.MB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CACHELINE_ALIGNED_ADDR">
+<span class="target" id="hello__fpga_8c_1ad3542630f57f4e7073dbd18dd41c9e9a"></span><code class="descname">CACHELINE_ALIGNED_ADDR</code><span class="sig-paren">(</span>p<span class="sig-paren">)</span><a class="headerlink" href="#c.CACHELINE_ALIGNED_ADDR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.LPBK1_BUFFER_SIZE">
+<span class="target" id="hello__fpga_8c_1aaa5caa9ebd221b79ab0d6f8c5568e855"></span><code class="descname">LPBK1_BUFFER_SIZE</code><a class="headerlink" href="#c.LPBK1_BUFFER_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.LPBK1_BUFFER_ALLOCATION_SIZE">
+<span class="target" id="hello__fpga_8c_1a680d7d8ff687719f3dfd4a1cf7d04cfe"></span><code class="descname">LPBK1_BUFFER_ALLOCATION_SIZE</code><a class="headerlink" href="#c.LPBK1_BUFFER_ALLOCATION_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.LPBK1_DSM_SIZE">
+<span class="target" id="hello__fpga_8c_1a01a171b6816e2e3681ee0bea0fd74b70"></span><code class="descname">LPBK1_DSM_SIZE</code><a class="headerlink" href="#c.LPBK1_DSM_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_SRC_ADDR">
+<span class="target" id="hello__fpga_8c_1a3346cda33cdc35d5d5b42cd489c75aa0"></span><code class="descname">CSR_SRC_ADDR</code><a class="headerlink" href="#c.CSR_SRC_ADDR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_DST_ADDR">
+<span class="target" id="hello__fpga_8c_1a8fc5dce1142497274a335a84489be3d4"></span><code class="descname">CSR_DST_ADDR</code><a class="headerlink" href="#c.CSR_DST_ADDR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_CTL">
+<span class="target" id="hello__fpga_8c_1acbe346f9bf5608488adb1b6ad68809b2"></span><code class="descname">CSR_CTL</code><a class="headerlink" href="#c.CSR_CTL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_CFG">
+<span class="target" id="hello__fpga_8c_1a21f1970d1fcd3dee94bf0ab5aeb54fbd"></span><code class="descname">CSR_CFG</code><a class="headerlink" href="#c.CSR_CFG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_NUM_LINES">
+<span class="target" id="hello__fpga_8c_1ab1c7049b0e183020bdabcaaec8f20e49"></span><code class="descname">CSR_NUM_LINES</code><a class="headerlink" href="#c.CSR_NUM_LINES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.DSM_STATUS_TEST_COMPLETE">
+<span class="target" id="hello__fpga_8c_1ac77542e2d0512964e9a065d647b14639"></span><code class="descname">DSM_STATUS_TEST_COMPLETE</code><a class="headerlink" href="#c.DSM_STATUS_TEST_COMPLETE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_AFU_DSM_BASEL">
+<span class="target" id="hello__fpga_8c_1a4502164cd63bc6b91df80c619468e479"></span><code class="descname">CSR_AFU_DSM_BASEL</code><a class="headerlink" href="#c.CSR_AFU_DSM_BASEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.CSR_AFU_DSM_BASEH">
+<span class="target" id="hello__fpga_8c_1ae4d60cb421c5268892dae615cdbf7614"></span><code class="descname">CSR_AFU_DSM_BASEH</code><a class="headerlink" href="#c.CSR_AFU_DSM_BASEH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.NLB0_AFUID">
+<span class="target" id="hello__fpga_8c_1a326496be663d917e61f22100670026b9"></span><code class="descname">NLB0_AFUID</code><a class="headerlink" href="#c.NLB0_AFUID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.ON_ERR_GOTO">
+<span class="target" id="hello__fpga_8c_1a7635d12a96b25dd1760b4bc44130eed9"></span><code class="descname">ON_ERR_GOTO</code><span class="sig-paren">(</span>res, label, desc<span class="sig-paren">)</span><a class="headerlink" href="#c.ON_ERR_GOTO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv26usleepj">
+<span id="usleep__unsigned"></span><span class="target" id="hello__fpga_8c_1a300ec1c0f7befcbb990985d36d56d8c9"></span>int <code class="descname">usleep</code><span class="sig-paren">(</span>unsigned<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv26usleepj" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv29print_errPKc11fpga_result">
+<span id="print_err__cCP.fpga_result"></span><span class="target" id="hello__fpga_8c_1aa11f434898b86d619a5ceb6a5d7bf066"></span>void <code class="descname">print_err</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>s</em>, <a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <em>res</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29print_errPKc11fpga_result" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv24mainiA_Pc">
+<span id="main__i.cPA"></span><span class="target" id="hello__fpga_8c_1a0ddf1224851353fc92bfbff6f499fa97"></span>int <code class="descname">main</code><span class="sig-paren">(</span>int <em>argc</em>, char *<em>argv</em>[]<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv24mainiA_Pc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv210cache_line">
+<span id="cache_line"></span><span class="target" id="structcache__line"></span><em class="property">struct </em><code class="descname">cache_line</code><a class="headerlink" href="#_CPPv210cache_line" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N10cache_line4uintE">
+<span id="cache_line::uint__uint32_tA"></span><span class="target" id="structcache__line_1a115df3d786d5e243f8e9439ffe865a8c"></span>uint32_t <code class="descname">uint</code>[16]<a class="headerlink" href="#_CPPv2N10cache_line4uintE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="hello-events-c">
+<h3><a class="toc-backref" href="#id21">hello_events.c</a><a class="headerlink" href="#hello-events-c" title="Permalink to this headline">¶</a></h3>
+<p>A code sample of using OPAE event API. </p>
+<p>This sample starts two processes. One process injects an artificial fatal error to sysfs; while the other tries to asynchronously capture and handle the event. This sample code exercises all major functions of the event API, including creating and destroying event handles, register and unregister events, polling on event file descriptor, and getting the OS object associated with an event. For a full discussion of OPAE event API, refer to event.h. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="macro">
+<dt id="c.FME_SYSFS_INJECT_ERROR">
+<span class="target" id="hello__events_8c_1aeed061055cfe359757fdacf8a96a0a81"></span><code class="descname">FME_SYSFS_INJECT_ERROR</code><a class="headerlink" href="#c.FME_SYSFS_INJECT_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt>
+<span class="target" id="hello__events_8c_1a7635d12a96b25dd1760b4bc44130eed9"></span><code class="descname">ON_ERR_GOTO</code><span class="sig-paren">(</span>res, label, desc<span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv26usleepj">
+<span class="target" id="hello__events_8c_1a300ec1c0f7befcbb990985d36d56d8c9"></span>int <code class="descname">usleep</code><span class="sig-paren">(</span>unsigned<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv26usleepj" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv29print_errPKc11fpga_result">
+<span class="target" id="hello__events_8c_1aa11f434898b86d619a5ceb6a5d7bf066"></span>void <code class="descname">print_err</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>s</em>, <a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <em>res</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29print_errPKc11fpga_result" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222inject_ras_fatal_error10fpga_token7uint8_t">
+<span id="inject_ras_fatal_error__fpga_token.uint8_t"></span><span class="target" id="hello__events_8c_1a3e4148e96751de422105e1715e39cf82"></span><em class="property">static</em> <a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">inject_ras_fatal_error</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>token</em>, uint8_t <em>err</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222inject_ras_fatal_error10fpga_token7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv24mainiA_Pc">
+<span class="target" id="hello__events_8c_1a0ddf1224851353fc92bfbff6f499fa97"></span>int <code class="descname">main</code><span class="sig-paren">(</span>int <em>argc</em>, char *<em>argv</em>[]<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv24mainiA_Pc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv216ras_inject_error">
+<span id="ras_inject_error"></span><span class="target" id="structras__inject__error"></span><em class="property">struct </em><code class="descname">ras_inject_error</code><a class="headerlink" href="#_CPPv216ras_inject_error" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt>
+<span class="target" id="structras__inject__error_1a4c896e6127af21a14bea9b9290d86d57"></span><code class="descname">union ras_inject_error::&#64;0 ras_inject_error::&#64;1</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="type">
+<dt>
+<span class="target" id="unionras__inject__error_8____unnamed____"></span><em class="property">union </em></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt>
+<span class="target" id="unionras__inject__error_8____unnamed_____1a1f8c50db95e9ead5645e32f8df5baa7b"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt>
+<span class="target" id="unionras__inject__error_8____unnamed_____1a1378d7d8767899287b0407055215aa4e"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="structras__inject__error_8____unnamed_____8____unnamed____"></span><em class="property">struct </em></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt>
+<span class="target" id="structras__inject__error_8____unnamed_____8____unnamed_____1a2a0e5bc9b5c01998865d21cfc6acdd8b"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt>
+<span class="target" id="structras__inject__error_8____unnamed_____8____unnamed_____1a248d7cd65b618004dbd5f44e96b8cd61"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt>
+<span class="target" id="structras__inject__error_8____unnamed_____8____unnamed_____1a8da0039b80fc69ebb6f5f263320816ed"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt>
+<span class="target" id="structras__inject__error_8____unnamed_____8____unnamed_____1aa799822e734135bf270e704b72c08764"></span><code class="descname"></code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../drv_arch/drv_arch.html" class="btn btn-neutral float-right" title="OPAE Intel® FPGA Linux Device Driver Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../build_chain/fpga_api/api_build.html" class="btn btn-neutral" title="Building the OPAE C Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.14.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
