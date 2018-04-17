@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.0.0
+                0.13.0
               </div>
             
           
@@ -291,6 +291,16 @@ defined in [types_enum.h](#types-enum-h).</p>
 <p>This should intuitively make sense - <a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a> creates <code class="docutils literal"><span class="pre">fpga_properties</span></code> objects, <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> creates <code class="docutils literal"><span class="pre">fpga_token</span></code> objects, <a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a> creates <code class="docutils literal"><span class="pre">fpga_handle</span></code> objects, and <a class="reference internal" href="#properties_8h_1ac51c19bdd763a98e143a938c47963905"><span class="std std-ref">fpgaCloneProperties()</span></a> and <a class="reference internal" href="#enum_8h_1a43a84795de460e8288070b672ef90a59"><span class="std std-ref">fpgaCloneToken()</span></a> clone (create) <code class="docutils literal"><span class="pre">fpga_properties</span></code> and <code class="docutils literal"><span class="pre">fpga_token</span></code> objects, respectively.</p>
 <p>Since these opaque types are interpreted as pointers (they are typedef’d to a <code class="docutils literal"><span class="pre">void</span> <span class="pre">*</span></code>), passing an uninitialized opaque type into any function except the respective initailzation function will result in undefined behaviour, because OPAE will try to follow an invalid pointer. Undefined behaviour in this case may include an unexpected error code, or an application crash. </p>
 <div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="macro">
+<dt id="c.FPGA_ERROR_NAME_MAX">
+<span class="target" id="types_8h_1a6af563bebf37e9c908aa7fe8470efa8f"></span><code class="descname">FPGA_ERROR_NAME_MAX</code><a class="headerlink" href="#c.FPGA_ERROR_NAME_MAX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information about an error register</p>
+<p>This data structure captures information about an error register exposed by an accelerator resource. The error API provides functions to retrieve these information structures from a particular resource. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Typedefs</p>
 <dl class="type">
 <dt id="_CPPv215fpga_properties">
@@ -358,6 +368,25 @@ defined in [types_enum.h](#types-enum-h).</p>
 <dt id="_CPPv2N12fpga_version5patchE">
 <span id="fpga_version::patch__uint16_t"></span><span class="target" id="structfpga__version_1a3c5b1d07c0628aa9b6f3bd086ed0d962"></span>uint16_t <code class="descname">patch</code><a class="headerlink" href="#_CPPv2N12fpga_version5patchE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Revision or patchlevel </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv215fpga_error_info">
+<span id="fpga_error_info"></span><span class="target" id="structfpga__error__info"></span><em class="property">struct </em><code class="descname">fpga_error_info</code><a class="headerlink" href="#_CPPv215fpga_error_info" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;types.h&gt;</em><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N15fpga_error_info4nameE">
+<span id="fpga_error_info::name__cA"></span><span class="target" id="structfpga__error__info_1a63e0ccbeddbe44792e1c1f7375243751"></span>char <code class="descname">name</code>[64]<a class="headerlink" href="#_CPPv2N15fpga_error_info4nameE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N15fpga_error_info9can_clearE">
+<span id="fpga_error_info::can_clear__b"></span><span class="target" id="structfpga__error__info_1a8f3a6c3707e10f13a55662a081494e69"></span>bool <code class="descname">can_clear</code><a class="headerlink" href="#_CPPv2N15fpga_error_info9can_clearE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>name of the error </p>
 </dd></dl>
 
 </div>
@@ -1422,6 +1451,42 @@ which are also defined in &lt;opae/properties.h&gt;.</p>
 </p>
 </dd></dl>
 
+<dl class="function">
+<dt id="_CPPv226fpgaPropertiesGetNumErrorsK15fpga_propertiesP8uint32_t">
+<span id="fpgaPropertiesGetNumErrors__fpga_propertiesC.uint32_tP"></span><span class="target" id="properties_8h_1a6cfb80c2a4fe8fd7be1ac4ecd72985b5"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesGetNumErrors</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint32_t *<em>num_errors</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv226fpgaPropertiesGetNumErrorsK15fpga_propertiesP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of errors that can be reported by a resource</p>
+<p>Returns the number of error registers understood by a resource.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">num_errors</span></code>: Pointer to a 32 bit memory location to store the number of supported errors in </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226fpgaPropertiesSetNumErrorsK15fpga_properties8uint32_t">
+<span id="fpgaPropertiesSetNumErrors__fpga_propertiesC.uint32_t"></span><span class="target" id="properties_8h_1ac8be299c378aff53410dda6081975038"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPropertiesSetNumErrors</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> <em>prop</em>, uint32_t <em>num_errors</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv226fpgaPropertiesSetNumErrorsK15fpga_properties8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the number of error registers</p>
+<p>Set the number of error registers understood by a resource to enumerate.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>See “Accessor Return Values” in <a class="reference external" href="#properties-h">properties.h</a>. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Properties object to query </li>
+<li><code class="docutils literal"><span class="pre">num_errors</span></code>: Number of errors </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
 </div>
 </div>
 </div>
@@ -2309,7 +2374,7 @@ provided by the utilities API.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.0.0',
+            VERSION:'0.13.0',
             LANGUAGE:'en',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
