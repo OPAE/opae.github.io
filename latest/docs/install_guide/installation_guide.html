@@ -90,12 +90,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#system-compatibility">System compatibility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-download-the-opae-sdk">How to download the OPAE SDK</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#driver-installation-with-dkms-rpm-package">Driver installation with DKMS rpm package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#driver-installation-with-dkms-rpm-and-deb-package">Driver installation with DKMS rpm and deb package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#driver-build-installation-with-driver-source-package">Driver build/installation with driver source package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#manual-driver-build-from-rpm-package">Manual Driver build from RPM package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#opae-sdk-build-installation-from-opae-sdk-source">OPAE SDK build/installation from OPAE SDK source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-opae-sdk-rpm-and-deb-packages-from-the-source">Building OPAE SDK rpm and deb packages from the source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#opae-sdk-installation-with-rpm-packages">OPAE SDK installation with rpm packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#opae-sdk-installation-with-rpm-packages">OPAE SDK installation with rpm packages</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#opae-sdk-installation-with-deb-packages">OPAE SDK installation with deb packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#fpga-device-access-permissions">FPGA Device Access Permissions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#memlock-limit">Memlock limit</a></li>
@@ -259,19 +261,27 @@ required:</p>
 <li>boost-devel.x86_64: (tested with 1.53.0-26.el7)</li>
 </ul>
 </div>
-<div class="section" id="driver-installation-with-dkms-rpm-package">
-<h2>Driver installation with DKMS rpm package<a class="headerlink" href="#driver-installation-with-dkms-rpm-package" title="Permalink to this headline">¶</a></h2>
-<p>Install:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum install opae-intel-fpga-drv-&lt;release&gt;.rpm
+<div class="section" id="driver-installation-with-dkms-rpm-and-deb-package">
+<h2>Driver installation with DKMS rpm and deb package<a class="headerlink" href="#driver-installation-with-dkms-rpm-and-deb-package" title="Permalink to this headline">¶</a></h2>
+<p>Install rpm package:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum install opae-intel-fpga-driver-&lt;release&gt;.x86_64.rpm
 </pre></div>
 </div>
-<p>Uninsall:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum remove opae-intel-fpga-drv-&lt;release&gt;
+<p>Uninsall rpm package:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum remove opae-intel-fpga-driver-&lt;release&gt;
 </pre></div>
 </div>
-<p>During the rpm installation process, the tool will compile the driver
-from source then install the driver automatically. Driver installed by
-rpm package will be automatically install again after system reboot.</p>
+<p>Install deb package:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo dpkg -i opae-intel-fpga-driver_&lt;release&gt;_amd64.deb
+</pre></div>
+</div>
+<p>Uninsall deb package:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo dpkg -r opae-intel-fpga-driver
+</pre></div>
+</div>
+<p>During the installation process, the tool will compile the driver from
+source then install the driver automatically. Driver installed by these
+packages will be automatically install again after system reboot.</p>
 </div>
 <div class="section" id="driver-build-installation-with-driver-source-package">
 <h2>Driver build/installation with driver source package<a class="headerlink" href="#driver-build-installation-with-driver-source-package" title="Permalink to this headline">¶</a></h2>
@@ -398,32 +408,10 @@ toolchain on their systems to install the OPAE SDK.</p>
 <span class="go">opae-ase-&lt;release&gt;-1.x86_64.rpm           (libopae-c-ase)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="opae-sdk-installation-with-rpm-packages">
-<h2>OPAE SDK installation with rpm packages<a class="headerlink" href="#opae-sdk-installation-with-rpm-packages" title="Permalink to this headline">¶</a></h2>
-<p>The rpm packages generated in the previous step can be installed using
-these commands:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum install opae-&lt;release&gt;-1.x86_64.rpm
-<span class="gp">$</span> sudo yum install opae-libs-&lt;release&gt;-1.x86_64.rpm
-<span class="gp">$</span> sudo yum install opae-tools-&lt;release&gt;-1.x86_64.rpm
-<span class="gp">$</span> sudo yum install opae-tools-extra-&lt;release&gt;-1.x86_64.rpm
-<span class="gp">$</span> sudo yum install opae-devel-&lt;release&gt;-1.x86_64.rpm
-<span class="gp">$</span> sudo yum install opae-ase-&lt;release&gt;-1.x86_64.rpm
-</pre></div>
-</div>
-<p>To uninstall:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum remove opae
-<span class="gp">$</span> sudo yum remove opae-libs
-<span class="gp">$</span> sudo yum remove opae-tools
-<span class="gp">$</span> sudo yum remove opae-tools-extra
-<span class="gp">$</span> sudo yum remove opae-devel
-<span class="gp">$</span> sudo yum remove opae-ase
-</pre></div>
-</div>
 <ul class="simple">
-<li>For generating deb packages, cmake version 3.0.0 and above is
-required. To build deb packages follow these steps:</li>
+<li>To build deb packages follow these steps:</li>
 </ul>
+<p><code class="docutils literal"><span class="pre">Note:</span> <span class="pre">For</span> <span class="pre">generating</span> <span class="pre">deb</span> <span class="pre">packages,</span> <span class="pre">cmake</span> <span class="pre">version</span> <span class="pre">3.0.0</span> <span class="pre">and</span> <span class="pre">above</span> <span class="pre">is</span> <span class="pre">required.</span></code></p>
 <div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> opae-sdk-&lt;release&gt;
 <span class="gp">$</span> mkdir mybuild
 <span class="gp">$</span> <span class="nb">cd</span> mybuild
@@ -442,6 +430,28 @@ required. To build deb packages follow these steps:</li>
 <span class="go">opae-&lt;release&gt;-1.x86_64-ase.deb           (libopae-c-ase)</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="opae-sdk-installation-with-rpm-packages">
+<h1>OPAE SDK installation with rpm packages<a class="headerlink" href="#opae-sdk-installation-with-rpm-packages" title="Permalink to this headline">¶</a></h1>
+<p>The rpm packages generated in the previous step can be installed using
+these commands:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum install opae-&lt;release&gt;-1.x86_64.rpm
+<span class="gp">$</span> sudo yum install opae-libs-&lt;release&gt;-1.x86_64.rpm
+<span class="gp">$</span> sudo yum install opae-tools-&lt;release&gt;-1.x86_64.rpm
+<span class="gp">$</span> sudo yum install opae-tools-extra-&lt;release&gt;-1.x86_64.rpm
+<span class="gp">$</span> sudo yum install opae-devel-&lt;release&gt;-1.x86_64.rpm
+<span class="gp">$</span> sudo yum install opae-ase-&lt;release&gt;-1.x86_64.rpm
+</pre></div>
+</div>
+<p>To uninstall:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum remove opae
+<span class="gp">$</span> sudo yum remove opae-libs
+<span class="gp">$</span> sudo yum remove opae-tools
+<span class="gp">$</span> sudo yum remove opae-tools-extra
+<span class="gp">$</span> sudo yum remove opae-devel
+<span class="gp">$</span> sudo yum remove opae-ase
+</pre></div>
 </div>
 <div class="section" id="opae-sdk-installation-with-deb-packages">
 <h2>OPAE SDK installation with deb packages<a class="headerlink" href="#opae-sdk-installation-with-deb-packages" title="Permalink to this headline">¶</a></h2>
