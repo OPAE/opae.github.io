@@ -639,6 +639,26 @@ which are also defined in &lt;opae/properties.h&gt;.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
+<dt id="_CPPv227fpgaGetPropertiesFromHandle11fpga_handleP15fpga_properties">
+<span id="fpgaGetPropertiesFromHandle__fpga_handle.fpga_propertiesP"></span><span class="target" id="properties_8h_1a027ca0f8c45573c378179d7f57971128"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetPropertiesFromHandle</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> *<em>prop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv227fpgaGetPropertiesFromHandle11fpga_handleP15fpga_properties" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a fpga_properties object</p>
+<p>Initializes the memory pointed at by <code class="docutils literal"><span class="pre">prop</span></code> to represent a properties object, and populates it with the properties of the resource referred to by <code class="docutils literal"><span class="pre">handle</span></code>. Individual properties can then be queried using fpgaPropertiesGet*() accessor functions.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd><a class="reference internal" href="#properties_8h_1a027ca0f8c45573c378179d7f57971128"><span class="std std-ref">fpgaGetPropertiesFromHandle()</span></a> will allocate memory for the created properties object returned in <code class="docutils literal"><span class="pre">prop</span></code>. It is the responsibility of the caller to free this memory after use by calling <a class="reference internal" href="#properties_8h_1a6f83533f996cf6bd25274e0b7b9c3050"><span class="std std-ref">fpgaDestroyProperties()</span></a>.</dd>
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_NO_MEMORY if no memory could be allocated to create the <code class="docutils literal"><span class="pre">fpga_properties</span></code> object. FPGA_EXCEPTION if an exception happend while initializing the <code class="docutils literal"><span class="pre">fpga_properties</span></code> object. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Open handle to get properties for. </li>
+<li><code class="docutils literal"><span class="pre">prop</span></code>: Pointer to a variable of type fpga_properties </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="_CPPv217fpgaGetProperties10fpga_tokenP15fpga_properties">
 <span id="fpgaGetProperties__fpga_token.fpga_propertiesP"></span><span class="target" id="properties_8h_1a010d3b6839fc8763e66e4f953682a489"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetProperties</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>token</em>, <a class="reference internal" href="#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a> *<em>prop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217fpgaGetProperties10fpga_tokenP15fpga_properties" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create a fpga_properties object</p>
@@ -646,7 +666,7 @@ which are also defined in &lt;opae/properties.h&gt;.</p>
 <p>If <code class="docutils literal"><span class="pre">token</span></code> is NULL, an “empty” properties object is created to be used as a filter for <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a>. All individual fields are set to <code class="docutils literal"><span class="pre">don</span></code>t care`, which implies that the fpga_properties object would match all FPGA resources if used for an <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> query. The matching criteria can be further refined by using fpgaSet* functions on the properties object, or the object can be populated with the actual properties of a resource by using <a class="reference internal" href="#properties_8h_1a56a1c04d0c8f8eb1785969934f31a41a"><span class="std std-ref">fpgaUpdateProperties()</span></a>.</p>
 <p><dl class="docutils">
 <dt><strong>Note</strong></dt>
-<dd><a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a> will allocate memory for the created properties object returned in <code class="docutils literal"><span class="pre">prop</span></code>. It is the responsibility of the using application to free this memory after use by calling <a class="reference internal" href="#properties_8h_1a6f83533f996cf6bd25274e0b7b9c3050"><span class="std std-ref">fpgaDestroyProperties()</span></a>.</dd>
+<dd><a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a> will allocate memory for the created properties object returned in <code class="docutils literal"><span class="pre">prop</span></code>. It is the responsibility of the caller to free this memory after use by calling <a class="reference internal" href="#properties_8h_1a6f83533f996cf6bd25274e0b7b9c3050"><span class="std std-ref">fpgaDestroyProperties()</span></a>.</dd>
 <dt><strong>Return</strong></dt>
 <dd>FPGA_OK on success. FPGA_NO_MEMORY if no memory could be allocated to create the <code class="docutils literal"><span class="pre">fpga_properties</span></code> object. FPGA_EXCEPTION if an exception happend while initializing the <code class="docutils literal"><span class="pre">fpga_properties</span></code> object. </dd>
 <dt><strong>Parameters</strong></dt>
