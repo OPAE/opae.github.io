@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.0.0
+                0.13.1
               </div>
             
           
@@ -87,7 +87,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="quick_start/readme.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install_guide/installation_guide.html#opae-sdk-installation-with-rpm-packages">OPAE SDK installation with rpm packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
 </ul>
@@ -581,7 +580,7 @@ which are also defined in &lt;opae/properties.h&gt;.</p>
 <dd>FPGA_OK on success. FPGA_INVALID_PARAM if invalid pointers or objects are passed into the function. FPGA_NO_DRIVER if OPAE can’t find the respective enumeration data structures usually provided by the driver. FPGA_NO_MEMORY if there was not enough memory to create tokens. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">filters</span></code>: Array of <code class="docutils literal"><span class="pre">fpga_properties</span></code> objects describing the properties of the objects that should be returned. A resource is considered matching if its properties match any one of the supplied filters. Passing NULL will match all FPGA resources present in the system. </li>
+<li><code class="docutils literal"><span class="pre">filters</span></code>: Array of <code class="docutils literal"><span class="pre">fpga_properties</span></code> objects describing the properties of the objects that should be returned. A resource is considered matching if its properties match any one of the supplied filters. Passing an empty filters object (one without any filter criteria set) will match all FPGA resources present in the system. </li>
 <li><code class="docutils literal"><span class="pre">num_filters</span></code>: Number of entries in the <code class="docutils literal"><span class="pre">filters</span></code> array. </li>
 <li><code class="docutils literal"><span class="pre">tokens</span></code>: Pointer to an array of fpga_token variables to be populated. If NULL is supplied, <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> will not create any tokens, but it will return the number of possible matches in <code class="docutils literal"><span class="pre">num_match</span></code>. </li>
 <li><code class="docutils literal"><span class="pre">max_tokens</span></code>: Maximum number of tokens that <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> shall return (length of <code class="docutils literal"><span class="pre">tokens</span></code> array). There may be more or fewer matches than this number; <code class="docutils literal"><span class="pre">num_matches</span></code> is set to the number of actual matches. </li>
@@ -2310,7 +2309,7 @@ provided by the utilities API.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.0.0',
+            VERSION:'0.13.1',
             LANGUAGE:'en',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
