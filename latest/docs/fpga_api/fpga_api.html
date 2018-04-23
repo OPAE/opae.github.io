@@ -545,20 +545,6 @@ defined in [types_enum.h](#types-enum-h).</p>
 
 </dd></dl>
 
-<dl class="type">
-<dt id="_CPPv217fpga_reconf_flags">
-<span id="fpga_reconf_flags"></span><span class="target" id="types__enum_8h_1a9a4d903f00f7511b06eea9809d81aae7"></span><em class="property">enum </em><code class="descname">fpga_reconf_flags</code><a class="headerlink" href="#_CPPv217fpga_reconf_flags" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Reconfiguration flags</p>
-<p>These flags can be passed to the fpgaReconfigure() function. </p>
-<p><em>Values:</em></p>
-<dl class="enumerator">
-<dt id="_CPPv217FPGA_RECONF_FORCE">
-<span class="target" id="types__enum_8h_1a9a4d903f00f7511b06eea9809d81aae7a3eb0a410afacbd5b85d308fc51fc8cd8"></span><code class="descname">FPGA_RECONF_FORCE</code> = (1u &lt;&lt; 0)<a class="headerlink" href="#_CPPv217FPGA_RECONF_FORCE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Reconfigure the slot without checking if it is in use </p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 </div>
@@ -2016,16 +2002,14 @@ partial bitstreams) as well as assigning accelerators to host interfaces.</p>
 <p>As part of the reconfiguration flow, all accelerators associated with this slot will be unassigned and reset.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
-<dd>FPGA_OK on success. FPGA_INVALID_PARAM if the provided parameters are not valid. FPGA_EXCEPTION if an internal error occurred accessing the handle or while sending the bitstream data to the driver. FPGA_BUSY if the accelerator for the given slot is in use. FPGA_RECONF_ERROR on errors reported by the driver (such as CRC or protocol errors).</dd>
-<dt><strong>Note</strong></dt>
-<dd>By default, fpgaReconfigureSlot will not allow reconfiguring a slot with an accelerator in use. Add the flag FPGA_RECONF_FORCE to force reconfiguration without checking for accelerators in use. </dd>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if the provided parameters are not valid. FPGA_EXCEPTION if an internal error occurred accessing the handle or while sending the bitstream data to the driver. FPGA_RECONF_ERROR on errors reported by the driver (such as CRC or protocol errors). </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
 <li><code class="docutils literal"><span class="pre">fpga</span></code>: Handle to an FPGA object previously opened </li>
 <li><code class="docutils literal"><span class="pre">slot</span></code>: Token identifying the slot to reconfigure </li>
 <li><code class="docutils literal"><span class="pre">bitstream</span></code>: Pointer to memory holding the bitstream </li>
 <li><code class="docutils literal"><span class="pre">bitstream_len</span></code>: Length of the bitstream in bytes </li>
-<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags that control behavior of reconfiguration. Value of 0 indicates no flags. FPGA_RECONF_FORCE indicates that the bitstream is programmed into the slot without checking if the resource is currently in use. </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags (to be defined) </li>
 </ul>
 </dd>
 </dl>
