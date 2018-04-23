@@ -88,7 +88,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html#revision-history">Revision History</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -97,7 +98,7 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
@@ -203,13 +204,13 @@
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>fpgamux tests multiple AFUs that are synthesized into a single AFU along
-with the CCIP-MUX BBB (basic building block). The CCIP-MUX uses the
-upper bits in the MMIO addresses to route MMIO reads and writes to the
-AFU running on the corresponding CCIP-MUX port. fpgamux uses a
+<p><code class="docutils literal"><span class="pre">fpgamux</span></code> tests multiple AFUs that are synthesized into a single AFU
+along with the CCIP-MUX basic building block (BBB). The CCIP-MUX uses
+the upper bits in the MMIO addresses to route MMIO reads and writes to
+the AFU running on the corresponding CCIP-MUX port. <code class="docutils literal"><span class="pre">fpgamux</span></code> uses a
 configuration file that lists the software components and correct
-configuration. fpgamux only runs on the Integrated FPGA Platform. You
-cannot run it on the PCIe accelerator card (PAC).</p>
+configuration. <code class="docutils literal"><span class="pre">fpgamux</span></code> only runs on the Integrated FPGA Platform.
+You cannot run it on the PCIe accelerator card (PAC).</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">OPAE</span> <span class="n">driver</span> <span class="n">discovers</span> <span class="n">only</span> <span class="n">the</span> <span class="n">first</span> <span class="n">AFU</span><span class="p">.</span> <span class="n">The</span> <span class="n">first</span> <span class="n">software</span> <span class="n">component</span> <span class="n">in</span> <span class="n">the</span> <span class="n">configuration</span>
 <span class="n">determines</span> <span class="n">the</span> <span class="n">GUID</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">enumeration</span><span class="p">.</span> <span class="n">Use</span> <span class="n">the</span> <span class="o">-</span><span class="n">G</span><span class="o">|--</span><span class="n">guid</span> <span class="n">option</span> <span class="n">to</span> <span class="n">override</span> <span class="n">the</span> <span class="n">GUID</span>
 <span class="k">for</span> <span class="n">the</span> <span class="n">first</span> <span class="n">software</span> <span class="n">component</span><span class="p">.</span>
@@ -218,18 +219,33 @@ cannot run it on the PCIe accelerator card (PAC).</p>
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">-S</span> <span class="pre">SOCKET_ID,</span> <span class="pre">--socket-id</span> <span class="pre">SOCKET_ID</span></code> socket id of FPGA resource.</p>
-<p><code class="docutils literal"><span class="pre">-B</span> <span class="pre">BUS,</span> <span class="pre">--bus</span> <span class="pre">BUS</span></code> bus id of FPGA resource.</p>
-<p><code class="docutils literal"><span class="pre">-D</span> <span class="pre">DEVICE,</span> <span class="pre">--device</span> <span class="pre">DEVICE</span></code> device id of FPGA resource.</p>
-<p><code class="docutils literal"><span class="pre">-F</span> <span class="pre">FUNCTION,</span> <span class="pre">--function</span> <span class="pre">FUNCTION</span></code> function id of FPGA resource.</p>
-<p><code class="docutils literal"><span class="pre">-G,</span> <span class="pre">--guid</span></code> specifies the GUID to use for the AFC enumeration.</p>
-<p><code class="docutils literal"><span class="pre">-m,</span> <span class="pre">--muxfile</span> <span class="pre">&lt;filepath.json&gt;</span></code> The path to the fpgamux configuration
-file. This file must be in JSON format following the schema described
-below.</p>
+<p><code class="docutils literal"><span class="pre">-S</span> <span class="pre">SOCKET_ID,</span> <span class="pre">--socket-id</span> <span class="pre">SOCKET_ID</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">socket</span> <span class="n">id</span> <span class="n">of</span> <span class="n">FPGA</span> <span class="n">resource</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-B</span> <span class="pre">BUS,</span> <span class="pre">--bus</span> <span class="pre">BUS</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">bus</span> <span class="n">id</span> <span class="n">of</span> <span class="n">FPGA</span> <span class="n">resource</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-D</span> <span class="pre">DEVICE,</span> <span class="pre">--device</span> <span class="pre">DEVICE</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">device</span> <span class="n">id</span> <span class="n">of</span> <span class="n">FPGA</span> <span class="n">resource</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-F</span> <span class="pre">FUNCTION,</span> <span class="pre">--function</span> <span class="pre">FUNCTION</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">function</span> <span class="n">id</span> <span class="n">of</span> <span class="n">FPGA</span> <span class="n">resource</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-G,</span> <span class="pre">--guid</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Specifies</span> <span class="n">the</span> <span class="n">GUID</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">the</span> <span class="n">AFC</span> <span class="n">enumeration</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-m,</span> <span class="pre">--muxfile</span> <span class="pre">&lt;filepath.json&gt;</span></code></p>
+<p>The path to the <code class="docutils literal"><span class="pre">fpgamux</span></code> configuration file. This file must be in
+JSON format following the schema described below.</p>
 </div>
 <div class="section" id="configuration">
 <h2>CONFIGURATION<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p>fpgamux uses a configuration file (in JSON format) to determine what
+<p><code class="docutils literal"><span class="pre">fpgamux</span></code> uses a configuration file (in JSON format) to determine what
 software components to instantiate and how to configure them to work
 with the AFUs. The schema includes the following elements:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="p">[</span>

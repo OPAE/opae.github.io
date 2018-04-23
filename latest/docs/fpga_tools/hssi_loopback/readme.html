@@ -87,7 +87,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html#revision-history">Revision History</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -96,7 +97,7 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
@@ -205,71 +206,81 @@
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>The hssi_loopback utility works in conjunction with a packet generator
-accelerator function unit (AFU) to test HSSI (high-speed serial
-interface) cards. The hssi_loopback utility tests both external and
-internal loopbacks. hssi_loopback runs an external loopback test when
-the command line arguments include both source and destination ports.
-hssi_loopback runs an internal loopback test when command line
-argurments include a single port. hssi_loopback only runs on the
-Integrated FPGA Platform. You cannot run it on the PCIe accelerator card
-(PAC).</p>
+<p>The <code class="docutils literal"><span class="pre">hssi_loopback</span></code> utility works in conjunction with a packet
+generator accelerator function unit (AFU) to test high-speed serial
+interface (HSSI) cards. The <code class="docutils literal"><span class="pre">hssi_loopback</span></code> utility tests both
+external and internal loopbacks. <code class="docutils literal"><span class="pre">hssi_loopback</span></code> runs an external
+loopback test when the command line arguments include both source and
+destination ports. <code class="docutils literal"><span class="pre">hssi_loopback</span></code> runs an internal loopback test when
+command line argurments include a single port. <code class="docutils literal"><span class="pre">hssi_loopback</span></code> only
+runs on the Intel Xeon with Arria 10 FPGA. You cannot run it on the
+Intel PAC (programmable accelerator card).</p>
 <p><em>NOTE</em>: The following limitations apply to the current version of
 hssi_loopback:</p>
 <ul class="simple">
 <li>For the external loopback the two port arguments can be the same. For
 the e10 design, the ports should be the same.</li>
-<li>The hssi_loopback test supports only the e40 and e10 E2E AFUs. The
-e10 E2E AFU tests HSSI with a retimer card.</li>
-<li>The hssi_loopback test uses the control and status registers (CSRs)
-defined in the AFU.</li>
+<li>The <code class="docutils literal"><span class="pre">hssi_loopback</span></code> test supports only the e40 and e10 E2E AFUs.
+The e10 E2E AFU tests HSSI with a retimer card.</li>
+<li>The <code class="docutils literal"><span class="pre">hssi_loopback</span></code> test uses the control and status registers
+(CSRs) defined in the AFU.</li>
 </ul>
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">-S</span> <span class="pre">SOCKET_ID,</span> <span class="pre">--socket-id</span> <span class="pre">SOCKET_ID</span></code> Socket id of FPGA resource.</p>
-<p><code class="docutils literal"><span class="pre">-B</span> <span class="pre">BUS,</span> <span class="pre">--bus</span> <span class="pre">BUS</span></code> Bus id of FPGA resource.</p>
-<p><code class="docutils literal"><span class="pre">-D</span> <span class="pre">DEVICE,</span> <span class="pre">--device</span> <span class="pre">DEVICE</span></code> Device id of FPGA resource.</p>
-<p><code class="docutils literal"><span class="pre">-F</span> <span class="pre">FUNCTION,</span> <span class="pre">--function</span> <span class="pre">FUNCTION</span></code> Function id of FPGA resource.</p>
-<p><code class="docutils literal"><span class="pre">-G,</span> <span class="pre">--guid</span></code> specifies guid for the AFC enumeration.</p>
-<p><code class="docutils literal"><span class="pre">-m,</span> <span class="pre">--mode</span></code> One of the following: [<code class="docutils literal"><span class="pre">auto</span></code>, <code class="docutils literal"><span class="pre">e40</span></code>,
-<code class="docutils literal"><span class="pre">e10]</span></code>auto` is the default and indicates that the software runs the
-mode based on the first acclerator functional context (AFC) it
-enumerates.</p>
-<p><code class="docutils literal"><span class="pre">-t,</span> <span class="pre">--timeout</span></code> Timeout (in seconds) before the application terminates
-in continous mode. Continuous mode is the default when the number of
-packets is not specified.</p>
-<p><code class="docutils literal"><span class="pre">-y,</span> <span class="pre">--delay</span></code> Delay (in seconds) between printing out a simple status
-line. Default is 0.100 seconds (100 milliseconds).</p>
-<p><code class="docutils literal"><span class="pre">-c,</span> <span class="pre">--packet-count</span></code> The number of packets to send.</p>
-<p><code class="docutils literal"><span class="pre">-d,</span> <span class="pre">--packet-delay</span></code> The delay in between packets. This delay is the
-number of 100 MHz clock cycles, roughly 10 nanoseconds.</p>
-<p><code class="docutils literal"><span class="pre">-s,</span> <span class="pre">--packet-size</span></code> The packet size to send. The minimum is 46 bytes
-and the maximum is 1500 bytes. The default is 46 bytes.</p>
+<p><code class="docutils literal"><span class="pre">-S</span> <span class="pre">SOCKET_ID,</span> <span class="pre">--socket-id</span> <span class="pre">SOCKET_ID</span></code></p>
+<p>Socket ID FPGA resource.</p>
+<p><code class="docutils literal"><span class="pre">-B</span> <span class="pre">BUS,</span> <span class="pre">--bus</span> <span class="pre">BUS</span></code></p>
+<p>Bus ID of FPGA resource.</p>
+<p><code class="docutils literal"><span class="pre">-D</span> <span class="pre">DEVICE,</span> <span class="pre">--device</span> <span class="pre">DEVICE</span></code></p>
+<p>Device ID of FPGA resource.</p>
+<p><code class="docutils literal"><span class="pre">-F</span> <span class="pre">FUNCTION,</span> <span class="pre">--function</span> <span class="pre">FUNCTION</span></code></p>
+<p>Function ID of FPGA resource.</p>
+<p><code class="docutils literal"><span class="pre">-G,</span> <span class="pre">--guid</span></code></p>
+<p>Specifies guid for the AFC enumeration.</p>
+<p><code class="docutils literal"><span class="pre">-m,</span> <span class="pre">--mode</span></code></p>
+<p>One of the following: [<code class="docutils literal"><span class="pre">auto</span></code>, <code class="docutils literal"><span class="pre">e40</span></code>, <code class="docutils literal"><span class="pre">e10</span></code>] <code class="docutils literal"><span class="pre">auto</span></code> is the
+default and indicates that the software runs the mode based on the first
+acclerator functional context (AFC) it enumerates.</p>
+<p><code class="docutils literal"><span class="pre">-t,</span> <span class="pre">--timeout</span></code></p>
+<p>Timeout (in seconds) before the application terminates in continous
+mode. Continuous mode is the default when you do not specify the number
+of packets.</p>
+<p><code class="docutils literal"><span class="pre">-y,</span> <span class="pre">--delay</span></code></p>
+<p>Delay (in seconds) between printing out a simple status line. Default is
+0.100 seconds (100 milliseconds).</p>
+<p><code class="docutils literal"><span class="pre">-c,</span> <span class="pre">--packet-count</span></code></p>
+<p>The number of packets to send.</p>
+<p><code class="docutils literal"><span class="pre">-d,</span> <span class="pre">--packet-delay</span></code></p>
+<p>The delay in between packets. This delay is the number of 100 MHz clock
+cycles, roughly 10 nanoseconds.</p>
+<p><code class="docutils literal"><span class="pre">-s,</span> <span class="pre">--packet-size</span></code></p>
+<p>The packet size to send. The minimum is 46 bytes and the maximum is 1500
+bytes. The default is 46 bytes.</p>
 </div>
 <div class="section" id="commands">
 <h2>COMMANDS<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">send</span> <span class="pre">&lt;source</span> <span class="pre">port&gt;</span> <span class="pre">[&lt;destination</span> <span class="pre">port&gt;]</span> <span class="pre">[--packet-count|-c</span> <span class="pre">&lt;count&gt;]</span> <span class="pre">[--packet-delay|-d</span> <span class="pre">&lt;delay&gt;]</span> <span class="pre">[--packet-length|-l</span> <span class="pre">&lt;length&gt;]</span></code>
-Send packets from one port to the other. If the command line does not
+<p><code class="docutils literal"><span class="pre">send</span> <span class="pre">&lt;source</span> <span class="pre">port&gt;</span> <span class="pre">[&lt;destination</span> <span class="pre">port&gt;]</span> <span class="pre">[--packet-count|-c</span> <span class="pre">&lt;count&gt;]</span> <span class="pre">[--packet-delay|-d</span> <span class="pre">&lt;delay&gt;]</span> <span class="pre">[--packet-length|-l</span> <span class="pre">&lt;length&gt;]</span></code></p>
+<p>Send packets from one port to the other. If the command line does not
 specify a destination port, the test runs an internal loopback.
 Otherwise, the test runs an external loopback from the source port to
 the destination port.</p>
-<p><code class="docutils literal"><span class="pre">status</span> <span class="pre">[clear]</span></code> Read and interpret the status registers and print to
-the screen. <code class="docutils literal"><span class="pre">clear</span></code> clears the status registers.</p>
-<p><code class="docutils literal"><span class="pre">stop</span></code> Issue a stop command to all Ethernet controllers in the AFU.</p>
-<p><code class="docutils literal"><span class="pre">readmacs</span></code> Read and display the port MAC addresses. An EEPROM stores
-the MAC addresses.</p>
+<p><code class="docutils literal"><span class="pre">status</span> <span class="pre">[clear]</span></code></p>
+<p>Read and interpret the status registers and print to the screen.
+<code class="docutils literal"><span class="pre">clear</span></code> clears the status registers.</p>
+<p><code class="docutils literal"><span class="pre">stop</span></code></p>
+<p>Issue a stop command to all Ethernet controllers in the AFU.</p>
+<p><code class="docutils literal"><span class="pre">readmacs</span></code></p>
+<p>Read and display the port MAC addresses. An EEPROM stores the MAC
+addresses.</p>
 </div>
 <div class="section" id="exit-codes">
 <h2>EXIT CODES<a class="headerlink" href="#exit-codes" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">0</span>     <span class="n">Success</span> <span class="o">-</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">packets</span> <span class="n">received</span> <span class="n">are</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">packets</span> <span class="n">sent</span> <span class="n">and</span> <span class="n">no</span> <span class="n">errors</span>
-      <span class="n">are</span> <span class="n">reported</span><span class="p">.</span>
-
-<span class="o">-</span><span class="mi">1</span>    <span class="n">Loopback</span> <span class="n">failure</span> <span class="o">-</span> <span class="n">Either</span> <span class="n">number</span> <span class="n">of</span> <span class="n">packets</span> <span class="n">does</span> <span class="n">not</span> <span class="n">match</span> <span class="n">or</span> <span class="n">the</span> <span class="n">test</span> <span class="n">detected</span> <span class="n">errors</span><span class="p">.</span>
-
-<span class="o">-</span><span class="mi">2</span>    <span class="n">Errors</span> <span class="n">parsing</span> <span class="n">arguments</span><span class="p">.</span>
-</pre></div>
-</div>
+<p>0 Success - Number of packets received are equal to the number of
+packets sent and no errors are reported.</p>
+<p>-1 Loopback failure - Either number of packets does not match or the
+test detected errors.</p>
+<p>-2 Errors parsing arguments.</p>
 </div>
 <div class="section" id="examples">
 <h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>

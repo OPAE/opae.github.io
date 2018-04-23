@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>fpgaconf &mdash; OPAE</title>
+  <title>pac_hssi_config &mdash; OPAE</title>
   
 
   
@@ -28,9 +28,7 @@
     <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="fpgad" href="../fpgad/fpgad.html" />
-    <link rel="prev" title="fpgainfo" href="../fpgainfo/fpgainfo.html" /> 
+    <link rel="search" title="Search" href="../../../search.html" /> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -104,16 +102,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../coreidle/coreidle.html">coreidle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgabist/fpgabist.html">fpgabist</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">fpgaconf</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">EXAMPLES</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgaflash/fpgaflash.html">fpgaflash</a></li>
@@ -172,13 +165,13 @@
     
       <li><a href="../../../index.html">Docs</a> &raquo;</li>
         
-      <li>fpgaconf</li>
+      <li>pac_hssi_config</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/docs/fpga_tools/fpgaconf/fpgaconf.md.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/docs/fpga_tools/pac_hssi_config/pac_hssi_config.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -191,63 +184,163 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="fpgaconf">
-<h1>fpgaconf<a class="headerlink" href="#fpgaconf" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="pac-hssi-config">
+<h1>pac_hssi_config<a class="headerlink" href="#pac-hssi-config" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">fpgaconf</span> <span class="pre">[-hvn]</span> <span class="pre">[-b</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-d</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-f</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[-s</span> <span class="pre">&lt;socket&gt;]</span> <span class="pre">&lt;gbs&gt;</span></code></p>
+<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">pac_hssi_config</span><span class="p">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="n">subcommand</span> <span class="p">[</span><span class="n">subarg</span><span class="p">]</span> <span class="p">[</span><span class="n">bdf</span><span class="p">]</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">fpgaconf</span></code> configures the FPGA with the accelerator funciton (AF). It
-also checks the AF for compatibility with the targeted FPGA and the FPGA
-Interface Manager (FIM). <code class="docutils literal"><span class="pre">fpgaconf</span></code> takes the following arguments:</p>
-<p><code class="docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">usage</span> <span class="n">information</span><span class="p">.</span>
-</pre></div>
+<p>The <code class="docutils literal"><span class="pre">pac_hssi_config.py</span></code> tool exercises the Ethernet 10 Gbps (10GbE)
+and 40GbE transceivers for designs using the Intel® Programmable
+Acceleration Card (PAC) with Intel Arria® 10 GX FPGA. This tool does not
+support the Intel Xeon® Processor with Integrated FPGA.</p>
+<div class="figure">
+<img alt="PAC" src="../../../_images/dcp_hssi_arch.PNG" />
 </div>
-<p><code class="docutils literal"><span class="pre">-v,</span> <span class="pre">--verbose</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">more</span> <span class="n">verbose</span> <span class="n">messages</span> <span class="k">while</span> <span class="n">enumerating</span> <span class="n">and</span> <span class="n">configuring</span><span class="p">.</span> <span class="n">Can</span> <span class="n">be</span>
-<span class="n">requested</span> <span class="n">more</span> <span class="n">than</span> <span class="n">once</span><span class="p">.</span>
-</pre></div>
+<p>The two required arguments to the <code class="docutils literal"><span class="pre">pac_hssi_config.py</span></code> tool specify
+the subcommand and bus, device, and function (BDF) for the PCIe device
+under test. You must provide the BDF parameter for systems with more
+than one PCIe card. If you do not provide the BDF when required, the
+command prints a list of valid BDFs for the system. You can determine
+the BDF using the <code class="docutils literal"><span class="pre">lspci</span></code> command.</p>
+<p>For usage help, type the following at a command prompt:</p>
+<p><code class="docutils literal"><span class="pre">pac_hssi_config.py</span> <span class="pre">[-h|--help]</span></code></p>
+<p>To configure the network ports, send data and read statistics, use the
+following form of the <code class="docutils literal"><span class="pre">pac_hssi_config.py</span></code> script:</p>
+<p><code class="docutils literal"><span class="pre">pac_hssi_config.py</span> <span class="pre">subcommand</span> <span class="pre">[subarg]</span> <span class="pre">[bdf]</span></code></p>
+<p>Only a subset of subcommand arguments support <code class="docutils literal"><span class="pre">subarg</span></code>.</p>
+<div class="section" id="table-1-general-subcommands">
+<h3>Table 1. General Subcommands<a class="headerlink" href="#table-1-general-subcommands" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="29%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Subcommand</th>
+<th class="head">Subarg</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">stat</span></code></td>
+<td>N/A</td>
+<td>Prints high speed
+serial interface
+(HSSI) controller
+statistics.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">eeprom</span></code></td>
+<td>N/A</td>
+<td>Reads the 128-bit
+unique board ID, MAC
+address and
+board-specific IDs
+from EEPROM.</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p><code class="docutils literal"><span class="pre">-n,</span> <span class="pre">--dry-run</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Performs</span> <span class="n">enumeration</span><span class="p">.</span> <span class="n">Skips</span> <span class="n">any</span> <span class="n">operations</span> <span class="n">with</span> <span class="n">side</span><span class="o">-</span><span class="n">effects</span> <span class="n">such</span> <span class="n">as</span> <span class="n">the</span>
-<span class="n">actual</span> <span class="n">AF</span> <span class="n">configuration</span><span class="p">.</span>
-</pre></div>
+<div class="section" id="table-2-10-40-gbe-traffic-generation-subcommands">
+<h3>Table 2. 10/40 GbE Traffic Generation Subcommands<a class="headerlink" href="#table-2-10-40-gbe-traffic-generation-subcommands" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="29%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Subcommand</th>
+<th class="head">Subarg</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">e10init</span></code> and
+<code class="docutils literal"><span class="pre">e40init</span></code></td>
+<td>N/A</td>
+<td>Initializes HSSI PHY
+to 10GbE or 40GbE
+mode. Clears
+statistics and enable
+internal HSSI
+transceiver loopback.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">e10loop</span></code> and
+<code class="docutils literal"><span class="pre">e40loop</span></code></td>
+<td>On/Off</td>
+<td>Turns on or off
+internal HSSI
+transceiver loopback.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">e10reset</span></code> and
+<code class="docutils literal"><span class="pre">e40reset</span></code></td>
+<td>On/Off</td>
+<td>Asserts or deasserts
+AFU reset. Clears
+packet statistics and
+disables internal HSSI
+transceiver loopback.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">e10send</span></code> and
+<code class="docutils literal"><span class="pre">e40send</span></code></td>
+<td>N/A</td>
+<td>Sends 1,000,000
+1500-byte packets. For
+10GbE sends packets on
+all four ports. 40GbE
+has a single port.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">e10stat</span></code> and
+<code class="docutils literal"><span class="pre">e40stat</span></code></td>
+<td>N/A</td>
+<td>Prints packet
+statisics.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">e10statclr</span></code> and
+<code class="docutils literal"><span class="pre">e40statclr</span></code></td>
+<td>N/A</td>
+<td>Clears packet
+statistics. Use this
+command after
+switching loopback
+modes to clear any
+transient statistics
+accumulated during the
+mode switch.</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p><code class="docutils literal"><span class="pre">-b,</span> <span class="pre">--bus</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">bus</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
-</pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">-d,</span> <span class="pre">--device</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">device</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">-f,</span> <span class="pre">--function</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">function</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">-s,</span> <span class="pre">--socket</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Socket</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">fpgaconf</span></code> enumerates available FPGA devices in the system and selects
-compatible FPGAs for configuration. If more than one FPGA is compatible
-with the AF, <code class="docutils literal"><span class="pre">fpgaconf</span></code> exits and asks you to be more specific in
-selecting the target FPGAs by specifying a socket number or a PCIe BDF.</p>
-</div>
-<div class="section" id="examples">
-<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">fpgaconf</span> <span class="pre">my_af.gbs</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Program</span> <span class="s">&quot;my_af.gbs&quot;</span> <span class="n">to</span> <span class="n">a</span> <span class="n">compatible</span> <span class="n">FPGA</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">fpgaconf</span> <span class="pre">-v</span> <span class="pre">-s</span> <span class="pre">0</span> <span class="pre">my_af.gbs</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Program</span> <span class="s">&quot;my_af.gbs&quot;</span> <span class="n">to</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="n">in</span> <span class="n">socket</span> <span class="mi">0</span><span class="p">,</span> <span class="k">if</span> <span class="n">compatible</span><span class="p">,</span>
-<span class="k">while</span> <span class="n">printing</span> <span class="n">out</span> <span class="n">slightly</span> <span class="n">more</span> <span class="n">verbose</span> <span class="n">information</span><span class="p">.</span>
-</pre></div>
-</div>
+<div class="section" id="revision-history">
+<h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="57%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Date</th>
+<th class="head">Intel Acceleration Stack Version</th>
+<th class="head">Changes Made</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>2018.04
+.13</td>
+<td>DCP 1.1 Alpha (works with Quartus
+Prime Pro 17.1.1)</td>
+<td>Initial release.</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -256,15 +349,6 @@ selecting the target FPGAs by specifying a socket number or a PCIe BDF.</p>
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../fpgad/fpgad.html" class="btn btn-neutral float-right" title="fpgad" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../fpgainfo/fpgainfo.html" class="btn btn-neutral" title="fpgainfo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
