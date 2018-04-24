@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.13.1
+                0.13.0
               </div>
             
           
@@ -88,8 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html#revision-history">Revision History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -98,7 +97,7 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
@@ -203,7 +202,7 @@
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">fpgaport</span></code> enables and disables virtualization. It assigns and
+<p>The fpgaport enables and disables virtualization. It assigns and
 releases control of the port to the virtual function (VF). By default,
 the driver assigns the port to the physical function (PF) in the
 non-virtualization use case.</p>
@@ -215,21 +214,31 @@ non-virtualization use case.</p>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">device</span></code></p>
-<p>The FPGA device being targeted with this action.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">FPGA</span> <span class="n">device</span> <span class="n">being</span> <span class="n">targeted</span> <span class="n">with</span> <span class="n">this</span> <span class="n">action</span><span class="p">.</span>
+</pre></div>
+</div>
 <p><code class="docutils literal"><span class="pre">port</span></code></p>
-<p>The number of the port.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">port</span><span class="p">.</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="optional-arguments">
 <h2>OPTIONAL ARGUMENTS<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
-<p>Print usage information.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Print</span> <span class="n">usage</span> <span class="n">information</span><span class="p">.</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="example">
 <h2>EXAMPLE<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">fpgaport</span> <span class="pre">release</span> <span class="pre">/dev/intel-fpga-fme.0</span> <span class="pre">0</span></code></p>
-<p>Release port 0 from physical function control.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Release</span> <span class="n">port</span> <span class="mi">0</span> <span class="n">from</span> <span class="n">physical</span> <span class="n">function</span> <span class="n">control</span><span class="p">.</span>
+</pre></div>
+</div>
 <p><code class="docutils literal"><span class="pre">fpgaport</span> <span class="pre">assign</span> <span class="pre">/dev/intel-fpga-fme.0</span> <span class="pre">0</span></code></p>
-<p>Assign port 0 to physical function control.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Assign</span> <span class="n">port</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">physical</span> <span class="n">function</span> <span class="n">control</span><span class="p">.</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -275,7 +284,7 @@ non-virtualization use case.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.13.1',
+            VERSION:'0.13.0',
             LANGUAGE:'en',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

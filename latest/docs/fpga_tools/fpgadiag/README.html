@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.13.1
+                0.13.0
               </div>
             
           
@@ -88,8 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html#revision-history">Revision History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -98,7 +97,7 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
@@ -215,34 +214,48 @@
 hardware.</p>
 <p><code class="docutils literal"><span class="pre">&lt;mode&gt;</span></code> chooses which test to run. <code class="docutils literal"><span class="pre">&lt;target&gt;</span></code> specifies the
 platform that runs the test. <code class="docutils literal"><span class="pre">&lt;target&gt;</span></code> can be either <code class="docutils literal"><span class="pre">fpga</span></code> or
-<code class="docutils literal"><span class="pre">ase</span></code> where <code class="docutils literal"><span class="pre">ase</span></code>. <code class="docutils literal"><span class="pre">&lt;ase&gt;</span></code> is the abbreviation for Accelerator
-Simulation Environment.</p>
+<code class="docutils literal"><span class="pre">ase</span></code> where <code class="docutils literal"><span class="pre">ase</span></code> stands for Accelerator Simulation Environment.</p>
 <p>The <code class="docutils literal"><span class="pre">&lt;mode&gt;</span></code> selects from the following tests:</p>
 <p><strong>lpbk1</strong></p>
-<p>This test runs a loopback test on the number of cachelines specified
-with the <code class="docutils literal"><span class="pre">BEGIN</span></code> option. <code class="docutils literal"><span class="pre">fpgadiag</span></code> sets up source and destination
-buffers in main memory. The FPGA then performs a <code class="docutils literal"><span class="pre">memcpy</span></code> from a
-source buffer to the destination buffer, one cacheline at a time.</p>
-<p>A cacheline is 64 bytes. When <code class="docutils literal"><span class="pre">BEGIN</span> <span class="pre">=</span> <span class="pre">END</span></code>, the test performs one
-iteration. When <code class="docutils literal"><span class="pre">BEGIN</span> <span class="pre">=</span> <span class="pre">END</span> <span class="pre">+</span> <span class="pre">x</span></code>, the test performs <code class="docutils literal"><span class="pre">x</span></code> iterations.
-The first iteration consists of copying <code class="docutils literal"><span class="pre">BEGIN</span></code> cachelines; the second
-iteration consists of copying <code class="docutils literal"><span class="pre">BEGIN+1</span></code> cache lines. The third
-iteration consists of copying <code class="docutils literal"><span class="pre">BEGIN+2</span></code> cache lines, and so on.</p>
-<p>The latency is shown as the number of clock cycles.</p>
-<p>When you specify <code class="docutils literal"><span class="pre">MULTI-CL</span></code>, you copy <code class="docutils literal"><span class="pre">MULTI-CL</span></code> cache lines at a
-time. The WR-FENCE chooses on which virtual channel the WrFence occurs.</p>
-<p>If you specify continuous mode with <code class="docutils literal"><span class="pre">--cont</span></code>, the program iterates
-until the timeout specified in <code class="docutils literal"><span class="pre">TIMEOUT</span></code> completes.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>This test runs a loopback test on the number of cachelines specified with
+the `BEGIN` option. _fpgadiag_ sets up source and  destination buffers in
+main memory. The FPGA then performs a memcpy from a source buffer to the
+destination buffer, one cacheline at a time.
+
+A cacheline is 64 bytes. When `BEGIN = END`, the test performs one iteration. When
+`BEGIN = END + x`, the test performs `x` iterations. The first iteration consists
+of copying `BEGIN` cachelines; the second iteration consists of copying
+`BEGIN+1` cache lines; the third iteration consists of copying `BEGIN+3`
+cache lines, and so on.
+
+The latency is shown as the number of clock cycles.
+
+When you specify `MULTI-CL`, you copy `MULTI-CL` cache lines at a time.
+The WR-FENCE chooses what virtual channel the WrFence occurs on.
+
+
+If you specify continuous mode with `--cont`, the program iterates
+until the timeout specified in `TIMEOUT` completes.
+</pre></div>
+</div>
 <p><strong>read</strong></p>
-<p>This test performs reads. Use this test to measure read bandwidth.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="n">test</span> <span class="n">performs</span> <span class="n">reads</span><span class="p">.</span> <span class="n">Use</span> <span class="n">this</span> <span class="n">test</span> <span class="n">to</span> <span class="n">measure</span> <span class="n">read</span> <span class="n">bandwidth</span><span class="p">.</span>
+</pre></div>
+</div>
 <p><strong>write</strong></p>
-<p>This test performs writes. Use it to measure write bandwidth.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="n">test</span> <span class="n">performs</span> <span class="n">writes</span><span class="p">.</span> <span class="n">Use</span> <span class="n">it</span> <span class="n">to</span> <span class="n">measure</span> <span class="n">write</span> <span class="n">bandwidth</span><span class="p">.</span>
+</pre></div>
+</div>
 <p><strong>trput</strong></p>
-<p>This test measures both read and write bandwidth by performing 50% read
-and 50% write tests.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="n">test</span> <span class="n">measures</span> <span class="n">both</span> <span class="n">read</span> <span class="n">and</span> <span class="n">write</span> <span class="n">bandwidth</span> <span class="n">by</span> <span class="n">performing</span> <span class="mi">50</span><span class="o">%</span> <span class="n">read</span> <span class="n">and</span>
+<span class="mi">50</span><span class="o">%</span> <span class="n">write</span> <span class="n">tests</span><span class="p">.</span>
+</pre></div>
+</div>
 <p><strong>sw</strong></p>
-<p>This is a send-and-respond (ping-pong) test. One side sends data and
-waits for response.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="n">is</span> <span class="n">a</span> <span class="n">send</span><span class="o">-</span><span class="n">and</span><span class="o">-</span><span class="n">respond</span> <span class="p">(</span><span class="n">ping</span><span class="o">-</span><span class="n">pong</span><span class="p">)</span> <span class="n">test</span><span class="p">.</span> <span class="n">One</span> <span class="n">side</span> <span class="n">sends</span> <span class="n">data</span> <span class="n">and</span>
+<span class="n">waits</span> <span class="k">for</span> <span class="n">response</span><span class="p">.</span>
+</pre></div>
+</div>
 <p>Each test requires a particular AF. Before running a test, make sure the
 required AF is properly configured on the platform.</p>
 <ul class="simple">
@@ -337,7 +350,9 @@ accelerator card (PAC).</li>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--timeout-usec=,</span> <span class="pre">--timeout-msec=,</span> <span class="pre">--timeout-sec=,</span> <span class="pre">--timeout-min=,</span> <span class="pre">--timeout-hour=</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">timeout</span> <span class="k">for</span> <span class="o">--</span><span class="n">cont</span> <span class="n">mode</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span> <span class="k">for</span> <span class="n">all</span> <span class="n">options</span> <span class="n">is</span> <span class="mf">0.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">timeout</span> <span class="k">for</span> <span class="o">--</span><span class="n">cont</span> <span class="n">mode</span> <span class="p">(</span><span class="n">microseconds</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">milliseconds</span>
+<span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">seconds</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">minutes</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="n">hours</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--cache-policy=,</span> <span class="pre">-p</span></code></p>
@@ -364,23 +379,23 @@ accelerator card (PAC).</li>
 <div class="section" id="read-test-options">
 <h3><strong>read</strong> test options<a class="headerlink" href="#read-test-options" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal"><span class="pre">--guid=,</span> <span class="pre">-g</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">AFU</span> <span class="n">ID</span> <span class="n">to</span> <span class="n">enumerate</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">F7DF405C</span><span class="o">-</span><span class="n">BD7A</span><span class="o">-</span><span class="n">CF72</span><span class="o">-</span><span class="mf">22F</span><span class="mi">1</span><span class="o">-</span><span class="mi">44</span><span class="n">B0B93ACD18</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">AFU</span> <span class="n">ID</span> <span class="n">to</span> <span class="n">enumerate</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">F7DF405C</span><span class="o">-</span><span class="n">BD7A</span><span class="o">-</span><span class="n">CF72</span><span class="o">-</span><span class="mf">22F</span><span class="mi">1</span><span class="o">-</span><span class="mi">44</span><span class="n">B0B93ACD18</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--begin=B,</span> <span class="pre">-b</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">B</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">B</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--end=E,</span> <span class="pre">-e</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">E</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span> <span class="n">and</span> <span class="n">E</span> <span class="n">designate</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">E</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span> <span class="n">and</span> <span class="n">E</span> <span class="n">designate</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--multi-cl=M,</span> <span class="pre">-u</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="n">can</span> <span class="n">equal</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">or</span> <span class="mf">4.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mf">1.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="n">can</span> <span class="n">equal</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">or</span> <span class="mf">4.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--strided-access=S,</span> <span class="pre">-a</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">&lt;=</span> <span class="n">S</span> <span class="o">&lt;=</span> <span class="mf">64.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mf">1.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">&lt;=</span> <span class="n">S</span> <span class="o">&lt;=</span> <span class="mf">64.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--cont,</span> <span class="pre">-L</span></code></p>
@@ -388,20 +403,22 @@ accelerator card (PAC).</li>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--timeout-usec=,</span> <span class="pre">--timeout-msec=,</span> <span class="pre">--timeout-sec=,</span> <span class="pre">--timeout-min=,</span> <span class="pre">--timeout-hour=</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">timeout</span> <span class="k">for</span> <span class="o">--</span><span class="n">cont</span> <span class="n">mode</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span> <span class="k">for</span> <span class="n">all</span> <span class="n">options</span> <span class="n">is</span> <span class="mf">0.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">timeout</span> <span class="k">for</span> <span class="o">--</span><span class="n">cont</span> <span class="n">mode</span> <span class="p">(</span><span class="n">microseconds</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">milliseconds</span>
+<span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">seconds</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">minutes</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="n">hours</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--cache-hint=,</span> <span class="pre">-i</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">rdline</span><span class="o">-</span><span class="n">I</span> <span class="n">or</span> <span class="n">rdline</span><span class="o">-</span><span class="n">S</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">rdline</span><span class="o">-</span><span class="n">I</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">rdline</span><span class="o">-</span><span class="n">I</span> <span class="n">or</span> <span class="n">rdline</span><span class="o">-</span><span class="n">S</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">rdline</span><span class="o">-</span><span class="n">I</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--warm-fpga-cache</span> <span class="pre">-H;</span> <span class="pre">--cool-fpga-cache</span> <span class="pre">-M</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Try</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span> <span class="n">cache</span> <span class="n">with</span> <span class="n">hits</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span> <span class="n">Try</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Attempt</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span> <span class="n">cache</span> <span class="n">with</span> <span class="n">hits</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">,</span> <span class="n">Attempt</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span>
 <span class="n">cache</span> <span class="n">with</span> <span class="n">misses</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--cool-cpu-cache,</span> <span class="pre">-C</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Try</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span> <span class="n">cpu</span> <span class="n">cache</span> <span class="n">with</span> <span class="n">misses</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Attempt</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span> <span class="n">cpu</span> <span class="n">cache</span> <span class="n">with</span> <span class="n">misses</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--read-vc=,</span> <span class="pre">-r</span></code></p>
@@ -416,63 +433,7 @@ accelerator card (PAC).</li>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--begin=B,</span> <span class="pre">-b</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">E</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span> <span class="n">and</span> <span class="n">E</span> <span class="n">designate</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--multi-cl=M,</span> <span class="pre">-u</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="n">can</span> <span class="n">equal</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">or</span> <span class="mf">4.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mf">1.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--strided-access=S,</span> <span class="pre">-a</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">&lt;=</span> <span class="n">S</span> <span class="o">&lt;=</span> <span class="mf">64.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mf">1.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--cont,</span> <span class="pre">-L</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Continuous</span> <span class="n">mode</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--timeout-usec=,</span> <span class="pre">--timeout-msec=,</span> <span class="pre">--timeout-sec=,</span> <span class="pre">--timeout-min=,</span> <span class="pre">--timeout-hour=</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">timeout</span> <span class="k">for</span> <span class="o">--</span><span class="n">cont</span> <span class="n">mode</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span> <span class="k">for</span> <span class="n">all</span> <span class="n">options</span> <span class="n">is</span> <span class="mf">0.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--cache-policy=,</span> <span class="pre">-p</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">wrline</span><span class="o">-</span><span class="n">I</span><span class="p">,</span> <span class="n">wrline</span><span class="o">-</span><span class="n">M</span><span class="p">,</span> <span class="n">or</span> <span class="n">wrpush</span><span class="o">-</span><span class="n">I</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">wrline</span><span class="o">-</span><span class="n">M</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--warm-fpga-cache</span> <span class="pre">-H;</span> <span class="pre">--cool-fpga-cache</span> <span class="pre">-M</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Try</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span> <span class="n">cache</span> <span class="n">with</span> <span class="n">hits</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span> <span class="n">Try</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span>
-<span class="n">cache</span> <span class="n">with</span> <span class="n">misses</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--cool-cpu-cache,</span> <span class="pre">-C</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Try</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span> <span class="n">cpu</span> <span class="n">cache</span> <span class="n">with</span> <span class="n">misses</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--write-vc=,</span> <span class="pre">-w</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="k">auto</span><span class="p">,</span> <span class="n">vl0</span><span class="p">,</span> <span class="n">vh0</span><span class="p">,</span> <span class="n">vh1</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="k">auto</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--wrfence-vc=,</span> <span class="pre">-f</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span>Can be auto, vl0, vh0, vh1, random. The default=`WRITE-VC`.
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--alt-wr-pattern,</span> <span class="pre">-l</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Alternate</span> <span class="n">Write</span> <span class="n">Pattern</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="trput-test-options">
-<h3><strong>trput</strong> test options<a class="headerlink" href="#trput-test-options" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">--guid=,</span> <span class="pre">-g</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">AFU</span> <span class="n">ID</span> <span class="n">to</span> <span class="n">enumerate</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">F7DF405C</span><span class="o">-</span><span class="n">BD7A</span><span class="o">-</span><span class="n">CF72</span><span class="o">-</span><span class="mf">22F</span><span class="mi">1</span><span class="o">-</span><span class="mi">44</span><span class="n">B0B93ACD18</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--begin=B,</span> <span class="pre">-b</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">B</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">--end=E,</span> <span class="pre">-e</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">E</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span> <span class="n">and</span> <span class="n">E</span> <span class="n">designate</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">E</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span> <span class="n">and</span> <span class="n">E</span> <span class="n">designate</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--multi-cl=M,</span> <span class="pre">-u</span></code></p>
@@ -488,27 +449,87 @@ accelerator card (PAC).</li>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--timeout-usec=,</span> <span class="pre">--timeout-msec=,</span> <span class="pre">--timeout-sec=,</span> <span class="pre">--timeout-min=,</span> <span class="pre">--timeout-hour=</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">timeout</span> <span class="k">for</span> <span class="o">--</span><span class="n">cont</span> <span class="n">mode</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span> <span class="k">for</span> <span class="n">all</span> <span class="n">options</span> <span class="n">is</span> <span class="mf">0.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">timeout</span> <span class="k">for</span> <span class="o">--</span><span class="n">cont</span> <span class="n">mode</span> <span class="p">(</span><span class="n">microseconds</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">milliseconds</span>
+<span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">seconds</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">minutes</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="n">hours</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--cache-policy=,</span> <span class="pre">-p</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">wrline</span><span class="o">-</span><span class="n">I</span><span class="p">,</span> <span class="n">wrline</span><span class="o">-</span><span class="n">M</span><span class="p">,</span> <span class="n">or</span> <span class="n">wrpush</span><span class="o">-</span><span class="n">I</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">wrline</span><span class="o">-</span><span class="n">M</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">wrline</span><span class="o">-</span><span class="n">I</span><span class="p">,</span> <span class="n">wrline</span><span class="o">-</span><span class="n">M</span><span class="p">,</span> <span class="n">or</span> <span class="n">wrpush</span><span class="o">-</span><span class="n">I</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">wrline</span><span class="o">-</span><span class="n">M</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">--cache-hint=,</span> <span class="pre">-i</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">rdline</span><span class="o">-</span><span class="n">I</span> <span class="n">or</span> <span class="n">rdline</span><span class="o">-</span><span class="n">S</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">rdline</span><span class="o">-</span><span class="n">I</span><span class="p">.</span>
+<p><code class="docutils literal"><span class="pre">--warm-fpga-cache</span> <span class="pre">-H;</span> <span class="pre">--cool-fpga-cache</span> <span class="pre">-M</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Attempt</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span> <span class="n">cache</span> <span class="n">with</span> <span class="n">hits</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span> <span class="n">Attempt</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span>
+<span class="n">cache</span> <span class="n">with</span> <span class="n">misses</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">--read-vc=,</span> <span class="pre">-r</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="k">auto</span><span class="p">,</span> <span class="n">vl0</span><span class="p">,</span> <span class="n">vh0</span><span class="p">,</span> <span class="n">vh1</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="k">auto</span><span class="p">.</span>
+<p><code class="docutils literal"><span class="pre">--cool-cpu-cache,</span> <span class="pre">-C</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Attempt</span> <span class="n">to</span> <span class="n">prime</span> <span class="n">the</span> <span class="n">cpu</span> <span class="n">cache</span> <span class="n">with</span> <span class="n">misses</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--write-vc=,</span> <span class="pre">-w</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="k">auto</span><span class="p">,</span> <span class="n">vl0</span><span class="p">,</span> <span class="n">vh0</span><span class="p">,</span> <span class="n">vh1</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="k">auto</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="k">auto</span><span class="p">,</span> <span class="n">vl0</span><span class="p">,</span> <span class="n">vh0</span><span class="p">,</span> <span class="n">vh1</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="k">auto</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--wrfence-vc=,</span> <span class="pre">-f</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span>Can be  auto, vl0, vh0, vh1. The default=`WRITE-VC`.
+<div class="highlight-c"><div class="highlight"><pre><span></span>Can be auto, vl0, vh0, vh1, random. The default=`WRITE-VC`
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--alt-wr-pattern,</span> <span class="pre">-l</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Alternate</span> <span class="n">Write</span> <span class="n">Pattern</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="trput-test-options">
+<h3><strong>trput</strong> test options<a class="headerlink" href="#trput-test-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">--guid=,</span> <span class="pre">-g</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">AFU</span> <span class="n">ID</span> <span class="n">to</span> <span class="n">enumerate</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">F7DF405C</span><span class="o">-</span><span class="n">BD7A</span><span class="o">-</span><span class="n">CF72</span><span class="o">-</span><span class="mf">22F</span><span class="mi">1</span><span class="o">-</span><span class="mi">44</span><span class="n">B0B93ACD18</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--begin=B,</span> <span class="pre">-b</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">B</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--end=E,</span> <span class="pre">-e</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">E</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span> <span class="n">and</span> <span class="n">E</span> <span class="n">designate</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--multi-cl=M,</span> <span class="pre">-u</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="n">can</span> <span class="n">equal</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">or</span> <span class="mf">4.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mf">1.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--strided-access=S,</span> <span class="pre">-a</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">&lt;=</span> <span class="n">S</span> <span class="o">&lt;=</span> <span class="mf">64.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--cont,</span> <span class="pre">-L</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Continuous</span> <span class="n">mode</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">off</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--timeout-usec=,</span> <span class="pre">--timeout-msec=,</span> <span class="pre">--timeout-sec=,</span> <span class="pre">--timeout-min=,</span> <span class="pre">--timeout-hour=</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">timeout</span> <span class="k">for</span> <span class="o">--</span><span class="n">cont</span> <span class="n">mode</span> <span class="p">(</span><span class="n">microseconds</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">milliseconds</span>
+<span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">seconds</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">minutes</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="n">hours</span> <span class="n">portion</span> <span class="k">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--cache-policy=,</span> <span class="pre">-p</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">wrline</span><span class="o">-</span><span class="n">I</span><span class="p">,</span> <span class="n">wrline</span><span class="o">-</span><span class="n">M</span><span class="p">,</span> <span class="n">or</span> <span class="n">wrpush</span><span class="o">-</span><span class="n">I</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">wrline</span><span class="o">-</span><span class="n">M</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--cache-hint=,</span> <span class="pre">-i</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">rdline</span><span class="o">-</span><span class="n">I</span> <span class="n">or</span> <span class="n">rdline</span><span class="o">-</span><span class="n">S</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">rdline</span><span class="o">-</span><span class="n">I</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--read-vc=,</span> <span class="pre">-r</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="k">auto</span><span class="p">,</span> <span class="n">vl0</span><span class="p">,</span> <span class="n">vh0</span><span class="p">,</span> <span class="n">vh1</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="k">auto</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--write-vc=,</span> <span class="pre">-w</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="k">auto</span><span class="p">,</span> <span class="n">vl0</span><span class="p">,</span> <span class="n">vh0</span><span class="p">,</span> <span class="n">vh1</span><span class="p">,</span> <span class="n">random</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="k">auto</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--wrfence-vc=,</span> <span class="pre">-f</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>Can be  auto, vl0, vh0, vh1. The default=`WRITE-VC`
 </pre></div>
 </div>
 </div>
@@ -519,19 +540,19 @@ accelerator card (PAC).</li>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--begin=B,</span> <span class="pre">-b</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">B</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">B</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--end=E,</span> <span class="pre">-e</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">E</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span> <span class="n">and</span> <span class="n">E</span> <span class="n">designate</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">E</span> <span class="o">&lt;=</span> <span class="mf">65535.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span> <span class="n">and</span> <span class="n">E</span> <span class="n">designate</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cache</span> <span class="n">lines</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--cache-policy=,</span> <span class="pre">-p</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">wrline</span><span class="o">-</span><span class="n">I</span><span class="p">,</span> <span class="n">wrline</span><span class="o">-</span><span class="n">M</span><span class="p">,</span> <span class="n">or</span> <span class="n">wrpush</span><span class="o">-</span><span class="n">I</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">wrline</span><span class="o">-</span><span class="n">M</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">wrline</span><span class="o">-</span><span class="n">I</span><span class="p">,</span> <span class="n">wrline</span><span class="o">-</span><span class="n">M</span><span class="p">,</span> <span class="n">or</span> <span class="n">wrpush</span><span class="o">-</span><span class="n">I</span><span class="p">.</span> <span class="n">The</span> <span class="k">default</span><span class="o">=</span><span class="n">wrline</span><span class="o">-</span><span class="n">M</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--cache-hint=</span> <span class="pre">-i</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">rdline</span><span class="o">-</span><span class="n">I</span> <span class="n">or</span> <span class="n">rdline</span><span class="o">-</span><span class="n">S</span><span class="p">.</span> <span class="n">The</span> <span class="n">ddfault</span><span class="o">=</span><span class="n">rdline</span><span class="o">-</span><span class="n">I</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Can</span> <span class="n">be</span> <span class="n">rdline</span><span class="o">-</span><span class="n">I</span> <span class="n">or</span> <span class="n">rdline</span><span class="o">-</span><span class="n">S</span><span class="p">.</span> <span class="n">The</span> <span class="n">ddfault</span><span class="o">=</span><span class="n">rdline</span><span class="o">-</span><span class="n">I</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">--read-vc=,</span> <span class="pre">-r</span></code></p>
@@ -556,8 +577,8 @@ accelerator card (PAC).</li>
 <h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>This command starts a <code class="docutils literal"><span class="pre">lpbk1</span></code> test for the FPGA on bus <code class="docutils literal"><span class="pre">0x5e</span></code>. The
 test copies 57535, 57536, 57537 … up to 65535 cache lines, one line at a
-time. The test prints output in the comma separated values (CSV) format
-with the header suppressed.</p>
+time. The test prints output in the CSV format with the header
+suppressed.</p>
 <div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">fpgadiag</span> <span class="o">--</span><span class="n">mode</span><span class="o">=</span><span class="n">lpbk1</span> <span class="o">--</span><span class="n">target</span><span class="o">=</span><span class="n">fpga</span> <span class="o">-</span><span class="n">SV</span> <span class="o">--</span><span class="n">bus</span><span class="o">-</span><span class="n">number</span><span class="o">=</span><span class="mh">0x5e</span> <span class="o">--</span><span class="n">begin</span><span class="o">=</span><span class="mi">57535</span>
 <span class="o">--</span><span class="n">end</span><span class="o">=</span><span class="mi">65535</span> <span class="o">--</span><span class="n">cache</span><span class="o">-</span><span class="n">hint</span><span class="o">=</span><span class="n">rdline</span><span class="o">-</span><span class="n">I</span> <span class="o">--</span><span class="n">cache</span><span class="o">-</span><span class="n">policy</span><span class="o">=</span><span class="n">wrpush</span><span class="o">-</span><span class="n">I</span> <span class="o">--</span><span class="n">multi</span><span class="o">-</span><span class="n">cl</span><span class="o">=</span><span class="mi">1</span>
 <span class="o">--</span><span class="n">write</span><span class="o">-</span><span class="n">vc</span><span class="o">=</span><span class="n">vl0</span> <span class="o">--</span><span class="n">read</span><span class="o">-</span><span class="n">vc</span><span class="o">=</span><span class="n">vh1</span> <span class="o">--</span><span class="n">wrfence</span><span class="o">-</span><span class="n">vc</span><span class="o">=</span><span class="k">auto</span>
@@ -597,8 +618,8 @@ few 1 GB pages.</li>
 <li>Is the required AFU loaded? See <a class="reference external" href="#description">DESCRIPTION</a> for
 information about what AFU the test requires.</li>
 <li>Are <code class="docutils literal"><span class="pre">--begin</span></code> and <code class="docutils literal"><span class="pre">--end</span></code> values set properly? <code class="docutils literal"><span class="pre">--end</span></code> must be
-larger than the <code class="docutils literal"><span class="pre">--begin</span></code>. Also, <code class="docutils literal"><span class="pre">--begin</span></code> must be a multiple of
-the <code class="docutils literal"><span class="pre">--multi-cl</span></code> value.</li>
+no smaller than the <code class="docutils literal"><span class="pre">--begin</span></code>. Also, <code class="docutils literal"><span class="pre">--begin</span></code> must be a multiple
+of the <code class="docutils literal"><span class="pre">--multi-cl</span></code> value.</li>
 <li>The <code class="docutils literal"><span class="pre">--warm-fpga-cache</span></code> and <code class="docutils literal"><span class="pre">--cool-fpga-cache</span></code> options in the
 <code class="docutils literal"><span class="pre">read</span></code> and <code class="docutils literal"><span class="pre">write</span></code> tests are mutually exclusive.</li>
 <li>The timeout options are only meaningful for the continuous mode (with
@@ -649,7 +670,7 @@ the <code class="docutils literal"><span class="pre">--cont</span></code> option
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.13.1',
+            VERSION:'0.13.0',
             LANGUAGE:'en',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
