@@ -423,11 +423,11 @@ toolchain on their systems to install the OPAE SDK.</p>
 </pre></div>
 </div>
 <p>This will generate the following deb packages.</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">opae-&lt;release&gt;.x86_64-libs.deb          (libopae-c and samples)</span>
-<span class="go">opae-&lt;release&gt;.x86_64-tools.deb         (tools)</span>
-<span class="go">opae-&lt;release&gt;.x86_64-tools-extra.deb   (tools)</span>
-<span class="go">opae-&lt;release&gt;.x86_64-devel.deb         (headers)</span>
-<span class="go">opae-&lt;release&gt;.x86_64-ase.deb           (libopae-c-ase)</span>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">opae-libs-&lt;release&gt;.x86_64.deb          (libopae-c and samples)</span>
+<span class="go">opae-tools-&lt;release&gt;.x86_64.deb         (tools)</span>
+<span class="go">opae-tools-extra-&lt;release&gt;.x86_64.deb   (tools)</span>
+<span class="go">opae-devel-&lt;release&gt;.x86_64.deb         (headers)</span>
+<span class="go">opae-ase-&lt;release&gt;.x86_64.deb           (libopae-c-ase)</span>
 </pre></div>
 </div>
 </div>
@@ -457,11 +457,11 @@ these commands:</p>
 <h2>OPAE SDK installation with deb packages<a class="headerlink" href="#opae-sdk-installation-with-deb-packages" title="Permalink to this headline">¶</a></h2>
 <p>The deb packages generated in the previous step can be installed using
 these commands:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo dpkg -i opae-&lt;release&gt;.x86_64-libs.deb
-<span class="gp">$</span> sudo dpkg -i opae-&lt;release&gt;.x86_64-tools.deb
-<span class="gp">$</span> sudo dpkg -i opae-&lt;release&gt;.x86_64-tools-extra.deb
-<span class="gp">$</span> sudo dpkg -i opae-&lt;release&gt;.x86_64-devel.deb
-<span class="gp">$</span> sudo dpkg -i opae-&lt;release&gt;.x86_64-ase.deb
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo dpkg -i opae-libs-&lt;release&gt;.x86_64.deb
+<span class="gp">$</span> sudo dpkg -i opae-tools-&lt;release&gt;.x86_64.deb
+<span class="gp">$</span> sudo dpkg -i opae-tools-extra-&lt;release&gt;.x86_64.deb
+<span class="gp">$</span> sudo dpkg -i opae-devel-&lt;release&gt;.x86_64.deb
+<span class="gp">$</span> sudo dpkg -i opae-ase-&lt;release&gt;.x86_64.deb
 </pre></div>
 </div>
 <p>To uninstall:</p>
