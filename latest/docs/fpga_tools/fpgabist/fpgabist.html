@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.0.0
+                0.13.1
               </div>
             
           
@@ -87,9 +87,9 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html#opae-sdk-installation-with-rpm-packages">OPAE SDK installation with rpm packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html#revision-history">Revision History</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -98,7 +98,7 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
@@ -205,19 +205,19 @@
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>The fpgabist tool performs self-diagnostic tests on supported FPGA
+<p>The <code class="docutils literal"><span class="pre">fpgabist</span></code> tool performs self-diagnostic tests on supported FPGA
 platforms.</p>
 <p>The tool accepts one or more Accelerator Function (AF) binaries from a
 predetermined set of AFs. Depending on the available binaries, the tool
 runs appropriate tests and reports hardware issues.</p>
-<p>fpgabist always uses fpgainfo to report system information before
-running any hardware tests.</p>
-<p>Currently, fpgabist accepts the following AFs: 1. nlb_mode_3 = host
+<p><code class="docutils literal"><span class="pre">fpgabist</span></code> always uses <code class="docutils literal"><span class="pre">fpgainfo</span></code> to report system information
+before running any hardware tests.</p>
+<p>Currently, <code class="docutils literal"><span class="pre">fpgabist</span></code> accepts the following AFs: 1. nlb_mode_3 = host
 memory interface checking 2. dma = local memory interface checking</p>
 <p>The platform includes the AF files, but you can also compile the AFs
 from the source.</p>
 <p>If there are multiple devices, use -b, -d, -f to specify the BDF for the
-specific device. If you do not specify a BDF, fpgabist tests all cards.</p>
+specific device.</p>
 </div>
 <div class="section" id="positional-arguments">
 <h2>POSITIONAL ARGUMENTS<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h2>
@@ -252,7 +252,7 @@ specific device. If you do not specify a BDF, fpgabist tests all cards.</p>
 <div class="section" id="examples">
 <h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">fpgabist</span> <span class="pre">&lt;path_to_gbs_files&gt;/dma_afu.gbs</span> <span class="pre">&lt;path_to_gbs_files&gt;/nlb_3.gbs</span></code></p>
-<p>Runs fpgabist on any platforms in the system that match the default
+<p>Runs <code class="docutils literal"><span class="pre">fpgabist</span></code> on any platforms in the system that match the default
 device ID. This command runs both the DMA and NLB_MODE_3 tests.</p>
 </div>
 </div>
@@ -299,7 +299,7 @@ device ID. This command runs both the DMA and NLB_MODE_3 tests.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.0.0',
+            VERSION:'0.13.1',
             LANGUAGE:'en',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
