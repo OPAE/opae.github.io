@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.13.1
+                0.13.0
               </div>
             
           
@@ -88,8 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html#revision-history">Revision History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -98,7 +97,7 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
@@ -115,11 +114,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../fpgamux/fpgamux.html">fpgamux</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">mmlink</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">OPTIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">NOTES</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
@@ -196,41 +194,32 @@
   <div class="section" id="mmlink">
 <h1>mmlink<a class="headerlink" href="#mmlink" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">mmlink</span> <span class="pre">[-B</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-D</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-F</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[-S</span> <span class="pre">&lt;socket&gt;]</span> <span class="pre">[-P</span> <span class="pre">&lt;TCP</span> <span class="pre">port&gt;]</span> <span class="pre">[-I</span> <span class="pre">&lt;IP</span> <span class="pre">Address&gt;]</span></code></p>
 </div>
 <div class="section" id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>The Remote Signal Tap logic analyzer provides real-time hardware
 debugging for the Accelerator Function Unit (AFU). It provides a signal
 trace capability that the Quartus Prime software adds to the AFU. The
-Remote Signal Tap logic analyzer provides access to the Remote Signal
-Tap part of the Port MMIO space and then runs the remote protocol.</p>
-</div>
-<div class="section" id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+Remote Signal Tap logic analyzer provides access to the RST part of the
+Port MMIO space and then runs the remote protocol. ## EXAMPLES ##</p>
 <p><code class="docutils literal"><span class="pre">./mmlink</span>&#160; <span class="pre">-B</span> <span class="pre">0x5e</span> <span class="pre">-P</span> <span class="pre">3333</span></code></p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">MMLink</span> <span class="n">app</span> <span class="n">starts</span> <span class="n">and</span> <span class="n">listens</span> <span class="k">for</span> <span class="n">connection</span><span class="p">.</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">-B,--bus</span></code></p>
-<p>FPGA Bus number.</p>
-<p><code class="docutils literal"><span class="pre">-D,--device</span></code></p>
-<p>FPGA Device number.</p>
-<p><code class="docutils literal"><span class="pre">-F,--function</span></code></p>
-<p>FPGA function number.</p>
-<p><code class="docutils literal"><span class="pre">-S,--socket</span></code></p>
-<p>FPGA socket number.</p>
-<p><code class="docutils literal"><span class="pre">-P,--port</span></code></p>
-<p>TCP port number.</p>
-<p><code class="docutils literal"><span class="pre">-I,--ip</span></code></p>
-<p>IP address of FPGA system.</p>
+<h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">-B,--bus</span></code> FPGA Bus number.</p>
+<p><code class="docutils literal"><span class="pre">-D,--device</span></code> FPGA Device number.</p>
+<p><code class="docutils literal"><span class="pre">-F,--functio</span></code> FPGA function number.</p>
+<p><code class="docutils literal"><span class="pre">-S,--socket</span></code> FPGA socket number.</p>
+<p><code class="docutils literal"><span class="pre">-P,--port</span></code> TCP port number.</p>
+<p><code class="docutils literal"><span class="pre">-I,--ip</span></code> IP address of FPGA system.</p>
 </div>
 <div class="section" id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<h2>NOTES<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <p>Driver privilege:</p>
 <p>Change AFU driver privilege to user:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span>$ chmod 777 /dev/intel-fpga-port.0
@@ -292,7 +281,7 @@ user    soft   memlock           10000
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.13.1',
+            VERSION:'0.13.0',
             LANGUAGE:'en',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
