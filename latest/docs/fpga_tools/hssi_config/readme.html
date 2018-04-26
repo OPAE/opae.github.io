@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.0.0
+                0.13.1
               </div>
             
           
@@ -87,9 +87,9 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html#opae-sdk-installation-with-rpm-packages">OPAE SDK installation with rpm packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html#revision-history">Revision History</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -98,7 +98,7 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
@@ -128,20 +128,20 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#locating-the-fme-device">Locating the FME device</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#csv-file-format">CSV file format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples-of-commands">Examples of commands</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#dumping-registers">Dumping registers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#reading-single-registers">Reading single registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#locating-the-fme-device">Locating the FME Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#csv-file-format">CSV File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples-of-commands">Examples of Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dumping-registers">Dumping Registers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reading-single-registers">Reading Single Registers</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#loading-registers">Loading registers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#writing-single-registers">Writing single registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-registers">Loading Registers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#writing-single-registers">Writing Single Registers</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#testing-hssi-read-and-write">Testing HSSI read and write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-hssi-read-and-write">Testing HSSI Read and Write</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../hssi_loopback/readme.html">hssi_loopback</a></li>
@@ -213,10 +213,11 @@
 <h1>hssi_config<a class="headerlink" href="#hssi-config" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p>hssi_config reads or writes HSSI registers on either on an Intel FPGA
-using the FPGA Interface Manager (FIM) or on an HSSI retimer card
-attached to the board. hssi_config is only available for the Integrated
-FPGA Platform. You cannot run it on the PCIe accelerator card (PAC).</p>
+<p><code class="docutils literal"><span class="pre">hssi_config</span></code> reads or writes HSSI registers on either on an Intel®
+FPGA using the FPGA Interface Manager (FIM) or on an HSSI retimer card
+attached to the board. <code class="docutils literal"><span class="pre">hssi_config</span></code> is only available for the
+Integrated FPGA Platform. You cannot run it on the PCIe accelerator card
+(PAC).</p>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
@@ -238,104 +239,80 @@ command arguments. The following options and commands are available:</p>
 <div class="section" id="options">
 <h3>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal"><span class="pre">[--resource|-r</span> <span class="pre">&lt;sysfs</span> <span class="pre">resource</span> <span class="pre">path&gt;</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span>The resource path in the sysfs psuedo-filesystem.
-Example:
-`/sys/devices/pci0000\:5e/0000\:5e\:00.0/resource0`
-</pre></div>
-</div>
+<p>The resource path in the sysfs psuedo-filesystem. Example:
+<code class="docutils literal"><span class="pre">/sys/devices/pci0000\:5e/0000\:5e\:00.0/resource0</span></code></p>
 <p><code class="docutils literal"><span class="pre">[--socket-id</span> <span class="pre">0|1]</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">socket</span> <span class="n">id</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
-<span class="n">Required</span> <span class="n">on</span> <span class="n">two</span><span class="o">-</span><span class="n">socket</span> <span class="n">systems</span> <span class="n">to</span> <span class="n">differentiate</span> <span class="n">between</span> <span class="n">the</span> <span class="n">two</span> <span class="n">possible</span> <span class="n">target</span> <span class="n">FPGAs</span><span class="p">.</span>
-</pre></div>
-</div>
+<p>The socket id of the target FPGA. Required on two-socket systems to
+differentiate between the two possible target FPGAs.</p>
 </div>
 <div class="section" id="commands">
 <h3>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal"><span class="pre">dump</span> <span class="pre">[outfile.csv]</span> <span class="pre">[--input-file</span> <span class="pre">inputfile.csv]</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Dump</span> <span class="n">registers</span> <span class="n">to</span> <span class="n">stdout</span> <span class="n">or</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span><span class="p">,</span> <span class="k">if</span> <span class="n">provided</span><span class="p">.</span> <span class="n">hssi_config</span> <span class="n">has</span> <span class="n">a</span> <span class="n">built</span><span class="o">-</span><span class="n">in</span> <span class="n">set</span> <span class="n">of</span> <span class="n">registers</span> <span class="n">to</span>
-<span class="n">dump</span><span class="p">.</span> <span class="n">The</span> <span class="n">first</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span> <span class="n">to</span> <span class="n">write</span><span class="p">.</span> <span class="n">The</span> <span class="n">command</span> <span class="n">dumps</span> <span class="n">to</span> <span class="n">stdout</span> <span class="k">if</span> <span class="n">you</span> <span class="k">do</span> <span class="n">not</span>
-<span class="n">specify</span> <span class="n">a</span> <span class="n">file</span> <span class="n">name</span><span class="p">.</span> <span class="n">Use</span> <span class="n">the</span> <span class="o">--</span><span class="n">input</span><span class="o">-</span><span class="n">file</span> <span class="n">option</span> <span class="n">to</span> <span class="n">specify</span> <span class="n">a</span> <span class="n">different</span> <span class="n">set</span> <span class="n">of</span> <span class="n">registers</span><span class="p">.</span>
-</pre></div>
-</div>
+<p>Dump registers to stdout or to a file, if provided. <code class="docutils literal"><span class="pre">hssi_config</span></code> has
+a built-in set of registers to dump. The first argument is the path to a
+file to write. The command dumps to stdout if you do not specify a file
+name. Use the –input-file option to specify a different set of
+registers.</p>
 <p><code class="docutils literal"><span class="pre">load</span> <span class="pre">[inputfile.csv]</span> <span class="pre">[--c-header]</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Load</span> <span class="n">a</span> <span class="n">set</span> <span class="n">of</span> <span class="k">register</span> <span class="n">values</span> <span class="n">from</span> <span class="n">either</span> <span class="n">stdin</span> <span class="n">or</span> <span class="n">an</span> <span class="n">input</span> <span class="n">file</span> <span class="k">if</span> <span class="n">provided</span><span class="p">.</span> <span class="n">The</span> <span class="n">first</span> <span class="n">argument</span>
-<span class="n">is</span> <span class="n">the</span> <span class="n">path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">registers</span> <span class="n">to</span> <span class="n">load</span><span class="p">.</span> <span class="n">Loads</span> <span class="n">from</span> <span class="n">stdin</span> <span class="k">if</span> <span class="n">omitted</span><span class="p">.</span>
-
-<span class="n">Use</span> <span class="o">--</span><span class="n">c</span><span class="o">-</span><span class="n">header</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">a</span> <span class="n">C</span> <span class="n">header</span> <span class="n">file</span> <span class="n">with</span> <span class="n">an</span> <span class="n">array</span> <span class="n">of</span> <span class="mi">64</span><span class="o">-</span><span class="n">bit</span> <span class="n">numbers</span> <span class="n">to</span> <span class="n">write</span> <span class="n">to</span> <span class="n">the</span> <span class="n">HSSI_CTRL</span> <span class="k">register</span><span class="p">.</span>
-<span class="n">This</span> <span class="n">header</span> <span class="n">file</span> <span class="n">can</span> <span class="n">substitute</span> <span class="k">for</span> <span class="n">the</span> <span class="n">input</span> <span class="n">file</span><span class="p">.</span>
-<span class="nl">NOTE</span><span class="p">:</span> <span class="n">You</span> <span class="n">must</span> <span class="n">perform</span> <span class="n">the</span> <span class="n">acknowledge</span> <span class="n">routine</span> <span class="n">after</span> <span class="n">each</span> <span class="n">write</span><span class="p">.</span>
-</pre></div>
-</div>
+<p>Load a set of register values from either stdin or an input file, if
+provided. The first argument is the path to a file containing the
+registers to load. Loads from stdin if omitted.</p>
+<p>Use –c-header to generate a C header file with an array of 64-bit
+numbers to write to the <code class="docutils literal"><span class="pre">HSSI_CTRL</span></code> register. This header file can
+substitute for the input file. NOTE: You must perform the acknowledge
+routine after each write.</p>
 <p><code class="docutils literal"><span class="pre">read</span> <span class="pre">lane(0-15)</span> <span class="pre">reg-address</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Read</span> <span class="n">from</span> <span class="n">a</span> <span class="n">single</span> <span class="n">XCVR</span> <span class="p">(</span><span class="n">transceiver</span><span class="p">)</span> <span class="k">register</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">first</span> <span class="n">command</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">XCVR</span> <span class="n">lane</span><span class="p">.</span> <span class="n">Use</span> <span class="o">-</span><span class="mi">1</span> <span class="n">to</span> <span class="n">specify</span> <span class="n">a</span> <span class="n">read</span> <span class="n">from</span> <span class="n">all</span> <span class="n">lanes</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">second</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">XCVR</span> <span class="n">address</span> <span class="p">(</span><span class="n">offset</span><span class="p">).</span>
-</pre></div>
-</div>
+<p>Read from a single XCVR (transceiver) register. The first command
+argument is the XCVR lane. Use -1 to specify a read from all lanes. The
+second argument is the XCVR address (offset).</p>
 <p><code class="docutils literal"><span class="pre">write</span> <span class="pre">lane(0-15)</span> <span class="pre">reg-address</span> <span class="pre">value</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Write</span> <span class="n">to</span> <span class="n">a</span> <span class="n">single</span> <span class="n">XCVR</span> <span class="k">register</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">first</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">XCVR</span> <span class="n">lane</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">second</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">XCVR</span> <span class="n">address</span><span class="p">(</span><span class="n">offset</span><span class="p">).</span>
-<span class="n">The</span> <span class="n">third</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">value</span> <span class="n">to</span> <span class="n">write</span> <span class="n">to</span> <span class="n">the</span> <span class="k">register</span><span class="p">.</span>
-</pre></div>
-</div>
+<p>Write to a single XCVR register. The first argument is the XCVR lane.
+The second argument is the XCVR address(offset). The third argument is
+the value to write to the register.</p>
 <p><code class="docutils literal"><span class="pre">rread</span> <span class="pre">device(0x30,</span> <span class="pre">0x32,</span> <span class="pre">0x34,</span> <span class="pre">0x36)</span> <span class="pre">channel(0-3)</span> <span class="pre">address</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Read</span> <span class="n">from</span> <span class="n">a</span> <span class="n">single</span> <span class="n">retimer</span> <span class="k">register</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">first</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">I2C</span> <span class="n">device</span> <span class="n">address</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">second</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">channel</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">third</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="k">register</span> <span class="n">address</span> <span class="p">(</span><span class="n">or</span> <span class="n">I2C</span> <span class="n">byte</span> <span class="n">address</span><span class="p">).</span>
-</pre></div>
-</div>
+<p>Read from a single retimer register. The first argument is the I2C
+device address. The second argument is the channel. The third argument
+is the register address (or I2C byte address).</p>
 <p><code class="docutils literal"><span class="pre">rwrite</span> <span class="pre">device(0x30,</span> <span class="pre">0x32,</span> <span class="pre">0x34,</span> <span class="pre">0x36)</span> <span class="pre">channel(0-3)</span> <span class="pre">address</span> <span class="pre">value</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Write</span> <span class="n">to</span> <span class="n">a</span> <span class="n">single</span> <span class="n">retimer</span> <span class="k">register</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">first</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">I2C</span> <span class="n">device</span> <span class="n">address</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">second</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">channel</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">third</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="k">register</span> <span class="n">address</span> <span class="p">(</span><span class="n">or</span> <span class="n">I2C</span> <span class="n">byte</span> <span class="n">address</span><span class="p">).</span>
-<span class="n">The</span> <span class="n">fourth</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">value</span> <span class="n">to</span> <span class="n">write</span><span class="p">.</span>
-</pre></div>
-</div>
+<p>Write to a single retimer register. The first argument is the I2C device
+address. The second argument is the channel. The third argument is the
+register address (or I2C byte address). The fourth argument is the value
+to write.</p>
 <p><code class="docutils literal"><span class="pre">iread</span> <span class="pre">instance</span> <span class="pre">(0,1)</span> <span class="pre">device-addr</span> <span class="pre">byte-address</span> <span class="pre">byte-count</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Read</span> <span class="n">from</span> <span class="n">a</span> <span class="n">device</span> <span class="n">on</span> <span class="n">the</span> <span class="n">I2C</span> <span class="n">bus</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">first</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">I2C</span> <span class="n">controller</span> <span class="n">instance</span> <span class="p">(</span><span class="mi">0</span> <span class="n">or</span> <span class="mi">1</span><span class="p">).</span>
-<span class="n">The</span> <span class="n">second</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">device</span> <span class="n">address</span> <span class="n">to</span> <span class="n">read</span> <span class="n">from</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">third</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">byte</span> <span class="n">address</span> <span class="n">of</span> <span class="n">the</span> <span class="k">register</span> <span class="n">to</span> <span class="n">read</span> <span class="n">from</span> <span class="n">the</span> <span class="n">device</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">fourth</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">bytes</span> <span class="n">to</span> <span class="n">read</span><span class="p">.</span>
-</pre></div>
-</div>
+<p>Read from a device on the I2C bus. The first argument is the I2C
+controller instance (0 or 1). The second argument is the device address
+to read from. The third argument is the byte address of the register to
+read from the device. The fourth argument is the number of bytes to
+read.</p>
 <p><code class="docutils literal"><span class="pre">iwrite</span> <span class="pre">instance</span> <span class="pre">(0,1)</span> <span class="pre">device-addr</span> <span class="pre">byte-address</span> <span class="pre">byte1</span> <span class="pre">[byte2</span> <span class="pre">[byte3...]]</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Write</span> <span class="n">to</span> <span class="n">a</span> <span class="n">device</span> <span class="n">on</span> <span class="n">the</span> <span class="n">I2C</span> <span class="n">bus</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">first</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">I2C</span> <span class="n">controller</span> <span class="n">instance</span> <span class="p">(</span><span class="mi">0</span> <span class="n">or</span> <span class="mi">1</span><span class="p">).</span>
-<span class="n">The</span> <span class="n">second</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">device</span> <span class="n">address</span> <span class="n">to</span> <span class="n">read</span> <span class="n">from</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">third</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">byte</span> <span class="n">address</span> <span class="n">of</span> <span class="n">the</span> <span class="k">register</span> <span class="n">to</span> <span class="n">read</span> <span class="n">from</span> <span class="n">the</span> <span class="n">device</span><span class="p">.</span>
-<span class="n">All</span> <span class="n">subsequent</span> <span class="n">arguments</span> <span class="n">are</span> <span class="n">the</span> <span class="n">bytes</span> <span class="n">to</span> <span class="n">write</span> <span class="n">to</span> <span class="n">the</span> <span class="n">device</span><span class="p">.</span>
-</pre></div>
-</div>
+<p>Write to a device on the I2C bus. The first argument is the I2C
+controller instance (0 or 1). The second argument is the device address
+to read from. The third argument is the byte address of the register to
+read from the device. All subsequent arguments are the bytes to write to
+the device.</p>
 <p><code class="docutils literal"><span class="pre">test</span> <span class="pre">(rd|rw)</span> <span class="pre">inputfile.csv</span> <span class="pre">[--acktimes]</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Perform</span> <span class="n">built</span><span class="o">-</span><span class="n">in</span> <span class="n">test</span> <span class="k">for</span> <span class="n">reading</span> <span class="n">or</span> <span class="n">writing</span> <span class="n">XCVR</span> <span class="n">registers</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">first</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">the</span> <span class="n">path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">registers</span> <span class="n">to</span> <span class="n">test</span><span class="p">.</span>
-</pre></div>
-</div>
+<p>Perform built-in test for reading or writing XCVR registers. The first
+argument is the path to a file containing the registers to test.</p>
 </div>
 </div>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>hssi_config is a utility that reads or writes hssi equalization
-parameters stored in either the tranceiver (XCVR) registers or the
-registers of the retimer on the I2C bus. To access registers, the hssi
-controller writes to the HSSI_CTRL register and reads from the HSSI_STAT
-register in the the FME (FPGA Management Engine). These two registers
-implement the HSSI AUX bus mailbox protocol to access devices on other
-buses. Because hssi_config maps the FME MMIO space directly, the FPGA
+<p>The <code class="docutils literal"><span class="pre">hssi_config</span></code> utility reads or writes hssi equalization parameters
+stored in either the tranceiver (XCVR) registers or the registers of the
+retimer on the I2C bus. To access registers, the hssi controller writes
+to the <code class="docutils literal"><span class="pre">HSSI_CTRL</span></code> register and reads from the <code class="docutils literal"><span class="pre">HSSI_STAT</span></code> register
+in the the FPGA Management Engine (FME). These two registers implement
+the HSSI AUX bus mailbox protocol to access devices on other buses.
+Because <code class="docutils literal"><span class="pre">hssi_config</span></code> maps the FME MMIO space directly, the FPGA
 driver is not required.</p>
 </div>
 <div class="section" id="locating-the-fme-device">
-<h2>Locating the FME device<a class="headerlink" href="#locating-the-fme-device" title="Permalink to this headline">¶</a></h2>
-<p>The FME (FPGA Management Engine) reads and writes the HSSI_CTRL and
-HSSI_STAT registers on the NIOS device. The FME maps the MMIO address
-space of the FME identified by its resource in the sysfs
-psuedo-filesystem in Linux operating systems. To identify resource
-paths, use the lspci utility to query for Intel devices with device id
-of bcc0.</p>
+<h2>Locating the FME Device<a class="headerlink" href="#locating-the-fme-device" title="Permalink to this headline">¶</a></h2>
+<p>The FME reads and writes the <code class="docutils literal"><span class="pre">HSSI_CTRL</span></code> and <code class="docutils literal"><span class="pre">HSSI_STAT</span></code> registers
+on the NIOS device. The FME maps the MMIO address space of the FME
+identified by its resource in the sysfs psuedo-filesystem in Linux
+operating systems. To identify resource paths, use the <code class="docutils literal"><span class="pre">lspci</span></code> utility
+to query for Intel devices with device id of bcc0.</p>
 <p>Example:</p>
 <p><code class="docutils literal"><span class="pre">lspci</span> <span class="pre">-d</span> <span class="pre">8086:bcc0</span></code></p>
 <p>This command should print out at least one line like the following
@@ -349,9 +326,9 @@ of 0 would use a resource path as follows:</p>
 <p><code class="docutils literal"><span class="pre">/sys/devices/pci0000\:5e/0000\:5e\:00.0/resource0</span></code></p>
 </div>
 <div class="section" id="csv-file-format">
-<h2>CSV file format<a class="headerlink" href="#csv-file-format" title="Permalink to this headline">¶</a></h2>
-<p>Any CSV file parsed by hssi_config must meet have at least four columns.
-The following table provides the column specifications:</p>
+<h2>CSV File Format<a class="headerlink" href="#csv-file-format" title="Permalink to this headline">¶</a></h2>
+<p>Any CSV file parsed by <code class="docutils literal"><span class="pre">hssi_config</span></code> must meet have at least four
+columns. The following table provides the column specifications:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="4%" />
@@ -373,8 +350,9 @@ n</th>
 <tr class="row-even"><td>1</td>
 <td>Register
 type.</td>
-<td>Can be either FPGA_RX, FPGA_TX, RTMR_RX, RTMR_TX
-(or their corresponding numeric values, 1-4).</td>
+<td>Can be either <code class="docutils literal"><span class="pre">FPGA_RX</span></code>, <code class="docutils literal"><span class="pre">FPGA_TX</span></code>,
+<code class="docutils literal"><span class="pre">RTMR_RX</span></code>, <code class="docutils literal"><span class="pre">RTMR_TX</span></code> (or their corresponding
+numeric values, 1-4).</td>
 </tr>
 <tr class="row-odd"><td>2</td>
 <td>Lane or
@@ -406,9 +384,9 @@ or writing registers.</td>
 </table>
 </div>
 <div class="section" id="examples-of-commands">
-<h2>Examples of commands<a class="headerlink" href="#examples-of-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Examples of Commands<a class="headerlink" href="#examples-of-commands" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="dumping-registers">
-<h3>Dumping registers<a class="headerlink" href="#dumping-registers" title="Permalink to this headline">¶</a></h3>
+<h3>Dumping Registers<a class="headerlink" href="#dumping-registers" title="Permalink to this headline">¶</a></h3>
 <p>Dump default register set to stdout:</p>
 <p><code class="docutils literal"><span class="pre">&gt;hssi_config</span> <span class="pre">dump</span></code></p>
 <p>Dump default registers to a file, data.csv:</p>
@@ -417,7 +395,7 @@ or writing registers.</td>
 regspec.csv:</p>
 <p><code class="docutils literal"><span class="pre">&gt;hssi_config</span> <span class="pre">dump</span> <span class="pre">data.csv</span> <span class="pre">--input-file</span> <span class="pre">regspec.csv</span></code></p>
 <div class="section" id="reading-single-registers">
-<h4>Reading single registers<a class="headerlink" href="#reading-single-registers" title="Permalink to this headline">¶</a></h4>
+<h4>Reading Single Registers<a class="headerlink" href="#reading-single-registers" title="Permalink to this headline">¶</a></h4>
 <p>Read register from XCVR at 0x2e1 on lane 0:</p>
 <p><code class="docutils literal"><span class="pre">&gt;hssi_config</span> <span class="pre">read</span> <span class="pre">0</span> <span class="pre">0x2e1</span></code></p>
 <p>Read register 0x109 from retimer on channel 0, device 0x30, channel 1:</p>
@@ -425,7 +403,7 @@ regspec.csv:</p>
 </div>
 </div>
 <div class="section" id="loading-registers">
-<h3>Loading registers<a class="headerlink" href="#loading-registers" title="Permalink to this headline">¶</a></h3>
+<h3>Loading Registers<a class="headerlink" href="#loading-registers" title="Permalink to this headline">¶</a></h3>
 <p>Load registers specified in an input file called data.csv:</p>
 <p><code class="docutils literal"><span class="pre">&gt;hssi_config</span> <span class="pre">load</span> <span class="pre">data.csv</span></code></p>
 <p>Load registers specified from stdin:</p>
@@ -437,7 +415,7 @@ regspec.csv:</p>
 </pre></div>
 </div>
 <div class="section" id="writing-single-registers">
-<h4>Writing single registers<a class="headerlink" href="#writing-single-registers" title="Permalink to this headline">¶</a></h4>
+<h4>Writing Single Registers<a class="headerlink" href="#writing-single-registers" title="Permalink to this headline">¶</a></h4>
 <p>Write 1 to XCVR register at 0x2e1 on lane 0:</p>
 <p><code class="docutils literal"><span class="pre">&gt;hssi_config</span> <span class="pre">write</span> <span class="pre">0</span> <span class="pre">0x2e1</span> <span class="pre">1</span></code></p>
 <p>Read register 0x109 from retimer on channel 0, device 0x30, channel 1:</p>
@@ -446,20 +424,26 @@ regspec.csv:</p>
 </div>
 </div>
 <div class="section" id="testing-hssi-read-and-write">
-<h2>Testing HSSI read and write<a class="headerlink" href="#testing-hssi-read-and-write" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">test</span></code> command tests read or read and write operations on the XCVR
-registers. The first argument to test must be either rd or rw and the
-second argument is the path to a file containing the set of registers to
-test. The rd command reads all the registers. For rw, every register in
-the file is read from and written to in the following sequence: 1. Read
-the register, save the value 2. Write 1 to the register 3. Read the
-register, verify that the register value is 1 4. Write 0 to the register
-5. Read the register, verify that the register value is 0 6. Write the
-original value to the register 7. Read the register, assert it is the
-original value</p>
-<p>The command line option –acktimes indicates that the time spent in the
-ack routine should be measured. When meaured, a summary of ack times
-will be printed out.</p>
+<h2>Testing HSSI Read and Write<a class="headerlink" href="#testing-hssi-read-and-write" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">&gt;</span>&#160; <span class="pre">test</span> <span class="pre">(rd|rw)</span> <span class="pre">register-file.csv</span> <span class="pre">[--acktimes]</span></code></p>
+<p><code class="docutils literal"><span class="pre">rd|wr</span></code></p>
+<p>Specifies either a <code class="docutils literal"><span class="pre">rd</span></code> or <code class="docutils literal"><span class="pre">wr</span></code> of transceiver registers. For
+writes, every register in the file is read from and written to in the
+following sequence:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Read</span> <span class="n">the</span> <span class="k">register</span><span class="p">,</span> <span class="n">save</span> <span class="n">the</span> <span class="n">value</span>
+<span class="mf">2.</span> <span class="n">Write</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">the</span> <span class="k">register</span>
+<span class="mf">3.</span> <span class="n">Read</span> <span class="n">the</span> <span class="k">register</span><span class="p">,</span> <span class="n">verify</span> <span class="n">that</span> <span class="n">the</span> <span class="k">register</span> <span class="n">value</span> <span class="n">is</span> <span class="mi">1</span>
+<span class="mf">4.</span> <span class="n">Write</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">the</span> <span class="k">register</span>
+<span class="mf">5.</span> <span class="n">Read</span> <span class="n">the</span> <span class="k">register</span><span class="p">,</span> <span class="n">verify</span> <span class="n">that</span> <span class="n">the</span> <span class="k">register</span> <span class="n">value</span> <span class="n">is</span> <span class="mi">0</span>
+<span class="mf">6.</span> <span class="n">Write</span> <span class="n">the</span> <span class="n">original</span> <span class="n">value</span> <span class="n">to</span> <span class="n">the</span> <span class="k">register</span>
+<span class="mf">7.</span> <span class="n">Read</span> <span class="n">the</span> <span class="k">register</span><span class="p">,</span> <span class="n">assert</span> <span class="n">it</span> <span class="n">is</span> <span class="n">the</span> <span class="n">original</span> <span class="n">value</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">register=file.csv</span></code></p>
+<p>Specifies the path to a file containing the set of registers to test.</p>
+<p><code class="docutils literal"><span class="pre">--acktimes</span></code></p>
+<p>Specifies the time spent in the <code class="docutils literal"><span class="pre">ack</span></code> routine. When meaured, a summary
+of ack times prints to stdout. This argument is optional.</p>
 </div>
 </div>
 
@@ -505,7 +489,7 @@ will be printed out.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.0.0',
+            VERSION:'0.13.1',
             LANGUAGE:'en',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
