@@ -1,49 +1,36 @@
 # mmlink #
 
-## Synopsis  ##
+## SYNOPSIS  ##
 
 `mmlink [-B <bus>] [-D <device>] [-F <function>] [-S <socket>] [-P <TCP port>] [-I <IP Address>]`
 
 
-## Description ##
+## DESCRIPTION ##
 The Remote Signal Tap logic analyzer provides real-time hardware debugging for the Accelerator Function Unit (AFU). 
-It provides a signal trace capability that the Quartus Prime software adds to the AFU. The Remote Signal Tap logic
-analyzer provides access to the Remote Signal Tap part of the Port MMIO space and then runs the remote protocol.
-
-## Examples  ##
+It provides a signal trace capability that the Quartus Prime software adds to the AFU.
+The Remote Signal Tap logic analyzer provides access to the RST part of the Port MMIO space and then runs the remote protocol.
+## EXAMPLES  ##
 
 `./mmlink  -B 0x5e -P 3333`
 
   MMLink app starts and listens for connection.
 
-## Options ##
+## OPTIONS ##
 
-`-B,--bus` 
+`-B,--bus` FPGA Bus number.
 
-FPGA Bus number.
+`-D,--device` FPGA Device number.
 
-`-D,--device` 
+`-F,--functio` FPGA function number.
 
-FPGA Device number.
+`-S,--socket` FPGA socket number.
 
-`-F,--function` 
+`-P,--port` TCP port number.
 
-FPGA function number.
-
-`-S,--socket` 
-
-FPGA socket number.
-
-`-P,--port` 
-
-TCP port number.
-
-`-I,--ip ` 
-
-IP address of FPGA system. 
+`-I,--ip ` IP address of FPGA system. 
 
 
-## Notes ##
+## NOTES ##
 
 Driver privilege:
 
