@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.0.0
+                0.13.1
               </div>
             
           
@@ -87,9 +87,9 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html#opae-sdk-installation-with-rpm-packages">OPAE SDK installation with rpm packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html#revision-history">Revision History</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -98,7 +98,7 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
@@ -117,8 +117,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">packager</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#packager-interface">PACKAGER INTERFACE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#packager-command-syntax">Packager Command Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#accelerator-description-file">Accelerator Description File</a></li>
 </ul>
 </li>
@@ -196,94 +197,217 @@
 <h1>packager<a class="headerlink" href="#packager" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">packager</span> <span class="pre">&lt;cmd&gt;</span> <span class="pre">[options]</span></code></p>
+<p><code class="docutils literal"><span class="pre">packager</span> <span class="pre">&lt;cmd&gt;</span> <span class="pre">[arguments]</span></code></p>
 </div>
 <div class="section" id="description">
-<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>The packager provides tools to help AFU developers create Accelerator
-Function files. The Accelerator Function file is the programming file
-for an AFU in the Intel® Acceleration Stack for FPGAs platform. It
-includes metadata the packager tool generates and a raw binary file
-(.rbf) that the Intel Quartus Prime software generates.</p>
-<p>Currently, the packager’s only function is to create an AFU file. Refer
-to Section 2 for more information about the packager. The packager
-depends on a JSON file to describe AFU metadata. Refer to Section 3 for
-more information about the JASON file.</p>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>The packager provides tools that Accelerator Functional Unit (AFU)
+developers use to create Accelerator Function (AF) files. The AF file is
+the programming file for an AFU on Intel® FPGA platforms. The packager
+tool concatenates the metadata from the JSON file to a raw binary file
+<code class="docutils literal"><span class="pre">(.rbf)</span></code> that the Intel Quartus® Prime software generates.</p>
+<p>The packager’s only function is to create an AF file. Refer to <a class="reference external" href="#packager-command-syntax">Packager
+Command Syntax</a> for more information about
+invoking the packager. The packager depends on a JSON file to describe
+AFU metadata. Refer to <a class="reference external" href="#accelerator-description-file">Accelerator Description
+File</a> for more information about the
+JSON file.</p>
 <p><strong>The packager requires Python 2.7.1 and Python 2.7.3. The tool
-indicates if it is being called with a compatible version of Python.</strong></p>
+indicates if it is being called with a compatible of Python.</strong></p>
 </div>
-<div class="section" id="packager-interface">
-<h2>PACKAGER INTERFACE<a class="headerlink" href="#packager-interface" title="Permalink to this headline">¶</a></h2>
-<p>The packager is a command line tool with the following interface:</p>
-<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">packager</span> <span class="pre">&lt;CMD&gt;</span> <span class="pre">[options]</span></code></p>
-<p>To display the list of commands for the packager, run:</p>
-<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">packager</span> <span class="pre">help</span></code></p>
-<p>To display help for a specific command, run:</p>
-<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">packager</span> <span class="pre">&lt;CMD&gt;</span> <span class="pre">--help</span></code></p>
-<p>To display the version of the packager tool, run:</p>
-<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">packager</span> <span class="pre">version</span></code></p>
-<p>To generate an AFU file, run:</p>
+<div class="section" id="packager-command-syntax">
+<h2>Packager Command Syntax<a class="headerlink" href="#packager-command-syntax" title="Permalink to this headline">¶</a></h2>
+<p>The packager is a command line tool with the following syntax:</p>
+<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">packager</span> <span class="pre">&lt;cmd&gt;</span> <span class="pre">[arguments]</span></code></p>
+<p>The following table describes the <code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code> arguments:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="44%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Arguments</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">create-gbs</span></code></td>
+<td><code class="docutils literal"><span class="pre">--rbf=&lt;RBF_PATH&gt;</span></code>
+<code class="docutils literal"><span class="pre">--afu=&lt;AFU_JSON_PATH&gt;</span></code>
+<code class="docutils literal"><span class="pre">--gbs=&lt;GBS_PATH&gt;</span></code>
+<code class="docutils literal"><span class="pre">--set-value=&lt;key&gt;.&lt;value</span>
+<span class="pre">&gt;</span></code></td>
+<td>Creates the AF file.
+The engineering name
+for this file is the
+green bit stream,
+abbreviated gbs. The
+<code class="docutils literal"><span class="pre">--rbf</span></code> and
+<code class="docutils literal"><span class="pre">--afu</span></code> arguments
+are required.
+<code class="docutils literal"><span class="pre">&lt;RBF_PATH&gt;</span></code> is
+the path to the RBF
+file for the AFU.
+The Quartus® Prime
+software generates
+this RBF by
+compiling the AFU
+design.
+<code class="docutils literal"><span class="pre">&lt;AFU_JSON_PATH&gt;</span></code>
+is the path to the
+Accelerator
+Description file.
+This is a JSON file
+that describes the
+metadata that
+<code class="docutils literal"><span class="pre">create-gbs</span></code>
+appends to the RBF.
+<code class="docutils literal"><span class="pre">&lt;GBS_PATH&gt;</span></code> is
+the path to the RBF
+file for the FPGA
+Interface Manager
+(FIM) that contains
+the FPGA interface
+unit and other
+interfaces. If you
+do not specify the
+<code class="docutils literal"><span class="pre">--gbs</span></code>, the
+command defaults to
+<code class="docutils literal"><span class="pre">&lt;rbf_name&gt;.gbs</span></code>.
+You can use the
+optional
+<code class="docutils literal"><span class="pre">--set-value=&lt;key&gt;.</span>
+<span class="pre">&lt;value&gt;</span></code>
+argument to set
+values for JSON
+metadata. To set
+more than one JSON
+value, list a series
+of <code class="docutils literal"><span class="pre">&lt;key&gt;.&lt;value&gt;</span></code>
+pairs.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">modify-gbs</span></code></td>
+<td><code class="docutils literal"><span class="pre">--gbs=&lt;gbs_PATH&gt;</span></code></td>
+<td>Modifies the AF
+file. The
+<code class="docutils literal"><span class="pre">--input-gbs</span></code>arg
+ument
+is required. If you
+do not provide the
+<code class="docutils literal"><span class="pre">--output-gbs</span></code>
+argument,
+<code class="docutils literal"><span class="pre">modify-gbs</span></code>
+overwrites the
+<code class="docutils literal"><span class="pre">--input-gbs</span></code>
+file. Use the
+<code class="docutils literal"><span class="pre">--set-value=&lt;key&gt;.</span>
+<span class="pre">&lt;value&gt;</span></code>
+argument to set
+values for JSON
+metadata. To set
+more than one JSON
+value, list a series
+of <code class="docutils literal"><span class="pre">&lt;key&gt;.&lt;value&gt;</span></code>
+pairs.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">gbs-info</span></code></td>
+<td><code class="docutils literal"><span class="pre">--input-gbs=&lt;gbs_PATH&gt;</span></code></td>
+<td>Prints information
+about the AF file.
+The <code class="docutils literal"><span class="pre">--input-gbs</span></code>
+argument is
+required.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">get-rbf</span></code></td>
+<td><code class="docutils literal"><span class="pre">--gbs=&lt;GBS_PATH&gt;</span></code>
+<code class="docutils literal"><span class="pre">--rbf=&lt;RBF_PATH&gt;</span></code></td>
+<td>Creates the the RBF
+by extracting it
+from the AF file.
+The
+<code class="docutils literal"><span class="pre">--gbs</span></code>argument
+is required. If you
+do not specify the
+<code class="docutils literal"><span class="pre">--rbf</span></code> agrument,
+the command defaults
+to <code class="docutils literal"><span class="pre">&lt;gbs_name.rbf</span></code>
+.</td>
+</tr>
+<tr class="row-even"><td>None, or any
+<code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code></td>
+<td><code class="docutils literal"><span class="pre">--help</span></code></td>
+<td>Summarizes the
+<code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code> options.
+Typing
+<code class="docutils literal"><span class="pre">packager</span> <span class="pre">--help</span></code>
+gives a list of
+<code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code> values.
+Typing
+<code class="docutils literal"><span class="pre">packager</span> <span class="pre">&lt;CMD&gt;</span> <span class="pre">--h</span>
+<span class="pre">elp</span></code>
+provides detailed
+help for <code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>To generate an AF file, run:</p>
 <p><code class="docutils literal"><span class="pre">$</span> <span class="pre">packager</span> <span class="pre">create-gbs</span> <span class="pre">--rbf=&lt;RBF_PATH&gt;</span> <span class="pre">--afu=&lt;AFU_JSON_PATH&gt;</span> <span class="pre">--gbs=&lt;GBS_PATH&gt;</span></code></p>
-<blockquote>
-<div>is the path to the RBF file for the AFU. The Quartus Prime software</div></blockquote>
-<p>generates this RBF by compiling the AFU. is the path to the Accelerator
-Description file. This is a JSON file that describes the metadata that
-is appended to the AFU. is the path to the RBF file for the FPGA
-interface manager (FIM) that contains the FPGA interface unit and other
-interfaces.</p>
-<p><strong>TIP</strong>: JSON files can be very particular about things like trailing
-commas. If you’re getting errors, try using jsonlint.com to validate
-that your JSON is formatted correctly.</p>
-<p>To modify metadata in an existing AFU file, run the following command:</p>
+<p><strong>TIP</strong>: JSON files are very particular about syntax such as trailing
+commas. If you are getting errors, use <code class="docutils literal"><span class="pre">jsonlint.com</span></code> to validate that
+your JSON is formatted correctly.</p>
+<p>To modify metadata in an existing AF, run the following command:</p>
 <p><code class="docutils literal"><span class="pre">$</span> <span class="pre">packager</span> <span class="pre">modify-gbs</span> <span class="pre">--input-gbs=&lt;PATH_TO_GBS_TO_BE_MODIFIED&gt;</span> <span class="pre">--outputgbs=&lt;NAME_FOR_NEW_GBS&gt;</span> <span class="pre">--set-value</span> <span class="pre">&lt;key&gt;:&lt;value&gt;</span></code></p>
 <p>You can pass in a number of : pairs with –set-value to update values in
-“afu- image”.</p>
-<p>To print the metadata of an existing AFU:</p>
+an AF.</p>
+<p>To print the metadata of an existing AF:</p>
 <p><code class="docutils literal"><span class="pre">$</span> <span class="pre">packager</span> <span class="pre">get-info</span> <span class="pre">--gbs=&lt;GBS_PATH&gt;</span></code></p>
-<p>To extract the RBF from the AFU:</p>
+<p>To extract the RBF from the AF:</p>
 <p><code class="docutils literal"><span class="pre">$</span> <span class="pre">packager</span> <span class="pre">get-rbf</span> <span class="pre">--gbs=&lt;GBS_PATH&gt;</span> <span class="pre">--rbf=&lt;NAME_FOR_RBF&gt;</span></code></p>
 </div>
 <div class="section" id="accelerator-description-file">
 <h2>Accelerator Description File<a class="headerlink" href="#accelerator-description-file" title="Permalink to this headline">¶</a></h2>
-<p>This Accelerator Description File is a JSON file that describes an AFU.
-Its currently describes the metadata associated with a AFU. This
-metadata is used by the OPAE during reconfiguration. Here is an example
+<p>The Accelerator Description File is a JSON file that describes the
+metadata associated with an AFU. The Open Progammable Accelerator Engine
+(OPAE) uses this metadata during reconfiguration. Here is an example
 file:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="p">{</span>
-   <span class="s">&quot;version&quot;</span><span class="o">:</span> <span class="mi">1</span>
+   <span class="s">&quot;version&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
    <span class="s">&quot;platform-name&quot;</span><span class="o">:</span> <span class="s">&quot;DCP&quot;</span><span class="p">,</span>
    <span class="s">&quot;afu-image&quot;</span><span class="o">:</span> <span class="p">{</span>
       <span class="s">&quot;magic-no&quot;</span><span class="o">:</span> <span class="mi">488605312</span><span class="p">,</span>
-      <span class="s">&quot;interface-uuid&quot;</span><span class="o">:</span> <span class="s">&quot;576c885b-0a4f-549b-ca2e-3b2e12d579f7&quot;</span><span class="p">,</span>
-      <span class="s">&quot;clock-frequency-low&quot;</span><span class="o">:</span> <span class="s">&quot;50&quot;</span><span class="p">,</span>
-      <span class="s">&quot;clock-frequency-high&quot;</span><span class="o">:</span> <span class="s">&quot;200&quot;</span><span class="p">,</span>
-      <span class="s">&quot;power&quot;</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-      <span class="s">&quot;afc-clusters&quot;</span><span class="o">:</span> <span class="p">[{</span>
+      <span class="s">&quot;interface-uuid&quot;</span><span class="o">:</span> <span class="s">&quot;01234567-89AB-CDEF-0123-456789ABCDEF&quot;</span><span class="p">,</span>
+      <span class="s">&quot;power&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s">&quot;accelerator-clusters&quot;</span><span class="o">:</span> <span class="p">[{</span>
+         <span class="s">&quot;name&quot;</span><span class="o">:</span> <span class="s">&quot;dma_test_afu&quot;</span><span class="p">,</span>
          <span class="s">&quot;total-contexts&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-         <span class="s">&quot;name&quot;</span><span class="o">:</span> <span class="s">&quot;nlb_400&quot;</span><span class="p">,</span>
-         <span class="s">&quot;afc-type-uuid&quot;</span><span class="o">:</span> <span class="s">&quot;c000c966-0d82-4272-9aef-fe5f84570612&quot;</span>
+         <span class="s">&quot;accelerator-type-uuid&quot;</span><span class="o">:</span> <span class="s">&quot;331DB30C-9885-41EA-9081-F88B8F655CAA&quot;</span>
       <span class="p">}</span>
       <span class="p">]</span>
    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The clock frequency fields are for OpenCL which requires PLL
-reconfiguration. Quartus Prime compilation derives a set of PLL
-parameter values to update the PLL Dynamic Reconfiguration Block. The
-metadata stores these parameter values. After reprogramming the AFU
-using partial reconfiguration (PR), the software driver reconfigures the
-PLL by writing these parameter values over PCIe/CCI. No kernel space
-floating point processing is necessary.</p>
-<p><strong>Note the version field. This file format may change as the
-architecture evolves. The version reflects changes to the file format.</strong></p>
+<p>The packager stores these parameter values in the resultant AF. After
+reprogramming the AFU using partial reconfiguration (PR), the software
+driver reconfigures the PLLs by writing the clock-frequency-high and
+clock-frequency-low values (if present) over the PCIe® and CCI
+interfaces.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">JSON</span> <span class="n">file</span> <span class="n">format</span> <span class="n">may</span> <span class="n">change</span> <span class="n">as</span> <span class="n">the</span> <span class="n">architecture</span> <span class="n">evolves</span><span class="p">.</span> <span class="n">Any</span> <span class="n">changes</span> <span class="n">to</span> <span class="n">the</span> <span class="n">current</span> <span class="n">format</span> <span class="n">trigger</span> <span class="n">an</span> <span class="n">update</span>
+<span class="n">to</span> <span class="n">the</span> <span class="n">version</span> <span class="n">number</span><span class="p">.</span>
+</pre></div>
+</div>
 <table border="1" class="docutils">
 <colgroup>
 <col width="20%" />
-<col width="13%" />
-<col width="13%" />
-<col width="31%" />
-<col width="23%" />
+<col width="12%" />
+<col width="12%" />
+<col width="29%" />
+<col width="26%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">CATEGORY</th>
@@ -313,7 +437,8 @@ ated)</td>
 r</td>
 <td>Magic no.
 Associated with
-the FPGA Interface
+the FPGA
+Interface
 Manager.</td>
 <td>No</td>
 </tr>
@@ -323,13 +448,14 @@ rm-nam
 e</td>
 <td>String</td>
 <td>Name of the
-platform for which
-the metadata is
+platform for
+which the
+metadata is
 intended. The
 field value is
-“DCP” for Intel®
-Acceleration Stack
-for FPGAs.</td>
+“DCP” for Intel
+Acceleration
+Stack for FPGAs.</td>
 <td>No</td>
 </tr>
 <tr class="row-odd"><td>Per-AFU</td>
@@ -339,7 +465,8 @@ id</td>
 <td>UUID</td>
 <td>Interface id
 associated with
-the FPGA Interface
+the FPGA
+Interface
 Manager.</td>
 <td>Yes</td>
 </tr>
@@ -351,9 +478,9 @@ r</td>
 Function power
 consumption, in
 watts. Set to 0
-for Intel®
-Acceleration Stack
-for FPGAs
+for Intel
+Acceleration
+Stack for FPGAs
 platforms.</td>
 <td>Yes</td>
 </tr>
@@ -364,8 +491,9 @@ ncy-lo
 w</td>
 <td>Float</td>
 <td>Clock frequency
-for 1st PLL (Clock
-network)1 in MHz.</td>
+for 1st PLL
+(Clock network)1
+in MHz.</td>
 <td>No</td>
 </tr>
 <tr class="row-even"><td>Per-AFU</td>
@@ -460,7 +588,7 @@ architectures.</td>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.0.0',
+            VERSION:'0.13.1',
             LANGUAGE:'en',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
