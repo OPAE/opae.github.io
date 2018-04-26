@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.13.1
+                1.0.0
               </div>
             
           
@@ -87,9 +87,9 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html#opae-sdk-installation-with-rpm-packages">OPAE SDK installation with rpm packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html#revision-history">Revision History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment (ASE) User Guide</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -98,7 +98,7 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">OPAE Intel® FPGA Linux Device Driver Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
@@ -209,20 +209,13 @@
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">-B,--bus</span></code></p>
-<p>FPGA Bus number.</p>
-<p><code class="docutils literal"><span class="pre">-D,--device</span></code></p>
-<p>FPGA Device number.</p>
-<p><code class="docutils literal"><span class="pre">-F,--functio</span></code></p>
-<p>FPGA function number.</p>
-<p><code class="docutils literal"><span class="pre">-S,--socket</span></code></p>
-<p>FPGA socket number.</p>
-<p><code class="docutils literal"><span class="pre">-P,--port</span></code></p>
-<p>Port ID.</p>
-<p><code class="docutils literal"><span class="pre">-H,--freq-high</span></code></p>
-<p>User clock high frequency.</p>
-<p><code class="docutils literal"><span class="pre">-L,--freq-low</span></code></p>
-<p>User clock low frequency.</p>
+<p><code class="docutils literal"><span class="pre">-B,--bus</span></code> FPGA Bus number.</p>
+<p><code class="docutils literal"><span class="pre">-D,--device</span></code> FPGA Device number.</p>
+<p><code class="docutils literal"><span class="pre">-F,--functio</span></code> FPGA function number.</p>
+<p><code class="docutils literal"><span class="pre">-S,--socket</span></code> FPGA socket number.</p>
+<p><code class="docutils literal"><span class="pre">-P,--port</span></code> Port ID.</p>
+<p><code class="docutils literal"><span class="pre">-H,--freq-high</span></code> User clock high frequency.</p>
+<p><code class="docutils literal"><span class="pre">-L,--freq-low</span></code> User clock low frequency.</p>
 </div>
 </div>
 
@@ -268,7 +261,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.13.1',
+            VERSION:'1.0.0',
             LANGUAGE:'en',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
