@@ -465,6 +465,216 @@ human-readable strings.</li>
 more information about each of the functions, refer to the <a class="reference external" href="https://opae.github.io/0.13.0/docs/fpga_api/fpga_api.html">OPAE C API
 reference
 manual</a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="19%" />
+<col width="11%" />
+<col width="11%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Function
+ality</th>
+<th class="head">API Call</th>
+<th class="head">FPGA</th>
+<th class="head">Accel
+erato
+r</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Enumerat
+ion</td>
+<td><code class="docutils literal"><span class="pre">fpgaEnum</span>
+<span class="pre">erate()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Query FPGA resources that
+match certain properties</td>
+</tr>
+<tr class="row-odd"><td>Enumerat
+ion:
+Properti
+es</td>
+<td><code class="docutils literal"><span class="pre">fpga[Get</span>
+<span class="pre">,</span> <span class="pre">Update,</span>
+<span class="pre">Clear,</span> <span class="pre">Clo</span>
+<span class="pre">ne,</span> <span class="pre">Destro</span>
+<span class="pre">y</span> <span class="pre">Properti</span>
+<span class="pre">es]()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Manage <code class="docutils literal"><span class="pre">fpga_properties</span></code>
+life cycle</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td><code class="docutils literal"><span class="pre">fpgaProp</span>
+<span class="pre">ertiesGet[</span>
+<span class="pre">Prop]()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Get the specified property
+<em>Prop</em>, from the <a class="reference external" href="#fpga-resource-properties">FPGA
+Resource
+Properties</a>
+table</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td><code class="docutils literal"><span class="pre">fpgaProp</span>
+<span class="pre">ertiesSet[</span>
+<span class="pre">Prop]()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Set the specified property
+<em>Prop</em>, from the <a class="reference external" href="#fpga-resource-properties">FPGA
+Resource
+Properties</a>
+table</td>
+</tr>
+<tr class="row-even"><td>Access:
+Ownershi
+p</td>
+<td><code class="docutils literal"><span class="pre">fpga[Ope</span>
+<span class="pre">n,</span> <span class="pre">Close](</span>
+<span class="pre">)</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Acquire/release ownership</td>
+</tr>
+<tr class="row-odd"><td>Access:
+Reset</td>
+<td><code class="docutils literal"><span class="pre">fpgaRese</span>
+<span class="pre">t()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Reset an accelerator</td>
+</tr>
+<tr class="row-even"><td>Access:
+Event
+handling</td>
+<td><code class="docutils literal"><span class="pre">fpga[Reg</span>
+<span class="pre">ister,</span> <span class="pre">Unr</span>
+<span class="pre">egister]Ev</span>
+<span class="pre">ent()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Register/unregister an
+event to be notified about</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td><code class="docutils literal"><span class="pre">fpga[Cre</span>
+<span class="pre">ate,</span> <span class="pre">Destr</span>
+<span class="pre">oy]EventHa</span>
+<span class="pre">ndle()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Manage
+<code class="docutils literal"><span class="pre">fpga_event_handle</span></code> life
+cycle</td>
+</tr>
+<tr class="row-even"><td>Access:
+UMsg</td>
+<td><code class="docutils literal"><span class="pre">fpgaGetN</span>
+<span class="pre">umUmsg()</span></code>
+,
+<code class="docutils literal"><span class="pre">fpgaSetU</span>
+<span class="pre">msgAttribu</span>
+<span class="pre">tes()</span></code>,
+<code class="docutils literal"><span class="pre">fpgaTrig</span>
+<span class="pre">gerUmsg()`</span>
+<span class="pre">`,</span>
+<span class="pre">``fpgaGetU</span>
+<span class="pre">msgPtr()</span></code></td>
+<td>Yes</td>
+<td>No</td>
+<td>Low-latency accelerator
+notification mechanism.</td>
+</tr>
+<tr class="row-odd"><td>Access:
+MMIO</td>
+<td><code class="docutils literal"><span class="pre">fpgaMapM</span>
+<span class="pre">MIO()</span></code>,
+<code class="docutils literal"><span class="pre">fpgaUnMa</span>
+<span class="pre">pMMIO()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Map/unmap MMIO space</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td><a href="#id1"><span class="problematic" id="id2">``</span></a>fpgaGetM
+MIOInfo()`
+`</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Get information about the
+specified MMIO space</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td><code class="docutils literal"><span class="pre">fpgaRead</span>
+<span class="pre">MMIO[32,</span> <span class="pre">6</span>
+<span class="pre">4]()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Read a 32-bit or 64-bit
+value from MMIO space</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td><code class="docutils literal"><span class="pre">fpgaWrit</span>
+<span class="pre">eMMIO[32,</span>
+<span class="pre">64]()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Write a 32-bit or 64-bit
+value to MMIO space</td>
+</tr>
+<tr class="row-odd"><td>Memory
+manageme
+nt:
+Shared
+memory</td>
+<td><code class="docutils literal"><span class="pre">fpga[Pre</span>
+<span class="pre">pare,</span> <span class="pre">Rele</span>
+<span class="pre">ase]Buffer</span>
+<span class="pre">()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Manage memory buffer
+shared between the calling
+process and an accelerator</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td><code class="docutils literal"><span class="pre">fpgaGetI</span>
+<span class="pre">OVA()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Return the virtual address
+of a shared memory buffer</td>
+</tr>
+<tr class="row-odd"><td>Manageme
+nt:
+Reconfig
+uration</td>
+<td><code class="docutils literal"><span class="pre">fpgaReco</span>
+<span class="pre">nfigureSlo</span>
+<span class="pre">t()</span></code></td>
+<td>Yes</td>
+<td>No</td>
+<td>Replace an existing AFU
+with a new one</td>
+</tr>
+<tr class="row-even"><td>Error
+report</td>
+<td><code class="docutils literal"><span class="pre">fpgaErrS</span>
+<span class="pre">tr()</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Map an error code to a
+human readable string</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="fpga-resource-properties">
 <h3>FPGA Resource Properties<a class="headerlink" href="#fpga-resource-properties" title="Permalink to this headline">¶</a></h3>
