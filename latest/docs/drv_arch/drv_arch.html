@@ -309,6 +309,10 @@ always performs this check before reconfiguring the AF.</li>
 <li>The AF must also target the reconfigurable region (Port) of the FPGA.</li>
 </ul>
 <p>In all other cases PR fails and may cause system instability.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Platforms that support 512-bit Partial Reconfiguration require</span>
+<span class="go">binutils &gt;= version 2.25.</span>
+</pre></div>
+</div>
 <p>Close any software program accessing the FPGA, including software
 programs running in a virtualized host before initiating PR. Here is the
 recommended sequence:</p>
