@@ -508,6 +508,13 @@ for all users, you can replace <code class="docutils literal"><span class="pre">
 <span class="go">*    soft   memlock           unlimited</span>
 </pre></div>
 </div>
+<p>Note that settings in the /etc/security/limits.conf file don’t apply to
+services. To increase the locked memory limit for a service you need to
+modify the application’s systemd service file and add the line:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">[Service]</span>
+<span class="go">LimitMEMLOCK=infinity</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="hupgepage-settings">
 <h2>Hupgepage Settings<a class="headerlink" href="#hupgepage-settings" title="Permalink to this headline">¶</a></h2>
