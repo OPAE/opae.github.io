@@ -676,6 +676,10 @@ which are also defined in &lt;opae/properties.h&gt;.</p>
 </div>
 <div class="section" id="properties-h">
 <h3><a class="toc-backref" href="#id6">properties.h</a><a class="headerlink" href="#properties-h" title="Permalink to this headline">¶</a></h3>
+<p>Functions for examining and manipulating <code class="docutils literal"><span class="pre">fpga_properties</span></code> objects. </p>
+<p>In OPAE, <code class="docutils literal"><span class="pre">fpga_properties</span></code> objects are used both for obtaining information about resources and for selectively enumerating resources based on their properties. This file provides accessor functions (get/set) to allow reading and writing individual items of an <code class="docutils literal"><span class="pre">fpga_properties</span></code> object. Generally, not all object types supported by OPAE carry all properties. If you call a property accessor method on a <code class="docutils literal"><span class="pre">fpga_properties</span></code> object that does not support this particular property, it will return FPGA_INVALID_PARAM.</p>
+<p><em>Accessor Return Values</em></p>
+<p>In addition to the return values specified in the documentation below, all accessor functions return FPGA_OK on success, FPGA_INVALID_PARAM if you pass NULL or invalid parameters (i.e. non-initialized properties objects), FPGA_EXCEPTION if an internal exception occurred trying to access the properties object, FPGA_NOT_FOUND if the requested property is not part of the supplied properties object. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
