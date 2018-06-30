@@ -96,11 +96,6 @@
 <li class="toctree-l1"><a class="reference internal" href="fpga_api.html">OPAE C API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fpga_cxx_api.html">OPAE C++ Core API Reference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">OPAE Python API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#benefits">Benefits</a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-types-methods-and-constants">Module Types, Methods, and Constants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#fundamental-types">Fundamental Types</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#properties">Properties</a></li>
@@ -210,76 +205,40 @@
 following sections:</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#overview" id="id1">Overview</a></li>
-<li><a class="reference internal" href="#implementation" id="id2">Implementation</a><ul>
-<li><a class="reference internal" href="#benefits" id="id3">Benefits</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-types-methods-and-constants" id="id4">Module Types, Methods, and Constants</a></li>
-<li><a class="reference internal" href="#fundamental-types" id="id5">Fundamental Types</a><ul>
-<li><a class="reference internal" href="#properties" id="id6">Properties</a></li>
-<li><a class="reference internal" href="#token" id="id7">Token</a></li>
-<li><a class="reference internal" href="#handle" id="id8">Handle</a></li>
-<li><a class="reference internal" href="#event" id="id9">Event</a></li>
-<li><a class="reference internal" href="#shared-buffer" id="id10">Shared Buffer</a></li>
-<li><a class="reference internal" href="#error" id="id11">Error</a></li>
+<li><a class="reference internal" href="#module-types-methods-and-constants" id="id1">Module Types, Methods, and Constants</a></li>
+<li><a class="reference internal" href="#fundamental-types" id="id2">Fundamental Types</a><ul>
+<li><a class="reference internal" href="#properties" id="id3">Properties</a></li>
+<li><a class="reference internal" href="#token" id="id4">Token</a></li>
+<li><a class="reference internal" href="#handle" id="id5">Handle</a></li>
+<li><a class="reference internal" href="#event" id="id6">Event</a></li>
+<li><a class="reference internal" href="#shared-buffer" id="id7">Shared Buffer</a></li>
+<li><a class="reference internal" href="#error" id="id8">Error</a></li>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="overview">
-<h2><a class="toc-backref" href="#id1">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>The OPAE Python API is built on top of the OPAE C++ Core API and its object
-model. Because of this, developing OPAE applications in Python is very similar
-to developing OPAE applications in C++ which significantly reduces the learning
-curve required to adapt to the Python API. While the object model remains the same,
-some static factory functions in the OPAE C++ Core API have been moved to module
-level methods in the OPAE Python API with the exception of the properties class.
-The goal of the OPAE Python API is to enable fast prototyping, test automation,
-infrastructure managment, and an easy to use framework for FPGA resource
-interactions that don’t rely on software algorithms with a high runtime
-complexity.</p>
-</div>
-<div class="section" id="implementation">
-<h2><a class="toc-backref" href="#id2">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
-<p>The OPAE Python API is implemented by creating a Python extension using <a class="reference external" href="http://pybind11.readthedocs.io/en/stable">pybind11</a>.
-This extension is created by using the pybind11 API which relies mostly on
-macros and compile time introspection to define the module initialization point
-as well as type converters between OPAE C++ Core types and OPAE Python types.</p>
-<div class="section" id="benefits">
-<h3><a class="toc-backref" href="#id3">Benefits</a><a class="headerlink" href="#benefits" title="Permalink to this headline">¶</a></h3>
-<p>The major benefits of using pybind11 for developing the OPAE Python API
-include, but are not limited to, the following features of pybind11:</p>
-<ul class="simple">
-<li>Uses C++ 11 standard library although it can use C++ 14 or C++17.</li>
-<li>Automatic conversions of shared_ptr types</li>
-<li>Built-in support for numpy and Eigen numerical libraries</li>
-<li>Interoperable with the Python C API</li>
-</ul>
-</div>
 </div>
 <div class="section" id="module-types-methods-and-constants">
-<h2><a class="toc-backref" href="#id4">Module Types, Methods, and Constants</a><a class="headerlink" href="#module-types-methods-and-constants" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">Module Types, Methods, and Constants</a><a class="headerlink" href="#module-types-methods-and-constants" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="fundamental-types">
-<h2><a class="toc-backref" href="#id5">Fundamental Types</a><a class="headerlink" href="#fundamental-types" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">Fundamental Types</a><a class="headerlink" href="#fundamental-types" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="properties">
-<h3><a class="toc-backref" href="#id6">Properties</a><a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id3">Properties</a><a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="token">
-<h3><a class="toc-backref" href="#id7">Token</a><a class="headerlink" href="#token" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id4">Token</a><a class="headerlink" href="#token" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="handle">
-<h3><a class="toc-backref" href="#id8">Handle</a><a class="headerlink" href="#handle" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">Handle</a><a class="headerlink" href="#handle" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="event">
-<h3><a class="toc-backref" href="#id9">Event</a><a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">Event</a><a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="shared-buffer">
-<h3><a class="toc-backref" href="#id10">Shared Buffer</a><a class="headerlink" href="#shared-buffer" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">Shared Buffer</a><a class="headerlink" href="#shared-buffer" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="error">
-<h3><a class="toc-backref" href="#id11">Error</a><a class="headerlink" href="#error" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">Error</a><a class="headerlink" href="#error" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 </div>
