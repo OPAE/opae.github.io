@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OPAE Python Bindings &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="OPAE" href="../index.html"/>
+        <link rel="next" title="Building the OPAE C Library" href="build_chain/fpga_api/api_build.html"/>
+        <link rel="prev" title="Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide" href="ase_userguide/ase_userguide.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OPAE Python Bindings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#benefits">Benefits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#runtime-requirements">Runtime Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-wheels">Python Wheels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-from-source">Installing From Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-installation">Example Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-scripts">Example Scripts</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build_chain/fpga_api/api_build.html">Building the OPAE C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_api/fpga_api.html">OPAE C API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_api/fpga_cxx_api.html">OPAE C++ Core API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_api/fpga_python_api.html">OPAE Python API Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/fpgabist/fpgabist.html">fpgabist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/fpgaflash/fpgaflash.html">fpgaflash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/packager/packager.html">packager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/userclk/userclk.html">userclk</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/hssi_config/readme.html">hssi_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_tools/hssi_loopback/readme.html">hssi_loopback</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OPAE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>OPAE Python Bindings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/docs/README.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opae-python-bindings">
+<h1>OPAE Python Bindings<a class="headerlink" href="#opae-python-bindings" title="Permalink to this headline">¶</a></h1>
+<p>OPAE (Open Programmable Acceleration Engine) now includes Python
+bindings for interacting with FPGA resources. The OPAE Python API is
+built on top of the OPAE C++ Core API and its object model. Because of
+this, developing OPAE applications in Python is very similar to
+developing OPAE applications in C++ which significantly reduces the
+learning curve required to adapt to the Python API. While the object
+model remains the same, some static factory functions in the OPAE C++
+Core API have been moved to module level methods in the OPAE Python API
+with the exception of the properties class. The goal of the OPAE Python
+API is to enable fast prototyping, test automation, infrastructure
+managment, and an easy to use framework for FPGA resource interactions
+that don’t rely on software algorithms with a high runtime complexity.</p>
+<p>Currently, the only Python package that is part of OPAE is <code class="docutils literal"><span class="pre">opae.fpga</span></code></p>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>The OPAE Python API is implemented by creating a Python extension using
+<code class="docutils literal"><span class="pre">pybind11</span> <span class="pre">&lt;http://pybind11.readthedocs.io/en/stable&gt;</span></code>_. This
+extension is created by using the pybind11 API which relies mostly on
+macros and compile time introspection to define the module
+initialization point as well as type converters between OPAE C++ Core
+types and OPAE Python types.</p>
+</div>
+<div class="section" id="benefits">
+<h2>Benefits<a class="headerlink" href="#benefits" title="Permalink to this headline">¶</a></h2>
+<p>The major benefits of using pybind11 for developing the OPAE Python API
+include, but are not limited to, the following features of pybind11:</p>
+<ul class="simple">
+<li>Uses C++ 11 standard library although it can use C++ 14 or C++17.</li>
+<li>Automatic conversions of shared_ptr types</li>
+<li>Built-in support for numpy and Eigen numerical libraries</li>
+<li>Interoperable with the Python C API</li>
+</ul>
+</div>
+<div class="section" id="runtime-requirements">
+<h2>Runtime Requirements<a class="headerlink" href="#runtime-requirements" title="Permalink to this headline">¶</a></h2>
+<p>Because opae.fpga is built on top of the opae-cxx-core API, it does
+require that the runtime libraries for both opae-cxx-core and opae-c be
+installed on the system (as well as any other libraries they depend on).
+Those libraries can be installed using the opae-libs package (from
+either RPM or DEB format - depending on your Linux distribution).</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="python-wheels">
+<h2>Python Wheels<a class="headerlink" href="#python-wheels" title="Permalink to this headline">¶</a></h2>
+<p>The preferred method of installation is to use a binary wheel package
+for your version of Python.</p>
+<p>The following table lists example names for different Python versions
+and platforms.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="19%" />
+<col width="18%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Python Version</th>
+<th class="head">Python ABI</th>
+<th class="head">Linux Platform</th>
+<th class="head">Package Name</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>2.7</td>
+<td>CPython w/ UCS4</td>
+<td>x86_64</td>
+<td>opae.fpga.-cp27-cp27mu-linux_x86_64.whl</td>
+</tr>
+<tr class="row-odd"><td>3.4</td>
+<td>CPython w/ UCS4</td>
+<td>x86_64</td>
+<td>opae.fpga.-cp34-cp34mu-linux_x86_64.whl</td>
+</tr>
+<tr class="row-even"><td>3.6</td>
+<td>CPython w/ UCS4</td>
+<td>x86_64</td>
+<td>opae.fpga.-cp36-cp36mu-linux_x86_64.whl</td>
+</tr>
+</tbody>
+</table>
+<p>opae.fpga is currently not available in the Python Package Index but
+once it does become available, one should be able to install using pip
+by simply typing the following:</p>
+<div class="code shell highlight-c"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">opae</span><span class="p">.</span><span class="n">fpga</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-from-source">
+<h2>Installing From Source<a class="headerlink" href="#installing-from-source" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the runtime libraries mentioned above, installing from
+source does require that the OPAE header files be installed as well as
+those header files for pybind11. The former can be installed with the
+opae-devel package and the latter can be installed by installing
+pybind11 Python module.</p>
+<div class="section" id="example-installation">
+<h3>Example Installation<a class="headerlink" href="#example-installation" title="Permalink to this headline">¶</a></h3>
+<p>The following example shows how to build from source by installing the
+prerequisites before running the setup.py file.</p>
+<div class="code shell highlight-c"><div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">opae</span><span class="o">-</span><span class="n">libs</span><span class="o">-&lt;</span><span class="n">release</span><span class="o">&gt;</span><span class="p">.</span><span class="n">x86_64</span><span class="p">.</span><span class="n">rpm</span>
+<span class="o">&gt;</span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">opae</span><span class="o">-</span><span class="n">devel</span><span class="o">-&lt;</span><span class="n">release</span><span class="o">&gt;</span><span class="p">.</span><span class="n">x86_64</span><span class="p">.</span><span class="n">rpm</span>
+<span class="o">&gt;</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">pybind11</span>
+<span class="o">&gt;</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">opae</span><span class="p">.</span><span class="n">fpga</span><span class="o">-&lt;</span><span class="n">release</span><span class="o">&gt;</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<p><em>NOTE</em>: The <code class="docutils literal"><span class="pre">pip</span></code> examples above use the <code class="docutils literal"><span class="pre">--user</span></code> flag to avoid
+requiring root permissions. Those packages will be installed in the
+user’s <code class="docutils literal"><span class="pre">site-packages</span></code> directory found in the user’s <code class="docutils literal"><span class="pre">.local</span></code>
+directory.</p>
+</div>
+</div>
+<div class="section" id="example-scripts">
+<h2>Example Scripts<a class="headerlink" href="#example-scripts" title="Permalink to this headline">¶</a></h2>
+<p>The following example is an implementation of the sample, hello_fpga.c,
+which is designed to configure the NLB0 diagnostic accelerator for a
+simple loopback.</p>
+<div class="code python highlight-c"><div class="highlight"><pre><span></span>import time
+from opae import fpga
+
+NLB0 = &quot;d8424dc4-a4a3-c413-f89e-433683f9040b&quot;
+CTL = 0x138
+CFG = 0x140
+NUM_LINES = 0x130
+SRC_ADDR = 0x0120
+DST_ADDR = 0x0128
+DSM_ADDR = 0x0110
+
+def cl_align(addr):
+    return addr &gt;&gt; 6
+
+tokens = fpga.enumerate(type=fpga.ACCELERATOR, guid=NLB0)
+assert tokens, &quot;Could not enumerate accelerator: {}&quot;.format(NlB0)
+
+with fpga.open(tokens[0], fpga.OPEN_SHARED) as handle:
+    src = fpga.allocate_shared_buffer(handle, 4096)
+    dst = fpga.allocate_shared_buffer(handle, 4096)
+    dsm = fpga.allocate_shared_buffer(handle, 4096)
+    handle.write_csr32(CTL, 0)
+    handle.write_csr32(CTL, 1)
+    handle.write_csr64(DSM_ADDR, dsm.io_address())
+    handle.write_csr64(SRC_ADDR, cl_align(src.io_address())) # cacheline-aligned
+    handle.write_csr64(DST_ADDR, cl_align(dst.io_address())) # cacheline-aligned
+    handle.write_csr32(CFG, 0x42000)
+    handle.write_csr32(NUM_LINES, 4096/64)
+    handle.write_csr32(CTL, 3)
+    while dsm[0x42] &amp; 0x1 == 0:
+        time.sleep(0.001)
+    handle.write_csr32(CTL, 7)
+</pre></div>
+</div>
+<p>This example shows how one might reprogram (Partial Reconfiguration) an
+accelerator on a given bus, 0x5e, using a bitstream file, m0.gbs.</p>
+<div class="code python highlight-c"><div class="highlight"><pre><span></span>from opae import fpga
+
+BUS = 0x5e
+GBS = &#39;m0.gbs&#39;
+tokens = fpga.enumerate(type=fpga.DEVICE, bus=BUS)
+assert tokens, &quot;Could not enumerate device on bus: {}&quot;.format(BUS)
+with open(GBS, &#39;rb&#39;) as fd, fpga.open(tokens[0]) as device:
+    device.reconfigure(0, fd)
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="build_chain/fpga_api/api_build.html" class="btn btn-neutral float-right" title="Building the OPAE C Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ase_userguide/ase_userguide.html" class="btn btn-neutral" title="Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
