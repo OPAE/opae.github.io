@@ -2268,6 +2268,11 @@ provided by the utilities API.</p>
 <span class="target" id="hello__fpga_8c_1a7635d12a96b25dd1760b4bc44130eed9"></span><code class="descname">ON_ERR_GOTO</code><span class="sig-paren">(</span>res, label, desc<span class="sig-paren">)</span><a class="headerlink" href="#c.ON_ERR_GOTO" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="macro">
+<dt id="c.GETOPT_STRING">
+<span class="target" id="hello__fpga_8c_1acc2c9cc08f0f7b8f21f835d3fa0f6435"></span><code class="descname">GETOPT_STRING</code><a class="headerlink" href="#c.GETOPT_STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Functions</p>
@@ -2282,11 +2287,94 @@ provided by the utilities API.</p>
 <dd></dd></dl>
 
 <dl class="function">
+<dt id="_CPPv210parse_argsiA_Pc">
+<span id="parse_args__i.cPA"></span><span class="target" id="hello__fpga_8c_1a3a1b6f72679286eae6f9eec936cc5533"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">parse_args</code><span class="sig-paren">(</span>int <em>argc</em>, char *<em>argv</em>[]<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv210parse_argsiA_Pc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv29find_fpga9fpga_guidP10fpga_tokenP8uint32_tP8uint32_t">
+<span id="find_fpga__fpga_guid.fpga_tokenP.uint32_tP.uint32_tP"></span><span class="target" id="hello__fpga_8c_1a4d7bd60247349103a7a1a533c03af20a"></span>int <code class="descname">find_fpga</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv29fpga_guid" title="fpga_guid">fpga_guid</a> <em>interface_id</em>, <a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> *<em>accelerator_token</em>, uint32_t *<em>num_matches_accelerators</em>, uint32_t *<em>num_matches_fpga</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29find_fpga9fpga_guidP10fpga_tokenP8uint32_tP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212get_bus_info10fpga_tokenP8bdf_info">
+<span id="get_bus_info__fpga_token.bdf_infoP"></span><span class="target" id="hello__fpga_8c_1a66cc2dd65fadc30499ef1a0feccf196b"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">get_bus_info</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>tok</em>, <em class="property">struct</em> <a class="reference internal" href="#_CPPv28bdf_info" title="bdf_info">bdf_info</a> *<em>finfo</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv212get_bus_info10fpga_tokenP8bdf_info" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214print_bus_infoP8bdf_info">
+<span id="print_bus_info__bdf_infoP"></span><span class="target" id="hello__fpga_8c_1a50f16b5e73601f302cb92f11826556c5"></span>void <code class="descname">print_bus_info</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv28bdf_info" title="bdf_info">bdf_info</a> *<em>info</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214print_bus_infoP8bdf_info" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="_CPPv24mainiA_Pc">
 <span id="main__i.cPA"></span><span class="target" id="hello__fpga_8c_1a0ddf1224851353fc92bfbff6f499fa97"></span>int <code class="descname">main</code><span class="sig-paren">(</span>int <em>argc</em>, char *<em>argv</em>[]<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv24mainiA_Pc" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Variables</p>
+<dl class="member">
+<dt id="_CPPv27err_cnt">
+<span id="err_cnt__i"></span><span class="target" id="hello__fpga_8c_1abab664f1af4ec6cf1e511770feb455bb"></span>int <code class="descname">err_cnt</code><a class="headerlink" href="#_CPPv27err_cnt" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv26config">
+<span id="config__config"></span><span class="target" id="hello__fpga_8c_1ae865b377a614e395fc5035925aac72dc"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv26config" title="config">config</a> <code class="descname">config</code><p>= {</p>
+<p>	.target = {</p>
+<p>		.bus = -1,</p>
+<p>		.open_flags = 0</p>
+<p>	}</p>
+<p>}</p>
+<a class="headerlink" href="#_CPPv26config" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv26config">
+<span id="config"></span><span class="target" id="structconfig"></span><em class="property">struct </em><code class="descname">config</code><a class="headerlink" href="#_CPPv26config" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N6config6targetE">
+<span id="config::target__config::target"></span><span class="target" id="structconfig_1addcb907ea7ee915b8429a0f8af9eab20"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv26config" title="config">config</a>::<a class="reference internal" href="#_CPPv2N6config6targetE" title="config::target">target</a> <code class="descname">target</code><a class="headerlink" href="#_CPPv2N6config6targetE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv2N6config6targetE">
+<span id="config::target"></span><span class="target" id="structconfig_1_1target"></span><em class="property">struct </em><code class="descname">target</code><a class="headerlink" href="#_CPPv2N6config6targetE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N6config6target3busE">
+<span id="config::target::bus__i"></span><span class="target" id="structconfig_1_1target_1af867cbf6134f0932aeadbe2045b95bb1"></span>int <code class="descname">bus</code><a class="headerlink" href="#_CPPv2N6config6target3busE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N6config6target10open_flagsE">
+<span id="config::target::open_flags__i"></span><span class="target" id="structconfig_1_1target_1a0f9093f422ba18391e574d055b87ff8b"></span>int <code class="descname">open_flags</code><a class="headerlink" href="#_CPPv2N6config6target10open_flagsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv28bdf_info">
+<span id="bdf_info"></span><span class="target" id="structbdf__info"></span><em class="property">struct </em><code class="descname">bdf_info</code><a class="headerlink" href="#_CPPv28bdf_info" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N8bdf_info3busE">
+<span id="bdf_info::bus__uint8_t"></span><span class="target" id="structbdf__info_1a611147ec3e0539ee502df229265ac142"></span>uint8_t <code class="descname">bus</code><a class="headerlink" href="#_CPPv2N8bdf_info3busE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="hello-events-c">
 <h3><a class="toc-backref" href="#id21">hello_events.c</a><a class="headerlink" href="#hello-events-c" title="Permalink to this headline">¶</a></h3>
