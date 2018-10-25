@@ -345,6 +345,13 @@ defined in [types_enum.h](#types-enum-h).</p>
 <p>After use, <code class="docutils literal"><span class="pre">fpga_event_handle</span></code> objects should be destroyed using <a class="reference internal" href="#event_8h_1ab8e748d1c491717d677a96c23dee987b"><span class="std std-ref">fpgaDestroyEventHandle()</span></a> to free backing memory used by the <code class="docutils literal"><span class="pre">fpga_event_handle</span></code> object. </p>
 </dd></dl>
 
+<dl class="type">
+<dt id="_CPPv211fpga_object">
+<span id="fpga_object"></span><span class="target" id="types_8h_1ab0d91e42f9f3db11e2d095d3c0f728b2"></span><em class="property">typedef </em>void *<code class="descname">fpga_object</code><a class="headerlink" href="#_CPPv211fpga_object" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Object pertaining to an FPGA resource as identified by a unique name</p>
+<p>An <code class="docutils literal"><span class="pre">fpga_object</span></code> represents either a device attribute or a container of attributes. Similar to filesystems, a ‘/’ may be used to seperate objects in an object hierarchy. Once on object is acquired, it may be used to read or write data in a resource attribute or to query sub-objects if the object is a container object. The data in an object is buffered and will be kept around until the object is destroyed. Additionally, the data in an attribute can by synchronized from the owning resource using the FPGA_OBJECT_SYNC flag during read operations. The name identifying the object is unique with respect to the resource that owns it. A parent resource may be identified by an <code class="docutils literal"><span class="pre">fpga_token</span></code> object, by an <code class="docutils literal"><span class="pre">fpga_handle</span></code> object, or another <code class="docutils literal"><span class="pre">fpga_object</span></code> object. If a handle object is used when opening the object, then the object is opened with read-write access. Otherwise, the object is read-only. </p>
+</dd></dl>
+
 </div>
 <dl class="class">
 <dt id="_CPPv212fpga_version">
@@ -579,12 +586,48 @@ defined in [types_enum.h](#types-enum-h).</p>
 <dt id="_CPPv217fpga_reconf_flags">
 <span id="fpga_reconf_flags"></span><span class="target" id="types__enum_8h_1a9a4d903f00f7511b06eea9809d81aae7"></span><em class="property">enum </em><code class="descname">fpga_reconf_flags</code><a class="headerlink" href="#_CPPv217fpga_reconf_flags" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Reconfiguration flags</p>
-<p>These flags can be passed to the fpgaReconfigure() function. </p>
+<p>These flags can be passed to the <a class="reference internal" href="#manage_8h_1a6e5d00d445c69c94cb122224c47bf735"><span class="std std-ref">fpgaReconfigureSlot()</span></a> function. </p>
 <p><em>Values:</em></p>
 <dl class="enumerator">
 <dt id="_CPPv217FPGA_RECONF_FORCE">
 <span class="target" id="types__enum_8h_1a9a4d903f00f7511b06eea9809d81aae7a3eb0a410afacbd5b85d308fc51fc8cd8"></span><code class="descname">FPGA_RECONF_FORCE</code> = (1u &lt;&lt; 0)<a class="headerlink" href="#_CPPv217FPGA_RECONF_FORCE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Reconfigure the slot without checking if it is in use </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv220fpga_sysobject_flags">
+<span id="fpga_sysobject_flags"></span><span class="target" id="types__enum_8h_1a9cacfdee4baf5ca62998913596412afb"></span><em class="property">enum </em><code class="descname">fpga_sysobject_flags</code><a class="headerlink" href="#_CPPv220fpga_sysobject_flags" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv216FPGA_OBJECT_SYNC">
+<span class="target" id="types__enum_8h_1a9cacfdee4baf5ca62998913596412afba2d41c9cc1db0d054ac8a8e1afb707231"></span><code class="descname">FPGA_OBJECT_SYNC</code> = (1u &lt;&lt; 0)<a class="headerlink" href="#_CPPv216FPGA_OBJECT_SYNC" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Synchronize data from driver </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv216FPGA_OBJECT_GLOB">
+<span class="target" id="types__enum_8h_1a9cacfdee4baf5ca62998913596412afbaa8bfa7ba531a8b610b44f9364201e425"></span><code class="descname">FPGA_OBJECT_GLOB</code> = (1u &lt;&lt; 1)<a class="headerlink" href="#_CPPv216FPGA_OBJECT_GLOB" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Treat names as glob expressions </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv215FPGA_OBJECT_RAW">
+<span class="target" id="types__enum_8h_1a9cacfdee4baf5ca62998913596412afbacfaa8f881c5a8a3dd212e4fb4d070bf4"></span><code class="descname">FPGA_OBJECT_RAW</code> = (1u &lt;&lt; 2)<a class="headerlink" href="#_CPPv215FPGA_OBJECT_RAW" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read or write object data as raw bytes </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv223FPGA_OBJECT_RECURSE_ONE">
+<span class="target" id="types__enum_8h_1a9cacfdee4baf5ca62998913596412afbade8c9f9040403d5e7e08e3aede541844"></span><code class="descname">FPGA_OBJECT_RECURSE_ONE</code> = (1u &lt;&lt; 3)<a class="headerlink" href="#_CPPv223FPGA_OBJECT_RECURSE_ONE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create subobjects one level down from containers </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv223FPGA_OBJECT_RECURSE_ALL">
+<span class="target" id="types__enum_8h_1a9cacfdee4baf5ca62998913596412afba33387b602459cddf06b3eeab96eca47b"></span><code class="descname">FPGA_OBJECT_RECURSE_ALL</code> = (1u &lt;&lt; 4)<a class="headerlink" href="#_CPPv223FPGA_OBJECT_RECURSE_ALL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create subobjects all levels from from containers </p>
 </dd></dl>
 
 </dd></dl>
@@ -661,6 +704,8 @@ which are also defined in &lt;opae/properties.h&gt;.</p>
 <dd><p>Destroy a Token</p>
 <p>This function destroys a token created by <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> and frees the associated memory.</p>
 <p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd><a class="reference internal" href="#enum_8h_1a150a7a8f46e0d6df12cc329ff7030e21"><span class="std std-ref">fpgaDestroyToken()</span></a> requires the address of an fpga_token as previously created by <a class="reference internal" href="#enum_8h_1a277ba17f2377895855545bd82c1f901d"><span class="std std-ref">fpgaEnumerate()</span></a> or <a class="reference internal" href="#enum_8h_1a43a84795de460e8288070b672ef90a59"><span class="std std-ref">fpgaCloneToken()</span></a>. Passing any other value results in undefined behavior.</dd>
 <dt><strong>Return</strong></dt>
 <dd>FPGA_OK on success </dd>
 <dt><strong>Parameters</strong></dt>
@@ -785,6 +830,8 @@ which are also defined in &lt;opae/properties.h&gt;.</p>
 <dd><p>Destroy a fpga_properties object</p>
 <p>Destroys an existing fpga_properties object that the caller has previously created using <a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a> or <a class="reference internal" href="#properties_8h_1ac51c19bdd763a98e143a938c47963905"><span class="std std-ref">fpgaCloneProperties()</span></a>.</p>
 <p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd><a class="reference internal" href="#properties_8h_1a6f83533f996cf6bd25274e0b7b9c3050"><span class="std std-ref">fpgaDestroyProperties()</span></a> requires the address of an fpga_properties object, similar to <a class="reference internal" href="#properties_8h_1a027ca0f8c45573c378179d7f57971128"><span class="std std-ref">fpgaGetPropertiesFromHandle()</span></a>, <a class="reference internal" href="#properties_8h_1a010d3b6839fc8763e66e4f953682a489"><span class="std std-ref">fpgaGetProperties()</span></a>, and <a class="reference internal" href="#properties_8h_1ac51c19bdd763a98e143a938c47963905"><span class="std std-ref">fpgaCloneProperties()</span></a>. Passing any other value results in undefined behavior.</dd>
 <dt><strong>Return</strong></dt>
 <dd>FPGA_OK on success. FPGA_INVALID_PARAM is <code class="docutils literal"><span class="pre">prop</span></code> is not a valid object. FPGA_EXCEPTION if an internal exception occurrred while trying to access <code class="docutils literal"><span class="pre">prop</span></code>. </dd>
 <dt><strong>Parameters</strong></dt>
@@ -1670,6 +1717,8 @@ application and deliver asynchronous notifications for registered events.</p>
 <dd><p>Destroy an event_handle</p>
 <p>Destroy handle and free resources. On Linux this corresponds to closing the file descriptor pointed to by handle</p>
 <p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd><a class="reference internal" href="#event_8h_1ab8e748d1c491717d677a96c23dee987b"><span class="std std-ref">fpgaDestroyEventHandle()</span></a> requires the address of an event_handle as created by <a class="reference internal" href="#event_8h_1a54fb1847300ff886b4ad857716075083"><span class="std std-ref">fpgaCreateEventHandle()</span></a>. Passing any other value results in undefined behavior.</dd>
 <dt><strong>Return</strong></dt>
 <dd>FPGA_OK on success. FPGA_INVALID_PARAM if <code class="docutils literal"><span class="pre">event_handle</span></code> is NULL. </dd>
 <dt><strong>Parameters</strong></dt>
@@ -1897,12 +1946,14 @@ buffers with an accelerator (buffer.h), and using low-latency notifications
 <dt id="_CPPv217fpgaPrepareBuffer11fpga_handle8uint64_tPPvP8uint64_ti">
 <span id="fpgaPrepareBuffer__fpga_handle.uint64_t.voidPP.uint64_tP.i"></span><span class="target" id="buffer_8h_1aac3ed0146bc42c35f99610a319e87303"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaPrepareBuffer</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint64_t <em>len</em>, void **<em>buf_addr</em>, uint64_t *<em>wsid</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217fpgaPrepareBuffer11fpga_handle8uint64_tPPvP8uint64_ti" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Prepare a shared memory buffer</p>
-<p>Prepares a memory buffer for shared access between an accelerator and the calling process. This may either include allocation of physcial memory, or preparation of already allocated memory for sharing. The latter case is indicated by supplying the FPGA_BUF_PREALLOCATED flag.</p>
+<p>Prepares a memory buffer for shared access between an accelerator and the calling process. This may either include allocation of physical memory, or preparation of already allocated memory for sharing. The latter case is indicated by supplying the FPGA_BUF_PREALLOCATED flag.</p>
 <p>This function will ask the driver to pin the indicated memory (make it non-swappable), and program the IOMMU to allow access from the accelerator. If the buffer was not pre-allocated (flag FPGA_BUF_PREALLOCATED), the function will also allocate physical memory of the requested size and map the memory into the caller’s process’ virtual address space. It returns in ‘wsid’ an fpga_buffer object that can be used to program address registers in the accelerator for shared access to the memory.</p>
 <p>When using FPGA_BUF_PREALLOCATED, the input len must be a non-zero multiple of the page size, else the function returns FPGA_INVALID_PARAM. When not using FPGA_BUF_PREALLOCATED, the input len is rounded up to the nearest multiple of page size.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
-<dd>FPGA_OK on success. FPGA_NO_MEMORY if the requested memory could not be allocated. FPGA_INVALID_PARAM if invalid parameters were provided, or if the parameter combination is not valid. FPGA_EXCEPTION if an internal exception occurred while trying to access the handle. </dd>
+<dd>FPGA_OK on success. FPGA_NO_MEMORY if the requested memory could not be allocated. FPGA_INVALID_PARAM if invalid parameters were provided, or if the parameter combination is not valid. FPGA_EXCEPTION if an internal exception occurred while trying to access the handle.</dd>
+<dt><strong>Note</strong></dt>
+<dd>As a special case, when FPGA_BUF_PREALLOCATED is present in flags, if len == 0 and buf_addr == NULL, then the function returns FPGA_OK if pre-allocated buffers are supported. In this case, a return value other than FPGA_OK indicates that pre-allocated buffers are not supported. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
 <li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened accelerator resource </li>
@@ -2184,6 +2235,11 @@ provided by the utilities API.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Defines</p>
 <dl class="macro">
+<dt id="c.TEST_TIMEOUT">
+<span class="target" id="hello__fpga_8c_1a9fd0cdfdda29532a444c52dd9e1c1d1f"></span><code class="descname">TEST_TIMEOUT</code><a class="headerlink" href="#c.TEST_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
 <dt id="c.CL">
 <span class="target" id="hello__fpga_8c_1acda3b44286ccc5e1924198027f28a8c5"></span><code class="descname">CL</code><span class="sig-paren">(</span>x<span class="sig-paren">)</span><a class="headerlink" href="#c.CL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -2293,17 +2349,12 @@ provided by the utilities API.</p>
 
 <dl class="function">
 <dt id="_CPPv29find_fpga9fpga_guidP10fpga_tokenP8uint32_t">
-<span id="find_fpga__fpga_guid.fpga_tokenP.uint32_tP"></span><span class="target" id="hello__fpga_8c_1aa96da4f012e66255b683fb51438c2bc6"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">find_fpga</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv29fpga_guid" title="fpga_guid">fpga_guid</a> <em>interface_id</em>, <a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> *<em>accelerator_token</em>, uint32_t *<em>num_matches_accelerators</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29find_fpga9fpga_guidP10fpga_tokenP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="find_fpga__fpga_guid.fpga_tokenP.uint32_tP"></span><span class="target" id="hello__fpga_8c_1a47a2834f92903ad0fae9a16c3360715d"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">find_fpga</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv29fpga_guid" title="fpga_guid">fpga_guid</a> <em>afu_guid</em>, <a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> *<em>accelerator_token</em>, uint32_t *<em>num_matches_accelerators</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29find_fpga9fpga_guidP10fpga_tokenP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv212get_bus_info10fpga_tokenP8bdf_info">
-<span id="get_bus_info__fpga_token.bdf_infoP"></span><span class="target" id="hello__fpga_8c_1a66cc2dd65fadc30499ef1a0feccf196b"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">get_bus_info</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>tok</em>, <em class="property">struct</em> <a class="reference internal" href="#_CPPv28bdf_info" title="bdf_info">bdf_info</a> *<em>finfo</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv212get_bus_info10fpga_tokenP8bdf_info" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="_CPPv214print_bus_infoP8bdf_info">
-<span id="print_bus_info__bdf_infoP"></span><span class="target" id="hello__fpga_8c_1a50f16b5e73601f302cb92f11826556c5"></span>void <code class="descname">print_bus_info</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv28bdf_info" title="bdf_info">bdf_info</a> *<em>info</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214print_bus_infoP8bdf_info" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv27get_bus10fpga_tokenP7uint8_t">
+<span id="get_bus__fpga_token.uint8_tP"></span><span class="target" id="hello__fpga_8c_1aed96c4635797cab6a6fa6b22763aac26"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">get_bus</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>tok</em>, uint8_t *<em>bus</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv27get_bus10fpga_tokenP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -2319,13 +2370,44 @@ provided by the utilities API.</p>
 <span id="config__config"></span><span class="target" id="hello__fpga_8c_1ae865b377a614e395fc5035925aac72dc"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv26config" title="config">config</a> <code class="descname">config</code><p>= {</p>
 <p>	.target = {</p>
 <p>		.bus = -1,</p>
-<p>		.open_flags = 0</p>
-<p>	}</p>
+<p>	},</p>
+<p>	.open_flags = 0</p>
 <p>}</p>
 <a class="headerlink" href="#_CPPv26config" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
+<dl class="class">
+<dt id="_CPPv26config">
+<span id="config"></span><span class="target" id="structconfig"></span><em class="property">struct </em><code class="descname">config</code><a class="headerlink" href="#_CPPv26config" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N6config6targetE">
+<span id="config::target__config::target"></span><span class="target" id="structconfig_1addcb907ea7ee915b8429a0f8af9eab20"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv26config" title="config">config</a>::<a class="reference internal" href="#_CPPv2N6config6targetE" title="config::target">target</a> <code class="descname">target</code><a class="headerlink" href="#_CPPv2N6config6targetE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N6config10open_flagsE">
+<span id="config::open_flags__i"></span><span class="target" id="structconfig_1a56a710b532c4f7d6213fbd173920ffca"></span>int <code class="descname">open_flags</code><a class="headerlink" href="#_CPPv2N6config10open_flagsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv2N6config6targetE">
+<span id="config::target"></span><span class="target" id="structconfig_1_1target"></span><em class="property">struct </em><code class="descname">target</code><a class="headerlink" href="#_CPPv2N6config6targetE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N6config6target3busE">
+<span id="config::target::bus__i"></span><span class="target" id="structconfig_1_1target_1af867cbf6134f0932aeadbe2045b95bb1"></span>int <code class="descname">bus</code><a class="headerlink" href="#_CPPv2N6config6target3busE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="hello-events-c">
 <h3><a class="toc-backref" href="#id21">hello_events.c</a><a class="headerlink" href="#hello-events-c" title="Permalink to this headline">¶</a></h3>
@@ -2363,7 +2445,7 @@ provided by the utilities API.</p>
 
 <dl class="function">
 <dt id="_CPPv222inject_ras_fatal_error10fpga_token7uint8_t">
-<span id="inject_ras_fatal_error__fpga_token.uint8_t"></span><span class="target" id="hello__events_8c_1a3e4148e96751de422105e1715e39cf82"></span><em class="property">static</em> <a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">inject_ras_fatal_error</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>token</em>, uint8_t <em>err</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222inject_ras_fatal_error10fpga_token7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="inject_ras_fatal_error__fpga_token.uint8_t"></span><span class="target" id="hello__events_8c_1a21ab990ba21e75dd40821f08f21c9111"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">inject_ras_fatal_error</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>fme_token</em>, uint8_t <em>err</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222inject_ras_fatal_error10fpga_token7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -2373,17 +2455,12 @@ provided by the utilities API.</p>
 
 <dl class="function">
 <dt id="_CPPv29find_fpgaP10fpga_tokenP8uint32_t">
-<span id="find_fpga__fpga_tokenP.uint32_tP"></span><span class="target" id="hello__events_8c_1a6cb2d9465869b159c2ced1f53e95c188"></span>int <code class="descname">find_fpga</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> *<em>fpga</em>, uint32_t *<em>num_matches</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29find_fpgaP10fpga_tokenP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="find_fpga__fpga_tokenP.uint32_tP"></span><span class="target" id="hello__events_8c_1a187c0e0b83b8fa199546fc583b8debcd"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">find_fpga</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> *<em>fpga</em>, uint32_t *<em>num_matches</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29find_fpgaP10fpga_tokenP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv212get_bus_info10fpga_tokenP8bdf_info">
-<span class="target" id="hello__events_8c_1a66cc2dd65fadc30499ef1a0feccf196b"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">get_bus_info</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>tok</em>, <em class="property">struct</em> <a class="reference internal" href="#_CPPv28bdf_info" title="bdf_info">bdf_info</a> *<em>finfo</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv212get_bus_info10fpga_tokenP8bdf_info" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="_CPPv214print_bus_infoP8bdf_info">
-<span class="target" id="hello__events_8c_1a50f16b5e73601f302cb92f11826556c5"></span>void <code class="descname">print_bus_info</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv28bdf_info" title="bdf_info">bdf_info</a> *<em>info</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214print_bus_infoP8bdf_info" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv27get_bus10fpga_tokenP7uint8_t">
+<span class="target" id="hello__events_8c_1aed96c4635797cab6a6fa6b22763aac26"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">get_bus</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>tok</em>, uint8_t *<em>bus</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv27get_bus10fpga_tokenP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -2395,13 +2472,13 @@ provided by the utilities API.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Variables</p>
 <dl class="member">
-<dt id="_CPPv26config">
-<span class="target" id="hello__events_8c_1ae865b377a614e395fc5035925aac72dc"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv26config" title="config">config</a> <code class="descname">config</code><p>= {</p>
+<dt id="_CPPv213events_config">
+<span id="events_config__events_config"></span><span class="target" id="hello__events_8c_1adfeedbd5c731423297cf379c3ed85e5e"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv213events_config" title="events_config">events_config</a> <code class="descname">events_config</code><p>= {</p>
 <p>	.target = {</p>
 <p>		.bus = -1</p>
 <p>	}</p>
 <p>}</p>
-<a class="headerlink" href="#_CPPv26config" title="Permalink to this definition">¶</a><br /></dt>
+<a class="headerlink" href="#_CPPv213events_config" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -2419,42 +2496,29 @@ provided by the utilities API.</p>
 </dd></dl>
 
 <dl class="class">
-<dt>
-<span class="target" id="structconfig"></span><em class="property">struct </em><code class="descname">config</code><br /></dt>
+<dt id="_CPPv213events_config">
+<span id="events_config"></span><span class="target" id="structevents__config"></span><em class="property">struct </em><code class="descname">events_config</code><a class="headerlink" href="#_CPPv213events_config" title="Permalink to this definition">¶</a><br /></dt>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="member">
-<dt id="_CPPv2N6config6targetE">
-<span id="config::target__config::target"></span><span class="target" id="structconfig_1a04d846dc4898dbd7b30396e27cca3425"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv26config" title="config">config</a>::<a class="reference internal" href="#_CPPv2N6config6targetE" title="config::target">target</a> <code class="descname">target</code><a class="headerlink" href="#_CPPv2N6config6targetE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv2N13events_config6targetE">
+<span id="events_config::target__events_config::target"></span><span class="target" id="structevents__config_1ababe67263cba14e610376d806beb8bb1"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv213events_config" title="events_config">events_config</a>::<a class="reference internal" href="#_CPPv2N13events_config6targetE" title="events_config::target">target</a> <code class="descname">target</code><a class="headerlink" href="#_CPPv2N13events_config6targetE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
 <dl class="class">
-<dt id="_CPPv2N6config6targetE">
-<span id="config::target"></span><span class="target" id="structconfig_1_1target"></span><em class="property">struct </em><code class="descname">target</code><a class="headerlink" href="#_CPPv2N6config6targetE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv2N13events_config6targetE">
+<span id="events_config::target"></span><span class="target" id="structevents__config_1_1target"></span><em class="property">struct </em><code class="descname">target</code><a class="headerlink" href="#_CPPv2N13events_config6targetE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="member">
-<dt id="_CPPv2N6config6target3busE">
-<span id="config::target::bus__i"></span><span class="target" id="structconfig_1_1target_1af867cbf6134f0932aeadbe2045b95bb1"></span>int <code class="descname">bus</code><a class="headerlink" href="#_CPPv2N6config6target3busE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv2N13events_config6target3busE">
+<span id="events_config::target::bus__i"></span><span class="target" id="structevents__config_1_1target_1afd0988159618ac01bffa002cedbe117e"></span>int <code class="descname">bus</code><a class="headerlink" href="#_CPPv2N13events_config6target3busE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="class">
-<dt id="_CPPv28bdf_info">
-<span id="bdf_info"></span><span class="target" id="structbdf__info"></span><em class="property">struct </em><code class="descname">bdf_info</code><a class="headerlink" href="#_CPPv28bdf_info" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="member">
-<dt id="_CPPv2N8bdf_info3busE">
-<span id="bdf_info::bus__uint8_t"></span><span class="target" id="structbdf__info_1a611147ec3e0539ee502df229265ac142"></span>uint8_t <code class="descname">bus</code><a class="headerlink" href="#_CPPv2N8bdf_info3busE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-</div>
 </dd></dl>
 
 <dl class="type">

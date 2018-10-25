@@ -119,6 +119,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#revision-history">Revision History</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
@@ -227,11 +228,12 @@ for the given command.</p>
 <p><code class="docutils literal"><span class="pre">temp</span></code></p>
 <p>Show FPGA temperature values in degrees Celcius.</p>
 <p><code class="docutils literal"><span class="pre">port</span></code></p>
-<p>Shows information about the port such as the AFU ID of currently loaded
+<p>Show information about the port such as the AFU ID of currently loaded
 AFU.</p>
 <p><code class="docutils literal"><span class="pre">fme</span></code></p>
-<p>Show information about the FPGA platform such as the FPGA Interface
-Manager (FIM) ID.</p>
+<p>Show information about the FPGA platform including the partial
+reconfiguration (PR) Interface ID, the OPAE version, and the FPGA
+Interface Manager (FIM) ID.</p>
 </div>
 </div>
 <div class="section" id="optional-arguments">
@@ -266,7 +268,7 @@ type. It must be one of the following: <code class="docutils literal"><span clas
 </div>
 <div class="section" id="examples">
 <h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>This command shows the current power consumtion:</p>
+<p>This command shows the current power consumption:</p>
 <div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">fpgainfo</span> <span class="n">power</span>
 </pre></div>
 </div>
@@ -286,6 +288,35 @@ type. It must be one of the following: <code class="docutils literal"><span clas
 <div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">fpgainfo</span> <span class="n">fme</span> <span class="o">-</span><span class="n">b</span> <span class="mh">0x5e</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="revision-history">
+<h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="60%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Document
+Version</th>
+<th class="head">Intel Acceleration Stack Version</th>
+<th class="head">Changes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>2018.05.21</td>
+<td>1.1 Beta. (Supported with Intel
+Quartus Prime Pro Edition 17.1.)</td>
+<td>Updated
+descript
+ion
+of the
+<code class="docutils literal"><span class="pre">fme</span></code>
+command</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 

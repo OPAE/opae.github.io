@@ -142,6 +142,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#testing-hssi-read-and-write">Testing HSSI Read and Write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#revision-history">Revision History</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../hssi_loopback/readme.html">hssi_loopback</a></li>
@@ -239,7 +240,7 @@ command arguments. The following options and commands are available:</p>
 <div class="section" id="options">
 <h3>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal"><span class="pre">[--resource|-r</span> <span class="pre">&lt;sysfs</span> <span class="pre">resource</span> <span class="pre">path&gt;</span></code></p>
-<p>The resource path in the sysfs psuedo-filesystem. Example:
+<p>The resource path in the sysfs pseudo-filesystem. Example:
 <code class="docutils literal"><span class="pre">/sys/devices/pci0000\:5e/0000\:5e\:00.0/resource0</span></code></p>
 <p><code class="docutils literal"><span class="pre">[--socket-id</span> <span class="pre">0|1]</span></code></p>
 <p>The socket id of the target FPGA. Required on two-socket systems to
@@ -298,13 +299,13 @@ argument is the path to a file containing the registers to test.</p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal"><span class="pre">hssi_config</span></code> utility reads or writes hssi equalization parameters
-stored in either the tranceiver (XCVR) registers or the registers of the
-retimer on the I2C bus. To access registers, the hssi controller writes
-to the <code class="docutils literal"><span class="pre">HSSI_CTRL</span></code> register and reads from the <code class="docutils literal"><span class="pre">HSSI_STAT</span></code> register
-in the the FPGA Management Engine (FME). These two registers implement
-the HSSI AUX bus mailbox protocol to access devices on other buses.
-Because <code class="docutils literal"><span class="pre">hssi_config</span></code> maps the FME MMIO space directly, the FPGA
-driver is not required.</p>
+stored in either the transceiver (XCVR) registers or the registers of
+the retimer on the I2C bus. To access registers, the hssi controller
+writes to the <code class="docutils literal"><span class="pre">HSSI_CTRL</span></code> register and reads from the <code class="docutils literal"><span class="pre">HSSI_STAT</span></code>
+register in the FPGA Management Engine (FME). These two registers
+implement the HSSI AUX bus mailbox protocol to access devices on other
+buses. Because <code class="docutils literal"><span class="pre">hssi_config</span></code> maps the FME MMIO space directly, the
+FPGA driver is not required.</p>
 </div>
 <div class="section" id="locating-the-fme-device">
 <h2>Locating the FME Device<a class="headerlink" href="#locating-the-fme-device" title="Permalink to this headline">¶</a></h2>
@@ -442,8 +443,34 @@ following sequence:</p>
 <p><code class="docutils literal"><span class="pre">register=file.csv</span></code></p>
 <p>Specifies the path to a file containing the set of registers to test.</p>
 <p><code class="docutils literal"><span class="pre">--acktimes</span></code></p>
-<p>Specifies the time spent in the <code class="docutils literal"><span class="pre">ack</span></code> routine. When meaured, a summary
-of ack times prints to stdout. This argument is optional.</p>
+<p>Specifies the time spent in the <code class="docutils literal"><span class="pre">ack</span></code> routine. When measured, a
+summary of ack times prints to stdout. This argument is optional.</p>
+</div>
+<div class="section" id="revision-history">
+<h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="60%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Document
+Version</th>
+<th class="head">Intel Acceleration Stack Version</th>
+<th class="head">Changes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>2018.05.21</td>
+<td>1.1 Beta. (Supported with Intel
+Quartus Prime Pro Edition 17.1.)</td>
+<td>Correcte
+d
+typos.</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 

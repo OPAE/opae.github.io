@@ -114,6 +114,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#revision-history">Revision History</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
@@ -212,27 +213,32 @@ predetermined set of AFs. Depending on the available binaries, the tool
 runs appropriate tests and reports hardware issues.</p>
 <p><code class="docutils literal"><span class="pre">fpgabist</span></code> always uses <code class="docutils literal"><span class="pre">fpgainfo</span></code> to report system information
 before running any hardware tests.</p>
-<p>Currently, <code class="docutils literal"><span class="pre">fpgabist</span></code> accepts the following AFs: 1. nlb_mode_3 = host
-memory interface checking 2. dma = local memory interface checking</p>
-<p>The platform includes the AF files, but you can also compile the AFs
+<p>Currently, <code class="docutils literal"><span class="pre">fpgabist</span></code> accepts the following AFs: 1. nlb_mode_3: The
+native loopback (NLB) test implements a loopback from TX to RX. Use it
+to verify basic functionality and to measure bandwidth. 2. dma_afu: The
+direct memory access (DMA) AFU test transfers data from host memory to
+FPGA-attached local memory.</p>
+<p>The installation includes the AF files, but you can also compile the AFs
 from the source.</p>
-<p>If there are multiple devices, use -b, -d, -f to specify the BDF for the
-specific device.</p>
+<p>If there are multiple PCIe® devices, use -b, -d, -f to specify the BDF
+for the specific PCIe® device.</p>
 </div>
 <div class="section" id="positional-arguments">
 <h2>POSITIONAL ARGUMENTS<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">[path_to_gbs1</span> <span class="pre">path_to_gbs2</span> <span class="pre">...]</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Paths</span> <span class="n">to</span> <span class="n">GBS</span> <span class="n">files</span> <span class="n">of</span> <span class="n">AFs</span> <span class="n">being</span> <span class="n">used</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Paths</span> <span class="n">to</span> <span class="n">Accelerator</span> <span class="n">Function</span> <span class="p">(</span><span class="n">AF</span><span class="p">)</span> <span class="n">files</span><span class="p">.</span>
 </pre></div>
 </div>
 <div class="section" id="optional-arguments">
 <h3>OPTIONAL ARGUMENTS<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h3>
+<p>You can use the single letter or the full parameter name for the command
+line arguments.</p>
 <p><code class="docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">usage</span> <span class="n">information</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">-i</span> <span class="pre">device_id,</span> <span class="pre">--device-id</span> <span class="pre">device_id</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="n">ID</span> <span class="k">for</span> <span class="n">Intel</span> <span class="n">FPGA</span><span class="p">.</span> <span class="n">Deafult</span> <span class="nl">is</span><span class="p">:</span> <span class="mh">0x09c4</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="n">ID</span> <span class="k">for</span> <span class="n">Intel</span> <span class="n">FPGA</span><span class="p">.</span> <span class="n">Default</span> <span class="nl">is</span><span class="p">:</span> <span class="mh">0x09c4</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">-B</span> <span class="pre">bus,</span> <span class="pre">--bus</span> <span class="pre">bus</span></code></p>
@@ -252,8 +258,42 @@ specific device.</p>
 <div class="section" id="examples">
 <h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">fpgabist</span> <span class="pre">&lt;path_to_gbs_files&gt;/dma_afu.gbs</span> <span class="pre">&lt;path_to_gbs_files&gt;/nlb_3.gbs</span></code></p>
-<p>Runs <code class="docutils literal"><span class="pre">fpgabist</span></code> on any platforms in the system that match the default
+<p>Runs <code class="docutils literal"><span class="pre">fpgabist</span></code> on any platform in the system that matches the default
 device ID. This command runs both the DMA and NLB_MODE_3 tests.</p>
+<p><code class="docutils literal"><span class="pre">fpgabist</span> <span class="pre">-i</span> <span class="pre">09c4</span> <span class="pre">-b</span> <span class="pre">5</span> <span class="pre">&lt;path</span> <span class="pre">to</span> <span class="pre">gbs&gt;/dma_afu.gbs</span></code></p>
+<p>Runs <code class="docutils literal"><span class="pre">fpgabist</span></code> the DMA test on the PCIe® Endpoint with <code class="docutils literal"><span class="pre">device_id</span></code>
+09c4 on bus 5.</p>
+</div>
+<div class="section" id="revision-history">
+<h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="57%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Date</th>
+<th class="head">Intel Acceleration Stack Version</th>
+<th class="head">Changes Made</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>2018.05
+.21</td>
+<td>DCP 1.1 Beta (works with Quartus
+Prime Pro 17.1.1)</td>
+<td>Made the following
+changes: Expanded
+descriptions of
+<code class="docutils literal"><span class="pre">nlb_mode_3</span></code>
+and<code class="docutils literal"><span class="pre">dma_afu</span></code>
+tests. Added a
+second example
+command.</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 

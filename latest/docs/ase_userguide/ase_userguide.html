@@ -585,12 +585,12 @@ command syntax.</p>
 <div class="section" id="generate-ase-environment-py">
 <h4>generate_ase_environment.py<a class="headerlink" href="#generate-ase-environment-py" title="Permalink to this headline">¶</a></h4>
 <p>The <code class="docutils literal"><span class="pre">/ase/scripts/generate_ase_environment.py</span></code> generates platform
-configuration files. <code class="docutils literal"><span class="pre">afu_sim_setup</span></code> invokes it automtically. A legacy
-mode in <code class="docutils literal"><span class="pre">generate_ase_environment.py</span></code> performs a brute-force check of
-the specified AFU RTL directories, attempting to define a compilation.
-This brute-force mode is imperfect and lists every file ending in
-<code class="docutils literal"><span class="pre">.sv,</span> <span class="pre">.vs,</span> <span class="pre">.vhd,</span> <span class="pre">or</span> <span class="pre">.v</span></code> and directories separated by <code class="docutils literal"><span class="pre">+</span></code>. It also
-may fail when compilation is order-dependent.</p>
+configuration files. <code class="docutils literal"><span class="pre">afu_sim_setup</span></code> invokes it automatically. A
+legacy mode in <code class="docutils literal"><span class="pre">generate_ase_environment.py</span></code> performs a brute-force
+check of the specified AFU RTL directories, attempting to define a
+compilation. This brute-force mode is imperfect and lists every file
+ending in <code class="docutils literal"><span class="pre">.sv,</span> <span class="pre">.vs,</span> <span class="pre">.vhd,</span> <span class="pre">or</span> <span class="pre">.v</span></code> and directories separated by <code class="docutils literal"><span class="pre">+</span></code>.
+It also may fail when compilation is order-dependent.</p>
 <p>Run <code class="docutils literal"><span class="pre">generate_ase_environment.py</span> <span class="pre">--help</span></code> for a list of arguments.</p>
 <ul class="simple">
 <li>The script requires a directory path to your RTL AFU.</li>
@@ -602,7 +602,7 @@ may fail when compilation is order-dependent.</p>
 <li><code class="docutils literal"><span class="pre">-x</span></code>: The optional exclusions argument lists exclusions for path
 searches.</li>
 </ul>
-<p>The Synopsys and Mentor Graphics RTL simulatiors generate the following
+<p>The Synopsys and Mentor Graphics RTL simulators generate the following
 scripts. * Synopsys: Creates <code class="docutils literal"><span class="pre">synopsys_sim.setup</span></code> and <code class="docutils literal"><span class="pre">vcs_run.tcl</span></code>
 in the <code class="docutils literal"><span class="pre">VCS</span></code> configuration directory. * Mentor Graphics: Creates
 <code class="docutils literal"><span class="pre">vsim_run.tcl</span></code> in the <code class="docutils literal"><span class="pre">QUESTA</span></code> configuration directory.</p>
@@ -792,10 +792,10 @@ the system library with the <code class="docutils literal"><span class="pre">LD_
 <h5>Compiling the libopae-c-ase.so Library with the OPAE Software Application<a class="headerlink" href="#compiling-the-libopae-c-ase-so-library-with-the-opae-software-application" title="Permalink to this headline">¶</a></h5>
 <p>Use the OPAE ASE library implementation and compile it to the OPAE
 software application directly in one command using GCC.</p>
-<div class="code bash highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> Compile <span class="nb">command</span>
-<span class="gp">$</span> gcc -g -o hello_fpga_ase hello_fpga.c /tmp/opae/myinst/lib/libopae-c-ase.so -I /tmp/opae/myinst/include/ -std<span class="o">=</span>c99 -luuid
+<div class="code bash highlight-console"><div class="highlight"><pre><span></span><span class="gp">  #</span> Compile <span class="nb">command</span>
+<span class="gp">  $</span> gcc -g -o hello_fpga_ase hello_fpga.c /tmp/opae/myinst/lib/libopae-c-ase.so -I /tmp/opae/myinst/include/ -std<span class="o">=</span>c99 -luuid
 
-<span class="gp">#</span> When running the application, start the simulatorm, <span class="k">then</span> <span class="nb">set</span> LD_LIBRARY_PATH and ASE_WORKDIR
+<span class="gp">#</span> When running the application, start the simulator, <span class="k">then</span> <span class="nb">set</span> LD_LIBRARY_PATH and ASE_WORKDIR
 <span class="gp">$</span> ./hello_fpga_ase
 </pre></div>
 </div>

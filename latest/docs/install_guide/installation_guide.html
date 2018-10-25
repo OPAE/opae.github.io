@@ -98,7 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#opae-sdk-installation-with-deb-packages">OPAE SDK installation with deb packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#fpga-device-access-permissions">FPGA Device Access Permissions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#memlock-limit">Memlock limit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#hupgepage-settings">Hupgepage Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hugepage-settings">Hugepage Settings</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
@@ -515,8 +515,8 @@ modify the application’s systemd service file and add the line:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="hupgepage-settings">
-<h2>Hupgepage Settings<a class="headerlink" href="#hupgepage-settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hugepage-settings">
+<h2>Hugepage Settings<a class="headerlink" href="#hugepage-settings" title="Permalink to this headline">¶</a></h2>
 <p>Users need to configure system hugepage to reserve 2MB-hugepages or
 1GB-hugepages. For example, the ‘hello_fpga’ sample requires several
 2MB-hugepages. And the <em>fpgadiag</em> tool requires several 1GB-hugepages.</p>
