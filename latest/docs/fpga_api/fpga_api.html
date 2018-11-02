@@ -300,6 +300,12 @@ defined in [types_enum.h](#types-enum-h).</p>
 <p>This data structure captures information about an error register exposed by an accelerator resource. The error API provides functions to retrieve these information structures from a particular resource. </p>
 </dd></dl>
 
+<dl class="macro">
+<dt id="c.FPGA_METRIC_STR_SIZE">
+<span class="target" id="types_8h_1a38d47f983b7adaa90dda28ef60de86ca"></span><code class="descname">FPGA_METRIC_STR_SIZE</code><a class="headerlink" href="#c.FPGA_METRIC_STR_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>FPGA Metric string size </p>
+</dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Typedefs</p>
@@ -396,6 +402,103 @@ defined in [types_enum.h](#types-enum-h).</p>
 <span id="fpga_error_info::can_clear__b"></span><span class="target" id="structfpga__error__info_1a8f3a6c3707e10f13a55662a081494e69"></span>bool <code class="descname">can_clear</code><a class="headerlink" href="#_CPPv2N15fpga_error_info9can_clearE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>name of the error </p>
 </dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv212metric_value">
+<span id="metric_value"></span><span class="target" id="unionmetric__value"></span><em class="property">union </em><code class="descname">metric_value</code><a class="headerlink" href="#_CPPv212metric_value" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;types.h&gt;</em><p>Metric value union </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N12metric_value6ivalueE">
+<span id="metric_value::ivalue__uint64_t"></span><span class="target" id="unionmetric__value_1a3157831ae4c4f8ecda1f61bdaea2ef13"></span>uint64_t <code class="descname">ivalue</code><a class="headerlink" href="#_CPPv2N12metric_value6ivalueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12metric_value6dvalueE">
+<span id="metric_value::dvalue__double"></span><span class="target" id="unionmetric__value_1a40409d5d9e5b9f16e3270bed34404871"></span>double <code class="descname">dvalue</code><a class="headerlink" href="#_CPPv2N12metric_value6dvalueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12metric_value6fvalueE">
+<span id="metric_value::fvalue__float"></span><span class="target" id="unionmetric__value_1a171100c87da379700719f03ccac03092"></span>float <code class="descname">fvalue</code><a class="headerlink" href="#_CPPv2N12metric_value6fvalueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12metric_value6bvalueE">
+<span id="metric_value::bvalue__b"></span><span class="target" id="unionmetric__value_1aee6957b949306871afb1d006b066409f"></span>bool <code class="descname">bvalue</code><a class="headerlink" href="#_CPPv2N12metric_value6bvalueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv216fpga_metric_info">
+<span id="fpga_metric_info"></span><span class="target" id="structfpga__metric__info"></span><em class="property">struct </em><code class="descname">fpga_metric_info</code><a class="headerlink" href="#_CPPv216fpga_metric_info" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;types.h&gt;</em><p>Metric info struct </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N16fpga_metric_info10metric_numE">
+<span id="fpga_metric_info::metric_num__uint64_t"></span><span class="target" id="structfpga__metric__info_1adfdb0c64c6e3d00d35f9c8996cf36463"></span>uint64_t <code class="descname">metric_num</code><a class="headerlink" href="#_CPPv2N16fpga_metric_info10metric_numE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N16fpga_metric_info11metric_guidE">
+<span id="fpga_metric_info::metric_guid__fpga_guid"></span><span class="target" id="structfpga__metric__info_1af2e751ebec0b9526a73a59a29461a64a"></span><a class="reference internal" href="#_CPPv29fpga_guid" title="fpga_guid">fpga_guid</a> <code class="descname">metric_guid</code><a class="headerlink" href="#_CPPv2N16fpga_metric_info11metric_guidE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N16fpga_metric_info14qualifier_nameE">
+<span id="fpga_metric_info::qualifier_name__cA"></span><span class="target" id="structfpga__metric__info_1a38d4fbdc2acde2f19711c9733db6e24c"></span>char <code class="descname">qualifier_name</code>[256]<a class="headerlink" href="#_CPPv2N16fpga_metric_info14qualifier_nameE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N16fpga_metric_info10group_nameE">
+<span id="fpga_metric_info::group_name__cA"></span><span class="target" id="structfpga__metric__info_1aa3930b74a55578cf4f030f9ae284b848"></span>char <code class="descname">group_name</code>[256]<a class="headerlink" href="#_CPPv2N16fpga_metric_info10group_nameE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N16fpga_metric_info11metric_nameE">
+<span id="fpga_metric_info::metric_name__cA"></span><span class="target" id="structfpga__metric__info_1a3d336a0f9766b5c8e6a00069c2cc13e0"></span>char <code class="descname">metric_name</code>[256]<a class="headerlink" href="#_CPPv2N16fpga_metric_info11metric_nameE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N16fpga_metric_info12metric_unitsE">
+<span id="fpga_metric_info::metric_units__cA"></span><span class="target" id="structfpga__metric__info_1a537b1236822cc923a44ed0440dc8500a"></span>char <code class="descname">metric_units</code>[256]<a class="headerlink" href="#_CPPv2N16fpga_metric_info12metric_unitsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N16fpga_metric_info15metric_datatypeE">
+<span id="fpga_metric_info::metric_datatype__fpga_metric_datatype"></span><span class="target" id="structfpga__metric__info_1a3aef82b39037b6e4646f811fea4f93e4"></span><a class="reference internal" href="#_CPPv220fpga_metric_datatype" title="fpga_metric_datatype">fpga_metric_datatype</a> <code class="descname">metric_datatype</code><a class="headerlink" href="#_CPPv2N16fpga_metric_info15metric_datatypeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N16fpga_metric_info11metric_typeE">
+<span id="fpga_metric_info::metric_type__fpga_metric_type"></span><span class="target" id="structfpga__metric__info_1a0f1ee188177b88a3ade06b635c45743b"></span><a class="reference internal" href="#_CPPv216fpga_metric_type" title="fpga_metric_type">fpga_metric_type</a> <code class="descname">metric_type</code><a class="headerlink" href="#_CPPv2N16fpga_metric_info11metric_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv211fpga_metric">
+<span id="fpga_metric"></span><span class="target" id="structfpga__metric"></span><em class="property">struct </em><code class="descname">fpga_metric</code><a class="headerlink" href="#_CPPv211fpga_metric" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;types.h&gt;</em><p>Metric struct </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N11fpga_metric10metric_numE">
+<span id="fpga_metric::metric_num__uint64_t"></span><span class="target" id="structfpga__metric_1a05d5221efe860841a350b4c81c26f8d2"></span>uint64_t <code class="descname">metric_num</code><a class="headerlink" href="#_CPPv2N11fpga_metric10metric_numE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N11fpga_metric5valueE">
+<span id="fpga_metric::value__metric_value"></span><span class="target" id="structfpga__metric_1a0e64950f7e2c90ca97009d564cca1d04"></span><a class="reference internal" href="#_CPPv212metric_value" title="metric_value">metric_value</a> <code class="descname">value</code><a class="headerlink" href="#_CPPv2N11fpga_metric5valueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
 
 </div>
 </dd></dl>
@@ -629,6 +732,70 @@ defined in [types_enum.h](#types-enum-h).</p>
 <span class="target" id="types__enum_8h_1a9cacfdee4baf5ca62998913596412afba33387b602459cddf06b3eeab96eca47b"></span><code class="descname">FPGA_OBJECT_RECURSE_ALL</code> = (1u &lt;&lt; 4)<a class="headerlink" href="#_CPPv223FPGA_OBJECT_RECURSE_ALL" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create subobjects all levels from from containers </p>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv216fpga_metric_type">
+<span id="fpga_metric_type"></span><span class="target" id="types__enum_8h_1a04334291d3fe08ee2385f534629f3094"></span><em class="property">enum </em><code class="descname">fpga_metric_type</code><a class="headerlink" href="#_CPPv216fpga_metric_type" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>fpga metrics types opae defines power,thermal, performance counter and afu metric types </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv222FPGA_METRIC_TYPE_POWER">
+<span class="target" id="types__enum_8h_1a04334291d3fe08ee2385f534629f3094a19df4d36912e022021758321d7dfaca1"></span><code class="descname">FPGA_METRIC_TYPE_POWER</code><a class="headerlink" href="#_CPPv222FPGA_METRIC_TYPE_POWER" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv224FPGA_METRIC_TYPE_THERMAL">
+<span class="target" id="types__enum_8h_1a04334291d3fe08ee2385f534629f3094a1b615b52e8ec5f4339139567bcabd9d0"></span><code class="descname">FPGA_METRIC_TYPE_THERMAL</code><a class="headerlink" href="#_CPPv224FPGA_METRIC_TYPE_THERMAL" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv232FPGA_METRIC_TYPE_PERFORMANCE_CTR">
+<span class="target" id="types__enum_8h_1a04334291d3fe08ee2385f534629f3094a0090631e9c7498fcb11d73aae843d4c0"></span><code class="descname">FPGA_METRIC_TYPE_PERFORMANCE_CTR</code><a class="headerlink" href="#_CPPv232FPGA_METRIC_TYPE_PERFORMANCE_CTR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv220FPGA_METRIC_TYPE_AFU">
+<span class="target" id="types__enum_8h_1a04334291d3fe08ee2385f534629f3094afcaecf93ad13bf9558197c925c87d6c2"></span><code class="descname">FPGA_METRIC_TYPE_AFU</code><a class="headerlink" href="#_CPPv220FPGA_METRIC_TYPE_AFU" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv224FPGA_METRIC_TYPE_UNKNOWN">
+<span class="target" id="types__enum_8h_1a04334291d3fe08ee2385f534629f3094aeccc87ae6dc265c54200f71aad44d43b"></span><code class="descname">FPGA_METRIC_TYPE_UNKNOWN</code><a class="headerlink" href="#_CPPv224FPGA_METRIC_TYPE_UNKNOWN" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv220fpga_metric_datatype">
+<span id="fpga_metric_datatype"></span><span class="target" id="types__enum_8h_1ab10f51ceeb88998e5d0389cbd3d55bcc"></span><em class="property">enum </em><code class="descname">fpga_metric_datatype</code><a class="headerlink" href="#_CPPv220fpga_metric_datatype" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Metrics data type </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv224FPGA_METRIC_DATATYPE_INT">
+<span class="target" id="types__enum_8h_1ab10f51ceeb88998e5d0389cbd3d55bcca7e4011246e4e6ce4c62cbcd54c6b6446"></span><code class="descname">FPGA_METRIC_DATATYPE_INT</code><a class="headerlink" href="#_CPPv224FPGA_METRIC_DATATYPE_INT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv226FPGA_METRIC_DATATYPE_FLOAT">
+<span class="target" id="types__enum_8h_1ab10f51ceeb88998e5d0389cbd3d55bcca42b7558a3659d44b5291a68329ac59ba"></span><code class="descname">FPGA_METRIC_DATATYPE_FLOAT</code><a class="headerlink" href="#_CPPv226FPGA_METRIC_DATATYPE_FLOAT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv227FPGA_METRIC_DATATYPE_DOUBLE">
+<span class="target" id="types__enum_8h_1ab10f51ceeb88998e5d0389cbd3d55bcca0ef125e071fb8bb97d89e083055b350a"></span><code class="descname">FPGA_METRIC_DATATYPE_DOUBLE</code><a class="headerlink" href="#_CPPv227FPGA_METRIC_DATATYPE_DOUBLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv225FPGA_METRIC_DATATYPE_BOOL">
+<span class="target" id="types__enum_8h_1ab10f51ceeb88998e5d0389cbd3d55bcca42af89cdb2fd1aaf8209950ff080a684"></span><code class="descname">FPGA_METRIC_DATATYPE_BOOL</code><a class="headerlink" href="#_CPPv225FPGA_METRIC_DATATYPE_BOOL" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv228FPGA_METRIC_DATATYPE_UNKNOWN">
+<span class="target" id="types__enum_8h_1ab10f51ceeb88998e5d0389cbd3d55bccad5f469dac4b7a5961008918926f399dc"></span><code class="descname">FPGA_METRIC_DATATYPE_UNKNOWN</code><a class="headerlink" href="#_CPPv228FPGA_METRIC_DATATYPE_UNKNOWN" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
