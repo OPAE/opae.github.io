@@ -24,17 +24,25 @@
 
   
 
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="OPAE" href="../../index.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav">
+<body class="wy-body-for-nav" role="document">
 
    
   <div class="wy-grid-for-nav">
@@ -86,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -131,7 +140,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" aria-label="top navigation">
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">OPAE</a>
@@ -139,10 +148,9 @@
       </nav>
 
 
+      
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -305,16 +313,16 @@ More details on the errors reported for the resource can be found below:</p>
 </div>
 <div class="section" id="fpgaconf">
 <h1>fpgaconf<a class="headerlink" href="#fpgaconf" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="name-1">
-<span id="id1"></span><h2>NAME<a class="headerlink" href="#name-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>NAME<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>fpgadiag - Configure a green bitstream to an FPGA</p>
 </div>
-<div class="section" id="synopsis-1">
-<span id="id2"></span><h2>SYNOPSIS<a class="headerlink" href="#synopsis-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>SYNOPSIS<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">fpgaconf</span> <span class="pre">[-hvn]</span> <span class="pre">[-b</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-d</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-f</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[-s</span> <span class="pre">&lt;socket&gt;]</span> <span class="pre">&lt;gbs&gt;</span></code></p>
 </div>
-<div class="section" id="description-1">
-<span id="id3"></span><h2>DESCRIPTION<a class="headerlink" href="#description-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h2>DESCRIPTION<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>fpgaconf writes accelerator configuration bitstreams (also referred to
 as “green bitstreams” to an FPGA device recognized by OPAE. In the
 process, it also checks the green bitstream file for compatibility with
@@ -353,11 +361,11 @@ bistream”). fpgaconf takes the following arguments:</p>
 <p>fpgaconf will enumerate available FPGA devices in the system and select
 compatible FPGAs for configuration. If there are more than one candidate
 FPGAs that are compatible with the given green bitstream, fpgaconf will
-exit and ask you to be more specific in selecting the target FPGAs
-(e.g.&nbsp;by specifying a socket number, or a PCIe bus/device/function).</p>
+exit and ask you to be more specific in selecting the target FPGAs (e.g.
+by specifying a socket number, or a PCIe bus/device/function).</p>
 </div>
-<div class="section" id="examples-1">
-<span id="id4"></span><h2>EXAMPLES<a class="headerlink" href="#examples-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>EXAMPLES<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">fpgaconf</span> <span class="pre">my_green_bitstream.gbs</span></code></p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Program</span> <span class="s">&quot;my_green_bitstream.gbs&quot;</span> <span class="n">to</span> <span class="n">a</span> <span class="n">compatible</span> <span class="n">FPGA</span>
 </pre></div>
@@ -371,17 +379,17 @@ exit and ask you to be more specific in selecting the target FPGAs
 </div>
 <div class="section" id="fpgad">
 <h1>fpgad<a class="headerlink" href="#fpgad" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="name-2">
-<span id="id5"></span><h2>NAME<a class="headerlink" href="#name-2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h2>NAME<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>fpgad - log errors and generate events</p>
 </div>
-<div class="section" id="synopsis-2">
-<span id="id6"></span><h2>SYNOPSIS<a class="headerlink" href="#synopsis-2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>SYNOPSIS<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">fpgad</span> <span class="pre">--daemon</span> <span class="pre">[--directory=&lt;dir&gt;]</span> <span class="pre">[--logfile=&lt;file&gt;]</span> <span class="pre">[--pidfile=&lt;file&gt;]</span> <span class="pre">[--umask=&lt;mode&gt;]</span> <span class="pre">[--socket=&lt;sock&gt;]</span> <span class="pre">[--null-bitstream=&lt;file&gt;]</span></code>
 <code class="docutils literal"><span class="pre">fpgad</span> <span class="pre">[--socket=&lt;sock&gt;]</span> <span class="pre">[--null-bitstream=&lt;file&gt;]</span></code></p>
 </div>
-<div class="section" id="description-2">
-<span id="id7"></span><h2>DESCRIPTION<a class="headerlink" href="#description-2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h2>DESCRIPTION<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <p>Periodically monitors/reports the error status reflected in the device
 driver’s error status sysfs files. Establishes the channel by which
 events are communicated to the OPAE application. Programs a NULL
@@ -434,8 +442,8 @@ information:</p>
 <li>Run in non-daemon mode and view stdout.</li>
 </ol>
 </div>
-<div class="section" id="examples-2">
-<span id="id8"></span><h2>EXAMPLES<a class="headerlink" href="#examples-2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h2>EXAMPLES<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">fpgad</span> <span class="pre">--daemon</span> <span class="pre">--null-bitstream=my_null_bits.gbs</span></code></p>
 </div>
 <div class="section" id="see-also">
@@ -445,18 +453,18 @@ information:</p>
 </div>
 <div class="section" id="fpgadiag">
 <h1>fpgadiag<a class="headerlink" href="#fpgadiag" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="name-3">
-<span id="id9"></span><h2>NAME<a class="headerlink" href="#name-3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id9">
+<h2>NAME<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <p><em>fpgadiag</em> - FPGA diagnosis and testing tool.</p>
 </div>
-<div class="section" id="synopsis-3">
-<span id="id10"></span><h2>SYNOPSIS<a class="headerlink" href="#synopsis-3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id10">
+<h2>SYNOPSIS<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
 <div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">fpgadiag</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span> <span class="o">|</span> <span class="o">--</span><span class="n">mode</span><span class="o">=</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">mode</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="o">|</span> <span class="o">--</span><span class="n">target</span><span class="o">=</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="description-3">
-<span id="id11"></span><h2>DESCRIPTION<a class="headerlink" href="#description-3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h2>DESCRIPTION<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
 <p><em>fpgadiag</em> includes several tests to diagnose, test and report on the
 FPGA hardware.</p>
 <p><code class="docutils literal"><span class="pre">&lt;mode&gt;</span></code> chooses which test to run. <code class="docutils literal"><span class="pre">&lt;target&gt;</span></code> specifies on what
@@ -515,8 +523,8 @@ properly configured on the platform.</p>
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="common-options-1">
-<span id="id12"></span><h3>Common options<a class="headerlink" href="#common-options-1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id12">
+<h3>Common options<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal"><span class="pre">--help,</span> <span class="pre">-h</span></code></p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Print</span> <span class="n">help</span> <span class="n">information</span> <span class="n">and</span> <span class="n">exit</span><span class="p">.</span>
 </pre></div>
@@ -819,11 +827,11 @@ properly configured on the platform.</p>
 </div>
 </div>
 </div>
-<div class="section" id="examples-3">
-<span id="id13"></span><h2>EXAMPLES<a class="headerlink" href="#examples-3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id13">
+<h2>EXAMPLES<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
 <p>This command starts an <code class="docutils literal"><span class="pre">lpbk1</span></code> test on the FPGA on bus <code class="docutils literal"><span class="pre">0x5e</span></code>. The
-test copies 57535, 57536, 57537, …, up to 65535 cache lines, one line at
-a time. The test output is printed in the CSV format with header
+test copies 57535, 57536, 57537, …, up to 65535 cache lines, one line
+at a time. The test output is printed in the CSV format with header
 suppressed.</p>
 <div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">fpgadiag</span> <span class="o">--</span><span class="n">mode</span><span class="o">=</span><span class="n">lpbk1</span> <span class="o">--</span><span class="n">target</span><span class="o">=</span><span class="n">fpga</span> <span class="o">-</span><span class="n">SV</span> <span class="o">--</span><span class="n">bus</span><span class="o">-</span><span class="n">number</span><span class="o">=</span><span class="mh">0x5e</span> <span class="o">--</span><span class="n">begin</span><span class="o">=</span><span class="mi">57535</span>
 <span class="o">--</span><span class="n">end</span><span class="o">=</span><span class="mi">65535</span> <span class="o">--</span><span class="n">cache</span><span class="o">-</span><span class="n">hint</span><span class="o">=</span><span class="n">rdline</span><span class="o">-</span><span class="n">I</span> <span class="o">--</span><span class="n">cache</span><span class="o">-</span><span class="n">policy</span><span class="o">=</span><span class="n">wrpush</span><span class="o">-</span><span class="n">I</span> <span class="o">--</span><span class="n">multi</span><span class="o">-</span><span class="n">cl</span><span class="o">=</span><span class="mi">1</span>
@@ -847,8 +855,8 @@ The test notifies completion using a CSR write.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="troubleshooting-1">
-<span id="id14"></span><h2>TROUBLESHOOTING<a class="headerlink" href="#troubleshooting-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id14">
+<h2>TROUBLESHOOTING<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
 <p>When a test fails to run or gives errors, check the following:</p>
 <ul class="simple">
 <li>Is Intel FPGA driver properly installed? See <a class="reference external" href="/fpga-doc/docs/install_guide/installation_guide.html">Installation
@@ -874,30 +882,30 @@ the <code class="docutils literal"><span class="pre">--cont</span></code> option
 </div>
 <div class="section" id="mmlink">
 <h1>mmlink<a class="headerlink" href="#mmlink" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="name-4">
-<span id="id15"></span><h2>NAME<a class="headerlink" href="#name-4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id15">
+<h2>NAME<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
 <p>MMLink - Debugging RTL.</p>
 </div>
-<div class="section" id="synopsis-4">
-<span id="id16"></span><h2>SYNOPSIS<a class="headerlink" href="#synopsis-4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id16">
+<h2>SYNOPSIS<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">mmlink</span> <span class="pre">[-B</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-D</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-F</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[-S</span> <span class="pre">&lt;socket&gt;]</span> <span class="pre">[-P</span> <span class="pre">&lt;TCP</span> <span class="pre">port&gt;]</span> <span class="pre">[-I</span> <span class="pre">&lt;IP</span> <span class="pre">Address&gt;]</span></code></p>
 </div>
-<div class="section" id="description-4">
-<span id="id17"></span><h2>DESCRIPTION<a class="headerlink" href="#description-4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id17">
+<h2>DESCRIPTION<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
 <p>Remote signaltap is software tool used for debug RTL (AFU), effectively
 a signal trace capability that Quartus places into a green bitstream.
 Remote Signal Tap provides access the RST part of the Port MMIO space,
 and then runs the remote protocol on top.</p>
 </div>
-<div class="section" id="examples-4">
-<span id="id18"></span><h2>EXAMPLES<a class="headerlink" href="#examples-4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id18">
+<h2>EXAMPLES<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">./mmlink</span>&#160; <span class="pre">-B</span> <span class="pre">0x5e</span> <span class="pre">-P</span> <span class="pre">3333</span></code></p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">MMLink</span> <span class="n">app</span> <span class="n">starts</span> <span class="n">and</span> <span class="n">listens</span> <span class="k">for</span> <span class="n">connection</span><span class="p">.</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="options-1">
-<span id="id19"></span><h2>OPTIONS<a class="headerlink" href="#options-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id19">
+<h2>OPTIONS<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">-B,--bus</span></code> FPGA Bus number.</p>
 <p><code class="docutils literal"><span class="pre">-D,--device</span></code> FPGA Device number.</p>
 <p><code class="docutils literal"><span class="pre">-F,--functio</span></code> FPGA function number.</p>
@@ -916,30 +924,30 @@ and then runs the remote protocol on top.</p>
 </div>
 <div class="section" id="coreidle">
 <h1>coreidle<a class="headerlink" href="#coreidle" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="name-5">
-<span id="id20"></span><h2>NAME<a class="headerlink" href="#name-5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id20">
+<h2>NAME<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
 <p>coreidle - idles cores for shared TDP sockets to run online cores at
 maximum capacity.</p>
 </div>
-<div class="section" id="synopsis-5">
-<span id="id21"></span><h2>SYNOPSIS<a class="headerlink" href="#synopsis-5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id21">
+<h2>SYNOPSIS<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">coreidle</span> <span class="pre">[-B</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-D</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-F</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[-S</span> <span class="pre">&lt;socket&gt;]</span> <span class="pre">[-G</span> <span class="pre">&lt;GBS</span> <span class="pre">path&gt;]</span></code></p>
 </div>
-<div class="section" id="description-5">
-<span id="id22"></span><h2>DESCRIPTION<a class="headerlink" href="#description-5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id22">
+<h2>DESCRIPTION<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h2>
 <p>This tools parses input GBS, extracts power from metadata ,calculates
 fpga power, number of online and idle cores. It moves threads from idle
 cores to online cores.</p>
 </div>
-<div class="section" id="examples-5">
-<span id="id23"></span><h2>EXAMPLES<a class="headerlink" href="#examples-5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id23">
+<h2>EXAMPLES<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">./coreidle</span>&#160; <span class="pre">-B</span> <span class="pre">0x5e</span> <span class="pre">-G</span> <span class="pre">/home/lab/gbs/mode0.gbs</span></code></p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Idle</span> <span class="n">cores</span> <span class="n">to</span> <span class="n">run</span> <span class="n">online</span> <span class="n">cores</span> <span class="n">at</span> <span class="n">maximum</span> <span class="n">capacity</span><span class="p">.</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="options-2">
-<span id="id24"></span><h2>OPTIONS<a class="headerlink" href="#options-2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id24">
+<h2>OPTIONS<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">-B,--bus</span></code> FPGA Bus number.</p>
 <p><code class="docutils literal"><span class="pre">-D,--device</span></code> FPGA Device number.</p>
 <p><code class="docutils literal"><span class="pre">-F,--functio</span></code> FPGA function number.</p>
@@ -949,21 +957,21 @@ cores to online cores.</p>
 </div>
 <div class="section" id="fpgamux">
 <h1>fpgamux<a class="headerlink" href="#fpgamux" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="name-6">
-<span id="id25"></span><h2>NAME<a class="headerlink" href="#name-6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id25">
+<h2>NAME<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">fpgamux</span> <span class="o">-</span> <span class="n">Software</span> <span class="n">MUX</span> <span class="k">for</span> <span class="n">running</span> <span class="n">multiple</span> <span class="n">AFU</span> <span class="p">(</span><span class="n">accelerator</span> <span class="n">functional</span> <span class="n">unit</span><span class="p">)</span> <span class="n">tests</span> <span class="n">in</span> <span class="n">one</span> <span class="n">GBS</span> <span class="p">(</span><span class="n">green</span> <span class="n">bitsream</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="synopsis-6">
-<span id="id26"></span><h2>SYNOPSIS<a class="headerlink" href="#synopsis-6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id26">
+<h2>SYNOPSIS<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h2>
 <div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">fpgamux</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">S</span><span class="o">|--</span><span class="n">socket</span><span class="o">-</span><span class="n">id</span> <span class="n">SOCKET_ID</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">B</span><span class="o">|--</span><span class="n">bus</span><span class="o">-</span><span class="n">number</span> <span class="n">BUS</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">D</span><span class="o">|--</span><span class="n">device</span> <span class="n">DEVICE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">F</span><span class="o">|--</span><span class="n">function</span> <span class="n">FUNCTION</span><span class="p">]</span>
           <span class="p">[</span><span class="o">-</span><span class="n">G</span><span class="o">|--</span><span class="n">guid</span> <span class="n">GUID</span><span class="p">]</span> <span class="o">-</span><span class="n">m</span><span class="o">|--</span><span class="n">muxfile</span> <span class="n">MUXFILE</span><span class="p">.</span><span class="n">json</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="description-6">
-<span id="id27"></span><h2>DESCRIPTION<a class="headerlink" href="#description-6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id27">
+<h2>DESCRIPTION<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h2>
 <p>fpgamux is a testing tool to interact with multiple AFUs that have been
 synthesized into one GBS along with the CCIP-MUX BBB (basic building
 block). The CCIP-MUX uses upper bits in the MMIO addresses to route MMIO
@@ -976,8 +984,8 @@ configuration to use.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="options-3">
-<span id="id28"></span><h2>OPTIONS<a class="headerlink" href="#options-3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id28">
+<h2>OPTIONS<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">S</span> <span class="n">SOCKET_ID</span><span class="p">,</span> <span class="o">--</span><span class="n">socket</span><span class="o">-</span><span class="n">id</span> <span class="n">SOCKET_ID</span>
    <span class="n">socket</span> <span class="n">id</span> <span class="n">of</span> <span class="n">FPGA</span> <span class="n">resource</span>
 
@@ -1012,8 +1020,8 @@ below:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="examples-6">
-<span id="id29"></span><h2>EXAMPLES<a class="headerlink" href="#examples-6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id29">
+<h2>EXAMPLES<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h2>
 <p>An example configuration with two components is listed below:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span>
@@ -1073,26 +1081,26 @@ below:</p>
 </div>
 <div class="section" id="userclk">
 <h1>userclk<a class="headerlink" href="#userclk" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="name-7">
-<span id="id30"></span><h2>NAME<a class="headerlink" href="#name-7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id30">
+<h2>NAME<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h2>
 <p>userclk - to set afu high and low clock frequency.</p>
 </div>
-<div class="section" id="synopsis-7">
-<span id="id31"></span><h2>SYNOPSIS<a class="headerlink" href="#synopsis-7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id31">
+<h2>SYNOPSIS<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">userclk</span> <span class="pre">[-B</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-D</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-F</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[-S</span> <span class="pre">&lt;socket&gt;]</span> <span class="pre">[-P</span> <span class="pre">&lt;Port</span> <span class="pre">id&gt;]</span> <span class="pre">[-H</span> <span class="pre">&lt;User</span> <span class="pre">clock</span> <span class="pre">high</span> <span class="pre">frequency&gt;]</span> <span class="pre">-L</span> <span class="pre">&lt;User</span> <span class="pre">clock</span> <span class="pre">low</span> <span class="pre">frequency&gt;]</span></code></p>
 </div>
-<div class="section" id="description-7">
-<span id="id32"></span><h2>DESCRIPTION<a class="headerlink" href="#description-7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id32">
+<h2>DESCRIPTION<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h2>
 <p>userclk tool used to set high and low clock frequency to acceleration
 function unit.</p>
 </div>
-<div class="section" id="examples-7">
-<span id="id33"></span><h2>EXAMPLES<a class="headerlink" href="#examples-7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id33">
+<h2>EXAMPLES<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">./userclk</span>&#160; <span class="pre">-B</span> <span class="pre">0x5e</span> <span class="pre">-H</span> <span class="pre">400</span> <span class="pre">-L</span> <span class="pre">200</span></code></p>
 <p>Sets AFU frequency.</p>
 </div>
-<div class="section" id="options-4">
-<span id="id34"></span><h2>OPTIONS<a class="headerlink" href="#options-4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id34">
+<h2>OPTIONS<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">-B,--bus</span></code> FPGA Bus number.</p>
 <p><code class="docutils literal"><span class="pre">-D,--device</span></code> FPGA Device number.</p>
 <p><code class="docutils literal"><span class="pre">-F,--functio</span></code> FPGA function number.</p>
@@ -1105,7 +1113,9 @@ function unit.</p>
 
 
            </div>
-           
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -1114,11 +1124,11 @@ function unit.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017 Intel Corporation
+        &copy; Copyright 2017 Intel Corporation.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1133,33 +1143,35 @@ function unit.</p>
 
   
 
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../',
-              VERSION:'1.1.0',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-    
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
 
   
 
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
 
+  
+  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
+          SphinxRtdTheme.StickyNav.enable();
       });
-  </script> 
+  </script>
+   
 
 </body>
 </html>
