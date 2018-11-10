@@ -93,6 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#driver-build-installation-with-driver-source-package">Driver build/installation with driver source package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#manual-driver-build-from-rpm-package">Manual Driver build from RPM package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#opae-sdk-build-installation-from-opae-sdk-source">OPAE SDK build/installation from OPAE SDK source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-python-distributions-for-tools">Building python distributions for tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-opae-sdk-rpm-and-deb-packages-from-the-source">Building OPAE SDK rpm and deb packages from the source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#opae-sdk-installation-with-rpm-packages">OPAE SDK installation with rpm packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#opae-sdk-installation-with-deb-packages">OPAE SDK installation with deb packages</a></li>
@@ -378,6 +379,19 @@ something else by adding <code class="docutils literal"><span class="pre">-DCMAK
 <code class="docutils literal"><span class="pre">cmake</span></code> command above.</p>
 <p>Please see Quick Start Guide on how to run the hello_fpga sample to
 verify libopae-c &amp; driver are built correctly.</p>
+</div>
+<div class="section" id="building-python-distributions-for-tools">
+<h2>Building python distributions for tools<a class="headerlink" href="#building-python-distributions-for-tools" title="Permalink to this headline">¶</a></h2>
+<p>The tools that can be built with python distutils are: - packager -
+fpgaflash - fpgadiag</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> opae-sdk-&lt;release&gt;
+<span class="gp">$</span> mkdir mybuild
+<span class="gp">$</span> <span class="nb">cd</span> mybuild
+<span class="gp">$</span> cmake .. -DBUILD_PYTHON_DIST<span class="o">=</span>ON
+<span class="gp">$</span> make &lt;toolname&gt;-dist
+</pre></div>
+</div>
+<p>The python distributions will be available in mybuild///stage/dist</p>
 </div>
 <div class="section" id="building-opae-sdk-rpm-and-deb-packages-from-the-source">
 <h2>Building OPAE SDK rpm and deb packages from the source<a class="headerlink" href="#building-opae-sdk-rpm-and-deb-packages-from-the-source" title="Permalink to this headline">¶</a></h2>
