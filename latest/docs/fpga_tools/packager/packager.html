@@ -24,19 +24,27 @@
 
   
 
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="userclk" href="../userclk/userclk.html" />
-    <link rel="prev" title="mmlink" href="../mmlink/mmlink.html" /> 
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="OPAE" href="../../../index.html"/>
+        <link rel="next" title="userclk" href="../userclk/userclk.html"/>
+        <link rel="prev" title="mmlink" href="../mmlink/mmlink.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav">
+<body class="wy-body-for-nav" role="document">
 
    
   <div class="wy-grid-for-nav">
@@ -88,6 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -141,7 +150,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" aria-label="top navigation">
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">OPAE</a>
@@ -149,10 +158,9 @@
       </nav>
 
 
+      
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -223,9 +231,9 @@ indicates if it is being called with a compatible of Python.</strong></p>
 <p>The following table describes the <code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code> arguments:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="24%" />
-<col width="44%" />
-<col width="32%" />
+<col width="26%" />
+<col width="41%" />
+<col width="33%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Command</th>
@@ -234,121 +242,187 @@ indicates if it is being called with a compatible of Python.</strong></p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">create-gbs</span></code></td>
-<td><code class="docutils literal"><span class="pre">--rbf=&lt;RBF_PATH&gt;</span></code>
-<code class="docutils literal"><span class="pre">--afu=&lt;AFU_JSON_PATH&gt;</span></code>
-<code class="docutils literal"><span class="pre">--gbs=&lt;GBS_PATH&gt;</span></code>
-<code class="docutils literal"><span class="pre">--set-value=&lt;key&gt;.&lt;value</span>
-<span class="pre">&gt;</span></code></td>
-<td>Creates the AF file.
-The engineering name
-for this file is the
-green bit stream,
-abbreviated gbs. The
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">create-g</span>
+<span class="pre">bs</span></code></td>
+<td><code class="docutils literal"><span class="pre">--rbf=&lt;RBF_PATH</span>
+<span class="pre">&gt;</span></code>
+<code class="docutils literal"><span class="pre">--afu=&lt;AFU_JS</span>
+<span class="pre">ON_PATH&gt;</span></code>
+<code class="docutils literal"><span class="pre">--gbs=&lt;GBS_PA</span>
+<span class="pre">TH&gt;</span></code>
+<code class="docutils literal"><span class="pre">--set-value=&lt;</span>
+<span class="pre">key&gt;.&lt;value&gt;</span></code></td>
+<td>Creates the
+AF file. The
+engineering
+name for this
+file is the
+green bit
+stream,
+abbreviated
+gbs. The
 <code class="docutils literal"><span class="pre">--rbf</span></code> and
-<code class="docutils literal"><span class="pre">--afu</span></code> arguments
-are required.
-<code class="docutils literal"><span class="pre">&lt;RBF_PATH&gt;</span></code> is
-the path to the RBF
-file for the AFU.
-The Quartus® Prime
-software generates
-this RBF by
-compiling the AFU
-design.
-<code class="docutils literal"><span class="pre">&lt;AFU_JSON_PATH&gt;</span></code>
-is the path to the
+<code class="docutils literal"><span class="pre">--afu</span></code>
+arguments are
+required.
+<code class="docutils literal"><span class="pre">&lt;RBF_PATH&gt;`</span>
+<span class="pre">`</span>
+<span class="pre">is</span> <span class="pre">the</span> <span class="pre">path</span>
+<span class="pre">to</span> <span class="pre">the</span> <span class="pre">RBF</span>
+<span class="pre">file</span> <span class="pre">for</span> <span class="pre">the</span>
+<span class="pre">AFU.</span> <span class="pre">The</span>
+<span class="pre">Quartus®</span>
+<span class="pre">Prime</span>
+<span class="pre">software</span>
+<span class="pre">generates</span>
+<span class="pre">this</span> <span class="pre">RBF</span> <span class="pre">by</span>
+<span class="pre">compiling</span> <span class="pre">the</span>
+<span class="pre">AFU</span> <span class="pre">design.</span>
+<span class="pre">``&lt;AFU_JSON_P</span>
+<span class="pre">ATH&gt;</span></code>
+is the path
+to the
 Accelerator
-Description file.
-This is a JSON file
-that describes the
+Description
+file. This is
+a JSON file
+that
+describes the
 metadata that
-<code class="docutils literal"><span class="pre">create-gbs</span></code>
-appends to the RBF.
-<code class="docutils literal"><span class="pre">&lt;GBS_PATH&gt;</span></code> is
-the path to the RBF
-file for the FPGA
-Interface Manager
-(FIM) that contains
-the FPGA interface
-unit and other
-interfaces. If you
-do not specify the
-<code class="docutils literal"><span class="pre">--gbs</span></code>, the
-command defaults to
-<code class="docutils literal"><span class="pre">&lt;rbf_name&gt;.gbs</span></code>.
-You can use the
-optional
-<code class="docutils literal"><span class="pre">--set-value=&lt;key&gt;.</span>
-<span class="pre">&lt;value&gt;</span></code>
-argument to set
-values for JSON
-metadata. To set
-more than one JSON
-value, list a series
-of <code class="docutils literal"><span class="pre">&lt;key&gt;.&lt;value&gt;</span></code>
+<code class="docutils literal"><span class="pre">create-gbs`</span>
+<span class="pre">`</span>
+<span class="pre">appends</span> <span class="pre">to</span>
+<span class="pre">the</span> <span class="pre">RBF.</span>
+<span class="pre">``&lt;GBS_PATH&gt;`</span>
+<span class="pre">`</span>
+<span class="pre">is</span> <span class="pre">the</span> <span class="pre">path</span>
+<span class="pre">to</span> <span class="pre">the</span> <span class="pre">RBF</span>
+<span class="pre">file</span> <span class="pre">for</span> <span class="pre">the</span>
+<span class="pre">FPGA</span>
+<span class="pre">Interface</span>
+<span class="pre">Manager</span> <span class="pre">(FIM)</span>
+<span class="pre">that</span> <span class="pre">contains</span>
+<span class="pre">the</span> <span class="pre">FPGA</span>
+<span class="pre">interface</span>
+<span class="pre">unit</span> <span class="pre">and</span>
+<span class="pre">other</span>
+<span class="pre">interfaces.</span>
+<span class="pre">If</span> <span class="pre">you</span> <span class="pre">do</span> <span class="pre">not</span>
+<span class="pre">specify</span> <span class="pre">the</span>
+<span class="pre">``--gbs</span></code>,
+the command
+defaults to
+<code class="docutils literal"><span class="pre">&lt;rbf_name&gt;.</span>
+<span class="pre">gbs</span></code>.
+You can use
+the optional
+<code class="docutils literal"><span class="pre">--set-value</span>
+<span class="pre">=&lt;key&gt;.&lt;value</span>
+<span class="pre">&gt;</span></code>
+argument to
+set values
+for JSON
+metadata. To
+set more than
+one JSON
+value, list a
+series of
+<code class="docutils literal"><span class="pre">&lt;key&gt;.&lt;valu</span>
+<span class="pre">e&gt;</span></code>
 pairs.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">modify-gbs</span></code></td>
-<td><code class="docutils literal"><span class="pre">--gbs=&lt;gbs_PATH&gt;</span></code></td>
-<td>Modifies the AF
-file. The
-<code class="docutils literal"><span class="pre">--input-gbs</span></code>arg
-ument
-is required. If you
-do not provide the
-<code class="docutils literal"><span class="pre">--output-gbs</span></code>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">modify-g</span>
+<span class="pre">bs</span></code></td>
+<td><code class="docutils literal"><span class="pre">--gbs=&lt;gbs_PATH</span>
+<span class="pre">&gt;</span></code></td>
+<td>Modifies the
+AF file. The
+<code class="docutils literal"><span class="pre">--input-gbs</span>
+<span class="pre">``\</span> <span class="pre">argument</span>
+<span class="pre">is</span> <span class="pre">required.</span>
+<span class="pre">If</span> <span class="pre">you</span> <span class="pre">do</span> <span class="pre">not</span>
+<span class="pre">provide</span> <span class="pre">the</span>
+<span class="pre">``--output-gb</span>
+<span class="pre">s</span></code>
 argument,
-<code class="docutils literal"><span class="pre">modify-gbs</span></code>
-overwrites the
-<code class="docutils literal"><span class="pre">--input-gbs</span></code>
-file. Use the
-<code class="docutils literal"><span class="pre">--set-value=&lt;key&gt;.</span>
-<span class="pre">&lt;value&gt;</span></code>
-argument to set
-values for JSON
-metadata. To set
-more than one JSON
-value, list a series
-of <code class="docutils literal"><span class="pre">&lt;key&gt;.&lt;value&gt;</span></code>
+<code class="docutils literal"><span class="pre">modify-gbs`</span>
+<span class="pre">`</span>
+<span class="pre">overwrites</span>
+<span class="pre">the</span>
+<span class="pre">``--input-gbs</span>
+<span class="pre">``</span>
+<span class="pre">file.</span> <span class="pre">Use</span> <span class="pre">the</span>
+<span class="pre">``--set-value</span>
+<span class="pre">=&lt;key&gt;.&lt;value</span>
+<span class="pre">&gt;</span></code>
+argument to
+set values
+for JSON
+metadata. To
+set more than
+one JSON
+value, list a
+series of
+<code class="docutils literal"><span class="pre">&lt;key&gt;.&lt;valu</span>
+<span class="pre">e&gt;</span></code>
 pairs.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">gbs-info</span></code></td>
-<td><code class="docutils literal"><span class="pre">--input-gbs=&lt;gbs_PATH&gt;</span></code></td>
-<td>Prints information
-about the AF file.
-The <code class="docutils literal"><span class="pre">--input-gbs</span></code>
+<tr class="row-even"><td><a href="#id1"><span class="problematic" id="id2">``</span></a>gbs-info
+``</td>
+<td><code class="docutils literal"><span class="pre">--input-gbs=&lt;gb</span>
+<span class="pre">s_PATH&gt;</span></code></td>
+<td>Prints
+information
+about the AF
+file. The
+<a href="#id3"><span class="problematic" id="id4">``</span></a>–input-gbs
+``
 argument is
 required.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">get-rbf</span></code></td>
-<td><code class="docutils literal"><span class="pre">--gbs=&lt;GBS_PATH&gt;</span></code>
-<code class="docutils literal"><span class="pre">--rbf=&lt;RBF_PATH&gt;</span></code></td>
-<td>Creates the RBF by
-extracting it from
-the AF file. The
-<code class="docutils literal"><span class="pre">--gbs</span></code>argument
-is required. If you
-do not specify the
-<code class="docutils literal"><span class="pre">--rbf</span></code> argument,
-the command defaults
-to <code class="docutils literal"><span class="pre">&lt;gbs_name.rbf</span></code>
+<tr class="row-odd"><td><a href="#id5"><span class="problematic" id="id6">``</span></a>get-rbf`
+`</td>
+<td><code class="docutils literal"><span class="pre">--gbs=&lt;GBS_PATH</span>
+<span class="pre">&gt;</span></code>
+<code class="docutils literal"><span class="pre">--rbf=&lt;RBF_PA</span>
+<span class="pre">TH&gt;</span></code></td>
+<td>Creates the
+RBF by
+extracting it
+from the AF
+file. The
+<code class="docutils literal"><span class="pre">--gbs</span></code>ar
+gument
+is required.
+If you do not
+specify the
+<code class="docutils literal"><span class="pre">--rbf</span></code>
+argument, the
+command
+defaults to
+<code class="docutils literal"><span class="pre">&lt;gbs_name.r</span>
+<span class="pre">bf</span></code>
 .</td>
 </tr>
-<tr class="row-even"><td>None, or any
+<tr class="row-even"><td>None, or
+any
 <code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code></td>
 <td><code class="docutils literal"><span class="pre">--help</span></code></td>
-<td>Summarizes the
-<code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code> options.
+<td>Summarizes
+the <code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code>
+options.
 Typing
-<code class="docutils literal"><span class="pre">packager</span> <span class="pre">--help</span></code>
-gives a list of
-<code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code> values.
+<code class="docutils literal"><span class="pre">packager</span> <span class="pre">--</span>
+<span class="pre">help</span></code>
+gives a list
+of <code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code>
+values.
 Typing
-<code class="docutils literal"><span class="pre">packager</span> <span class="pre">&lt;CMD&gt;</span> <span class="pre">--h</span>
-<span class="pre">elp</span></code>
-provides detailed
-help for <code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code></td>
+<code class="docutils literal"><span class="pre">packager</span> <span class="pre">&lt;C</span>
+<span class="pre">MD&gt;</span> <span class="pre">--help</span></code>
+provides
+detailed help
+for <code class="docutils literal"><span class="pre">&lt;CMD&gt;</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -404,10 +478,10 @@ interfaces.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="20%" />
-<col width="12%" />
-<col width="12%" />
-<col width="29%" />
+<col width="15%" />
+<col width="15%" />
 <col width="26%" />
+<col width="25%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">CATEGORY</th>
@@ -419,33 +493,30 @@ interfaces.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>Per-AFU</td>
-<td>versio
-n</td>
-<td>Intege
-r</td>
+<td>version</td>
+<td>Integer</td>
 <td>Version of the
-metadata format.</td>
+metadata
+format.</td>
 <td>Yes</td>
 </tr>
 <tr class="row-odd"><td>Per-AFU</td>
-<td>magic-
-no
+<td>magic-n
+o
 (to be
-deprec
-ated)</td>
-<td>Intege
-r</td>
+depreca
+ted)</td>
+<td>Integer</td>
 <td>Magic no.
-Associated with
-the FPGA
+Associated
+with the FPGA
 Interface
 Manager.</td>
 <td>No</td>
 </tr>
 <tr class="row-even"><td>Per-AFU</td>
-<td>platfo
-rm-nam
-e</td>
+<td>platfor
+m-name</td>
 <td>String</td>
 <td>Name of the
 platform for
@@ -453,69 +524,70 @@ which the
 metadata is
 intended. The
 field value is
-“DCP” for Intel
+“DCP” for
+Intel
 Acceleration
-Stack for FPGAs.</td>
+Stack for
+FPGAs.</td>
 <td>No</td>
 </tr>
 <tr class="row-odd"><td>Per-AFU</td>
-<td>interf
-ace-uu
-id</td>
+<td>interfa
+ce-uuid</td>
 <td>UUID</td>
 <td>Interface id
-associated with
-the FPGA
+associated
+with the FPGA
 Interface
 Manager.</td>
 <td>Yes</td>
 </tr>
 <tr class="row-even"><td>Per-AFU</td>
 <td>power</td>
-<td>Intege
-r</td>
+<td>Integer</td>
 <td>Accelerator
 Function power
-consumption, in
-watts. Set to 0
-for Intel
+consumption,
+in watts. Set
+to 0 for Intel
 Acceleration
-Stack for FPGAs
+Stack for
+FPGAs
 platforms.</td>
 <td>Yes</td>
 </tr>
 <tr class="row-odd"><td>Per-AFU</td>
-<td>clock-
-freque
-ncy-lo
-w</td>
+<td>clock-f
+requenc
+y-low</td>
 <td>Float</td>
-<td>Clock frequency
-for 1st PLL
-(Clock network)1
-in MHz.</td>
+<td>Clock
+frequency for
+1st PLL (Clock
+network)1 in
+MHz.</td>
 <td>No</td>
 </tr>
 <tr class="row-even"><td>Per-AFU</td>
-<td>clock-
-freque
-ncy-hi
-gh</td>
+<td>clock-f
+requenc
+y-high</td>
 <td>Float</td>
-<td>Clock frequency
-for 2nd PLL (0 if
-absent) in MHz.</td>
+<td>Clock
+frequency for
+2nd PLL (0 if
+absent) in
+MHz.</td>
 <td>No</td>
 </tr>
 <tr class="row-odd"><td>Per-AFC
 Cluster</td>
-<td>total-
-contex
-ts</td>
-<td>Intege
-r</td>
-<td>Number of AFCs in
-this cluster.
+<td>total-c
+ontexts</td>
+<td>Integer</td>
+<td>Number of AFCs
+in this
+cluster.
 Always be 1 in
 current
 architectures.</td>
@@ -523,12 +595,11 @@ architectures.</td>
 </tr>
 <tr class="row-even"><td>Per-AFC
 Cluster</td>
-<td>afc-ty
-pe-uui
-d</td>
+<td>afc-typ
+e-uuid</td>
 <td>UUID</td>
-<td>AFC type = AFU ID
-in current
+<td>AFC type = AFU
+ID in current
 architectures.</td>
 <td>Yes</td>
 </tr>
@@ -537,7 +608,8 @@ Cluster</td>
 <td>name</td>
 <td>string</td>
 <td>AFC name = AFU
-name in current
+name in
+current
 architectures.</td>
 <td>Yes</td>
 </tr>
@@ -545,9 +617,9 @@ architectures.</td>
 </table>
 <table border="1" class="docutils">
 <colgroup>
-<col width="15%" />
-<col width="67%" />
-<col width="18%" />
+<col width="17%" />
+<col width="64%" />
+<col width="19%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Date</th>
@@ -567,7 +639,9 @@ architectures.</td>
 
 
            </div>
-           
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -585,11 +659,11 @@ architectures.</td>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017 Intel Corporation
+        &copy; Copyright 2017 Intel Corporation.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -604,33 +678,35 @@ architectures.</td>
 
   
 
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../../',
-              VERSION:'1.1.0',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
 
   
 
-  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
 
+  
+  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
+          SphinxRtdTheme.StickyNav.enable();
       });
-  </script> 
+  </script>
+   
 
 </body>
 </html>
