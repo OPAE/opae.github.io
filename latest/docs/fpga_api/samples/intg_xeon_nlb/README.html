@@ -24,25 +24,17 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../../../genindex.html"/>
-        <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="OPAE" href="../../../../index.html"/> 
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -94,7 +86,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -141,7 +132,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../index.html">OPAE</a>
@@ -149,9 +140,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -211,8 +203,8 @@ instantiating a local memory test only when possible.</p>
 <li><p class="first">There are multiple variants of NLB. Mode 0 builds a loopback and mode
 3 tests are unidirectional. A third variant adds SignalTap. Three
 primary source file lists are defined: hw/rtl/filelist_mode_0.txt,
-hw/rtl/filelist_mode_3.txt and hw/rtl/filelist_mode_0_stp.txt.
-The files define an AFU-specific macro to configure the mode and then
+hw/rtl/filelist_mode_3.txt and hw/rtl/filelist_mode_0_stp.txt. The
+files define an AFU-specific macro to configure the mode and then
 include hw/rtl/filelist_base.txt, which holds the shared list of
 sources. The desired variant is chosen by naming the corresponding
 file list, e.g.:</p>
@@ -229,9 +221,7 @@ syntax parsed by rtl_src_config use the –help option:</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -240,11 +230,11 @@ syntax parsed by rtl_src_config use the –help option:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017 Intel Corporation.
+        &copy; Copyright 2017 Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -259,35 +249,33 @@ syntax parsed by rtl_src_config use the –help option:</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../../../',
-            VERSION:'1.1.0',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../../../',
+              VERSION:'1.1.0',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

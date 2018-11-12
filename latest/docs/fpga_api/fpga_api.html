@@ -24,27 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="OPAE" href="../../index.html"/>
-        <link rel="next" title="OPAE C++ Core API Reference" href="fpga_cxx_api.html"/>
-        <link rel="prev" title="Building the OPAE C Library" href="../build_chain/fpga_api/api_build.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="OPAE C++ Core API Reference" href="fpga_cxx_api.html" />
+    <link rel="prev" title="Building the OPAE C Library" href="../build_chain/fpga_api/api_build.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -96,7 +88,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul class="current">
@@ -182,7 +173,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">OPAE</a>
@@ -190,9 +181,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -2068,8 +2060,8 @@ buffers with an accelerator (buffer.h), and using low-latency notifications
 <dd><p>Map MMIO space</p>
 <p>This function will return a pointer to the specified MMIO space of the target object in process virtual memory, if supported by the target. Some MMIO spaces may be restricted to privileged processes, depending on the used handle and type.</p>
 <p>After mapping the respective MMIO space, you can access it through direct pointer operations (observing supported access sizes and alignments of the target platform and accelerator).</p>
-<p>
-If the caller passes in NULL for mmio_ptr, no mapping will be performed, and no virtual address will be returned, though the call will return <code class="docutils literal"><span class="pre">FPGA_OK</span></code>. This implies that all accesses will be performed through <a class="reference internal" href="#mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"><span class="std std-ref">fpgaReadMMIO32()</span></a>, <a class="reference internal" href="#mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"><span class="std std-ref">fpgaWriteMMIO32()</span></a>, fpgeReadMMIO64(), and <a class="reference internal" href="#mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"><span class="std std-ref">fpgaWriteMMIO64()</span></a>. This is the only supported case for ASE.<dl class="docutils">
+<p><p>If the caller passes in NULL for mmio_ptr, no mapping will be performed, and no virtual address will be returned, though the call will return </p>
+<code class="docutils literal"><span class="pre">FPGA_OK</span></code>. This implies that all accesses will be performed through <a class="reference internal" href="#mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"><span class="std std-ref">fpgaReadMMIO32()</span></a>, <a class="reference internal" href="#mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"><span class="std std-ref">fpgaWriteMMIO32()</span></a>, fpgeReadMMIO64(), and <a class="reference internal" href="#mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"><span class="std std-ref">fpgaWriteMMIO64()</span></a>. This is the only supported case for ASE.<dl class="docutils">
 <dt><strong>Note</strong></dt>
 <dd>Some targets (such as the ASE simulator) do not support memory-mapping of IO register spaces and will not return a pointer to an actually mapped space. Instead, they will return <code class="docutils literal"><span class="pre">FPGA_NOT_SUPPORTED</span></code>. Usually, these platforms still allow the application to issue MMIO operations using <a class="reference internal" href="#mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"><span class="std std-ref">fpgaReadMMIO32()</span></a>, <a class="reference internal" href="#mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"><span class="std std-ref">fpgaWriteMMIO32()</span></a>, fpgeReadMMIO64(), and <a class="reference internal" href="#mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"><span class="std std-ref">fpgaWriteMMIO64()</span></a>.</dd>
 </dl>
@@ -2543,12 +2535,13 @@ provided by the utilities API.</p>
 <p class="breathe-sectiondef-title rubric">Variables</p>
 <dl class="member">
 <dt id="_CPPv26config">
-<span id="config__config"></span><span class="target" id="hello__fpga_8c_1ae865b377a614e395fc5035925aac72dc"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv26config" title="config">config</a> <code class="descname">config</code> = {
-	.target = {
-		.bus = -1,
-	},
-	.open_flags = 0
-}<a class="headerlink" href="#_CPPv26config" title="Permalink to this definition">¶</a><br /></dt>
+<span id="config__config"></span><span class="target" id="hello__fpga_8c_1ae865b377a614e395fc5035925aac72dc"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv26config" title="config">config</a> <code class="descname">config</code><p>= {</p>
+<p>	.target = {</p>
+<p>		.bus = -1,</p>
+<p>	},</p>
+<p>	.open_flags = 0</p>
+<p>}</p>
+<a class="headerlink" href="#_CPPv26config" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -2653,11 +2646,12 @@ provided by the utilities API.</p>
 <p class="breathe-sectiondef-title rubric">Variables</p>
 <dl class="member">
 <dt id="_CPPv213events_config">
-<span id="events_config__events_config"></span><span class="target" id="hello__events_8c_1adfeedbd5c731423297cf379c3ed85e5e"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv213events_config" title="events_config">events_config</a> <code class="descname">events_config</code> = {
-	.target = {
-		.bus = -1
-	}
-}<a class="headerlink" href="#_CPPv213events_config" title="Permalink to this definition">¶</a><br /></dt>
+<span id="events_config__events_config"></span><span class="target" id="hello__events_8c_1adfeedbd5c731423297cf379c3ed85e5e"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv213events_config" title="events_config">events_config</a> <code class="descname">events_config</code><p>= {</p>
+<p>	.target = {</p>
+<p>		.bus = -1</p>
+<p>	}</p>
+<p>}</p>
+<a class="headerlink" href="#_CPPv213events_config" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -2752,9 +2746,7 @@ provided by the utilities API.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -2772,11 +2764,11 @@ provided by the utilities API.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017 Intel Corporation.
+        &copy; Copyright 2017 Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -2791,35 +2783,33 @@ provided by the utilities API.</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'1.1.0',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'1.1.0',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
