@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                1.1.0
+                1.2.0
               </div>
             
           
@@ -120,6 +120,14 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#management-api">Management API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#manage-h">manage.h</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#metrics-api">Metrics API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#metrics-h">metrics.h</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sysobject">SysObject</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sysobject-h">sysobject.h</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a><ul>
@@ -261,13 +269,21 @@ sections:</p>
 <li><a class="reference internal" href="#manage-h" id="id16">manage.h</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#utilities" id="id17">Utilities</a><ul>
-<li><a class="reference internal" href="#utils-h" id="id18">utils.h</a></li>
+<li><a class="reference internal" href="#metrics-api" id="id17">Metrics API</a><ul>
+<li><a class="reference internal" href="#metrics-h" id="id18">metrics.h</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#samples" id="id19">Samples</a><ul>
-<li><a class="reference internal" href="#hello-fpga-c" id="id20">hello_fpga.c</a></li>
-<li><a class="reference internal" href="#hello-events-c" id="id21">hello_events.c</a></li>
+<li><a class="reference internal" href="#sysobject" id="id19">SysObject</a><ul>
+<li><a class="reference internal" href="#sysobject-h" id="id20">sysobject.h</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#utilities" id="id21">Utilities</a><ul>
+<li><a class="reference internal" href="#utils-h" id="id22">utils.h</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#samples" id="id23">Samples</a><ul>
+<li><a class="reference internal" href="#hello-fpga-c" id="id24">hello_fpga.c</a></li>
+<li><a class="reference internal" href="#hello-events-c" id="id25">hello_events.c</a></li>
 </ul>
 </li>
 </ul>
@@ -2356,12 +2372,269 @@ partial bitstreams) as well as assigning accelerators to host interfaces.</p>
 </div>
 </div>
 </div>
+<div class="section" id="metrics-api">
+<h2><a class="toc-backref" href="#id17">Metrics API</a><a class="headerlink" href="#metrics-api" title="Permalink to this headline">¶</a></h2>
+<p>The metrics APIs define functions for discovery/enumeration of metrics information
+and reading metrics values.</p>
+<div class="section" id="metrics-h">
+<h3><a class="toc-backref" href="#id18">metrics.h</a><a class="headerlink" href="#metrics-h" title="Permalink to this headline">¶</a></h3>
+<p>Functions for Discover/ Enumerates metrics and retrieves values. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv217fpgaGetNumMetrics11fpga_handleP8uint64_t">
+<span id="fpgaGetNumMetrics__fpga_handle.uint64_tP"></span><span class="target" id="metrics_8h_1ac4f079f737b78c4e9cd22b0d4dcd91aa"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetNumMetrics</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint64_t *<em>num_metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217fpgaGetNumMetrics11fpga_handleP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enumerates number of metrics</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_NOT_FOUND if the Metrics are not discovered </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened fpga resource </li>
+<li><code class="docutils literal"><span class="pre">num_metrics</span></code>: Number of metrics are discovered in fpga resource</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218fpgaGetMetricsInfo11fpga_handleP16fpga_metric_infoP8uint64_t">
+<span id="fpgaGetMetricsInfo__fpga_handle.fpga_metric_infoP.uint64_tP"></span><span class="target" id="metrics_8h_1ac59305e77a52f5568f2eafc35277e1fa"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetMetricsInfo</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, <a class="reference internal" href="#_CPPv216fpga_metric_info" title="fpga_metric_info">fpga_metric_info</a> *<em>metric_info</em>, uint64_t *<em>num_metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv218fpgaGetMetricsInfo11fpga_handleP16fpga_metric_infoP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve metrics information</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_NOT_FOUND if the Metrics are not found. FPGA_NO_MEMORY if there was not enough memory to enumerates metrics. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened fpga resource </li>
+<li><code class="docutils literal"><span class="pre">metric_info</span></code>: Pointer to array of metric info struct user allocates metrics info array</li>
+<li><code class="docutils literal"><span class="pre">num_metrics</span></code>: Size of metric info array</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221fpgaGetMetricsByIndex11fpga_handleP8uint64_t8uint64_tP11fpga_metric">
+<span id="fpgaGetMetricsByIndex__fpga_handle.uint64_tP.uint64_t.fpga_metricP"></span><span class="target" id="metrics_8h_1a3c956af4516f141d95527cdd4d22f786"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetMetricsByIndex</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint64_t *<em>metric_num</em>, uint64_t <em>num_metric_indexes</em>, <a class="reference internal" href="#_CPPv211fpga_metric" title="fpga_metric">fpga_metric</a> *<em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221fpgaGetMetricsByIndex11fpga_handleP8uint64_t8uint64_tP11fpga_metric" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve metrics values by index</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_NOT_FOUND if the Metrics are not found. FPGA_NO_MEMORY if there was not enough memory to enumerates metrics. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened fpga resource </li>
+<li><code class="docutils literal"><span class="pre">metric_num</span></code>: Pointer to array of metric index user allocates metric array </li>
+<li><code class="docutils literal"><span class="pre">num_metric_indexes</span></code>: Size of metric array </li>
+<li><code class="docutils literal"><span class="pre">metrics</span></code>: pointer to array of metric struct</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220fpgaGetMetricsByName11fpga_handlePPc8uint64_tP11fpga_metric">
+<span id="fpgaGetMetricsByName__fpga_handle.cPP.uint64_t.fpga_metricP"></span><span class="target" id="metrics_8h_1a2c19333a1eb6e0c51611fecaed2dc3a9"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaGetMetricsByName</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, char **<em>metrics_names</em>, uint64_t <em>num_metric_names</em>, <a class="reference internal" href="#_CPPv211fpga_metric" title="fpga_metric">fpga_metric</a> *<em>metrics</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv220fpgaGetMetricsByName11fpga_handlePPc8uint64_tP11fpga_metric" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve metric values by names</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_NOT_FOUND if the Metrics are not found </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle to previously opened fpga resource </li>
+<li><code class="docutils literal"><span class="pre">metrics_names</span></code>: Pointer to array of metrics name user allocates metrics name array </li>
+<li><code class="docutils literal"><span class="pre">num_metric_names</span></code>: Size of metric name array </li>
+<li><code class="docutils literal"><span class="pre">metrics</span></code>: Pointer to array of metric struct</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="sysobject">
+<h2><a class="toc-backref" href="#id19">SysObject</a><a class="headerlink" href="#sysobject" title="Permalink to this headline">¶</a></h2>
+<p>The SysObject API can be used to get system objects by name. Names used with
+the SysObject API are driver-specific and may not be compatible across plugins
+and/or drivers. For example, SysObject names used with the xfpga plugin will
+apply to the OPAE Linux Kernel driver and refer to sysfs nodes under the sysfs
+tree for the resource used with the SysObject API.</p>
+<div class="section" id="sysobject-h">
+<h3><a class="toc-backref" href="#id20">sysobject.h</a><a class="headerlink" href="#sysobject-h" title="Permalink to this headline">¶</a></h3>
+<p>Functions to read/write from system objects. On Linux systems with the OPAE kernel driver, this is used to access sysfs nodes created by the driver. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv218fpgaTokenGetObject10fpga_tokenPKcP11fpga_objecti">
+<span id="fpgaTokenGetObject__fpga_token.cCP.fpga_objectP.i"></span><span class="target" id="sysobject_8h_1aabea869646f2a612efc878e35d25c352"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaTokenGetObject</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv210fpga_token" title="fpga_token">fpga_token</a> <em>token</em>, <em class="property">const</em> char *<em>name</em>, <a class="reference internal" href="#_CPPv211fpga_object" title="fpga_object">fpga_object</a> *<em>object</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv218fpgaTokenGetObject10fpga_tokenPKcP11fpga_objecti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create an <code class="docutils literal"><span class="pre">fpga_object</span></code> data structures. An <code class="docutils literal"><span class="pre">fpga_object</span></code> is a handle to an FPGA resource which can be an attribute or register or driver attribute. This object is read-only. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if any of the supplied parameters is invalid. FPGA_NOT_FOUND if an object cannot be found with the given key. FPGA_NOT_SUPPORTED if this function is not supported by the current implementation of this API.</dd>
+<dt><strong>Note</strong></dt>
+<dd>Names that begin with ‘.’ or ‘/’ or contain ‘..’ are not allowed and result in FPGA_INVALID_PARAM being returned </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">token</span></code>: Token identifying a resource (accelerator or device) </li>
+<li><code class="docutils literal"><span class="pre">name</span></code>: A key identifying an object belonging to a resource. </li>
+<li><code class="docutils literal"><span class="pre">object</span></code>: Pointer to memory to store the object in </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Control behavior of object identification and creation. FPGA_OBJECT_GLOB is used to indicate that the name should be treated as a globbing expression. FPGA_OBJECT_RECURSE_ONE indicates that subobjects be created for objects one level down from the object identified by name. FPGA_OBJECT_RECURSE_ALL indicates that subobjects be created for all objects below the current object identified by name.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219fpgaHandleGetObject11fpga_handlePKcP11fpga_objecti">
+<span id="fpgaHandleGetObject__fpga_handle.cCP.fpga_objectP.i"></span><span class="target" id="sysobject_8h_1a80ccae112e76764fe9aa258b06a2672e"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaHandleGetObject</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>name</em>, <a class="reference internal" href="#_CPPv211fpga_object" title="fpga_object">fpga_object</a> *<em>object</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219fpgaHandleGetObject11fpga_handlePKcP11fpga_objecti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create an <code class="docutils literal"><span class="pre">fpga_object</span></code> data structure from a handle. An <code class="docutils literal"><span class="pre">fpga_object</span></code> is a handle to an FPGA resource which can be an attribute or register. This object has read/write access.. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if any of the supplied parameters is invalid. FPGA_NOT_FOUND if an object cannot be found with the given key. FPGA_NOT_SUPPORTED if this function is not supported by the current implementation of this API.</dd>
+<dt><strong>Note</strong></dt>
+<dd>Names that begin with ‘.’ or ‘/’ or contain ‘..’ are not allowed and result in FPGA_INVALID_PARAM being returned </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle identifying a resource (accelerator or device) </li>
+<li><code class="docutils literal"><span class="pre">name</span></code>: A key identifying an object belonging to a resource. </li>
+<li><code class="docutils literal"><span class="pre">object</span></code>: Pointer to memory to store the object in </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Control behavior of object identification and creation FPGA_OBJECT_GLOB is used to indicate that the name should be treated as a globbing expression. FPGA_OBJECT_RECURSE_ONE indicates that subobjects be created for objects one level down from the object identified by name. FPGA_OBJECT_RECURSE_ALL indicates that subobjects be created for all objects below the current object identified by name.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219fpgaObjectGetObject11fpga_objectPKcP11fpga_objecti">
+<span id="fpgaObjectGetObject__fpga_object.cCP.fpga_objectP.i"></span><span class="target" id="sysobject_8h_1a9854745736c2bd3dc41fbbb3de873ccd"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaObjectGetObject</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_object" title="fpga_object">fpga_object</a> <em>parent</em>, <em class="property">const</em> char *<em>name</em>, <a class="reference internal" href="#_CPPv211fpga_object" title="fpga_object">fpga_object</a> *<em>object</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv219fpgaObjectGetObject11fpga_objectPKcP11fpga_objecti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create an <code class="docutils literal"><span class="pre">fpga_object</span></code> data structure from a parent object. An <code class="docutils literal"><span class="pre">fpga_object</span></code> is a handle to an FPGA resource which can be an attribute or a register. If the parent object was created with a handle, then the new object will inherit the handle allowing it to have read-write access to the object data. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if any of the supplied parameters is invalid - this includes a parent object that is not a container object. FPGA_NOT_FOUND if an object cannot be found with the given key. FPGA_NOT_SUPPORTED if this function is not supported by the current implementation of this API.</dd>
+<dt><strong>Note</strong></dt>
+<dd>Names that begin with ‘.’ or ‘/’ or contain ‘..’ are not allowed and result in FPGA_INVALID_PARAM being returned </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">parent</span></code>: A parent container <code class="docutils literal"><span class="pre">fpga_object</span></code>. </li>
+<li><code class="docutils literal"><span class="pre">name</span></code>: A key identifying a sub-object of the parent container. </li>
+<li><code class="docutils literal"><span class="pre">object</span></code>: Pointer to memory to store the object in. </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Control behavior of object identification and creation. FPGA_OBJECT_GLOB is used to indicate that the name should be treated as a globbing expression. FPGA_OBJECT_RECURSE_ONE indicates that subobjects be created for objects one level down from the object identified by name. FPGA_OBJECT_RECURSE_ALL indicates that subobjects be created for all objects below the current object identified by name.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217fpgaDestroyObjectP11fpga_object">
+<span id="fpgaDestroyObject__fpga_objectP"></span><span class="target" id="sysobject_8h_1a5829c9ba73a939da7faa71e7dca442b3"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaDestroyObject</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_object" title="fpga_object">fpga_object</a> *<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217fpgaDestroyObjectP11fpga_object" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Free memory used for the fpga_object data structure. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd><a class="reference internal" href="#sysobject_8h_1a5829c9ba73a939da7faa71e7dca442b3"><span class="std std-ref">fpgaDestroyObject()</span></a> requires the address of an fpga_object as created by <a class="reference internal" href="#sysobject_8h_1aabea869646f2a612efc878e35d25c352"><span class="std std-ref">fpgaTokenGetObject()</span></a>, <a class="reference internal" href="#sysobject_8h_1a80ccae112e76764fe9aa258b06a2672e"><span class="std std-ref">fpgaHandleGetObject()</span></a>, or <a class="reference internal" href="#sysobject_8h_1a9854745736c2bd3dc41fbbb3de873ccd"><span class="std std-ref">fpgaObjectGetObject()</span></a>. Passing any other value results in undefind behavior.</dd>
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success, FPGA_INVALID_PARAM if the object is NULL, FPGA_EXCEPTION if an internal error is encountered. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">obj</span></code>: Pointer to the fpga_object instance to destroy</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217fpgaObjectGetSize11fpga_objectP8uint32_ti">
+<span id="fpgaObjectGetSize__fpga_object.uint32_tP.i"></span><span class="target" id="sysobject_8h_1a29a136634ad8f8b741ae00a52bca5dd4"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaObjectGetSize</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_object" title="fpga_object">fpga_object</a> <em>obj</em>, uint32_t *<em>value</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217fpgaObjectGetSize11fpga_objectP8uint32_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve the size of the object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success. FPGA_INVALID_PARAM if any of supplied paramters is invalid. FPGA_EXCEPTION if error occurred. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">obj</span></code>: An fpga_object instance. </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Pointer to variable to store size in. </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags that control how the object is read If FPGA_OBJECT_SYNC is used then object will update its buffered copy before retrieving the size.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214fpgaObjectRead11fpga_objectP7uint8_t6size_t6size_ti">
+<span id="fpgaObjectRead__fpga_object.uint8_tP.s.s.i"></span><span class="target" id="sysobject_8h_1a7ccef34c42dbddc7cd534aa598767d08"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaObjectRead</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_object" title="fpga_object">fpga_object</a> <em>obj</em>, uint8_t *<em>buffer</em>, size_t <em>offset</em>, size_t <em>len</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214fpgaObjectRead11fpga_objectP7uint8_t6size_t6size_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read bytes from an FPGA object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success, FPGA_INVALID_PARAM if any of the supplied parameters is invalid </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">obj</span></code>: An fpga_object instance. </li>
+<li><code class="docutils literal"><span class="pre">buffer</span></code>: Pointer to a buffer to read bytes into. </li>
+<li><code class="docutils literal"><span class="pre">offset</span></code>: Byte offset relative to objects internal buffer where to begin reading bytes from. </li>
+<li><code class="docutils literal"><span class="pre">len</span></code>: The length, in bytes, to read from the object. </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags that control how object is read If FPGA_OBJECT_SYNC is used then object will update its buffered copy before retrieving the data.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216fpgaObjectRead6411fpga_objectP8uint64_ti">
+<span id="fpgaObjectRead64__fpga_object.uint64_tP.i"></span><span class="target" id="sysobject_8h_1a03de9a8f3a530abc6918c5c6682d92cc"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaObjectRead64</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_object" title="fpga_object">fpga_object</a> <em>obj</em>, uint64_t *<em>value</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv216fpgaObjectRead6411fpga_objectP8uint64_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read a 64-bit value from an FPGA object. The value is assumed to be in string format and will be parsed. See flags below for changing that behavior. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success, FPGA_INVALID_PARAM if any of the supplied parameters is invalid </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">obj</span></code>: An fpga_object instance </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Pointer to a 64-bit variable to store the value in </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags that control how the object is read If FPGA_OBJECT_SYNC is used then object will update its buffered copy before retrieving the data. If FPGA_OBJECT_RAW is used, then the data will be read as raw bytes into the uint64_t pointer variable.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217fpgaObjectWrite6411fpga_object8uint64_ti">
+<span id="fpgaObjectWrite64__fpga_object.uint64_t.i"></span><span class="target" id="sysobject_8h_1a6dbc79fd4660f2fc576e8b7eb64d27fd"></span><a class="reference internal" href="#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <code class="descname">fpgaObjectWrite64</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211fpga_object" title="fpga_object">fpga_object</a> <em>obj</em>, uint64_t <em>value</em>, int <em>flags</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217fpgaObjectWrite6411fpga_object8uint64_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write 64-bit value to an FPGA object. The value will be converted to string before writing. See flags below for changing that behavior. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>FPGA_OK on success, FPGA_INVALID_PARAM if any of the supplied parameters is invalid</dd>
+<dt><strong>Note</strong></dt>
+<dd>The object must have been created using a handle to a resource. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">obj</span></code>: An fpga_object instance. </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: The value to write to the object </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags that control how the object is written If FPGA_OBJECT_RAW is used, then the value will be written as raw bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
 <div class="section" id="utilities">
-<h2><a class="toc-backref" href="#id17">Utilities</a><a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id21">Utilities</a><a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
 <p>Functions for mapping fpga_result values to meaningful error strings are
 provided by the utilities API.</p>
 <div class="section" id="utils-h">
-<h3><a class="toc-backref" href="#id18">utils.h</a><a class="headerlink" href="#utils-h" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id22">utils.h</a><a class="headerlink" href="#utils-h" title="Permalink to this headline">¶</a></h3>
 <p>Utility functions and macros for the FPGA API. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Functions</p>
@@ -2386,10 +2659,10 @@ provided by the utilities API.</p>
 </div>
 </div>
 <div class="section" id="samples">
-<h2><a class="toc-backref" href="#id19">Samples</a><a class="headerlink" href="#samples" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id23">Samples</a><a class="headerlink" href="#samples" title="Permalink to this headline">¶</a></h2>
 <p>Code samples demonstrate how to use OPAE C API.</p>
 <div class="section" id="hello-fpga-c">
-<h3><a class="toc-backref" href="#id20">hello_fpga.c</a><a class="headerlink" href="#hello-fpga-c" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id24">hello_fpga.c</a><a class="headerlink" href="#hello-fpga-c" title="Permalink to this headline">¶</a></h3>
 <p>A code sample illustrates the basic usage of the OPAE C API. </p>
 <p>The sample is a host application that demonstrates the basic steps of interacting with FPGA using the OPAE library. These steps include:</p>
 <p><ul class="simple">
@@ -2579,7 +2852,7 @@ provided by the utilities API.</p>
 
 </div>
 <div class="section" id="hello-events-c">
-<h3><a class="toc-backref" href="#id21">hello_events.c</a><a class="headerlink" href="#hello-events-c" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id25">hello_events.c</a><a class="headerlink" href="#hello-events-c" title="Permalink to this headline">¶</a></h3>
 <p>A code sample of using OPAE event API. </p>
 <p>This sample starts two processes. One process injects an artificial fatal error to sysfs; while the other tries to asynchronously capture and handle the event. This sample code exercises all major functions of the event API, including creating and destroying event handles, register and unregister events, polling on event file descriptor, and getting the OS object associated with an event. For a full discussion of OPAE event API, refer to event.h. </p>
 <div class="breathe-sectiondef docutils container">
@@ -2789,7 +3062,7 @@ provided by the utilities API.</p>
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../../',
-              VERSION:'1.1.0',
+              VERSION:'1.2.0',
               LANGUAGE:'en',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',

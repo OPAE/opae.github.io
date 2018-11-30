@@ -57,7 +57,7 @@
             
             
               <div class="version">
-                1.1.0
+                1.2.0
               </div>
             
           
@@ -217,9 +217,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.__enter__">__enter__() (opae.fpga.handle method)</a>
 </li>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.__exit__">__exit__() (opae.fpga.handle method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.__exit__">__exit__() (opae.fpga.handle method)</a>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.__getattr__">__getattr__() (opae.fpga.sysobject method)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.__getitem__">__getitem__() (opae.fpga.sysobject method)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.properties.__init__">__init__() (opae.fpga.properties method)</a>
 </li>
@@ -245,11 +249,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.properties.bbs_id">bbs_id (opae.fpga.properties attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.properties.bbs_version">bbs_version (opae.fpga.properties attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.properties.bus">bus (opae.fpga.properties attribute)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.bytes">bytes() (opae.fpga.sysobject method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -353,8 +359,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.shared_buffer.fill">fill() (opae.fpga.shared_buffer method)</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.token.find">find() (opae.fpga.token method)</a>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.find">find() (opae.fpga.sysobject method)</a>
+
+      <ul>
+        <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.token.find">(opae.fpga.token method)</a>
 </li>
+      </ul></li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv29find_fpga9fpga_guidP10fpga_tokenP8uint32_t">find_fpga (C++ function)</a>, <a href="docs/fpga_api/fpga_api.html#_CPPv29find_fpgaP10fpga_tokenP8uint32_t">[1]</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#c.FME_SYSFS_INJECT_ERROR">FME_SYSFS_INJECT_ERROR (C macro)</a>
@@ -507,8 +517,6 @@
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv2N12fpga_version5patchE">fpga_version::patch (C++ member)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv225fpgaAssignPortToInterface11fpga_handle8uint32_t8uint32_ti">fpgaAssignPortToInterface (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv221fpgaAssignToInterface11fpga_handle10fpga_token8uint32_ti">fpgaAssignToInterface (C++ function)</a>
@@ -519,11 +527,15 @@
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv214fpgaCloneToken10fpga_tokenP10fpga_token">fpgaCloneToken (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv29fpgaClose11fpga_handle">fpgaClose (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv221fpgaCreateEventHandleP17fpga_event_handle">fpgaCreateEventHandle (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv222fpgaDestroyEventHandleP17fpga_event_handle">fpgaDestroyEventHandle (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv217fpgaDestroyObjectP11fpga_object">fpgaDestroyObject (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv221fpgaDestroyPropertiesP15fpga_properties">fpgaDestroyProperties (C++ function)</a>
 </li>
@@ -535,6 +547,14 @@
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv216fpgaGetIOAddress11fpga_handle8uint64_tP8uint64_t">fpgaGetIOAddress (C++ function)</a>
 </li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv221fpgaGetMetricsByIndex11fpga_handleP8uint64_t8uint64_tP11fpga_metric">fpgaGetMetricsByIndex (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv220fpgaGetMetricsByName11fpga_handlePPc8uint64_tP11fpga_metric">fpgaGetMetricsByName (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv218fpgaGetMetricsInfo11fpga_handleP16fpga_metric_infoP8uint64_t">fpgaGetMetricsInfo (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv217fpgaGetNumMetrics11fpga_handleP8uint64_t">fpgaGetNumMetrics (C++ function)</a>
+</li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv214fpgaGetNumUmsg11fpga_handleP8uint64_t">fpgaGetNumUmsg (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv230fpgaGetOSObjectFromEventHandleK17fpga_event_handlePi">fpgaGetOSObjectFromEventHandle (C++ function)</a>
@@ -545,7 +565,19 @@
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv214fpgaGetUmsgPtr11fpga_handlePP8uint64_t">fpgaGetUmsgPtr (C++ function)</a>
 </li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv219fpgaHandleGetObject11fpga_handlePKcP11fpga_objecti">fpgaHandleGetObject (C++ function)</a>
+</li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv211fpgaMapMMIO11fpga_handle8uint32_tPP8uint64_t">fpgaMapMMIO (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv219fpgaObjectGetObject11fpga_objectPKcP11fpga_objecti">fpgaObjectGetObject (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv217fpgaObjectGetSize11fpga_objectP8uint32_ti">fpgaObjectGetSize (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv214fpgaObjectRead11fpga_objectP7uint8_t6size_t6size_ti">fpgaObjectRead (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv216fpgaObjectRead6411fpga_objectP8uint64_ti">fpgaObjectRead64 (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv217fpgaObjectWrite6411fpga_object8uint64_ti">fpgaObjectWrite64 (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv28fpgaOpen10fpga_tokenP11fpga_handlei">fpgaOpen (C++ function)</a>
 </li>
@@ -650,6 +682,8 @@
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv29fpgaReset11fpga_handle">fpgaReset (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv221fpgaSetUmsgAttributes11fpga_handle8uint64_t">fpgaSetUmsgAttributes (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv218fpgaTokenGetObject10fpga_tokenPKcP11fpga_objecti">fpgaTokenGetObject (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv215fpgaTriggerUmsg11fpga_handle8uint64_t">fpgaTriggerUmsg (C++ function)</a>
 </li>
@@ -761,13 +795,13 @@
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#c.ON_ERR_GOTO">ON_ERR_GOTO (C macro)</a>, <a href="docs/fpga_api/fpga_api.html#c.ON_ERR_GOTO">[1]</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">opae (C++ type)</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[1]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[2]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[3]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[4]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[5]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[6]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[7]</a>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">opae (C++ type)</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[1]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[2]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[3]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[4]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[5]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[6]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[7]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[8]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv24opae">[9]</a>
 </li>
       <li><a href="docs/fpga_api/fpga_python_api.html#module-opae.fpga">opae.fpga (module)</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">opae::fpga (C++ type)</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[1]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[2]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[3]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[4]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[5]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[6]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[7]</a>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">opae::fpga (C++ type)</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[1]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[2]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[3]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[4]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[5]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[6]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[7]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[8]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpgaE">[9]</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">opae::fpga::types (C++ type)</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[1]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[2]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[3]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[4]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[5]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[6]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[7]</a>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">opae::fpga::types (C++ type)</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[1]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[2]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[3]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[4]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[5]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[6]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[7]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[8]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5typesE">[9]</a>
 </li>
       <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types4busyE">opae::fpga::types::busy (C++ class)</a>
 </li>
@@ -782,6 +816,32 @@
       <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types6detail5is_okE11fpga_resultRKN4opae4fpga5types12src_locationE">opae::fpga::types::detail::is_ok (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types6detail15opae_exceptionsE">opae::fpga::types::detail::opae_exceptions (C++ member)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5errorE">opae::fpga::types::error (C++ class)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2NK4opae4fpga5types5error6c_typeEv">opae::fpga::types::error::c_type (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5error9can_clearEv">opae::fpga::types::error::can_clear (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5error5errorEN5token5ptr_tE8uint32_t">opae::fpga::types::error::error (C++ function)</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5error5errorERK5error">[1]</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5error11error_info_E">opae::fpga::types::error::error_info_ (C++ member)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5error10error_num_E">opae::fpga::types::error::error_num_ (C++ member)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5error3getEN5token5ptr_tE8uint32_t">opae::fpga::types::error::get (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5error4nameEv">opae::fpga::types::error::name (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5erroraSERK5error">opae::fpga::types::error::operator= (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5error5ptr_tE">opae::fpga::types::error::ptr_t (C++ type)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5error10read_valueEv">opae::fpga::types::error::read_value (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5error6token_E">opae::fpga::types::error::token_ (C++ member)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5errorD0Ev">opae::fpga::types::error::~error (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5eventE">opae::fpga::types::event (C++ class)</a>
 </li>
@@ -943,10 +1003,10 @@
 </li>
       <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types10properties3busE">opae::fpga::types::properties::bus (C++ member)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2NK4opae4fpga5types10properties6c_typeEv">opae::fpga::types::properties::c_type (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types10properties12capabilitiesE">opae::fpga::types::properties::capabilities (C++ member)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types10properties6deviceE">opae::fpga::types::properties::device (C++ member)</a>
@@ -1099,6 +1159,36 @@
 </li>
       <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types12src_location12src_locationEPKcPKci">opae::fpga::types::src_location::src_location (C++ function)</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types12src_location12src_locationERK12src_location">[1]</a>
 </li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobjectE">opae::fpga::types::sysobject (C++ class)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2NK4opae4fpga5types9sysobject5bytesE8uint32_t8uint32_ti">opae::fpga::types::sysobject::bytes (C++ function)</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2NK4opae4fpga5types9sysobject5bytesEi">[1]</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2NK4opae4fpga5types9sysobject6c_typeEv">opae::fpga::types::sysobject::c_type (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobject3getEN5token5ptr_tERKNSt6stringEi">opae::fpga::types::sysobject::get (C++ function)</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobject3getEN6handle5ptr_tERKNSt6stringEi">[1]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobject3getERKNSt6stringEi">[2]</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobject7handle_E">opae::fpga::types::sysobject::handle_ (C++ member)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2NK4opae4fpga5types9sysobjectcv11fpga_objectEv">opae::fpga::types::sysobject::operator fpga_object (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobjectaSERK9sysobject">opae::fpga::types::sysobject::operator= (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobject5ptr_tE">opae::fpga::types::sysobject::ptr_t (C++ type)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2NK4opae4fpga5types9sysobject6read64Ei">opae::fpga::types::sysobject::read64 (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2NK4opae4fpga5types9sysobject4sizeEv">opae::fpga::types::sysobject::size (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobject9sysobjectE11fpga_objectN5token5ptr_tEN6handle5ptr_tE">opae::fpga::types::sysobject::sysobject (C++ function)</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobject9sysobjectERK9sysobject">[1]</a>, <a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobject9sysobjectEv">[2]</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobject10sysobject_E">opae::fpga::types::sysobject::sysobject_ (C++ member)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobject6token_E">opae::fpga::types::sysobject::token_ (C++ member)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2NK4opae4fpga5types9sysobject7write64E8uint64_ti">opae::fpga::types::sysobject::write64 (C++ function)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types9sysobjectD0Ev">opae::fpga::types::sysobject::~sysobject (C++ function)</a>
+</li>
       <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2N4opae4fpga5types5tokenE">opae::fpga::types::token (C++ class)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_cxx_api.html#_CPPv2NK4opae4fpga5types5token6c_typeEv">opae::fpga::types::token::c_type (C++ function)</a>
@@ -1155,12 +1245,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv216ras_inject_error">ras_inject_error (C++ class)</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.read_csr32">read_csr32() (opae.fpga.handle method)</a>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.read64">read64() (opae.fpga.sysobject method)</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.read_csr64">read_csr64() (opae.fpga.handle method)</a>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.read_csr32">read_csr32() (opae.fpga.handle method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.read_csr64">read_csr64() (opae.fpga.handle method)</a>
+</li>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.error.read_value">read_value() (opae.fpga.error method)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.register_event">register_event() (in module opae.fpga)</a>
@@ -1175,11 +1267,17 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.shared_buffer">shared_buffer (class in opae.fpga)</a>
 </li>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.shared_buffer.size">size() (opae.fpga.shared_buffer method)</a>
+
+      <ul>
+        <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.size">(opae.fpga.sysobject method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.shared_buffer.size">size() (opae.fpga.shared_buffer method)</a>
-</li>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.properties.socket_id">socket_id (opae.fpga.properties attribute)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject">sysobject (class in opae.fpga)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1215,6 +1313,8 @@
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.write64">write64() (opae.fpga.sysobject method)</a>
+</li>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.write_csr32">write_csr32() (opae.fpga.handle method)</a>
 </li>
   </ul></td>
@@ -1262,7 +1362,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'./',
-              VERSION:'1.1.0',
+              VERSION:'1.2.0',
               LANGUAGE:'en',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',

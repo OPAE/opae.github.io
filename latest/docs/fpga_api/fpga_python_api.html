@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                1.1.0
+                1.2.0
               </div>
             
           
@@ -104,6 +104,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#event">Event</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#shared-buffer">Shared Buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error">Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sysobject">SysObject</a></li>
 </ul>
 </li>
 </ul>
@@ -214,6 +215,7 @@ following sections:</p>
 <li><a class="reference internal" href="#event" id="id10">Event</a></li>
 <li><a class="reference internal" href="#shared-buffer" id="id11">Shared Buffer</a></li>
 <li><a class="reference internal" href="#error" id="id12">Error</a></li>
+<li><a class="reference internal" href="#sysobject" id="id13">SysObject</a></li>
 </ul>
 </li>
 </ul>
@@ -656,6 +658,77 @@ be used to read the raw register value from its corresponding error register.</p
 </dd></dl>
 
 </div>
+<div class="section" id="sysobject">
+<h3><a class="toc-backref" href="#id13">SysObject</a><a class="headerlink" href="#sysobject" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="opae.fpga.sysobject">
+<em class="property">class </em><code class="descclassname">opae.fpga.</code><code class="descname">sysobject</code><a class="headerlink" href="#opae.fpga.sysobject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wraps the OPAE fpga_object primitive as a Python object.</p>
+<dl class="method">
+<dt id="opae.fpga.sysobject.__getattr__">
+<code class="descname">__getattr__</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.sysobject</em>, <em>arg0: unicode</em><span class="sig-paren">)</span> &#x2192; opae.fpga._opae.sysobject<a class="headerlink" href="#opae.fpga.sysobject.__getattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a sysobject instance from a valid sysobject.
+The parent sysobject must be a container type object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opae.fpga.sysobject.__getitem__">
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#opae.fpga.sysobject.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic">
+<li><p class="first">__getitem__(self: opae.fpga._opae.sysobject, arg0: unicode) -&gt; opae.fpga._opae.sysobject</p>
+<blockquote>
+<div><p>Get a sysobject instance from a valid sysobject.
+The parent sysobject must be a container type object.</p>
+</div></blockquote>
+</li>
+<li><p class="first">__getitem__(self: opae.fpga._opae.sysobject, arg0: int) -&gt; int</p>
+<blockquote>
+<div><p>Get a byte from the sysobject at a given index.
+Raises <cite>RuntimeError</cite> if the sysobject instance is a container type.</p>
+</div></blockquote>
+</li>
+<li><p class="first">__getitem__(self: opae.fpga._opae.sysobject, arg0: slice) -&gt; unicode</p>
+<blockquote>
+<div><p>Get a slice of bytes from the sysobject at a given offset.
+Raises <cite>RuntimeError</cite> if the sysobject instance is a container type.</p>
+</div></blockquote>
+</li>
+</ol>
+</dd></dl>
+
+<dl class="method">
+<dt id="opae.fpga.sysobject.bytes">
+<code class="descname">bytes</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.sysobject</em><span class="sig-paren">)</span> &#x2192; unicode<a class="headerlink" href="#opae.fpga.sysobject.bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get bytes from the sysobject.
+Raises <cite>RuntimeError</cite> if the sysobject instance is a container type.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opae.fpga.sysobject.find">
+<code class="descname">find</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.sysobject</em>, <em>name: unicode</em>, <em>flags: int=0L</em><span class="sig-paren">)</span> &#x2192; opae.fpga._opae.sysobject<a class="headerlink" href="#opae.fpga.sysobject.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a sysobject instance from a valid sysobject.
+The parent sysobject must be a container type object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opae.fpga.sysobject.read64">
+<code class="descname">read64</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.sysobject</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.sysobject.read64" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opae.fpga.sysobject.size">
+<code class="descname">size</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.sysobject</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.sysobject.size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opae.fpga.sysobject.write64">
+<code class="descname">write64</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.sysobject</em>, <em>arg0: int</em>, <em>arg1: int</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#opae.fpga.sysobject.write64" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 </div>
 
@@ -703,7 +776,7 @@ be used to read the raw register value from its corresponding error register.</p
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../../',
-              VERSION:'1.1.0',
+              VERSION:'1.2.0',
               LANGUAGE:'en',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',

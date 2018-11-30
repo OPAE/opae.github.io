@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                1.1.0
+                1.2.0
               </div>
             
           
@@ -112,7 +112,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#token-h">token.h</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#handle-h">handle.h</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#shared-buffer-h">shared_buffer.h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#errors-h">errors.h</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#events-h">events.h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sysobject-h">sysobject.h</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exceptions">Exceptions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#except-h">except.h</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#misc">Misc</a></li>
@@ -237,11 +239,13 @@ sections:</p>
 <li><a class="reference internal" href="#token-h" id="id13">token.h</a></li>
 <li><a class="reference internal" href="#handle-h" id="id14">handle.h</a></li>
 <li><a class="reference internal" href="#shared-buffer-h" id="id15">shared_buffer.h</a></li>
-<li><a class="reference internal" href="#events-h" id="id16">events.h</a></li>
-<li><a class="reference internal" href="#exceptions" id="id17">Exceptions</a></li>
-<li><a class="reference internal" href="#except-h" id="id18">except.h</a></li>
-<li><a class="reference internal" href="#misc" id="id19">Misc</a></li>
-<li><a class="reference internal" href="#version-h" id="id20">version.h</a></li>
+<li><a class="reference internal" href="#errors-h" id="id16">errors.h</a></li>
+<li><a class="reference internal" href="#events-h" id="id17">events.h</a></li>
+<li><a class="reference internal" href="#sysobject-h" id="id18">sysobject.h</a></li>
+<li><a class="reference internal" href="#exceptions" id="id19">Exceptions</a></li>
+<li><a class="reference internal" href="#except-h" id="id20">except.h</a></li>
+<li><a class="reference internal" href="#misc" id="id21">Misc</a></li>
+<li><a class="reference internal" href="#version-h" id="id22">version.h</a></li>
 </ul>
 </li>
 </ul>
@@ -1491,8 +1495,148 @@ scope before freeing the <cite>shared_buffer</cite> and <cite>event</cite> objec
 </dd></dl>
 
 </div>
+<div class="section" id="errors-h">
+<h3><a class="toc-backref" href="#id16">errors.h</a><a class="headerlink" href="#errors-h" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt>
+<span class="target" id="namespaceopae"></span><em class="property">namespace </em><code class="descname">opae</code><br /></dt>
+<dd><dl class="type">
+<dt>
+<span class="target" id="namespaceopae_1_1fpga"></span><em class="property">namespace </em><code class="descname">fpga</code><br /></dt>
+<dd><dl class="type">
+<dt>
+<span class="target" id="namespaceopae_1_1fpga_1_1types"></span><em class="property">namespace </em><code class="descname">types</code><br /></dt>
+<dd><dl class="class">
+<dt id="_CPPv2N4opae4fpga5types5errorE">
+<span id="opae::fpga::types::error"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error"></span><em class="property">class </em><code class="descname">error</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types5errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;errors.h&gt;</em><p>An error object represents an error register for a resource. This is used to read out the raw value in the register. No parsing is done by this class. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="type">
+<dt id="_CPPv2N4opae4fpga5types5error5ptr_tE">
+<span id="opae::fpga::types::error::ptr_t"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1a1ebeb4e4a63d9807d50c13b98a07ac2f"></span><em class="property">typedef </em>std::shared_ptr&lt;<a class="reference internal" href="#_CPPv2N4opae4fpga5types5errorE" title="opae::fpga::types::error">error</a>&gt; <code class="descname">ptr_t</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types5error5ptr_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types5error5errorERK5error">
+<span id="opae::fpga::types::error::error__errorCR"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1a81fa63e406170f777b19ede3889845be"></span><code class="descname">error</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4opae4fpga5types5error5errorERK5error" title="opae::fpga::types::error::error">error</a> &amp;<em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types5error5errorERK5error" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types5erroraSERK5error">
+<span id="opae::fpga::types::error::assign-operator__errorCR"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1a736a48278182c76699a959192ab23bf7"></span><a class="reference internal" href="#_CPPv2N4opae4fpga5types5errorE" title="opae::fpga::types::error">error</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4opae4fpga5types5errorE" title="opae::fpga::types::error">error</a> &amp;<em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types5erroraSERK5error" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types5error4nameEv">
+<span id="opae::fpga::types::error::name"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1a30ead52bd6a86f4a3cc7045e9dce0c20"></span>std::string <code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types5error4nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the error register name. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A std::string object set to the error name. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types5error9can_clearEv">
+<span id="opae::fpga::types::error::can_clear"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1a7adabe502dd600e493263d684359e7ac"></span>bool <code class="descname">can_clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types5error9can_clearEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Indicates whether an error register can be cleared. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A boolean value indicating if the error register can be cleared. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types5error10read_valueEv">
+<span id="opae::fpga::types::error::read_value"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1acc656f405ba3e3b500604ad64ff0b970"></span>uint64_t <code class="descname">read_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types5error10read_valueEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read the raw value contained in the associated error register. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A 64-bit value (unparsed) read from the error register </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types5errorD0Ev">
+<span id="opae::fpga::types::error::~error"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1a98daa1df4a7d000945797a3259153a6d"></span><code class="descname">~error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types5errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4opae4fpga5types5error6c_typeEv">
+<span id="opae::fpga::types::error::c_typeC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1a6ca36daa3801ba41791846fd01c98b68"></span><a class="reference internal" href="fpga_api.html#_CPPv215fpga_error_info" title="fpga_error_info">fpga_error_info</a> <code class="descname">c_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types5error6c_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the C data structure. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="fpga_api.html#structfpga__error__info"><span class="std std-ref">fpga_error_info</span></a> that contains the name and the can_clear boolean. </dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types5error3getEN5token5ptr_tE8uint32_t">
+<span id="opae::fpga::types::error::get__token::ptr_t.uint32_t"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1a75af4be53a11d3e79639a84c79209567"></span><em class="property">static</em> <a class="reference internal" href="#_CPPv2N4opae4fpga5types5errorE" title="opae::fpga::types::error">error</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types5error5ptr_tE" title="opae::fpga::types::error::ptr_t">ptr_t</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types5tokenE" title="opae::fpga::types::token">token</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types5token5ptr_tE" title="opae::fpga::types::token::ptr_t">ptr_t</a> <em>tok</em>, uint32_t <em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types5error3getEN5token5ptr_tE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Factory function for creating an error object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A shared_ptr containing the error object </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">tok</span></code>: The token object representing a resource. </li>
+<li><code class="docutils literal"><span class="pre">num</span></code>: The index of the error register. This must be lower than the num_errors property of the resource.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types5error5errorEN5token5ptr_tE8uint32_t">
+<span id="opae::fpga::types::error::error__token::ptr_t.uint32_t"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1a1acdf18b1cb09e0ee1539a6f845c8251"></span><code class="descname">error</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types5tokenE" title="opae::fpga::types::token">token</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types5token5ptr_tE" title="opae::fpga::types::token::ptr_t">ptr_t</a> <em>token</em>, uint32_t <em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types5error5errorEN5token5ptr_tE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv2N4opae4fpga5types5error6token_E">
+<span id="opae::fpga::types::error::token___token::ptr_t"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1a8fed4f6624e3d0644525642468c52d60"></span><a class="reference internal" href="#_CPPv2N4opae4fpga5types5tokenE" title="opae::fpga::types::token">token</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types5token5ptr_tE" title="opae::fpga::types::token::ptr_t">ptr_t</a> <code class="descname">token_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types5error6token_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4opae4fpga5types5error11error_info_E">
+<span id="opae::fpga::types::error::error_info___fpga_error_info"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1a686b42984c8fce14c6ebfb102d8a9a64"></span><a class="reference internal" href="fpga_api.html#_CPPv215fpga_error_info" title="fpga_error_info">fpga_error_info</a> <code class="descname">error_info_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types5error11error_info_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4opae4fpga5types5error10error_num_E">
+<span id="opae::fpga::types::error::error_num___uint32_t"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1error_1afb19c6ae95eb21e047925477adc9f3b4"></span>uint32_t <code class="descname">error_num_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types5error10error_num_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="events-h">
-<h3><a class="toc-backref" href="#id16">events.h</a><a class="headerlink" href="#events-h" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id17">events.h</a><a class="headerlink" href="#events-h" title="Permalink to this headline">¶</a></h3>
 <dl class="type">
 <dt>
 <span class="target" id="namespaceopae"></span><em class="property">namespace </em><code class="descname">opae</code><br /></dt>
@@ -1663,8 +1807,235 @@ scope before freeing the <cite>shared_buffer</cite> and <cite>event</cite> objec
 </dd></dl>
 
 </div>
+<div class="section" id="sysobject-h">
+<h3><a class="toc-backref" href="#id18">sysobject.h</a><a class="headerlink" href="#sysobject-h" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt>
+<span class="target" id="namespaceopae"></span><em class="property">namespace </em><code class="descname">opae</code><br /></dt>
+<dd><dl class="type">
+<dt>
+<span class="target" id="namespaceopae_1_1fpga"></span><em class="property">namespace </em><code class="descname">fpga</code><br /></dt>
+<dd><dl class="type">
+<dt>
+<span class="target" id="namespaceopae_1_1fpga_1_1types"></span><em class="property">namespace </em><code class="descname">types</code><br /></dt>
+<dd><dl class="class">
+<dt id="_CPPv2N4opae4fpga5types9sysobjectE">
+<span id="opae::fpga::types::sysobject"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject"></span><em class="property">class </em><code class="descname">sysobject</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobjectE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;sysobject.h&gt;</em><p>Wraps the OPAE fpga_object primitive. sysobject’s are created from a call to fpgaTokenGetObject, fpgaHandleGetObject, or fpgaObjectGetObject </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="type">
+<dt id="_CPPv2N4opae4fpga5types9sysobject5ptr_tE">
+<span id="opae::fpga::types::sysobject::ptr_t"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a1a64124cb599b2944cd2cda0081e2653"></span><em class="property">typedef </em>std::shared_ptr&lt;<a class="reference internal" href="#_CPPv2N4opae4fpga5types9sysobjectE" title="opae::fpga::types::sysobject">sysobject</a>&gt; <code class="descname">ptr_t</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobject5ptr_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9sysobject9sysobjectEv">
+<span id="opae::fpga::types::sysobject::sysobject"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a113c998356671d5e03d526b8c1c8e5aa"></span><code class="descname">sysobject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobject9sysobjectEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9sysobject9sysobjectERK9sysobject">
+<span id="opae::fpga::types::sysobject::sysobject__sysobjectCR"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1ac687a5693b259d5e0390361225e999fc"></span><code class="descname">sysobject</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4opae4fpga5types9sysobject9sysobjectEv" title="opae::fpga::types::sysobject::sysobject">sysobject</a> &amp;<em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobject9sysobjectERK9sysobject" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9sysobjectaSERK9sysobject">
+<span id="opae::fpga::types::sysobject::assign-operator__sysobjectCR"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1adf8b59f15dbd3d4514e0397cf5133a07"></span><a class="reference internal" href="#_CPPv2N4opae4fpga5types9sysobjectE" title="opae::fpga::types::sysobject">sysobject</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4opae4fpga5types9sysobjectE" title="opae::fpga::types::sysobject">sysobject</a> &amp;<em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobjectaSERK9sysobject" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9sysobject3getERKNSt6stringEi">
+<span id="opae::fpga::types::sysobject::get__ssCR.i"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a8722a8fdb2c7de416e8f47280d1c1888"></span><a class="reference internal" href="#_CPPv2N4opae4fpga5types9sysobjectE" title="opae::fpga::types::sysobject">sysobject</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types9sysobject5ptr_tE" title="opae::fpga::types::sysobject::ptr_t">ptr_t</a> <code class="descname">get</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em>, int <em>flags</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobject3getERKNSt6stringEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a sysobject from an object. This will be read-write if its parent was created from a handle.. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A shared_ptr to a sysobject instance. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">name</span></code>: An identifier representing an object belonging to this object. </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Control behavior of object identification and creation. FPGA_OBJECT_GLOB is used to indicate that the name should be treated as a globbing expression. FPGA_OBJECT_RECURSE_ONE indicates that subobjects be created for objects one level down from the object identified by name. FPGA_OBJECT_RECURSE_ALL indicates that subobjects be created for all objects. Flags are defaulted to 0 meaning no flags.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9sysobjectD0Ev">
+<span id="opae::fpga::types::sysobject::~sysobject"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a8f86033c1116397d837a2b6a92ddbbf4"></span><em class="property">virtual</em> <code class="descname">~sysobject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobjectD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4opae4fpga5types9sysobject4sizeEv">
+<span id="opae::fpga::types::sysobject::sizeC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a452a93469c1cf1873b994bfd55f25feb"></span>uint32_t <code class="descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types9sysobject4sizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the size (in bytes) of the object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The number of bytes that the object occupies in memory. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4opae4fpga5types9sysobject6read64Ei">
+<span id="opae::fpga::types::sysobject::read64__iC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a0d1b16e2aa383f7c9cda7ab36d92b4e6"></span>uint64_t <code class="descname">read64</code><span class="sig-paren">(</span>int <em>flags</em> = 0<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types9sysobject6read64Ei" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read a 64-bit value from an FPGA object. The value is assumed to be in string format and will be parsed. See flags below for changing that behavior. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A 64-bit value from the object. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags that control how the object is read If FPGA_OBJECT_SYNC is used then object will update its buffered copy before retrieving the data. If FPGA_OBJECT_RAW is used, then the data will be read as raw bytes into the uint64_t pointer variable. Flags are defaulted to 0 meaning no flags.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4opae4fpga5types9sysobject7write64E8uint64_ti">
+<span id="opae::fpga::types::sysobject::write64__uint64_t.iC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a21b51d2f7f4254e5b9e85cce20e1d483"></span>void <code class="descname">write64</code><span class="sig-paren">(</span>uint64_t <em>value</em>, int <em>flags</em> = 0<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types9sysobject7write64E8uint64_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write 64-bit value to an FPGA object. The value will be converted to string before writing. See flags below for changing that behavior. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This operation will force a sync operation to update its cached buffer </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">value</span></code>: The value to write to the object. </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags that control how the object is written If FPGA_OBJECT_RAW is used, then the value will be written as raw bytes. Flags are defaulted to 0 meaning no flags.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4opae4fpga5types9sysobject5bytesEi">
+<span id="opae::fpga::types::sysobject::bytes__iC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a81b055a8e9a0c4e7d4ea9870441de5b9"></span>std::vector&lt;uint8_t&gt; <code class="descname">bytes</code><span class="sig-paren">(</span>int <em>flags</em> = 0<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types9sysobject5bytesEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get all raw bytes from the object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A vector of all bytes in the object. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags that control how object is read If FPGA_OBJECT_SYNC is used then object will update its buffered copy before retrieving the data.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4opae4fpga5types9sysobject5bytesE8uint32_t8uint32_ti">
+<span id="opae::fpga::types::sysobject::bytes__uint32_t.uint32_t.iC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a60613f9647196473d951e114baffe31f"></span>std::vector&lt;uint8_t&gt; <code class="descname">bytes</code><span class="sig-paren">(</span>uint32_t <em>offset</em>, uint32_t <em>size</em>, int <em>flags</em> = 0<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types9sysobject5bytesE8uint32_t8uint32_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a subset of raw bytes from the object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A vector of size bytes in the object starting at offset. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">offset</span></code>: The bytes offset for the start of the returned vector. </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: The number of bytes for the returned vector. </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Flags that control how object is read If FPGA_OBJECT_SYNC is used then object will update its buffered copy before retrieving the data.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4opae4fpga5types9sysobject6c_typeEv">
+<span id="opae::fpga::types::sysobject::c_typeC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a48e46ec0eb41248c8c1afb96b3d56ea9"></span><a class="reference internal" href="fpga_api.html#_CPPv211fpga_object" title="fpga_object">fpga_object</a> <code class="descname">c_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types9sysobject6c_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve the underlying fpga_object primitive. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4opae4fpga5types9sysobjectcv11fpga_objectEv">
+<span id="opae::fpga::types::sysobject::castto-fpga_object-operatorC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1aa1c5761826b7aa06c81e5aa6ff63077b"></span><code class="descname">operator fpga_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types9sysobjectcv11fpga_objectEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve the underlying fpga_object primitive. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9sysobject3getEN5token5ptr_tERKNSt6stringEi">
+<span id="opae::fpga::types::sysobject::get__token::ptr_t.ssCR.i"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1af82679125fec13b5731ab619808f2ccb"></span><em class="property">static</em> <a class="reference internal" href="#_CPPv2N4opae4fpga5types9sysobjectE" title="opae::fpga::types::sysobject">sysobject</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types9sysobject5ptr_tE" title="opae::fpga::types::sysobject::ptr_t">ptr_t</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types5tokenE" title="opae::fpga::types::token">token</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types5token5ptr_tE" title="opae::fpga::types::token::ptr_t">ptr_t</a> <em>t</em>, <em class="property">const</em> std::string &amp;<em>name</em>, int <em>flags</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobject3getEN5token5ptr_tERKNSt6stringEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a sysobject from a token. This will be read-only. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A shared_ptr to a sysobject instance. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">t</span></code>: Token object representing a resource. </li>
+<li><code class="docutils literal"><span class="pre">name</span></code>: An identifier representing an object belonging to a resource represented by the token. </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Control behavior of object identification and creation. FPGA_OBJECT_GLOB is used to indicate that the name should be treated as a globbing expression. FPGA_OBJECT_RECURSE_ONE indicates that subobjects be created for objects one level down from the object identified by name. FPGA_OBJECT_RECURSE_ALL indicates that subobjects be created for all objects below the current object identified by name.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9sysobject3getEN6handle5ptr_tERKNSt6stringEi">
+<span id="opae::fpga::types::sysobject::get__handle::ptr_t.ssCR.i"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a91b4775d5e1d6520ce6fba54db990bb7"></span><em class="property">static</em> <a class="reference internal" href="#_CPPv2N4opae4fpga5types9sysobjectE" title="opae::fpga::types::sysobject">sysobject</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types9sysobject5ptr_tE" title="opae::fpga::types::sysobject::ptr_t">ptr_t</a> <code class="descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types6handleE" title="opae::fpga::types::handle">handle</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6handle5ptr_tE" title="opae::fpga::types::handle::ptr_t">ptr_t</a> <em>h</em>, <em class="property">const</em> std::string &amp;<em>name</em>, int <em>flags</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobject3getEN6handle5ptr_tERKNSt6stringEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a sysobject from a handle. This will be read-write. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A shared_ptr to a sysobject instance. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">h</span></code>: Handle object representing an open resource. </li>
+<li><code class="docutils literal"><span class="pre">name</span></code>: An identifier representing an object belonging to a resource represented by the handle. </li>
+<li><code class="docutils literal"><span class="pre">flags</span></code>: Control behavior of object identification and creation. FPGA_OBJECT_GLOB is used to indicate that the name should be treated as a globbing expression. FPGA_OBJECT_RECURSE_ONE indicates that subobjects be created for objects one level down from the object identified by name. FPGA_OBJECT_RECURSE_ALL indicates that subobjects be created for all objects below the current object identified by name.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9sysobject9sysobjectE11fpga_objectN5token5ptr_tEN6handle5ptr_tE">
+<span id="opae::fpga::types::sysobject::sysobject__fpga_object.token::ptr_t.handle::ptr_t"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a152cbb0823356ecb633b295a2c45fd43"></span><code class="descname">sysobject</code><span class="sig-paren">(</span><a class="reference internal" href="fpga_api.html#_CPPv211fpga_object" title="fpga_object">fpga_object</a> <em>sysobj</em>, <a class="reference internal" href="#_CPPv2N4opae4fpga5types5tokenE" title="opae::fpga::types::token">token</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types5token5ptr_tE" title="opae::fpga::types::token::ptr_t">ptr_t</a> <em>token</em>, <a class="reference internal" href="#_CPPv2N4opae4fpga5types6handleE" title="opae::fpga::types::handle">handle</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6handle5ptr_tE" title="opae::fpga::types::handle::ptr_t">ptr_t</a> <em>hnd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobject9sysobjectE11fpga_objectN5token5ptr_tEN6handle5ptr_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv2N4opae4fpga5types9sysobject10sysobject_E">
+<span id="opae::fpga::types::sysobject::sysobject___fpga_object"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a2982d55edea60fcf80245da9592c3abf"></span><a class="reference internal" href="fpga_api.html#_CPPv211fpga_object" title="fpga_object">fpga_object</a> <code class="descname">sysobject_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobject10sysobject_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4opae4fpga5types9sysobject6token_E">
+<span id="opae::fpga::types::sysobject::token___token::ptr_t"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1a9b4075f8e189e37c5992f724dc7380b4"></span><a class="reference internal" href="#_CPPv2N4opae4fpga5types5tokenE" title="opae::fpga::types::token">token</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types5token5ptr_tE" title="opae::fpga::types::token::ptr_t">ptr_t</a> <code class="descname">token_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobject6token_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4opae4fpga5types9sysobject7handle_E">
+<span id="opae::fpga::types::sysobject::handle___handle::ptr_t"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1sysobject_1acb5d249e9d682ef0f228a0296b7fe851"></span><a class="reference internal" href="#_CPPv2N4opae4fpga5types6handleE" title="opae::fpga::types::handle">handle</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6handle5ptr_tE" title="opae::fpga::types::handle::ptr_t">ptr_t</a> <code class="descname">handle_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types9sysobject7handle_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="exceptions">
-<h3><a class="toc-backref" href="#id17">Exceptions</a><a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id19">Exceptions</a><a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h3>
 <p>When the OPAE C++ API encounters an error from the OPAE C
 API, it captures the current source code location and
 the error code into an object of type <cite>except</cite>, then
@@ -1673,7 +2044,7 @@ appropriate catch blocks required to respond to runtime
 exceptions.</p>
 </div>
 <div class="section" id="except-h">
-<h3><a class="toc-backref" href="#id18">except.h</a><a class="headerlink" href="#except-h" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id20">except.h</a><a class="headerlink" href="#except-h" title="Permalink to this headline">¶</a></h3>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Defines</p>
 <dl class="macro">
@@ -2161,11 +2532,11 @@ exceptions.</p>
 
 </div>
 <div class="section" id="misc">
-<h3><a class="toc-backref" href="#id19">Misc</a><a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id21">Misc</a><a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h3>
 <p>The <cite>version</cite> class wraps the OPAE C version API.</p>
 </div>
 <div class="section" id="version-h">
-<h3><a class="toc-backref" href="#id20">version.h</a><a class="headerlink" href="#version-h" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id22">version.h</a><a class="headerlink" href="#version-h" title="Permalink to this headline">¶</a></h3>
 <dl class="type">
 <dt>
 <span class="target" id="namespaceopae"></span><em class="property">namespace </em><code class="descname">opae</code><br /></dt>
@@ -2270,7 +2641,7 @@ exceptions.</p>
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../../',
-              VERSION:'1.1.0',
+              VERSION:'1.2.0',
               LANGUAGE:'en',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
