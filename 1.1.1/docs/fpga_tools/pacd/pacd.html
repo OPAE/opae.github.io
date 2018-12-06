@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pacd &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="OPAE" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_api/api_build.html">Building the OPAE C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_cxx_api.html">OPAE C++ Core API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_python_api.html">OPAE Python API Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgabist/fpgabist.html">fpgabist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaflash/fpgaflash.html">fpgaflash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_config/readme.html">hssi_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_loopback/readme.html">hssi_loopback</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OPAE</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>pacd</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/docs/fpga_tools/pacd/pacd.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pacd">
+<h1>pacd<a class="headerlink" href="#pacd" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">pacd</span> <span class="pre">--daemon</span> <span class="pre">[--directory=&lt;dir&gt;]</span> <span class="pre">[--logfile=&lt;file&gt;]</span> <span class="pre">[--pidfile=&lt;file&gt;]</span> <span class="pre">[--umask=&lt;mode&gt;]</span> <span class="pre">[--default-bitstream=&lt;file&gt;]</span> <span class="pre">[--segment=&lt;PCIeSegment&gt;]</span> <span class="pre">[--bus=&lt;bus&gt;]</span> <span class="pre">[--device=&lt;device&gt;]</span> <span class="pre">[--function=&lt;function&gt;]</span> <span class="pre">[--upper-sensor-threshold=&lt;sensor&gt;:&lt;threshold&gt;[:&lt;reset_thresh&gt;]]</span> <span class="pre">[--lower-sensor-threshold=&lt;sensor&gt;:&lt;threshold&gt;[:&lt;reset_thresh&gt;]]</span> <span class="pre">[--poll-interval</span> <span class="pre">&lt;sec&gt;]</span> <span class="pre">[--cooldown-interval</span> <span class="pre">&lt;sec&gt;]</span> <span class="pre">[--no-defaults]</span> <span class="pre">[--driver-removal-disable]</span></code></p>
+<p><code class="docutils literal"><span class="pre">pacd</span> <span class="pre">[--default-bitstream=&lt;file&gt;]</span> <span class="pre">[--segment=&lt;PCIeSegment&gt;]</span> <span class="pre">[--bus=&lt;bus&gt;]</span> <span class="pre">[--device=&lt;device&gt;]</span> <span class="pre">[--function=&lt;function&gt;]</span> <span class="pre">[--upper-sensor-threshold=&lt;sensor&gt;:&lt;threshold&gt;[:&lt;reset_thresh&gt;]]</span> <span class="pre">[--lower-sensor-threshold=&lt;sensor&gt;:&lt;threshold&gt;[:&lt;reset_thresh&gt;]]</span> <span class="pre">[--poll-interval</span> <span class="pre">&lt;sec&gt;]</span> <span class="pre">[--cooldown-interval</span> <span class="pre">&lt;sec&gt;]</span> <span class="pre">[--no-defaults]</span> <span class="pre">[--driver-removal-disable]</span></code></p>
+</div>
+<div class="section" id="description">
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">pacd</span></code> periodically monitors the sensors on the PAC Baseboard
+Management Controller (BMC) and programs a default bitstream in response
+to a sensor’s value exceeding a specified threshold. pacd is only
+available on the PCIe Accelerator Card (PAC).</p>
+<p>On systems with multiple PACs, <code class="docutils literal"><span class="pre">pacd</span></code> will monitor the sensors for all
+cards in the system using the specified sensor threshold values. If the
+PCIe address is specified (i.e., <code class="docutils literal"><span class="pre">-S</span></code>, <code class="docutils literal"><span class="pre">-B</span></code>, <code class="docutils literal"><span class="pre">-D</span></code>, <code class="docutils literal"><span class="pre">-F</span></code>),
+<code class="docutils literal"><span class="pre">pacd</span></code> will monitor all PACs matching the PCIe address components
+specified. For example, if the user specifies <code class="docutils literal"><span class="pre">-B</span> <span class="pre">5</span></code> only, all PACs on
+PCIe bus <code class="docutils literal"><span class="pre">5</span></code> will be monitored. The sensor thresholds are global, so
+specifying <code class="docutils literal"><span class="pre">-T</span> <span class="pre">11:95.0:93.0</span></code> will monitor sensor <code class="docutils literal"><span class="pre">11</span></code> on all
+selected PACs and trigger if its value exceeds <code class="docutils literal"><span class="pre">95.0</span></code> and reset its
+trigger at <code class="docutils literal"><span class="pre">93.0</span></code>.</p>
+<p>Use SIGINT or SIGTERM to stop <code class="docutils literal"><span class="pre">pacd</span></code>, either in daemon mode
+(<code class="docutils literal"><span class="pre">kill</span> <span class="pre">-2</span> <span class="pre">`cat</span> <span class="pre">/tmp/pacd.pid`</span></code> or <code class="docutils literal"><span class="pre">kill</span> <span class="pre">-15</span> <span class="pre">`cat</span> <span class="pre">/tmp/pacd.pid`</span></code>) or
+<code class="docutils literal"><span class="pre">^C</span></code> when run as a regular process.</p>
+</div>
+<div class="section" id="installing-as-a-system-service">
+<h2>INSTALLING AS A SYSTEM SERVICE<a class="headerlink" href="#installing-as-a-system-service" title="Permalink to this headline">¶</a></h2>
+<p>The tools installation process will install all the necessary files
+required to make <code class="docutils literal"><span class="pre">pacd</span></code> a <code class="docutils literal"><span class="pre">systemd</span></code> service, capable of
+automatically starting on boot if desired.</p>
+<p>In order to start <code class="docutils literal"><span class="pre">pacd</span></code> as a <code class="docutils literal"><span class="pre">systemd</span></code> service, first edit the file
+<code class="docutils literal"><span class="pre">/etc/sysconfig/pacd.conf</span></code> as root. This file is shown below.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp"># Intel Programmable Acceleration Card (PAC) daemon variables.</span>
+<span class="cp"># Monitors Baseboard Management Controller (BMC) sensors.</span>
+
+<span class="cp">############## REQUIRED OPTIONS ################</span>
+
+<span class="n">PIDFile</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pacd</span><span class="p">.</span><span class="n">pid</span>
+
+<span class="cp"># Specify default GBS files to consider for PR.  Include &#39;-n&#39; for each.</span>
+<span class="cp"># ex.: DefaultGBSOptions=-n &lt;Default_GBS_Path&gt; -n &lt;Default_GBS_PATH_2&gt;</span>
+<span class="n">DefaultGBSOptions</span><span class="o">=-</span><span class="n">n</span> <span class="o">&lt;</span><span class="n">Default_GBS_Path</span><span class="o">&gt;</span>
+<span class="n">UMask</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">LogFile</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pacd</span><span class="p">.</span><span class="n">log</span>
+<span class="n">PollInterval</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">CooldownInterval</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="cp">############## OPTIONAL OPTIONS ################</span>
+
+<span class="cp"># Uncomment and specify specific PAC PCI address to monitor.</span>
+<span class="cp"># Default is to monitor all PACs</span>
+<span class="cp">#BoardPCIAddr=-S 0 -B 5 -D 0 -F 0</span>
+
+<span class="cp"># Specify threshold values. -T for UNR, -t for LNR.</span>
+<span class="cp"># ex.: ThresholdOptions=-T 4:12.5 -t 7:2.25:2.3</span>
+<span class="n">ThresholdOptions</span><span class="o">=</span>
+
+<span class="cp"># Extra advanced options.</span>
+<span class="cp"># ex.: ExtraOptions=--no-defaults --driver-removal-disable</span>
+<span class="n">ExtraOptions</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>Edit the <code class="docutils literal"><span class="pre">DefaultGBSOptions=</span></code> line, specifying the absolute path(s) of
+the GBS files to be loaded into the device when a threshold has been
+exceeded. Prefix each GBS file name with <code class="docutils literal"><span class="pre">-n</span></code>.</p>
+<p>To start the service, first tell <code class="docutils literal"><span class="pre">systemd</span></code> to rescan for services
+using the command <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">daemon-reload</span></code>, then issue the
+command <code class="docutils literal"><span class="pre">sudu</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">pacd</span></code>. This will start <code class="docutils literal"><span class="pre">pacd</span></code> as a
+service, and it will persist until the next boot. To stop the service,
+use <code class="docutils literal"><span class="pre">sudu</span> <span class="pre">systemctl</span> <span class="pre">stop</span> <span class="pre">pacd</span></code>. In order for <code class="docutils literal"><span class="pre">pacd</span></code> to persist
+across boots, issue <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">pacd</span></code>;
+<code class="docutils literal"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">disable</span> <span class="pre">pacd</span></code> will reverse this effect.</p>
+<p>To ensure that the service has been started, use either the
+<code class="docutils literal"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">status</span> <span class="pre">pacd</span> <span class="pre">-l</span></code> or <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">journalctl</span> <span class="pre">-xe</span></code>. Using
+<code class="docutils literal"><span class="pre">systemctl</span></code>, successful startup will display something similar to the
+following:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>sudo systemctl status pacd -l
+● pacd.service - PAC BMC sensor monitor
+   Loaded: loaded (/usr/lib/systemd/system/pacd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2018-08-23 09:34:59 PDT; 2s ago
+  Process: 15694 ExecStart=/usr/local/bin/pacd -d $DefaultGBSOptions -P /usr/local/bin -m $UMask -l $LogFile -p $PIDFile -i $PollInterval -c $CooldownInterval $BoardPCIAddr $ThresholdOptions $ExtraOptions (code=exited, status=0/SUCCESS)
+ Main PID: 15698 (pacd)
+   CGroup: /system.slice/pacd.service
+           └─15698 /usr/local/bin/pacd -d -n /etc/GBSs/default.gbs -P /usr/local/bin -m 0 -l /tmp/pacd.log -p /tmp/pacd.pid -i 0 -c 0
+
+Aug 23 09:34:59 sj-avl-d15-mc.avl systemd[1]: Starting PAC BMC sensor monitor...
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon requested
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: registering default bitstream &quot;/etc/GBSs/default.gbs&quot;
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon path is /usr/local/bin
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon umask is 0x0
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon log file is /tmp/pacd.log
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon pid file is /tmp/pacd.pid
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: Polling interval set to 0.000000 sec
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: Cooldown delay set to 0.000000 sec
+Aug 23 09:34:59 sj-avl-d15-mc.avl systemd[1]: Started PAC BMC sensor monitor.
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">journalctl</span></code> output will look similar to:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="n">sj</span><span class="o">-</span><span class="n">avl</span><span class="o">-</span><span class="n">d15</span><span class="o">-</span><span class="n">mc</span><span class="p">.</span><span class="n">avl</span> <span class="n">systemd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span> <span class="n">Starting</span> <span class="n">PAC</span> <span class="n">BMC</span> <span class="n">sensor</span> <span class="n">monitor</span><span class="p">...</span>
+<span class="o">--</span> <span class="nl">Subject</span><span class="p">:</span> <span class="n">Unit</span> <span class="n">pacd</span><span class="p">.</span><span class="n">service</span> <span class="n">has</span> <span class="n">begun</span> <span class="n">start</span><span class="o">-</span><span class="n">up</span>
+<span class="o">--</span> <span class="n">Defined</span><span class="o">-</span><span class="nl">By</span><span class="p">:</span> <span class="n">systemd</span>
+<span class="o">--</span> <span class="nl">Support</span><span class="p">:</span> <span class="nl">http</span><span class="p">:</span><span class="c1">//lists.freedesktop.org/mailman/listinfo/systemd-devel</span>
+<span class="o">--</span>
+<span class="o">--</span> <span class="n">Unit</span> <span class="n">pacd</span><span class="p">.</span><span class="n">service</span> <span class="n">has</span> <span class="n">begun</span> <span class="n">starting</span> <span class="n">up</span><span class="p">.</span>
+<span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="n">sj</span><span class="o">-</span><span class="n">avl</span><span class="o">-</span><span class="n">d15</span><span class="o">-</span><span class="n">mc</span><span class="p">.</span><span class="n">avl</span> <span class="n">pacd</span><span class="p">[</span><span class="mi">15694</span><span class="p">]</span><span class="o">:</span> <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="mi">2018</span><span class="o">:</span> <span class="n">daemon</span> <span class="n">requested</span>
+<span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="n">sj</span><span class="o">-</span><span class="n">avl</span><span class="o">-</span><span class="n">d15</span><span class="o">-</span><span class="n">mc</span><span class="p">.</span><span class="n">avl</span> <span class="n">pacd</span><span class="p">[</span><span class="mi">15694</span><span class="p">]</span><span class="o">:</span> <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="mi">2018</span><span class="o">:</span> <span class="n">registering</span> <span class="nb">NULL</span> <span class="n">bitstream</span> <span class="s">&quot;/etc/GBSs/NULL.gbs&quot;</span>
+<span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="n">sj</span><span class="o">-</span><span class="n">avl</span><span class="o">-</span><span class="n">d15</span><span class="o">-</span><span class="n">mc</span><span class="p">.</span><span class="n">avl</span> <span class="n">pacd</span><span class="p">[</span><span class="mi">15694</span><span class="p">]</span><span class="o">:</span> <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="mi">2018</span><span class="o">:</span> <span class="n">daemon</span> <span class="n">path</span> <span class="n">is</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span>
+<span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="n">sj</span><span class="o">-</span><span class="n">avl</span><span class="o">-</span><span class="n">d15</span><span class="o">-</span><span class="n">mc</span><span class="p">.</span><span class="n">avl</span> <span class="n">pacd</span><span class="p">[</span><span class="mi">15694</span><span class="p">]</span><span class="o">:</span> <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="mi">2018</span><span class="o">:</span> <span class="n">daemon</span> <span class="n">umask</span> <span class="n">is</span> <span class="mh">0x0</span>
+<span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="n">sj</span><span class="o">-</span><span class="n">avl</span><span class="o">-</span><span class="n">d15</span><span class="o">-</span><span class="n">mc</span><span class="p">.</span><span class="n">avl</span> <span class="n">pacd</span><span class="p">[</span><span class="mi">15694</span><span class="p">]</span><span class="o">:</span> <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="mi">2018</span><span class="o">:</span> <span class="n">daemon</span> <span class="n">log</span> <span class="n">file</span> <span class="n">is</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pacd</span><span class="p">.</span><span class="n">log</span>
+<span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="n">sj</span><span class="o">-</span><span class="n">avl</span><span class="o">-</span><span class="n">d15</span><span class="o">-</span><span class="n">mc</span><span class="p">.</span><span class="n">avl</span> <span class="n">pacd</span><span class="p">[</span><span class="mi">15694</span><span class="p">]</span><span class="o">:</span> <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="mi">2018</span><span class="o">:</span> <span class="n">daemon</span> <span class="n">pid</span> <span class="n">file</span> <span class="n">is</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">pacd</span><span class="p">.</span><span class="n">pid</span>
+<span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="n">sj</span><span class="o">-</span><span class="n">avl</span><span class="o">-</span><span class="n">d15</span><span class="o">-</span><span class="n">mc</span><span class="p">.</span><span class="n">avl</span> <span class="n">pacd</span><span class="p">[</span><span class="mi">15694</span><span class="p">]</span><span class="o">:</span> <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="mi">2018</span><span class="o">:</span> <span class="n">Polling</span> <span class="n">interval</span> <span class="n">set</span> <span class="n">to</span> <span class="mf">0.000000</span> <span class="n">sec</span>
+<span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="n">sj</span><span class="o">-</span><span class="n">avl</span><span class="o">-</span><span class="n">d15</span><span class="o">-</span><span class="n">mc</span><span class="p">.</span><span class="n">avl</span> <span class="n">pacd</span><span class="p">[</span><span class="mi">15694</span><span class="p">]</span><span class="o">:</span> <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="mi">2018</span><span class="o">:</span> <span class="n">Cooldown</span> <span class="n">delay</span> <span class="n">set</span> <span class="n">to</span> <span class="mf">0.000000</span> <span class="n">sec</span>
+<span class="n">Aug</span> <span class="mi">23</span> <span class="mi">09</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">59</span> <span class="n">sj</span><span class="o">-</span><span class="n">avl</span><span class="o">-</span><span class="n">d15</span><span class="o">-</span><span class="n">mc</span><span class="p">.</span><span class="n">avl</span> <span class="n">systemd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span> <span class="n">Started</span> <span class="n">PAC</span> <span class="n">BMC</span> <span class="n">sensor</span> <span class="n">monitor</span><span class="p">.</span>
+<span class="o">--</span> <span class="nl">Subject</span><span class="p">:</span> <span class="n">Unit</span> <span class="n">pacd</span><span class="p">.</span><span class="n">service</span> <span class="n">has</span> <span class="n">finished</span> <span class="n">start</span><span class="o">-</span><span class="n">up</span>
+<span class="o">--</span> <span class="n">Defined</span><span class="o">-</span><span class="nl">By</span><span class="p">:</span> <span class="n">systemd</span>
+<span class="o">--</span> <span class="nl">Support</span><span class="p">:</span> <span class="nl">http</span><span class="p">:</span><span class="c1">//lists.freedesktop.org/mailman/listinfo/systemd-devel</span>
+<span class="o">--</span>
+<span class="o">--</span> <span class="n">Unit</span> <span class="n">pacd</span><span class="p">.</span><span class="n">service</span> <span class="n">has</span> <span class="n">finished</span> <span class="n">starting</span> <span class="n">up</span><span class="p">.</span>
+<span class="o">--</span>
+<span class="o">--</span> <span class="n">The</span> <span class="n">start</span><span class="o">-</span><span class="n">up</span> <span class="n">result</span> <span class="n">is</span> <span class="n">done</span><span class="p">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">-d,</span> <span class="pre">--daemon</span></code></p>
+<p>When specified, <code class="docutils literal"><span class="pre">pacd</span></code> executes as a system daemon process.</p>
+<p><code class="docutils literal"><span class="pre">-P,</span> <span class="pre">--directory</span> <span class="pre">&lt;dir&gt;</span></code></p>
+<p>When running in daemon mode, run from the specified directory (path). If
+omitted when daemonizing, <code class="docutils literal"><span class="pre">/tmp</span></code> is used.</p>
+<p><code class="docutils literal"><span class="pre">-l,</span> <span class="pre">--logfile</span> <span class="pre">&lt;file&gt;</span></code></p>
+<p>When running in daemon mode, send output to file. When not in daemon
+mode, the output goes to stdout. If omitted when daemonizing,
+<code class="docutils literal"><span class="pre">/tmp/pacd.log</span></code> is used.</p>
+<p><code class="docutils literal"><span class="pre">-p,</span> <span class="pre">--pidfile</span> <span class="pre">&lt;file&gt;</span></code></p>
+<p>When running in daemon mode, write the daemon’s process id to a file. If
+omitted when daemonizing, <code class="docutils literal"><span class="pre">/tmp/pacd.pid</span></code> is used.</p>
+<p><code class="docutils literal"><span class="pre">-m,</span> <span class="pre">--umask</span> <span class="pre">&lt;mode&gt;</span></code></p>
+<p>When running in daemon mode, use the mode value as the file mode
+creation mask passed to umask. If omitted when daemonizing, <code class="docutils literal"><span class="pre">0</span></code> is
+used.</p>
+<p><code class="docutils literal"><span class="pre">-i,</span> <span class="pre">--poll-interval</span> <span class="pre">&lt;secs&gt;</span></code></p>
+<p><code class="docutils literal"><span class="pre">pacd</span></code> will poll and check the sensor values every <code class="docutils literal"><span class="pre">secs</span></code> seconds.
+This is a real number, so a floating-point number can be specified
+(i.e., <code class="docutils literal"><span class="pre">2.5</span></code> for two and a half second poll interval).</p>
+<p><code class="docutils literal"><span class="pre">-c,</span> <span class="pre">--cooldown-interval</span> <span class="pre">&lt;secs&gt;</span></code></p>
+<p>Specifies the time in seconds that <code class="docutils literal"><span class="pre">pacd</span></code> will wait after removing the
+FPGA driver before re-enabling the driver. This is the time that the
+host will not be able to access the PAC for any reason. Not valid in
+conjunction with <code class="docutils literal"><span class="pre">--driver-removal-disable</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">-n,</span> <span class="pre">--default-bitstream</span> <span class="pre">&lt;file&gt;</span></code></p>
+<p>Specify the default bitstream to program when a sensor value exceeds the
+specified threshold. This option may be specified multiple times. The
+AF, if any, that matches the FPGA’s PR interface ID is programmed when
+the sensor’s value exceeds the threshold.</p>
+<p><code class="docutils literal"><span class="pre">-S,</span> <span class="pre">--segment</span> <span class="pre">&lt;PCIe</span> <span class="pre">segment&gt;</span></code></p>
+<p>Specify the PCIe segment (domain) of the PAC of interest.</p>
+<p><code class="docutils literal"><span class="pre">-B,</span> <span class="pre">--bus</span> <span class="pre">&lt;PCIe</span> <span class="pre">bus&gt;</span></code></p>
+<p>Specify the PCIe bus of the PAC of interest.</p>
+<p><code class="docutils literal"><span class="pre">-D,</span> <span class="pre">--device</span> <span class="pre">&lt;PCIe</span> <span class="pre">device&gt;</span></code></p>
+<p>Specify the PCIe device of the PAC of interest.</p>
+<p><code class="docutils literal"><span class="pre">-F,</span> <span class="pre">--function</span> <span class="pre">&lt;PCIe</span> <span class="pre">function&gt;</span></code></p>
+<p>Specify the PCIe function of the PAC of interest.</p>
+<p><code class="docutils literal"><span class="pre">-T,</span> <span class="pre">--upper-sensor-threshold</span> <span class="pre">&lt;sensor&gt;:&lt;trigger_threshold&gt;[:&lt;reset_threshold&gt;]</span></code></p>
+<p>Specify the threshold value for a sensor that, when exceeded (sensor
+value strictly greater than <code class="docutils literal"><span class="pre">&lt;trigger_threshold&gt;</span></code>), will cause the
+default bitstream specified with <code class="docutils literal"><span class="pre">-n</span></code> that matches the FPGA’s PR
+Interface ID to be programmed into the FPGA. The sensor will be
+considered triggered (and no PR performed) until its value drops below
+<code class="docutils literal"><span class="pre">&lt;reset_threshold&gt;</span></code>.</p>
+<p>This option can be specified multiple times.</p>
+<p>The sensors specified will be monitored for all specified PACs. There is
+no mechanism for specifying per-PAC sensor thresholds.</p>
+<p><code class="docutils literal"><span class="pre">-t,</span> <span class="pre">--lower-sensor-threshold</span> <span class="pre">&lt;sensor&gt;:&lt;trigger_threshold&gt;[:&lt;reset_threshold&gt;]</span></code></p>
+<p>Specify the threshold value for a sensor that, when exceeded (sensor
+value strictly less than <code class="docutils literal"><span class="pre">&lt;trigger_threshold&gt;</span></code>), will cause the
+default bitstream specified with <code class="docutils literal"><span class="pre">-n</span></code> that matches the FPGA’s PR
+Interface ID to be programmed into the FPGA. The sensor will be
+considered triggered (and no PR performed) until its value goes above
+<code class="docutils literal"><span class="pre">&lt;reset_threshold&gt;</span></code>.</p>
+<p>This option can be specified multiple times.</p>
+<p>The sensors specified will be monitored for all specified PACs. There is
+no mechanism for specifying per-PAC sensor thresholds.</p>
+<p><code class="docutils literal"><span class="pre">-N,</span> <span class="pre">--no-defaults</span></code></p>
+<p><code class="docutils literal"><span class="pre">pacd</span></code> will by default monitor the same set of sensors that the BMC
+monitors that could trigger a machine re-boot. This set is typically all
+settable non-recoverable thresholds. Specifying this option tells
+<code class="docutils literal"><span class="pre">pacd</span></code> not to monitor these sensors. This option requires at least one
+of <code class="docutils literal"><span class="pre">-T</span></code> or <code class="docutils literal"><span class="pre">-t</span></code> to be specified.</p>
+<p><code class="docutils literal"><span class="pre">--driver-removal-disable</span></code></p>
+<p>This is an advanced option with the default being to disable the driver.
+When a sensor is initially tripped requiring a PR of the FPGA, <code class="docutils literal"><span class="pre">pacd</span></code>
+will remove the FPGA device driver for the device, wait for a period of
+time, re-enable the driver and then PR the default bitstream into the
+device.</p>
+<p>If this option is specified, <code class="docutils literal"><span class="pre">pacd</span></code> will skip disabling the driver and
+just PR the default bitstream into the device.</p>
+</div>
+<div class="section" id="notes">
+<h2>NOTES<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">pacd</span></code> is intended to prevent an over-temperature or power
+“non-recoverable” event from causing the FPGA’s BMC to shut down the
+PAC. Shutting down the PAC results in a PCIe “surprise removal” which
+will cause the host to ultimately reboot.</p>
+<p>There are several issues that need to be taken into consideration when
+enabling <code class="docutils literal"><span class="pre">pacd</span></code>:</p>
+<ol class="arabic simple">
+<li>The application being accelerated needs to be able to respond
+appropriately when the device driver disappears from the system. The
+application will receive a SIGHUP signal when the driver shuts itself
+down. On receipt of SIGHUP, the app should clean up and exit as soon
+as possible.</li>
+<li>There is a window in which the running system will reboot if a PR is
+in progress when a sensor’s threshold is tripped.</li>
+<li>The OS and driver cannot invalidate any pointers that the application
+has to FPGA MMIO space. Utilization of the OPAE API to access the
+MMIO region is strongly recommended to avoid unanticipated reboots.</li>
+<li>The OS and driver cannot prevent direct access of host memory from
+the FPGA, as in the case of a DMA operation from the AFU to the host.
+There is a high probability of a reboot if a PR is attempted by
+<code class="docutils literal"><span class="pre">pacd</span></code> due to a threshold trip event during a DMA operation.</li>
+</ol>
+</div>
+<div class="section" id="troubleshooting">
+<h2>TROUBLESHOOTING<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>If you encounter any issues, you can get debug information in two ways:</p>
+<ol class="arabic simple">
+<li>By examining the log file when in daemon mode.</li>
+<li>By running in non-daemon mode and viewing stdout.</li>
+</ol>
+</div>
+<div class="section" id="examples">
+<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The following command will start <code class="docutils literal"><span class="pre">pacd</span></code> as a daemon process,
+programming <code class="docutils literal"><span class="pre">my_null_bits.gbs</span></code> when any BMC-triggerable threshold is
+tripped.</p>
+<p><code class="docutils literal"><span class="pre">pacd</span> <span class="pre">--daemon</span> <span class="pre">--null-bitstream=my_null_bits.gbs</span></code></p>
+<p>The following command will start <code class="docutils literal"><span class="pre">pacd</span></code> as a regular process,
+programming <code class="docutils literal"><span class="pre">idle.gbs</span></code> when sensor 11 (FPGA Core TEMP) exceeds 92.35
+degrees C or sensor 0 (Total Input Power) goes out of the range [9.2 -
+19.9] Watts.</p>
+<p><code class="docutils literal"><span class="pre">pacd</span> <span class="pre">-n=idle.gbs</span> <span class="pre">-T</span> <span class="pre">11:92.35</span> <span class="pre">-T</span> <span class="pre">0:19.9</span> <span class="pre">-t</span> <span class="pre">0:9.2</span></code></p>
+</div>
+<div class="section" id="revision-history">
+<h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="55%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Document Version</th>
+<th class="head">Intel Acceleration Stack Version</th>
+<th class="head">Changes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>2018.08.08</td>
+<td>1.2 Beta. (Supported with Intel
+Quartus Prime Pro Edition 17.1.)</td>
+<td>Initial
+revision.</td>
+</tr>
+<tr class="row-odd"><td>2018.08.17</td>
+<td>1.2 Beta. (Supported with Intel
+Quartus Prime Pro Edition 17.1.)</td>
+<td>Updated to
+include new
+options.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.1.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
