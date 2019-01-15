@@ -308,11 +308,10 @@ The ASE also provides methods to identify potential issues early,
 before in-system deployment.</li>
 <li>The ASE can help identify certain lock conditions and Configuration
 and Status Registers (CSR) address mapping and pointer math errors.</li>
-<li>The ASE presents a memory model to the AFU that tracks memory
-requested as accelerator workspaces. The memory model immediately
-flags illegal memory transactions to locations outside of requested
-memory spaces. Consequently, you can fix incorrect memory accesses
-early, during the simulation phase.</li>
+<li>The ASE tracks memory requested from the accelerator. The memory
+model immediately flags illegal memory transactions to locations
+outside of requested memory spaces. Consequently, you can fix
+incorrect memory accesses early, during the simulation phase.</li>
 <li>The ASE does not guarantee that you can synthesize an AFU. After you
 verify the AFU RTL functionality in the ASE, use the ASE and the
 Intel Quartus® Prime Pro Edition software iteratively to generate the
@@ -447,10 +446,14 @@ software.</p>
 your installation.</p>
 <p>Check the RTL simulator product information for supported operating
 systems, installation notes, and other related information. The RTL
-simulator must be able to perform the following functions: *
-Compilation of the SystemVerilog Direct Programming Interface (DPI)
-constructs * Compilation of the standard examples that are included in
-the installation * Support for SystemC</p>
+simulator must be able to perform the following functions:</p>
+<ul class="simple">
+<li>Compilation of the SystemVerilog Direct Programming Interface (DPI)
+constructs</li>
+<li>Compilation of the standard examples that are included in the
+installation</li>
+<li>Support for SystemC</li>
+</ul>
 </div>
 <div class="section" id="package-description">
 <h2>Package Description<a class="headerlink" href="#package-description" title="Permalink to this headline">¶</a></h2>
@@ -459,11 +462,12 @@ the installation * Support for SystemC</p>
 <div class="code shell highlight-console"><div class="highlight"><pre><span></span><span class="go">OPAE_BASEDIR</span>
 <span class="go">    |-- ase</span>
 <span class="go">    |   |-- api</span>
-<span class="go">    |   |   `-- src</span>
+<span class="go">    |   |   -- src</span>
+<span class="go">    |   |-- in</span>
 <span class="go">    |   |-- rtl</span>
-<span class="go">    |   |   `-- dcp_emif_model</span>
+<span class="go">    |   |   -- dcp_emif_model</span>
 <span class="go">    |   |-- scripts</span>
-<span class="go">    |   `-- sw</span>
+<span class="go">    |   |-- sw</span>
 <span class="go">    |</span>
 <span class="go">    |-- cmake</span>
 <span class="go">    |-- common</span>
@@ -473,7 +477,9 @@ the installation * Support for SystemC</p>
 <span class="go">    |</span>
 <span class="go">    |-- doc</span>
 <span class="go">    |-- libopae</span>
+<span class="go">    |-- libopaecxx</span>
 <span class="go">    |-- platforms</span>
+<span class="go">    |-- pyopae</span>
 <span class="go">    |-- safe_string</span>
 <span class="go">    |-- samples</span>
 <span class="go">    |-- scripts</span>
@@ -568,7 +574,7 @@ access both of these scripts directly:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">rtl_src_config</span></code>: This script transforms the list of RTL sources
 into simulator configuration files.</li>
-<li><code class="docutils literal"><span class="pre">generate_ase_environment.py</span></code>: This script instantiates a your
+<li><code class="docutils literal"><span class="pre">generate_ase_environment.py</span></code>: This script instantiates your
 simulated platform configuration.</li>
 </ul>
 </div>
@@ -605,9 +611,13 @@ It also may fail when compilation is order-dependent.</p>
 searches.</li>
 </ul>
 <p>The Synopsys and Mentor Graphics RTL simulators generate the following
-scripts. * Synopsys: Creates <code class="docutils literal"><span class="pre">synopsys_sim.setup</span></code> and <code class="docutils literal"><span class="pre">vcs_run.tcl</span></code>
-in the <code class="docutils literal"><span class="pre">VCS</span></code> configuration directory. * Mentor Graphics: Creates
-<code class="docutils literal"><span class="pre">vsim_run.tcl</span></code> in the <code class="docutils literal"><span class="pre">QUESTA</span></code> configuration directory.</p>
+scripts.</p>
+<ul class="simple">
+<li>Synopsys: Creates <code class="docutils literal"><span class="pre">synopsys_sim.setup</span></code> and <code class="docutils literal"><span class="pre">vcs_run.tcl</span></code> in the
+<code class="docutils literal"><span class="pre">VCS</span></code> configuration directory.</li>
+<li>Mentor Graphics: Creates <code class="docutils literal"><span class="pre">vsim_run.tcl</span></code> in the <code class="docutils literal"><span class="pre">QUESTA</span></code>
+configuration directory.</li>
+</ul>
 <p>The run-time simultation uses the <code class="docutils literal"><span class="pre">.tcl</span></code> files.</p>
 <p>Details on generated files: * <code class="docutils literal"><span class="pre">vlog_files.list</span></code>: Lists all the
 Verilog and SystemVerilog files found in the AFU directory path. *
@@ -657,7 +667,7 @@ OPAE ASE library is the client process. Communication between server and
 client uses named pipes. The ASE abstracts most of the simulation
 infrastructure. You do not need to modify it.</p>
 <div class="figure">
-<img alt="ASE" src="../../_images/ase_server_client_process_rev1.PNG" />
+<img alt="ASE" src="../../_images/ase_server_client_process_rev2.PNG" />
 </div>
 <ul class="simple">
 <li><strong>Server Process</strong>: * The server process interfaces to 3rd-Party RTL
@@ -666,17 +676,14 @@ Modelsim-SE* Questasim* and Synopsys CS-MX* via the
 SystemVerilog-DPI library and simulator software interface. * Named
 pipes implement communication to the client. Named pipes also
 implement control, status and session management. The server process
-includes a pipe event monitoring engine. * The server process also
-provides a physical memory model that simulates the RTL AFU access to
-physical addresses. The physical memory model simulates address
-translation from virtual addresses to physical addresses. *
-SystemVerilog manages the CCI-P interface. All CCI-P events are
-logged and time stamped. * The server also includes a CCI-P protocol
-checker that checks CCI-P transactions originating in the AFU. This
-checker identifies CCI-P protocol issues, hazards, race conditions,
-and so on. * The buffer allocation calls map to POSIX Shared Memory
-(<code class="docutils literal"><span class="pre">/dev/shm</span></code>). The server-client processes share information about
-these buffers using named pipes.</li>
+includes a pipe event monitoring engine. * SystemVerilog manages the
+CCI-P interface. All CCI-P events are logged and time stamped. * The
+server also includes a CCI-P protocol checker that checks CCI-P
+transactions originating in the AFU. This checker identifies CCI-P
+protocol issues, hazards, race conditions, and so on. * The buffer
+allocation calls map to POSIX Shared Memory (<code class="docutils literal"><span class="pre">/dev/shm</span></code>). The
+server-client processes share information about these buffers using
+named pipes.</li>
 </ul>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">The Physical addresses generated in ASE are not realistic and are not replicable in-system.</span>
 </pre></div>
@@ -686,9 +693,12 @@ these buffers using named pipes.</li>
 library to access the ASE platform functionality including MMIO,
 Buffer management, and session control. The features available depend
 on the platform you specify at build time. These functions are
-available using the OPAE API. * A compiled program compiles and
-links to the ASE implementation of OPAE library. All OPAE calls route
-to ASE instead of the OPAE platform driver.</li>
+available using the OPAE API. * The client process also provides a
+physical memory model that simulates the RTL AFU access to physical
+addresses. The physical memory model simulates address translation
+from virtual addresses to physical addresses. * A compiled program
+compiles and links to the ASE implementation of OPAE library. All
+OPAE calls route to ASE instead of the OPAE platform driver.</li>
 </ul>
 <p>Separate build scripts build the server and client processes.</p>
 <ul class="simple">
@@ -870,7 +880,7 @@ specify this.</td>
 targets</a></p>
 <p>Use the <code class="docutils literal"><span class="pre">scripts/generate_ase_environment.py</span></code> script to generate the
 AFU-specific files for the simulator build. This script is not
-infallible requires manual inspection of generated configurations to
+infallible and requires manual inspection of generated configurations to
 achieve correct results.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1219,22 +1229,14 @@ switch is for simulation software, not the OPAE ASE software library.</p>
 </div>
 <ol class="arabic simple" start="2">
 <li>Compile The ASE SystemVerilog files located in the <code class="docutils literal"><span class="pre">ase/rtl/</span></code>
-directory.<ul>
-<li>Compile ASE RTL the platform components for the Integrated FPGA
-Platform or the Intel PAC into the</li>
-<li>simulation databases. For the PAC, compile the embedded memory
-interface (EMIF) Memory controller</li>
-<li>model into the ASE environment. If the simulation requires the
-Intel FPGA Gate libraries, compile</li>
-<li>the models into the ASE environment.</li>
-</ul>
-</li>
-<li>Compile AFU components into the ASE environment.<ul>
-<li>Use the RTL simulator software tools to compile the AFU
-components. Use Synopsys or Mentor utilities to compile VHDL or
-SystemVerilog components.</li>
-</ul>
-</li>
+directory. Compile ASE RTL the platform components for the Integrated
+FPGA Platform or the Intel PAC into the simulation databases. For the
+PAC, compile the embedded memory interface (EMIF) Memory controller
+model into the ASE environment. If the simulation requires the Intel
+FPGA Gate libraries, compile the models into the ASE environment.</li>
+<li>Compile AFU components into the ASE environment. Use the RTL
+simulator software tools to compile the AFU components. Use Synopsys
+or Mentor utilities to compile VHDL or SystemVerilog components.</li>
 </ol>
 </div>
 <div class="section" id="ase-makefile-targets">
@@ -1788,11 +1790,15 @@ range.</td>
 <div class="section" id="logging-verbosity-control">
 <h3>Logging Verbosity Control<a class="headerlink" href="#logging-verbosity-control" title="Permalink to this headline">¶</a></h3>
 <p>ASE provides the following three levels for logging message verbosity.
-By default, these messages print to <code class="docutils literal"><span class="pre">stdout</span></code>: * ASE_INFO: Prints
-mandatory information messages required to specify operation. *
-ASE_ERR: Prints error messages during operation. * ASE_MSG: Prints
-general messages indicating check points in the ASE. Suppress these
-messages by setting the environment variable <code class="docutils literal"><span class="pre">ASE_LOG</span></code> to <code class="docutils literal"><span class="pre">0</span></code>.</p>
+By default, these messages print to <code class="docutils literal"><span class="pre">stdout</span></code>:</p>
+<ul class="simple">
+<li>ASE_INFO: Prints mandatory information messages required to specify
+operation.</li>
+<li>ASE_ERR: Prints error messages during operation.</li>
+<li>ASE_MSG: Prints general messages indicating check points in the ASE.
+Suppress these messages by setting the environment variable
+<code class="docutils literal"><span class="pre">ASE_LOG</span></code> to <code class="docutils literal"><span class="pre">0</span></code>.</li>
+</ul>
 <p>The following command suppresses the ASE_MSG category:</p>
 <div class="code bash highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nv">ASE_LOG</span><span class="o">=</span><span class="m">0</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span>libopae-c-ase ./hello_fpga
 </pre></div>
