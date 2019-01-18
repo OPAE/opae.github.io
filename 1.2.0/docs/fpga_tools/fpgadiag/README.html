@@ -24,27 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../../genindex.html"/>
-        <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="OPAE" href="../../../index.html"/>
-        <link rel="next" title="fpgaflash" href="../fpgaflash/fpgaflash.html"/>
-        <link rel="prev" title="fpgad" href="../fpgad/fpgad.html"/> 
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="fpgaflash" href="../fpgaflash/fpgaflash.html" />
+    <link rel="prev" title="fpgad" href="../fpgad/fpgad.html" /> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -149,6 +141,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../hssi_config/readme.html">hssi_config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hssi_loopback/readme.html">hssi_loopback</a></li>
 </ul>
+<p class="caption"><span class="caption-text">OPAE support on Intel FPGA PCIe driver and Linux PCIe FPGA DFL driver</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_dfl_drv/fpga_dfl_drv.html">Enable OPAE on FPGA PCIe drivers</a></li>
+</ul>
 
             
           
@@ -159,7 +155,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">OPAE</a>
@@ -167,9 +163,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -569,9 +566,9 @@ accelerator card (PAC).</li>
 <div class="section" id="examples">
 <h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>This command starts a <code class="docutils literal"><span class="pre">lpbk1</span></code> test for the FPGA on bus <code class="docutils literal"><span class="pre">0x5e</span></code>. The
-test copies 57535, 57536, 57537 … up to 65535 cache lines, one line at
-a time. The test prints output in the comma separated values (CSV)
-format with the header suppressed.</p>
+test copies 57535, 57536, 57537 … up to 65535 cache lines, one line at a
+time. The test prints output in the comma separated values (CSV) format
+with the header suppressed.</p>
 <div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">fpgadiag</span> <span class="o">--</span><span class="n">mode</span><span class="o">=</span><span class="n">lpbk1</span> <span class="o">--</span><span class="n">target</span><span class="o">=</span><span class="n">fpga</span> <span class="o">-</span><span class="n">SV</span> <span class="o">--</span><span class="n">bus</span><span class="o">-</span><span class="n">number</span><span class="o">=</span><span class="mh">0x5e</span> <span class="o">--</span><span class="n">begin</span><span class="o">=</span><span class="mi">57535</span>
 <span class="o">--</span><span class="n">end</span><span class="o">=</span><span class="mi">65535</span> <span class="o">--</span><span class="n">cache</span><span class="o">-</span><span class="n">hint</span><span class="o">=</span><span class="n">rdline</span><span class="o">-</span><span class="n">I</span> <span class="o">--</span><span class="n">cache</span><span class="o">-</span><span class="n">policy</span><span class="o">=</span><span class="n">wrpush</span><span class="o">-</span><span class="n">I</span> <span class="o">--</span><span class="n">multi</span><span class="o">-</span><span class="n">cl</span><span class="o">=</span><span class="mi">1</span>
 <span class="o">--</span><span class="n">write</span><span class="o">-</span><span class="n">vc</span><span class="o">=</span><span class="n">vl0</span> <span class="o">--</span><span class="n">read</span><span class="o">-</span><span class="n">vc</span><span class="o">=</span><span class="n">vh1</span> <span class="o">--</span><span class="n">wrfence</span><span class="o">-</span><span class="n">vc</span><span class="o">=</span><span class="k">auto</span>
@@ -623,26 +620,25 @@ the <code class="docutils literal"><span class="pre">--cont</span></code> option
 <h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="17%" />
-<col width="53%" />
-<col width="31%" />
+<col width="13%" />
+<col width="57%" />
+<col width="29%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Date</th>
-<th class="head">Intel Acceleration Stack
-Version</th>
+<th class="head">Intel Acceleration Stack Version</th>
 <th class="head">Changes Made</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>2018.05.
-21</td>
-<td>DCP 1.1 Beta (works with
-Quartus Prime Pro 17.1.1)</td>
+<tr class="row-even"><td>2018.05
+.21</td>
+<td>DCP 1.1 Beta (works with Quartus
+Prime Pro 17.1.1)</td>
 <td>fpgadiag now
 reports the
-correct values
-for bandwidth.</td>
+correct values for
+bandwidth.</td>
 </tr>
 </tbody>
 </table>
@@ -651,9 +647,7 @@ for bandwidth.</td>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -671,11 +665,11 @@ for bandwidth.</td>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017 Intel Corporation.
+        &copy; Copyright 2017 Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -690,35 +684,33 @@ for bandwidth.</td>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../../',
-            VERSION:'1.2.0',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../../',
+              VERSION:'1.2.0',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

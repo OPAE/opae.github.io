@@ -25,25 +25,17 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="#"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="OPAE" href="index.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -132,6 +124,10 @@
 <li class="toctree-l1"><a class="reference internal" href="docs/fpga_tools/hssi_config/readme.html">hssi_config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/fpga_tools/hssi_loopback/readme.html">hssi_loopback</a></li>
 </ul>
+<p class="caption"><span class="caption-text">OPAE support on Intel FPGA PCIe driver and Linux PCIe FPGA DFL driver</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docs/fpga_dfl_drv/fpga_dfl_drv.html">Enable OPAE on FPGA PCIe drivers</a></li>
+</ul>
 
             
           
@@ -142,7 +138,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">OPAE</a>
@@ -150,9 +146,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -224,9 +221,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.__enter__">__enter__() (opae.fpga.handle method)</a>
 </li>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.__exit__">__exit__() (opae.fpga.handle method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.__exit__">__exit__() (opae.fpga.handle method)</a>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.__getattr__">__getattr__() (opae.fpga.sysobject method)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.__getitem__">__getitem__() (opae.fpga.sysobject method)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.properties.__init__">__init__() (opae.fpga.properties method)</a>
 </li>
@@ -252,11 +253,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.properties.bbs_id">bbs_id (opae.fpga.properties attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.properties.bbs_version">bbs_version (opae.fpga.properties attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.properties.bus">bus (opae.fpga.properties attribute)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.bytes">bytes() (opae.fpga.sysobject method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -360,8 +363,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.shared_buffer.fill">fill() (opae.fpga.shared_buffer method)</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.token.find">find() (opae.fpga.token method)</a>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.find">find() (opae.fpga.sysobject method)</a>
+
+      <ul>
+        <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.token.find">(opae.fpga.token method)</a>
 </li>
+      </ul></li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv29find_fpga9fpga_guidP10fpga_tokenP8uint32_t">find_fpga (C++ function)</a>, <a href="docs/fpga_api/fpga_api.html#_CPPv29find_fpgaP10fpga_tokenP8uint32_t">[1]</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#c.FME_SYSFS_INJECT_ERROR">FME_SYSFS_INJECT_ERROR (C macro)</a>
@@ -524,10 +531,10 @@
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv214fpgaCloneToken10fpga_tokenP10fpga_token">fpgaCloneToken (C++ function)</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_api.html#_CPPv29fpgaClose11fpga_handle">fpgaClose (C++ function)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="docs/fpga_api/fpga_api.html#_CPPv29fpgaClose11fpga_handle">fpgaClose (C++ function)</a>
+</li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv221fpgaCreateEventHandleP17fpga_event_handle">fpgaCreateEventHandle (C++ function)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv222fpgaDestroyEventHandleP17fpga_event_handle">fpgaDestroyEventHandle (C++ function)</a>
@@ -1242,12 +1249,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_api.html#_CPPv216ras_inject_error">ras_inject_error (C++ class)</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.read_csr32">read_csr32() (opae.fpga.handle method)</a>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.read64">read64() (opae.fpga.sysobject method)</a>
 </li>
-      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.read_csr64">read_csr64() (opae.fpga.handle method)</a>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.read_csr32">read_csr32() (opae.fpga.handle method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.read_csr64">read_csr64() (opae.fpga.handle method)</a>
+</li>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.error.read_value">read_value() (opae.fpga.error method)</a>
 </li>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.register_event">register_event() (in module opae.fpga)</a>
@@ -1262,11 +1271,17 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.shared_buffer">shared_buffer (class in opae.fpga)</a>
 </li>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.shared_buffer.size">size() (opae.fpga.shared_buffer method)</a>
+
+      <ul>
+        <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.size">(opae.fpga.sysobject method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.shared_buffer.size">size() (opae.fpga.shared_buffer method)</a>
-</li>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.properties.socket_id">socket_id (opae.fpga.properties attribute)</a>
+</li>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject">sysobject (class in opae.fpga)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1302,6 +1317,8 @@
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.sysobject.write64">write64() (opae.fpga.sysobject method)</a>
+</li>
       <li><a href="docs/fpga_api/fpga_python_api.html#opae.fpga.handle.write_csr32">write_csr32() (opae.fpga.handle method)</a>
 </li>
   </ul></td>
@@ -1316,9 +1333,7 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -1327,11 +1342,11 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017 Intel Corporation.
+        &copy; Copyright 2017 Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1346,35 +1361,33 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'1.2.0',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'1.2.0',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
