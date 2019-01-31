@@ -24,19 +24,27 @@
 
   
 
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Building the OPAE Intel FPGA driver (in-tree)" href="../build_chain/fpga_driver/driver_build.html" />
-    <link rel="prev" title="Plugin Developer’s Guide" href="../fpga_api/plug_guide/readme.html" /> 
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="OPAE" href="../../index.html"/>
+        <link rel="next" title="Building the OPAE Intel FPGA driver (in-tree)" href="../build_chain/fpga_driver/driver_build.html"/>
+        <link rel="prev" title="Plugin Developer’s Guide" href="../fpga_api/plug_guide/readme.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav">
+<body class="wy-body-for-nav" role="document">
 
    
   <div class="wy-grid-for-nav">
@@ -109,7 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#fpga-virtualization">FPGA Virtualization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#driver-organization">Driver Organization</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pcie-module-device-driver">PCIe Module Device Driver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pcie-module-device-driver-1">PCIe Module Device Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">PCIe Module Device Driver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pcie-module-device-driver-functions">PCIe Module Device Driver Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fme-platform-module-device-driver">FME Platform Module Device Driver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fme-platform-module-device-driver-functions">FME Platform Module Device Driver Functions</a></li>
@@ -185,7 +193,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" aria-label="top navigation">
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">OPAE</a>
@@ -193,10 +201,9 @@
       </nav>
 
 
+      
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -369,8 +376,8 @@ the same driver inside the VF.</li>
 <h3>PCIe Module Device Driver<a class="headerlink" href="#pcie-module-device-driver" title="Permalink to this headline">¶</a></h3>
 <p>!## Driver Organization ##</p>
 </div>
-<div class="section" id="pcie-module-device-driver-1">
-<span id="id1"></span><h3>PCIe Module Device Driver<a class="headerlink" href="#pcie-module-device-driver-1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>PCIe Module Device Driver<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="figure">
 <img alt="Driver" src="../../_images/Driver_Organization.png" />
 </div>
@@ -966,8 +973,8 @@ character device node, registering a <code class="docutils literal"><span class=
 <ul class="simple">
 <li>Disable UMsg before issuing this ioctl.</li>
 <li>The buffer for the iova field must large enough for all UMsg’s
-(num_umsgs * PAGE_SIZE). * The the driver’s buffer management marks
-this buffer “in use”. * If iova is NULL, the driver’s buffer
+(num_umsgs * PAGE_SIZE). * The the driver’s buffer management
+marks this buffer “in use”. * If iova is NULL, the driver’s buffer
 management marks any previous region “in use”.</li>
 <li>arg is a pointer to a:</li>
 </ul>
@@ -1001,9 +1008,9 @@ files ##</li>
 <table border="1" class="docutils">
 <colgroup>
 <col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
+<col width="43%" />
+<col width="18%" />
+<col width="14%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">sysfs file</th>
@@ -1014,43 +1021,32 @@ files ##</li>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>ports_num</td>
-<td>fme_header.capa
-bility.num_port
-s</td>
+<td>fme_header.capability.num_ports</td>
 <td>decimal int</td>
 <td>Read-only</td>
 </tr>
 <tr class="row-odd"><td>cache_size</td>
-<td>fme_header.capa
-bility.cache_si
-ze</td>
+<td>fme_header.capability.cache_size</td>
 <td>decimal int</td>
 <td>Read-only</td>
 </tr>
 <tr class="row-even"><td>version</td>
-<td>fme_header.capa
-bility.fabric_v
-erid</td>
+<td>fme_header.capability.fabric_verid</td>
 <td>decimal int</td>
 <td>Read-only</td>
 </tr>
 <tr class="row-odd"><td>socket_id</td>
-<td>fme_header.capa
-bility.socket_i
-d</td>
+<td>fme_header.capability.socket_id</td>
 <td>decimal int</td>
 <td>Read-only</td>
 </tr>
 <tr class="row-even"><td>bitstream_id</td>
-<td>fme_header.bits
-tream_id</td>
+<td>fme_header.bitstream_id</td>
 <td>hex uint64_t</td>
 <td>Read-only</td>
 </tr>
-<tr class="row-odd"><td>bitstream_metad
-ata</td>
-<td>fme_header.bits
-tream_md</td>
+<tr class="row-odd"><td>bitstream_metadata</td>
+<td>fme_header.bitstream_md</td>
 <td>hex uint64_t</td>
 <td>Read-only</td>
 </tr>
@@ -1061,115 +1057,93 @@ tream_md</td>
 <p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/thermal_mgmt/</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="15%" />
-<col width="32%" />
-<col width="11%" />
-<col width="29%" />
-<col width="12%" />
+<col width="16%" />
+<col width="30%" />
+<col width="13%" />
+<col width="27%" />
+<col width="14%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">sysfs
-file</th>
+<tr class="row-odd"><th class="head">sysfs file</th>
 <th class="head">mmio field</th>
 <th class="head">type</th>
 <th class="head">access</th>
-<th class="head">platfo
-rm
-suppor
-t</th>
+<th class="head">platform
+support</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>threshol
-d1</td>
-<td>thermal.threshold.t
-mp_thshold1</td>
-<td>decim
-al
+<tr class="row-even"><td>threshold1</td>
+<td>thermal.threshold.tmp_thshold1</td>
+<td>decimal
 int</td>
 <td>User: Read-only
 Root: Read-write</td>
-<td>Integr
-ated
+<td>Integrate
+d
 FPGA</td>
 </tr>
-<tr class="row-odd"><td>threshol
-d2</td>
-<td>thermal.threshold.t
-mp_thshold2</td>
-<td>decim
-al
+<tr class="row-odd"><td>threshold2</td>
+<td>thermal.threshold.tmp_thshold2</td>
+<td>decimal
 int</td>
 <td>User: Read-only
 Root: Read-write</td>
-<td>Integr
-ated
+<td>Integrate
+d
 FPGA</td>
 </tr>
-<tr class="row-even"><td>threshol
-d_trip</td>
-<td>thermal.threshold.t
-herm_trip_thshold</td>
-<td>decim
-al
+<tr class="row-even"><td>threshold_
+trip</td>
+<td>thermal.threshold.ther
+m_trip_thshold</td>
+<td>decimal
 int</td>
 <td>Read-only</td>
-<td>Integr
-ated
+<td>Integrate
+d
 FPGA</td>
 </tr>
-<tr class="row-odd"><td>threshol
-d1_reach
-ed</td>
-<td>thermal.threshold.t
-hshold1_status</td>
-<td>decim
-al
+<tr class="row-odd"><td>threshold1_reached</td>
+<td>thermal.threshold.thsh
+old1_status</td>
+<td>decimal
 int</td>
 <td>Read-only</td>
-<td>Integr
-ated
+<td>Integrate
+d
 FPGA</td>
 </tr>
-<tr class="row-even"><td>threshol
-d2_reach
-ed</td>
-<td>thermal.threshold.t
-hshold2_status</td>
-<td>decim
-al
+<tr class="row-even"><td>threshold2_reached</td>
+<td>thermal.threshold.thsh
+old2_status</td>
+<td>decimal
 int</td>
 <td>Read-only</td>
-<td>Integr
-ated
+<td>Integrate
+d
 FPGA</td>
 </tr>
-<tr class="row-odd"><td>threshol
-d1_polic
-y</td>
-<td>thermal.threshold.t
-hshold_policy</td>
-<td>decim
-al
+<tr class="row-odd"><td>threshold1_policy</td>
+<td>thermal.threshold.thsh
+old_policy</td>
+<td>decimal
 int</td>
 <td>User: Read-only
 Root: Read-write</td>
-<td>Integr
-ated
+<td>Integrate
+d
 FPGA</td>
 </tr>
-<tr class="row-even"><td>temperat
-ure</td>
-<td>thermal.rdsensor_fm
-1.fpga_temp</td>
-<td>decim
-al
+<tr class="row-even"><td>temperature</td>
+<td>thermal.rdsensor_fm1.
+fpga_temp</td>
+<td>decimal
 int</td>
 <td>Read-only</td>
-<td>Integr
-ated
-FPGA,
-PAC</td>
+<td>Integrate
+d
+FPGA, PAC</td>
 </tr>
 </tbody>
 </table>
@@ -1181,14 +1155,13 @@ Integrated FPGA.</p>
 <p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/power_mgmt/</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="17%" />
-<col width="33%" />
-<col width="17%" />
-<col width="33%" />
+<col width="19%" />
+<col width="32%" />
+<col width="18%" />
+<col width="31%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">sysfs
-file</th>
+<tr class="row-odd"><th class="head">sysfs file</th>
 <th class="head">mmio field</th>
 <th class="head">type</th>
 <th class="head">access</th>
@@ -1196,49 +1169,47 @@ file</th>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>consumed</td>
-<td>power.status.pwr_con
-sumed</td>
+<td>power.status.pwr_consu
+med</td>
 <td>hex
 uint64_t</td>
 <td>Read-only</td>
 </tr>
-<tr class="row-odd"><td>threshold
-1</td>
-<td>power.threshold.thre
-shold1</td>
+<tr class="row-odd"><td>threshold1</td>
+<td>power.threshold.thresho
+ld1</td>
 <td>hex
 uint64_t</td>
-<td>User: Read-only
-Root: Read-write</td>
+<td>User: Read-only Root:
+Read-write</td>
 </tr>
-<tr class="row-even"><td>threshold
-2</td>
-<td>power.threshold.thre
-shold2</td>
+<tr class="row-even"><td>threshold2</td>
+<td>power.threshold.thresho
+ld2</td>
 <td>hex
 uint64_t</td>
-<td>User: Read-only
-Root: Read-write</td>
+<td>User: Read-only Root:
+Read-write</td>
 </tr>
-<tr class="row-odd"><td>threshold
-1_status</td>
-<td>power.threshold.thre
-shold1_status</td>
+<tr class="row-odd"><td>threshold1_s
+tatus</td>
+<td>power.threshold.thresho
+ld1_status</td>
 <td>decimal
 unsigned</td>
 <td>Read-only</td>
 </tr>
-<tr class="row-even"><td>threshold
-2_status</td>
-<td>power.threshold.thre
-shold2_status</td>
+<tr class="row-even"><td>threshold2_s
+tatus</td>
+<td>power.threshold.thresho
+ld2_status</td>
 <td>decimal
 unsigned</td>
 <td>Read-only</td>
 </tr>
 <tr class="row-odd"><td>rtl</td>
-<td>power.status.fpga_la
-tency_report</td>
+<td>power.status.fpga_late
+ncy_report</td>
 <td>decimal
 unsigned</td>
 <td>Read-only</td>
@@ -1251,40 +1222,37 @@ unsigned</td>
 <p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/errors/</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="19%" />
-<col width="33%" />
-<col width="17%" />
-<col width="11%" />
+<col width="20%" />
+<col width="29%" />
+<col width="18%" />
+<col width="13%" />
 <col width="20%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">sysfs file</th>
 <th class="head">mmio field</th>
 <th class="head">type</th>
-<th class="head">acces
-s</th>
+<th class="head">access</th>
 <th class="head">platform
 support</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>pcie0_erro
-rs</td>
+<tr class="row-even"><td>pcie0_errors</td>
 <td>gerror.pcie0_err</td>
 <td>hex
 uint64_t</td>
-<td>Read-
-write</td>
+<td>Read-wri
+te</td>
 <td>Integrated
 FPGA, PAC</td>
 </tr>
-<tr class="row-odd"><td>pcie1_erro
-rs</td>
+<tr class="row-odd"><td>pcie1_errors</td>
 <td>gerror.pcie1_err</td>
 <td>hex
 uint64_t</td>
-<td>Read-
-write</td>
+<td>Read-wri
+te</td>
 <td>Integrated
 FPGA</td>
 </tr>
@@ -1292,8 +1260,8 @@ FPGA</td>
 <td>gerror.ras_gerr</td>
 <td>hex
 uint64_t</td>
-<td>Read-
-only</td>
+<td>Read-onl
+y</td>
 <td>Integrated
 FPGA, PAC</td>
 </tr>
@@ -1301,29 +1269,28 @@ FPGA, PAC</td>
 <td>gerror.ras_berr</td>
 <td>hex
 uint64_t</td>
-<td>Read-
-only</td>
+<td>Read-onl
+y</td>
 <td>Integrated
 FPGA, PAC</td>
 </tr>
-<tr class="row-even"><td>warning_er
-rors</td>
-<td>gerror.ras_werr.eve
-nt_warn_err</td>
+<tr class="row-even"><td>warning_error
+s</td>
+<td>gerror.ras_werr.even
+t_warn_err</td>
 <td>hex int</td>
-<td>Read-
-write</td>
+<td>Read-wri
+te</td>
 <td>Integrated
 FPGA, PAC</td>
 </tr>
-<tr class="row-odd"><td>inject_err
-or</td>
+<tr class="row-odd"><td>inject_error</td>
 <td>gerror.ras_error_in
 j</td>
 <td>hex
 uint64_t</td>
-<td>Read-
-write</td>
+<td>Read-wri
+te</td>
 <td>Integrated
 FPGA, PAC</td>
 </tr>
@@ -1332,10 +1299,10 @@ FPGA, PAC</td>
 <p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/errors/fme-errors/</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
+<col width="17%" />
+<col width="46%" />
+<col width="22%" />
+<col width="15%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">sysfs file</th>
@@ -1351,25 +1318,18 @@ FPGA, PAC</td>
 <td>Read-only</td>
 </tr>
 <tr class="row-odd"><td>first_error</td>
-<td>gerror.fme_firs
-t_err.err_reg_s
-tatus</td>
+<td>gerror.fme_first_err.err_reg_status</td>
 <td>hex uint64_t</td>
 <td>Read-only</td>
 </tr>
 <tr class="row-even"><td>next_error</td>
-<td>gerror.fme_next
-_err.err_reg_st
-atus</td>
+<td>gerror.fme_next_err.err_reg_status</td>
 <td>hex uint64_t</td>
 <td>Read-only</td>
 </tr>
 <tr class="row-odd"><td>clear</td>
-<td>Clears errors,
-first_error,
-next_error</td>
-<td>various
-uint64_t</td>
+<td>Clears errors, first_error, next_error</td>
+<td>various uint64_t</td>
 <td>Write-only</td>
 </tr>
 </tbody>
@@ -1386,28 +1346,25 @@ uint64_t</td>
 <p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/pr/</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="15%" />
-<col width="58%" />
-<col width="15%" />
-<col width="12%" />
+<col width="18%" />
+<col width="51%" />
+<col width="17%" />
+<col width="14%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">sysfs
-file</th>
+<tr class="row-odd"><th class="head">sysfs file</th>
 <th class="head">mmio field</th>
 <th class="head">type</th>
 <th class="head">access</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>interfac
-e_id</td>
+<tr class="row-even"><td>interface_i
+d</td>
 <td>pr.fme_pr_intfc_id0_h,
 pr.fme_pre_intfc_id0_l</td>
-<td>hex
-16-byte</td>
-<td>Read-o
-nly</td>
+<td>hex 16-byte</td>
+<td>Read-only</td>
 </tr>
 </tbody>
 </table>
@@ -1418,7 +1375,7 @@ nly</td>
 <table border="1" class="docutils">
 <colgroup>
 <col width="18%" />
-<col width="43%" />
+<col width="42%" />
 <col width="22%" />
 <col width="17%" />
 </colgroup>
@@ -1441,10 +1398,10 @@ nly</td>
 Acceleration Stack for Intel® Xeon® CPU with FPGAs)</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="33%" />
-<col width="39%" />
-<col width="15%" />
-<col width="12%" />
+<col width="31%" />
+<col width="36%" />
+<col width="17%" />
+<col width="16%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">sysfs file</th>
@@ -1456,77 +1413,68 @@ Acceleration Stack for Intel® Xeon® CPU with FPGAs)</p>
 <tbody valign="top">
 <tr class="row-even"><td>freeze</td>
 <td>gperf.ch_ctl.freeze</td>
-<td>decimal
-int</td>
-<td>Read-w
-rite</td>
+<td>decimal int</td>
+<td>Read-write</td>
 </tr>
 <tr class="row-odd"><td>read_hit</td>
 <td>gperf.CACHE_RD_HIT</td>
 <td>hex
 uint64_t</td>
-<td>Read-o
-nly</td>
+<td>Read-only</td>
 </tr>
 <tr class="row-even"><td>read_miss</td>
 <td>gperf.CACHE_RD_MISS</td>
 <td>hex
 uint64_t</td>
-<td>Read-o
-nly</td>
+<td>Read-only</td>
 </tr>
 <tr class="row-odd"><td>write_hit</td>
 <td>gperf.CACHE_WR_HIT</td>
 <td>hex
 uint64_t</td>
-<td>Read-o
-nly</td>
+<td>Read-only</td>
 </tr>
 <tr class="row-even"><td>write_miss</td>
 <td>gperf.CACHE_WR_MISS</td>
 <td>hex
 uint64_t</td>
-<td>Read-o
-nly</td>
+<td>Read-only</td>
 </tr>
 <tr class="row-odd"><td>hold_request</td>
 <td>gperf.CACHE_HOLD_REQ</td>
 <td>hex
 uint64_t</td>
-<td>Read-o
-nly</td>
+<td>Read-only</td>
 </tr>
 <tr class="row-even"><td>tx_req_stall</td>
-<td>gperf.CACHE_TX_REQ_STALL</td>
+<td>gperf.CACHE_TX_REQ_STAL
+L</td>
 <td>hex
 uint64_t</td>
-<td>Read-o
-nly</td>
+<td>Read-only</td>
 </tr>
 <tr class="row-odd"><td>rx_req_stall</td>
-<td>gperf.CACHE_RX_REQ_STALL</td>
+<td>gperf.CACHE_RX_REQ_STAL
+L</td>
 <td>hex
 uint64_t</td>
-<td>Read-o
-nly</td>
+<td>Read-only</td>
 </tr>
-<tr class="row-even"><td>data_write_port_cont
+<tr class="row-even"><td>data_write_port_con
+tention</td>
+<td>gperf.CACHE_DATA_WR_POR
+T_CONTEN</td>
+<td>hex
+uint64_t</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>tag_write_port_cont
 ention</td>
-<td>gperf.CACHE_DATA_WR_PORT
+<td>gperf.CACHE_TAG_WR_PORT
 _CONTEN</td>
 <td>hex
 uint64_t</td>
-<td>Read-o
-nly</td>
-</tr>
-<tr class="row-odd"><td>tag_write_port_conte
-ntion</td>
-<td><a href="#id2"><span class="problematic" id="id3">gperf.CACHE_TAG_WR_PORT_</span></a>
-CONTEN</td>
-<td>hex
-uint64_t</td>
-<td>Read-o
-nly</td>
+<td>Read-only</td>
 </tr>
 </tbody>
 </table>
@@ -1535,10 +1483,10 @@ nly</td>
 Integrated FPGA.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
+<col width="16%" />
+<col width="28%" />
+<col width="17%" />
+<col width="40%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">sysfs file</th>
@@ -1549,12 +1497,9 @@ Integrated FPGA.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>freeze</td>
-<td>gperf.vtd_ctl.f
-reeze</td>
+<td>gperf.vtd_ctl.freeze</td>
 <td>decimal int</td>
-<td>User: Read-only
-Root:
-Read-write</td>
+<td>User: Read-only Root: Read-write</td>
 </tr>
 </tbody>
 </table>
@@ -1565,9 +1510,9 @@ Integrated FPGA.</div>
 </div>
 <table border="1" class="docutils">
 <colgroup>
-<col width="26%" />
+<col width="25%" />
 <col width="40%" />
-<col width="19%" />
+<col width="20%" />
 <col width="15%" />
 </colgroup>
 <thead valign="bottom">
@@ -1603,10 +1548,10 @@ Integrated FPGA.</div>
 <p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/dperf/fabric/</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="11%" />
+<col width="14%" />
 <col width="23%" />
-<col width="13%" />
-<col width="33%" />
+<col width="14%" />
+<col width="30%" />
 <col width="20%" />
 </colgroup>
 <thead valign="bottom">
@@ -1620,94 +1565,81 @@ support</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>enabl
-e</td>
-<td>gperf.fab_ctl
-.(enabled)</td>
-<td>decima
-l
+<tr class="row-even"><td>enable</td>
+<td>gperf.fab_ctl.(
+enabled)</td>
+<td>decimal
 int</td>
-<td>User: Read-only
-Root: Read-write</td>
+<td>User: Read-only Root:
+Read-write</td>
 <td>Integrated
 FPGA, PAC</td>
 </tr>
-<tr class="row-odd"><td>freez
-e</td>
-<td>gperf.fab_ctl
-.freeze</td>
-<td>decima
-l
+<tr class="row-odd"><td>freeze</td>
+<td>gperf.fab_ctl.f
+reeze</td>
+<td>decimal
 int</td>
-<td>User: Read-only
-Root: Read-write</td>
+<td>User: Read-only Root:
+Read-write</td>
 <td>Integrated
 FPGA, PAC</td>
 </tr>
-<tr class="row-even"><td>pcie0
-_read</td>
-<td>gperf.FAB_PCI
-E0_RD</td>
-<td>hex
-uint64
-_t</td>
-<td>Read-only</td>
-<td>Integrated
-FPGA, PAC</td>
-</tr>
-<tr class="row-odd"><td>pcie0
-_writ
-e</td>
-<td>gperf.FAB_PCI
-E0_WR</td>
-<td>hex
-uint64
-_t</td>
-<td>Read-only</td>
-<td>Integrated
-FPGA, PAC</td>
-</tr>
-<tr class="row-even"><td>pcie1
-_read</td>
-<td>gperf.FAB_PCI
-E1_RD</td>
-<td>hex
-uint64
-_t</td>
-<td>Read-only</td>
-<td>Integrated
-FPGA</td>
-</tr>
-<tr class="row-odd"><td>pcie1
-_writ
-e</td>
-<td>gperf.FAB_PCI
-E1_WR</td>
-<td>hex
-uint64
-_t</td>
-<td>Read-only</td>
-<td>Integrated
-FPGA</td>
-</tr>
-<tr class="row-even"><td>upi_r
-ead</td>
-<td>gperf.FAB_UPI
+<tr class="row-even"><td>pcie0_re
+ad</td>
+<td>gperf.FAB_PCIE0
 _RD</td>
 <td>hex
-uint64
-_t</td>
+uint64_t</td>
+<td>Read-only</td>
+<td>Integrated
+FPGA, PAC</td>
+</tr>
+<tr class="row-odd"><td>pcie0_wr
+ite</td>
+<td>gperf.FAB_PCIE0
+_WR</td>
+<td>hex
+uint64_t</td>
+<td>Read-only</td>
+<td>Integrated
+FPGA, PAC</td>
+</tr>
+<tr class="row-even"><td>pcie1_re
+ad</td>
+<td>gperf.FAB_PCIE1
+_RD</td>
+<td>hex
+uint64_t</td>
 <td>Read-only</td>
 <td>Integrated
 FPGA</td>
 </tr>
-<tr class="row-odd"><td>upi_w
-rite</td>
-<td>gperf.FAB_UPI
+<tr class="row-odd"><td>pcie1_wr
+ite</td>
+<td>gperf.FAB_PCIE1
 _WR</td>
 <td>hex
-uint64
-_t</td>
+uint64_t</td>
+<td>Read-only</td>
+<td>Integrated
+FPGA</td>
+</tr>
+<tr class="row-even"><td>upi_read</td>
+<td>gperf.FAB_UPI_
+RD</td>
+<td>hex
+uint64_t</td>
+<td>Read-only</td>
+<td>Integrated
+FPGA</td>
+</tr>
+<tr class="row-odd"><td>upi_writ
+e</td>
+<td>gperf.FAB_UPI_
+WR</td>
+<td>hex
+uint64_t</td>
 <td>Read-only</td>
 <td>Integrated
 FPGA</td>
@@ -1717,11 +1649,11 @@ FPGA</td>
 <p>intel-fpga-ev.<em>i</em>/intel-fpga/fme.*j*/dperf/fabric/port*k*/</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="16%" />
-<col width="25%" />
+<col width="17%" />
+<col width="26%" />
 <col width="18%" />
 <col width="14%" />
-<col width="28%" />
+<col width="26%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">sysfs file</th>
@@ -1777,8 +1709,8 @@ FPGA</td>
 <table border="1" class="docutils">
 <colgroup>
 <col width="16%" />
-<col width="52%" />
-<col width="17%" />
+<col width="51%" />
+<col width="18%" />
 <col width="15%" />
 </colgroup>
 <thead valign="bottom">
@@ -1809,7 +1741,7 @@ FPGA</td>
 <colgroup>
 <col width="23%" />
 <col width="32%" />
-<col width="25%" />
+<col width="24%" />
 <col width="21%" />
 </colgroup>
 <thead valign="bottom">
@@ -1879,7 +1811,9 @@ FPGA</td>
 
 
            </div>
-           
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -1897,11 +1831,11 @@ FPGA</td>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017 Intel Corporation
+        &copy; Copyright 2017 Intel Corporation.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1916,33 +1850,35 @@ FPGA</td>
 
   
 
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../',
-              VERSION:'1.2.0',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-    
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
 
   
 
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
 
+  
+  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
+          SphinxRtdTheme.StickyNav.enable();
       });
-  </script> 
+  </script>
+   
 
 </body>
 </html>

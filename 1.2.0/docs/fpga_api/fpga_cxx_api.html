@@ -24,19 +24,27 @@
 
   
 
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="OPAE Python API Reference" href="fpga_python_api.html" />
-    <link rel="prev" title="OPAE C API Reference" href="fpga_api.html" /> 
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="OPAE" href="../../index.html"/>
+        <link rel="next" title="OPAE Python API Reference" href="fpga_python_api.html"/>
+        <link rel="prev" title="OPAE C API Reference" href="fpga_api.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav">
+<body class="wy-body-for-nav" role="document">
 
    
   <div class="wy-grid-for-nav">
@@ -167,7 +175,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" aria-label="top navigation">
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">OPAE</a>
@@ -175,10 +183,9 @@
       </nav>
 
 
+      
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -465,8 +472,10 @@ or assigning values.</p>
 </dd></dl>
 
 <dl class="class">
+<dt>
+<span class="target" id="structopae_1_1fpga_1_1types_1_1pvalue"></span><em class="property">template </em>&lt;typename <em>T</em>&gt;</dt>
 <dt id="_CPPv2N4opae4fpga5types6pvalueE">
-<span id="opae::fpga::types::pvalue"></span><span class="target" id="structopae_1_1fpga_1_1types_1_1pvalue"></span><em class="property">template </em>&lt;typename <em>T</em>&gt;<br /><em class="property">struct </em><code class="descname">pvalue</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types6pvalueE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="opae::fpga::types::pvalue"></span><em class="property">struct </em><code class="descname">pvalue</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types6pvalueE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;pvalue.h&gt;</em><p>Wraps OPAE properties defined in the OPAE C API by associating an <code class="docutils literal"><span class="pre">fpga_properties</span></code> reference with the getters and setters defined for a property. </p>
 <p><dl class="docutils">
 <dt><strong>Template Parameters</strong></dt>
@@ -486,7 +495,7 @@ or assigning values.</p>
 
 <dl class="type">
 <dt id="_CPPv2IEN4opae4fpga5types6pvalueI1TE8setter_tE">
-template&lt;&gt;<br /><span class="target" id="structopae_1_1fpga_1_1types_1_1pvalue_1aad52288adec62917d7ed236c7eaed0c6"></span><em class="property">typedef </em><a class="reference internal" href="fpga_api.html#_CPPv211fpga_result" title="fpga_result">fpga_result</a> (*<code class="descname">setter_t</code>)<span class="sig-paren">(</span><a class="reference internal" href="fpga_api.html#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a>, T<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2IEN4opae4fpga5types6pvalueI1TE8setter_tE" title="Permalink to this definition">¶</a><br /></dt>
+template&lt;&gt;<br /><span class="target" id="structopae_1_1fpga_1_1types_1_1pvalue_1ab6fde171274b6487500035771f9938c6"></span><em class="property">typedef </em><a class="reference internal" href="fpga_api.html#_CPPv211fpga_result" title="fpga_result">fpga_result</a> (*<code class="descname">setter_t</code>)<span class="sig-paren">(</span><a class="reference internal" href="fpga_api.html#_CPPv215fpga_properties" title="fpga_properties">fpga_properties</a>, T<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2IEN4opae4fpga5types6pvalueI1TE8setter_tE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Define the setter function as setter_t. </p>
 </dd></dl>
 
@@ -586,9 +595,12 @@ template&lt;&gt;<br /><span class="target" id="structopae_1_1fpga_1_1types_1_1pv
 </dd></dl>
 
 <dl class="function">
+<dt>
+<em class="property">template </em>&lt;&gt;</dt>
 <dt id="_CPPv2N4opae4fpga5types6pvalue6updateEv">
-<em class="property">template </em>&lt;&gt;<br /><span class="target" id="structopae_1_1fpga_1_1types_1_1pvalue_1ad84d6dade69e2eedb98f93f7558a7974"></span>void <code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types6pvalue6updateEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><dl class="docutils">
+<span class="target" id="structopae_1_1fpga_1_1types_1_1pvalue_1ad84d6dade69e2eedb98f93f7558a7974"></span>void <code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types6pvalue6updateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Template specialization of <code class="docutils literal"><span class="pre">char*</span></code> type property updater. </p>
+<p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>The result of the property getter function. </dd>
 </dl>
@@ -1388,8 +1400,10 @@ scope before freeing the <cite>shared_buffer</cite> and <cite>event</cite> objec
 </dd></dl>
 
 <dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> T&gt;</dt>
 <dt id="_CPPv2NK4opae4fpga5types13shared_buffer4readE6size_t">
-<span id="opae::fpga::types::shared_buffer::read__sC"></span><em class="property">template </em>&lt;<em class="property">typename</em> T&gt;<br /><span class="target" id="classopae_1_1fpga_1_1types_1_1shared__buffer_1aca677d08c0a9798c2937244c9ed19b5e"></span>T <code class="descname">read</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types13shared_buffer6size_tE" title="opae::fpga::types::shared_buffer::size_t">size_t</a> <em>offset</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types13shared_buffer4readE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="opae::fpga::types::shared_buffer::read__sC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1shared__buffer_1aca677d08c0a9798c2937244c9ed19b5e"></span>T <code class="descname">read</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types13shared_buffer6size_tE" title="opae::fpga::types::shared_buffer::size_t">size_t</a> <em>offset</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types13shared_buffer4readE6size_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Read a T-sized block of memory at the given location. <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>A T from buffer base + offset. </dd>
@@ -1403,8 +1417,10 @@ scope before freeing the <cite>shared_buffer</cite> and <cite>event</cite> objec
 </dd></dl>
 
 <dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> T&gt;</dt>
 <dt id="_CPPv2N4opae4fpga5types13shared_buffer5writeERK1T6size_t">
-<span id="opae::fpga::types::shared_buffer::write__TCR.s"></span><em class="property">template </em>&lt;<em class="property">typename</em> T&gt;<br /><span class="target" id="classopae_1_1fpga_1_1types_1_1shared__buffer_1a49c8d0b03a0e47c8b58f84301ac34559"></span>void <code class="descname">write</code><span class="sig-paren">(</span><em class="property">const</em> T &amp;<em>value</em>, <a class="reference internal" href="#_CPPv2N4opae4fpga5types13shared_buffer6size_tE" title="opae::fpga::types::shared_buffer::size_t">size_t</a> <em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types13shared_buffer5writeERK1T6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="opae::fpga::types::shared_buffer::write__TCR.s"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1shared__buffer_1a49c8d0b03a0e47c8b58f84301ac34559"></span>void <code class="descname">write</code><span class="sig-paren">(</span><em class="property">const</em> T &amp;<em>value</em>, <a class="reference internal" href="#_CPPv2N4opae4fpga5types13shared_buffer6size_tE" title="opae::fpga::types::shared_buffer::size_t">size_t</a> <em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types13shared_buffer5writeERK1T6size_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Write a T-sized block of memory to the given location. <dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
@@ -2074,80 +2090,36 @@ exceptions.</p>
 <dt>
 <span class="target" id="namespaceopae_1_1fpga_1_1types"></span><em class="property">namespace </em><code class="descname">types</code><br /></dt>
 <dd><dl class="class">
-<dt id="_CPPv2N4opae4fpga5types12src_locationE">
-<span id="opae::fpga::types::src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location"></span><em class="property">class </em><code class="descname">src_location</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_locationE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;except.h&gt;</em><p>Identify a particular line in a source file. </p>
+<dt id="_CPPv2N4opae4fpga5types4busyE">
+<span id="opae::fpga::types::busy"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1busy"></span><em class="property">class </em><code class="descname">busy</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types4busyE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;except.h&gt;</em><p>busy exception</p>
+<p>busy tracks the source line of origin for exceptions thrown when the error code FPGA_BUSY is returned from a call to an OPAE C API function </p>
+<p>Inherits from <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1except"><span class="std std-ref">opae::fpga::types::except</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
-<dt id="_CPPv2N4opae4fpga5types12src_location12src_locationEPKcPKci">
-<span id="opae::fpga::types::src_location::src_location__cCP.cCP.i"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1aa873a93570e4652a4ca9e806d94fa7f6"></span><code class="descname">src_location</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>file</em>, <em class="property">const</em> char *<em>fn</em>, int <em>line</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_location12src_locationEPKcPKci" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1src__location"><span class="std std-ref">src_location</span></a> constructor <dl class="docutils">
+<dt id="_CPPv2N4opae4fpga5types4busy4busyE12src_location">
+<span id="opae::fpga::types::busy::busy__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1busy_1a64ade3853932d99c06e5d7cc4f667772"></span><code class="descname">busy</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types4busy4busyE12src_location" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>busy constructor</p>
+<p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">file</span></code>: The source file name, typically <strong>FILE</strong>. </li>
-<li><code class="docutils literal"><span class="pre">fn</span></code>: The current function, typically <strong>func</strong>. </li>
-<li><code class="docutils literal"><span class="pre">line</span></code>: The current line number, typically <strong>LINE</strong>. </li>
+<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
 </ul>
 </dd>
 </dl>
 </p>
 </dd></dl>
 
-<dl class="function">
-<dt id="_CPPv2N4opae4fpga5types12src_location12src_locationERK12src_location">
-<span id="opae::fpga::types::src_location::src_location__src_locationCR"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a0df0d9a994b3c66491ac4ee85ba5cba5"></span><code class="descname">src_location</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_location12src_locationEPKcPKci" title="opae::fpga::types::src_location::src_location">src_location</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_location12src_locationERK12src_location" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N4opae4fpga5types12src_locationaSERK12src_location">
-<span id="opae::fpga::types::src_location::assign-operator__src_locationCR"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a51cbdd224603d8523c99ccb21f1908fa"></span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_locationaSERK12src_location" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2NK4opae4fpga5types12src_location4fileEv">
-<span id="opae::fpga::types::src_location::fileC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a82f6ed23a0d1d947b0f1754ed066e45d"></span><em class="property">const</em> char *<code class="descname">file</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types12src_location4fileEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Retrieve the file name component of the location. </p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2NK4opae4fpga5types12src_location2fnEv">
-<span id="opae::fpga::types::src_location::fnC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a85e8edcb82dd85fbbb53c327541bd667"></span><em class="property">const</em> char *<code class="descname">fn</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types12src_location2fnEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Retrieve the function name component of the location. </p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2NK4opae4fpga5types12src_location4lineEv">
-<span id="opae::fpga::types::src_location::lineC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a9dfb5ebf31b205490604b1ee60359cff"></span>int <code class="descname">line</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types12src_location4lineEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Retrieve the line number component of the location. </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Private Members</p>
-<dl class="member">
-<dt id="_CPPv2N4opae4fpga5types12src_location5file_E">
-<span id="opae::fpga::types::src_location::file___cCP"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a5f8a4ed4689e7dbafb4b6d78057c064c"></span><em class="property">const</em> char *<code class="descname">file_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_location5file_E" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="member">
-<dt id="_CPPv2N4opae4fpga5types12src_location3fn_E">
-<span id="opae::fpga::types::src_location::fn___cCP"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a1bb3647316406de3745e3f65af4108e6"></span><em class="property">const</em> char *<code class="descname">fn_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_location3fn_E" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="member">
-<dt id="_CPPv2N4opae4fpga5types12src_location5line_E">
-<span id="opae::fpga::types::src_location::line___i"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1ae2b7d039ac7da1702409ee07028ab6cf"></span>int <code class="descname">line_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_location5line_E" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
 </div>
 </dd></dl>
 
 <dl class="class">
 <dt id="_CPPv2N4opae4fpga5types6exceptE">
-<span id="opae::fpga::types::except"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1except"></span><em class="property">class </em><code class="descname">except</code> : <em class="property">public</em> std::exception<a class="headerlink" href="#_CPPv2N4opae4fpga5types6exceptE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="opae::fpga::types::except"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1except"></span><em class="property">class </em><code class="descname">except</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types6exceptE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;except.h&gt;</em><p>Generic OPAE exception</p>
 <p>An except tracks the source line of origin and an optional fpga_result. If no fpga_result is given, then FPGA_EXCEPTION is used. </p>
+<p>Inherits from std::exception</p>
 <p>Subclassed by <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1busy"><span class="std std-ref">opae::fpga::types::busy</span></a>, <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1exception"><span class="std std-ref">opae::fpga::types::exception</span></a>, <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1invalid__param"><span class="std std-ref">opae::fpga::types::invalid_param</span></a>, <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__access"><span class="std std-ref">opae::fpga::types::no_access</span></a>, <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__daemon"><span class="std std-ref">opae::fpga::types::no_daemon</span></a>, <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__driver"><span class="std std-ref">opae::fpga::types::no_driver</span></a>, <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__memory"><span class="std std-ref">opae::fpga::types::no_memory</span></a>, <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__found"><span class="std std-ref">opae::fpga::types::not_found</span></a>, <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__supported"><span class="std std-ref">opae::fpga::types::not_supported</span></a>, <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1reconf__error"><span class="std std-ref">opae::fpga::types::reconf_error</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
@@ -2243,58 +2215,11 @@ exceptions.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="_CPPv2N4opae4fpga5types13invalid_paramE">
-<span id="opae::fpga::types::invalid_param"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1invalid__param"></span><em class="property">class </em><code class="descname">invalid_param</code> : <em class="property">public</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6exceptE" title="opae::fpga::types::except">except</a><a class="headerlink" href="#_CPPv2N4opae4fpga5types13invalid_paramE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1invalid__param"><span class="std std-ref">invalid_param</span></a> exception</p>
-<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1invalid__param"><span class="std std-ref">invalid_param</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_INVALID_PARAM is returned from a call to an OPAE C API function </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt id="_CPPv2N4opae4fpga5types13invalid_param13invalid_paramE12src_location">
-<span id="opae::fpga::types::invalid_param::invalid_param__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1invalid__param_1a5a6b2f0ac6aca0e54a5215f44073e983"></span><code class="descname">invalid_param</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types13invalid_param13invalid_paramE12src_location" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1invalid__param"><span class="std std-ref">invalid_param</span></a> constructor</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="class">
-<dt id="_CPPv2N4opae4fpga5types4busyE">
-<span id="opae::fpga::types::busy"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1busy"></span><em class="property">class </em><code class="descname">busy</code> : <em class="property">public</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6exceptE" title="opae::fpga::types::except">except</a><a class="headerlink" href="#_CPPv2N4opae4fpga5types4busyE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;except.h&gt;</em><p>busy exception</p>
-<p>busy tracks the source line of origin for exceptions thrown when the error code FPGA_BUSY is returned from a call to an OPAE C API function </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt id="_CPPv2N4opae4fpga5types4busy4busyE12src_location">
-<span id="opae::fpga::types::busy::busy__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1busy_1a64ade3853932d99c06e5d7cc4f667772"></span><code class="descname">busy</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types4busy4busyE12src_location" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>busy constructor</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="class">
 <dt id="_CPPv2N4opae4fpga5types9exceptionE">
-<span id="opae::fpga::types::exception"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1exception"></span><em class="property">class </em><code class="descname">exception</code> : <em class="property">public</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6exceptE" title="opae::fpga::types::except">except</a><a class="headerlink" href="#_CPPv2N4opae4fpga5types9exceptionE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="opae::fpga::types::exception"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1exception"></span><em class="property">class </em><code class="descname">exception</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types9exceptionE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;except.h&gt;</em><p>exception exception</p>
 <p>exception tracks the source line of origin for exceptions thrown when the error code FPGA_EXCEPTION is returned from a call to an OPAE C API function </p>
+<p>Inherits from <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1except"><span class="std std-ref">opae::fpga::types::except</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
@@ -2315,112 +2240,17 @@ exceptions.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="_CPPv2N4opae4fpga5types9not_foundE">
-<span id="opae::fpga::types::not_found"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1not__found"></span><em class="property">class </em><code class="descname">not_found</code> : <em class="property">public</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6exceptE" title="opae::fpga::types::except">except</a><a class="headerlink" href="#_CPPv2N4opae4fpga5types9not_foundE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__found"><span class="std std-ref">not_found</span></a> exception</p>
-<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__found"><span class="std std-ref">not_found</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_NOT_FOUND is returned from a call to an OPAE C API function </p>
+<dt id="_CPPv2N4opae4fpga5types13invalid_paramE">
+<span id="opae::fpga::types::invalid_param"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1invalid__param"></span><em class="property">class </em><code class="descname">invalid_param</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types13invalid_paramE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1invalid__param"><span class="std std-ref">invalid_param</span></a> exception</p>
+<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1invalid__param"><span class="std std-ref">invalid_param</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_INVALID_PARAM is returned from a call to an OPAE C API function </p>
+<p>Inherits from <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1except"><span class="std std-ref">opae::fpga::types::except</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
-<dt id="_CPPv2N4opae4fpga5types9not_found9not_foundE12src_location">
-<span id="opae::fpga::types::not_found::not_found__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1not__found_1a2e4911d2a10d677d0ec9361addc52210"></span><code class="descname">not_found</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9not_found9not_foundE12src_location" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__found"><span class="std std-ref">not_found</span></a> constructor</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="class">
-<dt id="_CPPv2N4opae4fpga5types9no_memoryE">
-<span id="opae::fpga::types::no_memory"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__memory"></span><em class="property">class </em><code class="descname">no_memory</code> : <em class="property">public</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6exceptE" title="opae::fpga::types::except">except</a><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_memoryE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__memory"><span class="std std-ref">no_memory</span></a> exception</p>
-<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__memory"><span class="std std-ref">no_memory</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_NO_MEMORY is returned from a call to an OPAE C API function </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt id="_CPPv2N4opae4fpga5types9no_memory9no_memoryE12src_location">
-<span id="opae::fpga::types::no_memory::no_memory__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__memory_1a60094b671e76cd6f6e9cd875886e74f6"></span><code class="descname">no_memory</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_memory9no_memoryE12src_location" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__memory"><span class="std std-ref">no_memory</span></a> constructor</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="class">
-<dt id="_CPPv2N4opae4fpga5types13not_supportedE">
-<span id="opae::fpga::types::not_supported"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1not__supported"></span><em class="property">class </em><code class="descname">not_supported</code> : <em class="property">public</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6exceptE" title="opae::fpga::types::except">except</a><a class="headerlink" href="#_CPPv2N4opae4fpga5types13not_supportedE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__supported"><span class="std std-ref">not_supported</span></a> exception</p>
-<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__supported"><span class="std std-ref">not_supported</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_NOT_SUPPORTED is returned from a call to an OPAE C API function </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt id="_CPPv2N4opae4fpga5types13not_supported13not_supportedE12src_location">
-<span id="opae::fpga::types::not_supported::not_supported__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1not__supported_1ab67655acb41e441e126ef6e29003aa4b"></span><code class="descname">not_supported</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types13not_supported13not_supportedE12src_location" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__supported"><span class="std std-ref">not_supported</span></a> constructor</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="class">
-<dt id="_CPPv2N4opae4fpga5types9no_driverE">
-<span id="opae::fpga::types::no_driver"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__driver"></span><em class="property">class </em><code class="descname">no_driver</code> : <em class="property">public</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6exceptE" title="opae::fpga::types::except">except</a><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_driverE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__driver"><span class="std std-ref">no_driver</span></a> exception</p>
-<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__driver"><span class="std std-ref">no_driver</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_NO_DRIVER is returned from a call to an OPAE C API function </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt id="_CPPv2N4opae4fpga5types9no_driver9no_driverE12src_location">
-<span id="opae::fpga::types::no_driver::no_driver__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__driver_1a0ca809c3c85c1e25cb1782eb46d9f8ea"></span><code class="descname">no_driver</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_driver9no_driverE12src_location" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__driver"><span class="std std-ref">no_driver</span></a> constructor</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last simple">
-<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="class">
-<dt id="_CPPv2N4opae4fpga5types9no_daemonE">
-<span id="opae::fpga::types::no_daemon"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__daemon"></span><em class="property">class </em><code class="descname">no_daemon</code> : <em class="property">public</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6exceptE" title="opae::fpga::types::except">except</a><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_daemonE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__daemon"><span class="std std-ref">no_daemon</span></a> exception</p>
-<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__daemon"><span class="std std-ref">no_daemon</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_NO_DAEMON is returned from a call to an OPAE C API function </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt id="_CPPv2N4opae4fpga5types9no_daemon9no_daemonE12src_location">
-<span id="opae::fpga::types::no_daemon::no_daemon__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__daemon_1a0086811cfd62bc1871403d306bc5e4fb"></span><code class="descname">no_daemon</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_daemon9no_daemonE12src_location" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__daemon"><span class="std std-ref">no_daemon</span></a> constructor</p>
+<dt id="_CPPv2N4opae4fpga5types13invalid_param13invalid_paramE12src_location">
+<span id="opae::fpga::types::invalid_param::invalid_param__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1invalid__param_1a5a6b2f0ac6aca0e54a5215f44073e983"></span><code class="descname">invalid_param</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types13invalid_param13invalid_paramE12src_location" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1invalid__param"><span class="std std-ref">invalid_param</span></a> constructor</p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last simple">
@@ -2436,9 +2266,10 @@ exceptions.</p>
 
 <dl class="class">
 <dt id="_CPPv2N4opae4fpga5types9no_accessE">
-<span id="opae::fpga::types::no_access"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__access"></span><em class="property">class </em><code class="descname">no_access</code> : <em class="property">public</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6exceptE" title="opae::fpga::types::except">except</a><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_accessE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="opae::fpga::types::no_access"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__access"></span><em class="property">class </em><code class="descname">no_access</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_accessE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__access"><span class="std std-ref">no_access</span></a> exception</p>
 <p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__access"><span class="std std-ref">no_access</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_NO_ACCESS is returned from a call to an OPAE C API function </p>
+<p>Inherits from <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1except"><span class="std std-ref">opae::fpga::types::except</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
@@ -2459,10 +2290,136 @@ exceptions.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="_CPPv2N4opae4fpga5types9no_daemonE">
+<span id="opae::fpga::types::no_daemon"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__daemon"></span><em class="property">class </em><code class="descname">no_daemon</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_daemonE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__daemon"><span class="std std-ref">no_daemon</span></a> exception</p>
+<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__daemon"><span class="std std-ref">no_daemon</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_NO_DAEMON is returned from a call to an OPAE C API function </p>
+<p>Inherits from <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1except"><span class="std std-ref">opae::fpga::types::except</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9no_daemon9no_daemonE12src_location">
+<span id="opae::fpga::types::no_daemon::no_daemon__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__daemon_1a0086811cfd62bc1871403d306bc5e4fb"></span><code class="descname">no_daemon</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_daemon9no_daemonE12src_location" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__daemon"><span class="std std-ref">no_daemon</span></a> constructor</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N4opae4fpga5types9no_driverE">
+<span id="opae::fpga::types::no_driver"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__driver"></span><em class="property">class </em><code class="descname">no_driver</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_driverE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__driver"><span class="std std-ref">no_driver</span></a> exception</p>
+<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__driver"><span class="std std-ref">no_driver</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_NO_DRIVER is returned from a call to an OPAE C API function </p>
+<p>Inherits from <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1except"><span class="std std-ref">opae::fpga::types::except</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9no_driver9no_driverE12src_location">
+<span id="opae::fpga::types::no_driver::no_driver__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__driver_1a0ca809c3c85c1e25cb1782eb46d9f8ea"></span><code class="descname">no_driver</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_driver9no_driverE12src_location" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__driver"><span class="std std-ref">no_driver</span></a> constructor</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N4opae4fpga5types9no_memoryE">
+<span id="opae::fpga::types::no_memory"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__memory"></span><em class="property">class </em><code class="descname">no_memory</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_memoryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__memory"><span class="std std-ref">no_memory</span></a> exception</p>
+<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__memory"><span class="std std-ref">no_memory</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_NO_MEMORY is returned from a call to an OPAE C API function </p>
+<p>Inherits from <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1except"><span class="std std-ref">opae::fpga::types::except</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9no_memory9no_memoryE12src_location">
+<span id="opae::fpga::types::no_memory::no_memory__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1no__memory_1a60094b671e76cd6f6e9cd875886e74f6"></span><code class="descname">no_memory</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9no_memory9no_memoryE12src_location" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__memory"><span class="std std-ref">no_memory</span></a> constructor</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N4opae4fpga5types9not_foundE">
+<span id="opae::fpga::types::not_found"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1not__found"></span><em class="property">class </em><code class="descname">not_found</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types9not_foundE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__found"><span class="std std-ref">not_found</span></a> exception</p>
+<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__found"><span class="std std-ref">not_found</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_NOT_FOUND is returned from a call to an OPAE C API function </p>
+<p>Inherits from <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1except"><span class="std std-ref">opae::fpga::types::except</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types9not_found9not_foundE12src_location">
+<span id="opae::fpga::types::not_found::not_found__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1not__found_1a2e4911d2a10d677d0ec9361addc52210"></span><code class="descname">not_found</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types9not_found9not_foundE12src_location" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__found"><span class="std std-ref">not_found</span></a> constructor</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N4opae4fpga5types13not_supportedE">
+<span id="opae::fpga::types::not_supported"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1not__supported"></span><em class="property">class </em><code class="descname">not_supported</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types13not_supportedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__supported"><span class="std std-ref">not_supported</span></a> exception</p>
+<p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__supported"><span class="std std-ref">not_supported</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_NOT_SUPPORTED is returned from a call to an OPAE C API function </p>
+<p>Inherits from <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1except"><span class="std std-ref">opae::fpga::types::except</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types13not_supported13not_supportedE12src_location">
+<span id="opae::fpga::types::not_supported::not_supported__src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1not__supported_1ab67655acb41e441e126ef6e29003aa4b"></span><code class="descname">not_supported</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> <em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types13not_supported13not_supportedE12src_location" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__supported"><span class="std std-ref">not_supported</span></a> constructor</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">loc</span></code>: Location where the exception was constructed. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
 <dt id="_CPPv2N4opae4fpga5types12reconf_errorE">
-<span id="opae::fpga::types::reconf_error"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1reconf__error"></span><em class="property">class </em><code class="descname">reconf_error</code> : <em class="property">public</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types6exceptE" title="opae::fpga::types::except">except</a><a class="headerlink" href="#_CPPv2N4opae4fpga5types12reconf_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="opae::fpga::types::reconf_error"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1reconf__error"></span><em class="property">class </em><code class="descname">reconf_error</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types12reconf_errorE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;except.h&gt;</em><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1reconf__error"><span class="std std-ref">reconf_error</span></a> exception</p>
 <p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1reconf__error"><span class="std std-ref">reconf_error</span></a> tracks the source line of origin for exceptions thrown when the error code FPGA_RECONF_ERROR is returned from a call to an OPAE C API function </p>
+<p>Inherits from <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1except"><span class="std std-ref">opae::fpga::types::except</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
@@ -2482,6 +2439,76 @@ exceptions.</p>
 </div>
 </dd></dl>
 
+<dl class="class">
+<dt id="_CPPv2N4opae4fpga5types12src_locationE">
+<span id="opae::fpga::types::src_location"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location"></span><em class="property">class </em><code class="descname">src_location</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_locationE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;except.h&gt;</em><p>Identify a particular line in a source file. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types12src_location12src_locationEPKcPKci">
+<span id="opae::fpga::types::src_location::src_location__cCP.cCP.i"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1aa873a93570e4652a4ca9e806d94fa7f6"></span><code class="descname">src_location</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>file</em>, <em class="property">const</em> char *<em>fn</em>, int <em>line</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_location12src_locationEPKcPKci" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1src__location"><span class="std std-ref">src_location</span></a> constructor <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">file</span></code>: The source file name, typically <strong>FILE</strong>. </li>
+<li><code class="docutils literal"><span class="pre">fn</span></code>: The current function, typically <strong>func</strong>. </li>
+<li><code class="docutils literal"><span class="pre">line</span></code>: The current line number, typically <strong>LINE</strong>. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types12src_location12src_locationERK12src_location">
+<span id="opae::fpga::types::src_location::src_location__src_locationCR"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a0df0d9a994b3c66491ac4ee85ba5cba5"></span><code class="descname">src_location</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_location12src_locationEPKcPKci" title="opae::fpga::types::src_location::src_location">src_location</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_location12src_locationERK12src_location" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N4opae4fpga5types12src_locationaSERK12src_location">
+<span id="opae::fpga::types::src_location::assign-operator__src_locationCR"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a51cbdd224603d8523c99ccb21f1908fa"></span><a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_locationaSERK12src_location" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4opae4fpga5types12src_location4fileEv">
+<span id="opae::fpga::types::src_location::fileC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a82f6ed23a0d1d947b0f1754ed066e45d"></span><em class="property">const</em> char *<code class="descname">file</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types12src_location4fileEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve the file name component of the location. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4opae4fpga5types12src_location2fnEv">
+<span id="opae::fpga::types::src_location::fnC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a85e8edcb82dd85fbbb53c327541bd667"></span><em class="property">const</em> char *<code class="descname">fn</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types12src_location2fnEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve the function name component of the location. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK4opae4fpga5types12src_location4lineEv">
+<span id="opae::fpga::types::src_location::lineC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a9dfb5ebf31b205490604b1ee60359cff"></span>int <code class="descname">line</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types12src_location4lineEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve the line number component of the location. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv2N4opae4fpga5types12src_location5file_E">
+<span id="opae::fpga::types::src_location::file___cCP"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a5f8a4ed4689e7dbafb4b6d78057c064c"></span><em class="property">const</em> char *<code class="descname">file_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_location5file_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4opae4fpga5types12src_location3fn_E">
+<span id="opae::fpga::types::src_location::fn___cCP"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1a1bb3647316406de3745e3f65af4108e6"></span><em class="property">const</em> char *<code class="descname">fn_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_location3fn_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N4opae4fpga5types12src_location5line_E">
+<span id="opae::fpga::types::src_location::line___i"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1src__location_1ae2b7d039ac7da1702409ee07028ab6cf"></span>int <code class="descname">line_</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types12src_location5line_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
 <dl class="type">
 <dt id="_CPPv2N4opae4fpga5types6detailE">
 <span id="opae::fpga::types::detail"></span><span class="target" id="namespaceopae_1_1fpga_1_1types_1_1detail"></span><em class="property">namespace </em><code class="descname">detail</code><a class="headerlink" href="#_CPPv2N4opae4fpga5types6detailE" title="Permalink to this definition">¶</a><br /></dt>
@@ -2489,7 +2516,7 @@ exceptions.</p>
 <p class="breathe-sectiondef-title rubric">Typedefs</p>
 <dl class="type">
 <dt id="_CPPv2N4opae4fpga5types6detail12exception_fnE">
-<span id="opae::fpga::types::detail::exception_fn"></span><span class="target" id="namespaceopae_1_1fpga_1_1types_1_1detail_1aeabc3a9cc02dcb0a1210820fb6a7a143"></span><em class="property">typedef </em>bool (*<code class="descname">exception_fn</code>)<span class="sig-paren">(</span><a class="reference internal" href="fpga_api.html#_CPPv211fpga_result" title="fpga_result">fpga_result</a>, <em class="property">const</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> &amp;loc<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types6detail12exception_fnE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="opae::fpga::types::detail::exception_fn"></span><span class="target" id="namespaceopae_1_1fpga_1_1types_1_1detail_1a27ea035002c36a1c80c601a99b9fa3db"></span><em class="property">typedef </em>bool (*<code class="descname">exception_fn</code>)<span class="sig-paren">(</span><a class="reference internal" href="fpga_api.html#_CPPv211fpga_result" title="fpga_result">fpga_result</a>, <em class="property">const</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> &amp;loc<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types6detail12exception_fnE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>typedef function pointer that returns bool if result is FPGA_OK </p>
 </dd></dl>
 
@@ -2497,8 +2524,10 @@ exceptions.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> T&gt;</dt>
 <dt id="_CPPv2N4opae4fpga5types6detail5is_okE11fpga_resultRKN4opae4fpga5types12src_locationE">
-<span id="opae::fpga::types::detail::is_ok__fpga_result.opae::fpga::types::src_locationCRCE"></span><em class="property">template </em>&lt;<em class="property">typename</em> T&gt;<br /><span class="target" id="namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"></span><em class="property">constexpr</em> bool <code class="descname">is_ok</code><span class="sig-paren">(</span><a class="reference internal" href="fpga_api.html#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <em>result</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> &amp;<em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types6detail5is_okE11fpga_resultRKN4opae4fpga5types12src_locationE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="opae::fpga::types::detail::is_ok__fpga_result.opae::fpga::types::src_locationCRCE"></span><span class="target" id="namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"></span><em class="property">constexpr</em> bool <code class="descname">is_ok</code><span class="sig-paren">(</span><a class="reference internal" href="fpga_api.html#_CPPv211fpga_result" title="fpga_result">fpga_result</a> <em>result</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv24opae" title="opae">opae</a>::<a class="reference internal" href="#_CPPv2N4opae4fpgaE" title="opae::fpga">fpga</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5typesE" title="opae::fpga::types">types</a>::<a class="reference internal" href="#_CPPv2N4opae4fpga5types12src_locationE" title="opae::fpga::types::src_location">src_location</a> &amp;<em>loc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4opae4fpga5types6detail5is_okE11fpga_resultRKN4opae4fpga5types12src_locationE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>is_ok is a template function that throws an excpetion of its template argument type if the result code is not FPGA_OK. Otherwise it returns true. </p>
 </dd></dl>
 
@@ -2512,17 +2541,17 @@ exceptions.</p>
 <p class="breathe-sectiondef-title rubric">Variables</p>
 <dl class="member">
 <dt id="_CPPv2N4opae4fpga5types6detail15opae_exceptionsE">
-<span id="opae::fpga::types::detail::opae_exceptions__exception_fnA"></span><span class="target" id="namespaceopae_1_1fpga_1_1types_1_1detail_1aaf5c7cfe3e7998add9471462d43ee1ff"></span><a class="reference internal" href="#_CPPv2N4opae4fpga5types6detail12exception_fnE" title="opae::fpga::types::detail::exception_fn">exception_fn</a> <code class="descname">opae_exceptions</code>[12]<p>= {</p>
-<a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1invalid__param"><span class="std std-ref">opae::fpga::types::invalid_param</span></a><p>&gt;,</p>
-<a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1busy"><span class="std std-ref">opae::fpga::types::busy</span></a><p>&gt;,</p>
-<a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1exception"><span class="std std-ref">opae::fpga::types::exception</span></a><p>&gt;,</p>
-<a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__found"><span class="std std-ref">opae::fpga::types::not_found</span></a><p>&gt;,</p>
-<a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__memory"><span class="std std-ref">opae::fpga::types::no_memory</span></a><p>&gt;,</p>
-<a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__supported"><span class="std std-ref">opae::fpga::types::not_supported</span></a><p>&gt;,</p>
-<a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__driver"><span class="std std-ref">opae::fpga::types::no_driver</span></a><p>&gt;,</p>
-<a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__daemon"><span class="std std-ref">opae::fpga::types::no_daemon</span></a><p>&gt;,</p>
-<a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__access"><span class="std std-ref">opae::fpga::types::no_access</span></a><p>&gt;,</p>
-<a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1reconf__error"><span class="std std-ref">opae::fpga::types::reconf_error</span></a>&gt;}<a class="headerlink" href="#_CPPv2N4opae4fpga5types6detail15opae_exceptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="opae::fpga::types::detail::opae_exceptions__exception_fnA"></span><span class="target" id="namespaceopae_1_1fpga_1_1types_1_1detail_1aaf5c7cfe3e7998add9471462d43ee1ff"></span><a class="reference internal" href="#_CPPv2N4opae4fpga5types6detail12exception_fnE" title="opae::fpga::types::detail::exception_fn">exception_fn</a> <code class="descname">opae_exceptions</code>[12] = {
+    <a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1invalid__param"><span class="std std-ref">opae::fpga::types::invalid_param</span></a>&gt;,
+    <a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1busy"><span class="std std-ref">opae::fpga::types::busy</span></a>&gt;,
+    <a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1exception"><span class="std std-ref">opae::fpga::types::exception</span></a>&gt;,
+    <a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__found"><span class="std std-ref">opae::fpga::types::not_found</span></a>&gt;,
+    <a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__memory"><span class="std std-ref">opae::fpga::types::no_memory</span></a>&gt;,
+    <a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1not__supported"><span class="std std-ref">opae::fpga::types::not_supported</span></a>&gt;,
+    <a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__driver"><span class="std std-ref">opae::fpga::types::no_driver</span></a>&gt;,
+    <a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__daemon"><span class="std std-ref">opae::fpga::types::no_daemon</span></a>&gt;,
+    <a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1no__access"><span class="std std-ref">opae::fpga::types::no_access</span></a>&gt;,
+    <a class="reference internal" href="#namespaceopae_1_1fpga_1_1types_1_1detail_1ad6802666a800e1d9b4ffe647a816083f"><span class="std std-ref">is_ok</span></a>&lt;<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1reconf__error"><span class="std std-ref">opae::fpga::types::reconf_error</span></a>&gt;}<a class="headerlink" href="#_CPPv2N4opae4fpga5types6detail15opae_exceptionsE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -2603,7 +2632,9 @@ exceptions.</p>
 
 
            </div>
-           
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -2621,11 +2652,11 @@ exceptions.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017 Intel Corporation
+        &copy; Copyright 2017 Intel Corporation.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -2640,33 +2671,35 @@ exceptions.</p>
 
   
 
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../',
-              VERSION:'1.2.0',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-    
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
 
   
 
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
 
+  
+  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
+          SphinxRtdTheme.StickyNav.enable();
       });
-  </script> 
+  </script>
+   
 
 </body>
 </html>
