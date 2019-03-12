@@ -1359,7 +1359,12 @@ scope before freeing the <cite>shared_buffer</cite> and <cite>event</cite> objec
 <dl class="function">
 <dt id="_CPPv2NK4opae4fpga5types13shared_buffer6c_typeEv">
 <span id="opae::fpga::types::shared_buffer::c_typeC"></span><span class="target" id="classopae_1_1fpga_1_1types_1_1shared__buffer_1a09d0312f11e75eb64fe9e97dad93a68c"></span><em class="property">volatile</em> uint8_t *<code class="descname">c_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK4opae4fpga5types13shared_buffer6c_typeEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Retrieve the virtual address of the buffer base. </p>
+<dd><p>Retrieve the virtual address of the buffer base.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Instances of a shared buffer can only be created using either ‘allocate’ or ‘attach’ static factory function. Because these functions return a shared pointer (std::shared_ptr) to the instance, references to an instance are counted automatically by design of the shared_ptr class. Calling ‘<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1shared__buffer_1a09d0312f11e75eb64fe9e97dad93a68c"><span class="std std-ref">c_type()</span></a>’ function is provided to get access to the raw data but isn’t used in tracking its reference count. Assigning this to a variable should be done in limited scopes as this variable can be defined in an outer scope and may outlive the <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1shared__buffer"><span class="std std-ref">shared_buffer</span></a> object. Once the reference count in the shared_ptr reaches zero, the <a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1shared__buffer"><span class="std std-ref">shared_buffer</span></a> object will be released and deallocated, turning any variables assigned from a call to ‘<a class="reference internal" href="#classopae_1_1fpga_1_1types_1_1shared__buffer_1a09d0312f11e75eb64fe9e97dad93a68c"><span class="std std-ref">c_type()</span></a>’ into dangling pointers. </dd>
+</dl>
+</p>
 </dd></dl>
 
 <dl class="function">
