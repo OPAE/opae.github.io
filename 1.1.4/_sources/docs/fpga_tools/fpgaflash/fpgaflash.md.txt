@@ -1,0 +1,64 @@
+# fpgaflash #
+
+## SYNOPSIS ##
+```console
+fpgaflash [-h] {user,factory,factory_only,eeprom,bmc_bl,bmc_app,bmc_fw,bmc_img,bmc_factory,dtb} file [bdf]
+```
+
+## DESCRIPTION ##
+`fpgaflash` updates both FPGA images and firmware in the flash memory device on Intel&reg; FPGAs. 
+
+If there are multiple devices in the system, the `fpgaflash` command must specify a BDF to select the correct device. If you do not
+speciy the BDF, `fpgaflash` prints out the BDFs of any compatible devices.
+
+## POSITIONAL ARGUMENTS ##
+`  {user,factory,factory_only,eeprom,bmc_bl,bmc_app,bmc_fw,bmc_img,bmc_factory,dtb}`
+
+Some image types are not available for all PACs. The following table lists the image types and their availability. 
+
+| Image type | Intel PAC Arria 10 GX FPGA | Intel PAC D50005 Stratix 10 FPGA| Usage |
+| -----------|-------------------------  | -------------------------------- |--------------------- |
+| `user`| Yes | Yes |  Only reprograms the user image in flash. |
+| `factory` | Yes  | Yes | Reprograms the entire flash. A catastrophic failure during a factory update such as a power outage requires a USB cable and `quartus_pgm` to recover. |
+| `factory_only` | No | Yes | Only updates the factory image in page 0.|
+| `eeprom` | Yes | Yes |  EEPROM update. |
+| `bmc_bl` | Yes | No | Intel FPGA PAC BMC boot loader update.|
+| `bmc_app` | Yes | No | Intel FPGA PAC BMC application update. |
+| `bmc_fw` | No | Yes | BMC firmware update. |
+| `bmc_img` | No | Yes | BMC image update. |
+| `bmc_factory`| No | Yes | BMC factory image update. |
+| `dtb` | No | Yes | Updates the device tree data structure.|
+ 
+## ADDTIONAL POSITIONAL ARGUMENTS ##
+
+`file`
+
+Specifies the Raw Programming Data File (rpd) to program into flash.
+
+`bdf`
+
+Specifies the bus, device and function (BDF) of device to program such as 04:00.0 or 0000:04:00.0. This flag
+is optional when there is a single device in the system.
+
+
+## OPTIONAL ARGUMENTS ##
+`-h, --help`
+
+`-n, --no-verify`
+Do not read back flash and verify after writing.
+
+`-y, --yes` 
+Answer Yes to all confirmation prompts
+
+## EXAMPLE ##
+
+`fpgaflash user new_image.rpd 0000:04:00.0`
+
+Programs `new_image.rpd` to flash of device with BDF 0000:04:00.0.
+
+  ## Revision History ##
+                                
+ | Document Version |   Changes  |
+ | ---------------- |-----------|
+ | 2019.05.13 |  Made the following changes: <br> Added support for storing many additional image types, including BMC, Nios II firmware, the factory image, and the device tree data structure. |
+| 2018.05.21 |  No changes from previous release. |

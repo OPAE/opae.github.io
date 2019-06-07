@@ -1,0 +1,237 @@
+# pacd #
+
+## SYNOPSIS ##
+`pacd [--directory=<dir>] [--logfile=<file>] [--pidfile=<file>] [--umask=<mode>] [--default-bitstream=<file>] [--segment=<PCIeSegment>] [--bus=<bus>] [--device=<device>] [--function=<function>] [--upper-sensor-threshold=<sensor>:<threshold>[:<reset_thresh>]] [--lower-sensor-threshold=<sensor>:<threshold>[:<reset_thresh>]] [--poll-interval <sec>] [--cooldown-interval <sec>] [--no-defaults]`
+
+`pacd [--default-bitstream=<file>] [--segment=<PCIeSegment>] [--bus=<bus>] [--device=<device>] [--function=<function>] [--upper-sensor-threshold=<sensor>:<threshold>[:<reset_thresh>]] [--lower-sensor-threshold=<sensor>:<threshold>[:<reset_thresh>]] [--poll-interval <sec>] [--cooldown-interval <sec>] [--no-defaults]`
+
+## DESCRIPTION ##
+`pacd` periodically monitors the sensors on the Intel&reg; Programmable Acceleration Card (PAC)  Board Management Controller (BMC)
+and programs a default bitstream if a sensor value exceeds a specified threshold. `pacd` is only available on the PCIe\*
+Accelerator Cards (PACs).
+
+On systems with multiple PACs, `pacd` monitors the sensors for all cards in the system using the specified
+sensor threshold values.  If you specify the PCIe using `-S`, `-B`, `-D`, `-F`, `pacd` monitors all PACs
+matching the PCIe address components specified.  For example, if you specify `-B 5` only, `pacd` monitors all PACs on
+PCIe bus `5`.  The sensor thresholds are global. Specifying `-T 11:95.0:93.0` monitors sensor
+`11` on all selected PACs and triggers if its value exceeds `95.0` and resets its trigger at `93.0`.
+
+Use `SIGINT` or `SIGTERM` to stop `pacd`, or `systemctl` to stop `pacd` if `pacd` was started as a service, 
+or `^C` when run as a regular process.
+
+
+## INSTALLING AS A SYSTEM SERVICE ##
+The tools installation process installs all the necessary files required to make `pacd` a `systemd` service, capable of
+automatically starting on boot if you specify this option.
+
+To start `pacd` as a `systemd` service, first edit the file `/etc/sysconfig/pacd.conf` as root.  This file is shown
+below.
+
+```
+# Intel Programmable Acceleration Card (PAC) 
+variables.
+# Monitors Baseboard Management Controller (BMC) sensors.
+
+############## REQUIRED OPTIONS ################
+
+PIDFile=/tmp/pacd.pid
+
+# Specify default GBS files to consider for PR.  Include '-n' for each.
+# ex.: DefaultGBSOptions=-n <Default_GBS_Path> -n <Default_GBS_PATH_2>
+DefaultGBSOptions=-n <Default_GBS_Path>
+UMask=0
+LogFile=/tmp/pacd.log
+PollInterval=0
+CooldownInterval=0
+
+############## OPTIONAL OPTIONS ################
+
+# Uncomment and specify specific PAC PCI address to monitor.
+# Default is to monitor all PACs
+#BoardPCIAddr=-S 0 -B 5 -D 0 -F 0
+
+# Specify threshold values. -T for UNR, -t for LNR.
+# ex.: ThresholdOptions=-T 4:12.5 -t 7:2.25:2.3
+ThresholdOptions=
+
+# Extra advanced options.
+# ex.: ExtraOptions=--no-defaults 
+ExtraOptions=
+```
+
+Edit the `DefaultGBSOptions=` line, specifying the absolute path(s) of the Accelerator Function (AF) files to be loaded into
+the device when threshold is exceeded.  Prefix each AF file name with `-n`.
+
+To start the service, first tell `systemd` to rescan for services using the command `sudo systemctl daemon-reload`,
+then issue the command `sudo systemctl start pacd`.  This command starts `pacd` as a service. It 
+persists until the next boot.  To stop the service, use `sudu systemctl stop pacd`.  For `pacd`
+to persist across boots, issue `sudo systemctl enable pacd`; `sudo systemctl disable pacd` reverses this effect.
+
+To ensure that the service has  started, use either the `sudo systemctl status pacd -l` or `sudo journalctl -xe`.
+If you use `systemctl`, successful startup displays something similar to the following:
+
+```
+sudo systemctl status pacd -l
+● pacd.service - PAC BMC sensor monitor
+   Loaded: loaded (/usr/lib/systemd/system/pacd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2018-08-23 09:34:59 PDT; 2s ago
+  Process: 15694 ExecStart=/usr/local/bin/pacd -d $DefaultGBSOptions -P /usr/local/bin -m $UMask -l $LogFile -p $PIDFile -i $PollInterval -c $CooldownInterval $BoardPCIAddr $ThresholdOptions $ExtraOptions (code=exited, status=0/SUCCESS)
+ Main PID: 15698 (pacd)
+   CGroup: /system.slice/pacd.service
+           └─15698 /usr/local/bin/pacd -d -n /etc/GBSs/default.gbs -P /usr/local/bin -m 0 -l /tmp/pacd.log -p /tmp/pacd.pid -i 0 -c 0
+
+Aug 23 09:34:59 sj-avl-d15-mc.avl systemd[1]: Starting PAC BMC sensor monitor...
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: registering default bitstream "/etc/GBSs/default.gbs"
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon path is /usr/local/bin
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon umask is 0x0
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon log file is /tmp/pacd.log
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon pid file is /tmp/pacd.pid
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: Polling interval set to 0.000000 sec
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: Cooldown delay set to 0.000000 sec
+Aug 23 09:34:59 sj-avl-d15-mc.avl systemd[1]: Started PAC BMC sensor monitor.
+```
+
+The `journalctl` output is similar to the following:
+
+```
+Aug 23 09:34:59 sj-avl-d15-mc.avl systemd[1]: Starting PAC BMC sensor monitor...
+-- Subject: Unit pacd.service has begun start-up
+-- Defined-By: systemd
+-- Support: http://lists.freedesktop.org/mailman/listinfo/systemd-devel
+-- 
+-- Unit pacd.service has begun starting up.
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: registering NULL bitstream "/etc/GBSs/NULL.gbs"
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon path is /usr/local/bin
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon umask is 0x0
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon log file is /tmp/pacd.log
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: daemon pid file is /tmp/pacd.pid
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: Polling interval set to 0.000000 sec
+Aug 23 09:34:59 sj-avl-d15-mc.avl pacd[15694]: Thu Aug 23 09:34:59 2018: Cooldown delay set to 0.000000 sec
+Aug 23 09:34:59 sj-avl-d15-mc.avl systemd[1]: Started PAC BMC sensor monitor.
+-- Subject: Unit pacd.service has finished start-up
+-- Defined-By: systemd
+-- Support: http://lists.freedesktop.org/mailman/listinfo/systemd-devel
+-- 
+-- Unit pacd.service has finished starting up.
+-- 
+-- The start-up result is done.
+```
+
+## OPTIONS ##
+
+`-d, --daemon`
+
+This argument has been deprecated. The `pacd` command treats it as a no-op.
+
+`-P, --directory <dir>`
+
+Run from the specified directory (path). 
+
+`-l, --logfile <file>`
+
+Send output to file. If you specify a log file on the command line, `pacd` writes to both that `logfile` and
+`stdout`, `stderr`, or `syslog` depending on whether 'pacd' started from the command line or a `systemd` service.
+
+`-p, --pidfile <file>`
+
+This argument has been deprecated. The `pacd` command treats it as a no-op.
+
+`-m, --umask <mode>`
+
+Use the mode value as the file mode creation mask passed to umask.
+
+`-i, --poll-interval <secs>`
+
+`pacd` polls and checks the sensor values every `secs` seconds.  This is a real number, meaning you can specify a
+floating-point number such as `2.5` for two-and-a-half second poll interval.
+
+`-c, --cooldown-interval <secs>`
+
+Specifies the time in seconds that `pacd` waits after removing the FPGA driver before
+re-enabling the driver.  The host is not able to access the PAC for this time period for 
+any reason.  
+
+`-n, --default-bitstream <file>`
+
+Specify the default bitstream to program when a sensor value exceeds the specified threshold.
+This option may be specified multiple times. The AF, if any, that matches the FPGA's PR interface
+ID is programmed when the sensor's value exceeds the threshold.
+
+`-S, --segment <PCIe segment>`
+
+Specify the PCIe segment (domain) of the PAC of interest.
+
+`-B, --bus <PCIe bus>`
+
+Specify the PCIe bus of the PAC of interest.
+
+`-D, --device <PCIe device>`
+
+Specify the PCIe device of the PAC of interest.
+
+`-F, --function <PCIe function>`
+
+Specify the PCIe function of the PAC of interest.
+
+`-T, --upper-sensor-threshold <sensor>:<trigger_threshold>[:<reset_threshold>]`
+
+Specify the threshold value for a sensor that, when exceeded (sensor value strictly greater than
+`<trigger_threshold>`), causes the default bitstream specified with `-n` that matches the FPGA's PR
+Interface ID to be programmed into the FPGA.  The sensor is considered triggered (and no PR
+performed) until its value drops below `<reset_threshold>`.
+
+You can specify this option multiple times.
+
+The sensors specified are monitored for all specified PACs.  There is no mechanism for specifying
+per-PAC sensor thresholds.
+
+`-t, --lower-sensor-threshold <sensor>:<trigger_threshold>[:<reset_threshold>]`
+
+Specify the threshold value for a sensor that, when exceeded (sensor value strictly less than
+`<trigger_threshold>`), causes the default bitstream specified with `-n` that matches the FPGA's PR
+Interface ID to be programmed into the FPGA.  The sensor is considered triggered (and no PR
+performed) until its value goes above `<reset_threshold>`.
+
+You can specify this option multiple times.
+
+The sensors specified are monitored for all specified PACs.  There is no mechanism for specifying
+per-PAC sensor thresholds.
+
+`-N, --no-defaults`
+
+By default `pacd` monitors the same set of sensors that the BMC monitors. These are sensors that could trigger
+a machine re-boot.  This set is typically all settable, non-recoverable thresholds.  Specifying
+this option tells `pacd` not to monitor these sensors.  This option requires at least one of `-T`
+or `-t` to be specified.
+
+## NOTES ##
+
+`pacd` is intended to prevent an over-temperature or power "non-recoverable" event from causing the
+FPGA's BMC to shut down the PAC.  Shutting down the PAC results in a PCIe "surprise removal"
+which ultimately causes the host to reboot.
+
+
+The application being accelerated must be able to respond appropriately when the device
+driver disappears from the system.  The application receives a `SIGHUP` signal when the driver
+shuts itself down.  On receipt of `SIGHUP`, the application should clean up and exit as soon as possible.
+
+## TROUBLESHOOTING ##
+
+If you encounter any issues, you can get debug information examining `stdout` and the system logs, `journalctl` or `dmesg`.
+
+## EXAMPLES ##
+
+The following command starts `pacd` as a regular process, programming `idle.gbs` when
+sensor 11 (FPGA Core TEMP) exceeds 92.35 degrees C or sensor 0 (Total Input Power) goes
+out of the range [9.2 - 19.9] Watts.
+
+`pacd -n=idle.gbs -T 11:92.35 -T 0:19.9 -t 0:9.2`
+
+## Revision History ##
+
+ | Document Version |   Changes  |
+ | ---------------- |----------|
+ | 2019.05.13 |  Made the following changes: <br> Removed the `daemon` argument. <br> Removed the `driver-removal-disable` argument.  <br> Removed descriptions of three problems that are fixed in the current release.|
+ | 2018.08.17 |  Updated to include new options.  | 
+ | 2018.08.08 |  Initial revision.  | 
+
