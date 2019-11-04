@@ -1,0 +1,210 @@
+<h1 id="pacsign">PACSign</h1>
+<h2 id="synopsis">SYNOPSIS</h2>
+<p><code>python PACSign.py [-h] {FIM,SR,BBS,BMC,BMC_FW,AFU,PR,GBS} ...</code></p>
+<p><code>python PACSign.py &lt;CMD&gt;  [-h] -t {UPDATE,CANCEL,RK_256,RK_384} -H HSM_MANAGER                           [-C HSM_CONFIG] [-r ROOT_KEY] [-k CODE_SIGNING_KEY]                           [-d CSK_ID] [-i INPUT_FILE] [-o OUTPUT_FILE] [-y] [-v]</code></p>
+<h2 id="description">DESCRIPTION</h2>
+<p>The <code>PACSign</code> utility inserts authentication markers into bitstreams targeted for the following programmable acceleration cards (PACs): * Intel® PAC with Intel Arria® 10 GX FPGA * Intel FPGA PAC D5005 * Intel PAC N3000 <code>PACSign</code> uses a root key and an optional code signing key to digitally sign the<br />
+bitstreams to validate their origin. The PACs will not program bitstreams without proper authentication.</p>
+<p>The current PACs only support elliptical curve keys with the curve type <code>secp256r1</code> or <code>prime256v1</code>. The <code>PACSign</code> command supports hardware security modules (HSMs) for both <code>OpenSSL</code> and <code>PKCS #11</code>.</p>
+<h2 id="bitstream-types">BITSTREAM TYPES</h2>
+<p>The first required argument to <code>PACSign</code> is the bitstream type identifier.</p>
+<p><code>{SR,FIM,BBS,BMC,BMC_FW,PR,AFU,GBS}</code></p>
+<p>Supported image types. <code>FIM</code> and <code>BBS</code> are aliases for the static region (<code>SR</code>). <code>BMC_FW</code> is an alias for the board management controller (<code>BMC</code>). <code>AFU</code> and <code>GBS</code> are aliases for the partial reconfiguration (<code>PR</code>) region.</p>
+<p><code>SR (FIM, BBS)</code></p>
+<p>Static FPGA image</p>
+<p><code>BMC (BMC_FW)</code></p>
+<p>BMC image, including firmware for some PACs</p>
+<p><code>PR (AFU, GBS)</code></p>
+<p>Reconfigurable FPGA image</p>
+<h2 id="required-options">REQUIRED OPTIONS</h2>
+<p>All bitstream types must specify the following information: * An operation that the <code>PACSign</code> command performs * The name and optional parameter file for a key signing module</p>
+<p><code>-t, --cert_type &lt;type&gt;</code></p>
+<p>The following operations are available:</p>
+<pre><code>`UPDATE` - add authentication data to the bitstream.
+`CANCEL` - create a code signing key cancellation bitstream.
+`RK_256` - create a bitstream to program a 256-bit root entry hash into the device.
+`RK_384` - create a bitstream to program a 384-bit root entry hash into the device. Currently 
+           available PACs do not support a 384-bit root entry hash.</code></pre>
+<p><code>-H, --HSM_manager &lt;module&gt;</code></p>
+<p>The module name for a module that interfaces to a HSM. <code>PACSign</code> includes both the <code>openssl_manager</code> and the <code>pkcs11_manager</code> to handle keys and signing operations.</p>
+<p><code>-C, --HSM_config &lt;cfg&gt;</code> (optional)</p>
+<p>The argument to this option is passed verbatim to the specified HSM. For <code>pkcs11_manager</code>, this option specifies a <code>JSON</code> file describing the PKCS #11 capable HSM’s parameters.</p>
+<h2 id="options">OPTIONS</h2>
+<p><code>-r, --root_key &lt;keyID&gt;</code></p>
+<p>The key identifier that the HSM uses to identify the root key to be used for the selected operation.</p>
+<p><code>-k, --code_signing_key &lt;keyID&gt;</code></p>
+<p>The key identifier that the HSM uses to identify the code signing key to be used for the selected operation.</p>
+<p><code>-d, --csk_id &lt;csk_num&gt;</code></p>
+<p>Only used for type <code>CANCEL</code>. Specifies the key number of the code signing key to cancel.</p>
+<p><code>-i, --input_file &lt;file&gt;</code></p>
+<p>Only used for <code>UPDATE</code> operations. Specifies the file name containing the data to be signed.</p>
+<p><code>-o, --output_file &lt;file&gt;</code></p>
+<p>Specifies the file name for the signed output bitstream.</p>
+<p><code>-y, --yes</code></p>
+<p>Silently answer all queries from <code>PACSign</code> in the affirmative.</p>
+<p><code>-v, --verbose</code></p>
+<p>Can be specified multiple times. Increases the verbosity of <code>PACSign</code>. Once enables non-fatal warnings to be displayed. Twice enables progress information. Three or more occurrences enables very verbose debugging information.</p>
+<h2 id="notes">NOTES</h2>
+<p>Different certification types require different sets of options. The table below describes the options required based on certification type:</p>
+<h3 id="update">UPDATE</h3>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>root_key</th>
+<th>code_signing_key</th>
+<th>csk_id</th>
+<th>input_file</th>
+<th>output_file</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SR</td>
+<td>Optional<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
+<td>Optional<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>BMC</td>
+<td>Optional<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></td>
+<td>Optional<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>PR</td>
+<td>Optional<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></td>
+<td>Optional<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cancel">CANCEL</h3>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>root_key</th>
+<th>code_signing_key</th>
+<th>csk_id</th>
+<th>input_file</th>
+<th>output_file</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SR</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>BMC</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>PR</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rk_256-rk_3841">RK_256 / RK_384[^1]</h3>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>root_key</th>
+<th>code_signing_key</th>
+<th>csk_id</th>
+<th>input_file</th>
+<th>output_file</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SR</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>BMC</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>PR</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">EXAMPLES</h2>
+<p>The following command generates a root hash programming PR bitstream. The generated file can be an input to the <code>fpgasupdate</code> command to program the root hash for PR operations into the device flash. You can only program the root hash one time.</p>
+<p><code>python PACSign.py PR -t RK_256 -o pr_rhp.bin -H openssl_manager -r key_pr_root_public_256.pem</code></p>
+<p>The following command adds authentication blocks to <code>hello_afu.gbs</code> signed by both provided keys and writes the result to <code>s_hello_afu.gbs</code>. For signed bitstreams, the newly-generated block replaces the old signature block.</p>
+<p><code>python PACSign.py PR -t update -H openssl_manager -i hello_afu.gbs -o s_hello_afu.gbs -r key_pr_root_public_256.pem -k key_pr_csk0_public_256.pem</code></p>
+<p>The following command generates a code signing key cancellation bitstream to cancel code signing key number 4 for all BMC operations. After this command runs the PAC rejects BMC images that CSK 4 signed.</p>
+<p><code>python PACSign.py BMC -t cancel -H openssl_manager -o csk4_cancel.gbs -r key_bmc_root_public_256.pem -d 4</code></p>
+<h2 id="revision-history">Revision History</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 58%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Document Version</th>
+<th>Intel Acceleration Stack Version</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2019.07.08</td>
+<td>1.2.1 Beta. <br>(Supported with Intel Quartus Prime Pro Edition 19.2.)</td>
+<td>Initial revision.</td>
+</tr>
+<tr class="even">
+<td>2019.10.04</td>
+<td>2.0.1 Beta. <br>(Supported with Intel Quartus Prime Pro Edition 19.2.)</td>
+<td>Editorial changes only.</td>
+</tr>
+</tbody>
+</table>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>For <code>UPDATE</code> type, you must specify both keys to produce an authenticated bitstream. Omitting one key generates a valid, but unauthenticated bitstream. You can only load the unauthenticated bitstream on a PAC with no root entry hash programmed for that bitstream type.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>For <code>UPDATE</code> type, you must specify both keys to produce an authenticated bitstream. Omitting one key generates a valid, but unauthenticated bitstream. You can only load the unauthenticated bitstream on a PAC with no root entry hash programmed for that bitstream type.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>For <code>UPDATE</code> type, you must specify both keys to produce an authenticated bitstream. Omitting one key generates a valid, but unauthenticated bitstream. You can only load the unauthenticated bitstream on a PAC with no root entry hash programmed for that bitstream type.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>For <code>UPDATE</code> type, you must specify both keys to produce an authenticated bitstream. Omitting one key generates a valid, but unauthenticated bitstream. You can only load the unauthenticated bitstream on a PAC with no root entry hash programmed for that bitstream type.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>For <code>UPDATE</code> type, you must specify both keys to produce an authenticated bitstream. Omitting one key generates a valid, but unauthenticated bitstream. You can only load the unauthenticated bitstream on a PAC with no root entry hash programmed for that bitstream type.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>For <code>UPDATE</code> type, you must specify both keys to produce an authenticated bitstream. Omitting one key generates a valid, but unauthenticated bitstream. You can only load the unauthenticated bitstream on a PAC with no root entry hash programmed for that bitstream type.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>

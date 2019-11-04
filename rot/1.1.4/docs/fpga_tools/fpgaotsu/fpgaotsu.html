@@ -1,0 +1,54 @@
+<h1 id="fpgaotsu">fpgaotsu</h1>
+<h2 id="synopsis">SYNOPSIS</h2>
+<p><code>fpgaotsu.py [-h] [--rsu-only] [--rsu] [-v] fpgaotsu_json</code></p>
+<h2 id="description">DESCRIPTION</h2>
+<p>One-time update tool updates non Root of Trust PCIe FPGA cards to Root of Trust (RoT) PCIe FPGA cards. Tool updates NIOS factory, NIOS user, BMC root key hash, SR key hash, MAX10 device tree, FPGA factory image, FPGA user, NIOS boot loader, MAX10 factory and MAX10 user to Root of Trust firmware.</p>
+<h3 id="positional-arguments">POSITIONAL ARGUMENTS</h3>
+<p><code>{fpgaotsu_json}</code></p>
+<p>Specifies the input json file or manifest.</p>
+<h3 id="optional-arguments">OPTIONAL ARGUMENTS</h3>
+<p><code>-h, --help</code></p>
+<p>Print usage information.</p>
+<p><code>--rsu-only</code></p>
+<p>Reset fpga pcie card and loads updated firmware.</p>
+<p><code>--rsu</code></p>
+<p>Updates fpga with Root of Trust firmware and Reset fpga pcie card.</p>
+<p><code>-v --verbose</code></p>
+<p>Enables debug logging.</p>
+<h3 id="example">EXAMPLE</h3>
+<p><code>fpgaotsu.py /usr/share/opae/d5005/one-time-update/fpgaotsu_d5005.json</code></p>
+<p>Programs all FPGA D5005 cards with Root of Trust firmware.</p>
+<p><code>fpgaotsu.py /usr/share/opae/n3000/one-time-update/fpgaotsu_d3000.json</code></p>
+<p>Programs all FPGA N3000 cards with Root of Trust firmware.</p>
+<h4 id="fpga-d5005-card">FPGA D5005 card:</h4>
+<p>User has to power cycle system after updating Root of Trust with one-time update tool.</p>
+<h4 id="fpga-n3000-card">FPGA N3000 card:</h4>
+<p>One-time update tool reset fpga pcie card two times after updating RoT firmware, Boot to Max10 factory image after first reset and boot to FPGA factory image after second reset. No need to power cycle system, fpga card reset loads to Root of Trust firmware.</p>
+<h2 id="testing-steps">Testing steps</h2>
+<h3 id="one-time-update-install-steps">one-time update install steps:</h3>
+<ol type="1">
+<li>Install from opae-one-time-update.rpm This should install dependencies:
+<ul>
+<li>opae-intel-fpga-driver</li>
+<li>opae-tools-extra</li>
+<li>Security-Tools</li>
+</ul></li>
+<li>Verify one-time update files (firmware and manifest) installed in
+<ul>
+<li>/usr/share/opae/n3000/one-time-update</li>
+<li>/usr/share/opae/d5005/one-time-update</li>
+</ul></li>
+<li>Update FPGA N3000 card with temporary max10 image to access second flash.
+<ol type="1">
+<li>sudo fpgaflash bmc_img usr/share/opae/n3000/one-time-update/max10_system_revd_dual_v111.1.13_temporary_cfm0_auto.rpd –rsu</li>
+<li>Verify sysfs attributes /sys/class/fpga/intel-fpga-dev.<em>/intel-fpga-fme.</em>/spi-altera.<em>.auto/spi_master/spi</em>/spi<em>.</em>/intel-generic-qspi.*.auto</li>
+</ol></li>
+<li>Run “fpgaotsu.py /usr/share/opae/n3000/one-time-update/fpgaotsu_n3000.json” for intel fpga N3000 card or Run “fpgaotsu.py /usr/share/opae/d5005/one-time-update/fpgaotsu_d5005.json” for intel fpga D5005 card
+<ul>
+<li>Updates Nios, MAX10 and FPGA images for FPGA N3000 and D5005.</li>
+<li>User has to power cycle FPGA D5005 card system after updating Root of Trust firmware.</li>
+</ul></li>
+</ol>
+<h3 id="one-time-update-tool-input-specs">one-time update tool input specs:</h3>
+<h4 id="fpgaotsu_n3000.json">fpgaotsu_n3000.json:</h4>
+<h4 id="fpgaotsu_d5005.json">fpgaotsu_d5005.json:</h4>

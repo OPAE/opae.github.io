@@ -1,0 +1,42 @@
+<h1 id="fpgasupdate">fpgasupdate</h1>
+<h2 id="synopsis">SYNOPSIS</h2>
+<p><code>fpgasupdate [--log-level=&lt;level&gt;] file [bdf]</code></p>
+<h2 id="description">DESCRIPTION</h2>
+<p>The <code>fpgasupdate</code> command implements a secure firmware update for the following programmable accelerator cards (PACs): * Intel® PAC with Intel Arria® 10 GX FPGA * Intel FPGA PAC D5005 * Intel PAC N3000</p>
+<p><code>--log-level &lt;level&gt;</code></p>
+<p>Specifies the <code>log-level</code> which is the level of information output to your command tool. The following seven levels are available: <code>state</code>, <code>ioctl</code>, <code>debug</code>, <code>info</code>, <code>warning</code>, <code>error</code>, <code>critical</code>. Setting <code>--log-level=state</code> provides the most verbose output. Setting <code>--log-level=ioctl</code> provides the second most information, and so on. The default level is <code>info</code>.</p>
+<p><code>file</code></p>
+<p>Specifies the secure update firmware file to be programmed. This file may be to program a static region (SR), programmable region (PR), root entry hash, key cancellation, or other device-specific firmware.</p>
+<p><code>bdf</code></p>
+<p>The PCIe® address of the PAC to program. <code>bdf</code> is of the form <code>[ssss:]bb:dd:f</code>, corresponding to PCIe segment, bus, device, function. The segment is optional. If you do not specify a segment, the segment defaults to <code>0000</code>. If the system has only one PAC you can omit the <code>bdf</code> and let <code>fpgasupdate</code> determine the address automatically.</p>
+<h2 id="troubleshooting">TROUBLESHOOTING</h2>
+<p>To gather more debug output, decrease the <code>--log-level</code> parameter.</p>
+<h2 id="examples">EXAMPLES</h2>
+<p><code>fpgasupdate firmware.bin</code><br> <code>fpgasupdate firmware.bin 05:00.0</code><br> <code>fpgasupdate firmware.bin 0001:04:02.0 --log-level=ioctl</code></p>
+<h2 id="revision-history">Revision History</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 58%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Document Version</th>
+<th>Intel Acceleration Stack Version</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2019.07.26</td>
+<td>1.2.1 Beta</td>
+<td>Initial release.</td>
+</tr>
+<tr class="even">
+<td>2019.10.04</td>
+<td>2.0.1 Beta <br> (Supported with Intel Quartus Prime Pro Edition 19.2.)</td>
+<td>Editorial changes only.</td>
+</tr>
+</tbody>
+</table>

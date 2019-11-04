@@ -1,0 +1,1998 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'1.1.4',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Building the OPAE Intel FPGA driver (in-tree)" href="../build_chain/fpga_driver/driver_build.html" />
+    <link rel="prev" title="OPAE Python API Reference" href="../fpga_api/fpga_python_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">OPAE Python Bindings</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_api/api_build.html">Building the OPAE C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/fpga_cxx_api.html">OPAE C++ Core API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/fpga_python_api.html">OPAE Python API Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-architecture">Hardware Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fpga-management-engine-fme">FPGA Management Engine (FME)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port">Port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accelerator-function-af">Accelerator Function (AF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#partial-reconfiguration-pr">Partial Reconfiguration (PR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fpga-virtualization">FPGA Virtualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#driver-organization">Driver Organization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pcie-module-device-driver">PCIe Module Device Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcie-module-device-driver-1">PCIe Module Device Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcie-module-device-driver-functions">PCIe Module Device Driver Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fme-platform-module-device-driver">FME Platform Module Device Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fme-platform-module-device-driver-functions">FME Platform Module Device Driver Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#port-platform-module-device-driver">Port Platform Module Device Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#port-platform-module-device-driver-functions">Port Platform Module Device Driver Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#platform-specific-device-drivers">Platform Specific Device Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#application-fpga-device-enumeration">Application FPGA Device Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pcie-driver-enumeration">PCIe Driver Enumeration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enumeration-data-structures">Enumeration Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enumeration-flow">Enumeration Flow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fme-platform-device-initialization">FME Platform Device Initialization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fme-platform-device-data-structures">FME Platform Device Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fme-platform-device-initialization-flow">FME Platform Device Initialization Flow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#port-platform-device-initialization">Port Platform Device Initialization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#port-platform-device-data-structures">Port Platform Device Data Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#port-platform-device-initialization-flow">Port Platform Device Initialization Flow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fme-ioctls">FME IOCTLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-ioctls">Port IOCTLs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#sysfs-files">sysfs files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fme-thermal-management-sysfs-files">FME Thermal Management sysfs files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fme-power-management-sysfs-files">FME Power Management sysfs files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fme-global-error-sysfs-files">FME Global Error sysfs files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fme-partial-reconfiguration-sysfs-files">FME Partial Reconfiguration sysfs files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fme-global-performance-sysfs-files">FME Global Performance sysfs files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-header-sysfs-files">Port Header sysfs files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-afu-header-sysfs-files">Port AFU Header sysfs files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-error-sysfs-files">Port Error sysfs files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgabist/fpgabist.html">fpgabist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaflash/fpgaflash.html">fpgaflash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/packager/packager.html">packager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/userclk/userclk.html">userclk</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_config/readme.html">hssi_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_loopback/readme.html">hssi_loopback</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OPAE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/docs/drv_arch/drv_arch.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="open-programmable-accelerator-engine-opae-linux-device-driver-architecture">
+<h1>Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture<a class="headerlink" href="#open-programmable-accelerator-engine-opae-linux-device-driver-architecture" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>The OPAE Intel® FPGA Linux Device Driver provides interfaces for
+userspace applications to configure, enumerate, open, and access FPGA
+accelerators on platforms equipped with Intel FPGA solutions. The OPAE
+FPGA driver also enables system-level management functions such as FPGA
+reconfiguration and virtualization.</p>
+<div class="section" id="hardware-architecture">
+<h2>Hardware Architecture<a class="headerlink" href="#hardware-architecture" title="Permalink to this headline">¶</a></h2>
+<p>The Linux Operating System treats the FPGA hardware as a PCIe* device.
+A predefined data structure Device Feature List (DFL) defines PCIe
+memory.</p>
+<div class="figure">
+<img alt="FPGA" src="../../_images/FPGA_PCIe_Device.png" />
+</div>
+<p>The Linux Device Driver uses PCIe Single Root I/O Virtualization
+(SR-IOV) to create Virtual Functions (VFs). The device driver can assign
+individual accelerators to virtual machines (VMs).</p>
+<div class="figure">
+<img alt="Virtualized" src="../../_images/FPGA_PCIe_Device_SRIOV.png" />
+</div>
+</div>
+<div class="section" id="fpga-management-engine-fme">
+<h2>FPGA Management Engine (FME)<a class="headerlink" href="#fpga-management-engine-fme" title="Permalink to this headline">¶</a></h2>
+<p>The FPGA Management Engine provides error reporting, reconfiguration,
+performance reporting, and other infrastructure functions. Each FPGA has
+one FME which is always accessed through the Physical Function (PF). The
+Intel Xeon® Processor with Integrated FPGA also performs power and
+thermal management. These functions are not available on the Intel
+Programmable Acceleration Card (PAC).</p>
+<p>User-space applications can acquire exclusive access to the FME using
+<code class="docutils literal"><span class="pre">open()</span></code>, and release it using <code class="docutils literal"><span class="pre">close()</span></code> as a privileged user
+(root).</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">If an application terminates without freeing the FME or Port resources, Linux closes all</span>
+<span class="go">file descriptors owned by the terminating process, freeing those resources.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="port">
+<h2>Port<a class="headerlink" href="#port" title="Permalink to this headline">¶</a></h2>
+<p>A Port represents the interface between two components: * The FPGA
+Interface Manager (FIM) which is the static FPGA fabric * The
+Accelerator Function (AF) which is the partially reconfigurable region</p>
+<p>The Port controls the communication from software to the AF and makes
+features such as reset and debug available. A PCIe device may have
+several Ports. Assign multiple ports to VFs using the
+<code class="docutils literal"><span class="pre">FPGA_FME_PORT_ASSIGN</span></code> ioctl on the FME device.</p>
+</div>
+<div class="section" id="accelerator-function-af">
+<h2>Accelerator Function (AF)<a class="headerlink" href="#accelerator-function-af" title="Permalink to this headline">¶</a></h2>
+<p>An AF attaches to a Port. The AF provides a 256 KB memory mapped I/O
+(MMIO) region for accelerator-specific control registers.</p>
+<ul class="simple">
+<li>Use <code class="docutils literal"><span class="pre">open()</span></code> on the Port device to acquire exclusive access to an
+AFU associated with the Port device.</li>
+<li>Use <code class="docutils literal"><span class="pre">close()</span></code>on the Port device to release the AFU associated
+with the Port device.</li>
+<li>Use <code class="docutils literal"><span class="pre">mmap()</span></code> on the Port device to map accelerator MMIO regions.</li>
+</ul>
+</div>
+<div class="section" id="partial-reconfiguration-pr">
+<h2>Partial Reconfiguration (PR)<a class="headerlink" href="#partial-reconfiguration-pr" title="Permalink to this headline">¶</a></h2>
+<p>Use PR to reconfigure an AF file. Successful reconfiguration has two
+requirements:</p>
+<ul class="simple">
+<li>You must generate the reconfiguration AF for the exact FIM. The AF
+and FIM are compatible if their IDs match. You can verify this match
+by comparing the interface ID in the AF header against the interface
+ID the available through
+<code class="docutils literal"><span class="pre">sysfs</span> <span class="pre">intel-fpga-dev.*i*/intel-fpga-fme.*j*/pr/interface_ID</span></code>. PR
+always performs this check before reconfiguring the AF.</li>
+<li>The AF must also target the reconfigurable region (Port) of the FPGA.</li>
+</ul>
+<p>In all other cases PR fails and may cause system instability.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Platforms that support 512-bit Partial Reconfiguration require</span>
+<span class="go">binutils &gt;= version 2.25.</span>
+</pre></div>
+</div>
+<p>Close any software program accessing the FPGA, including software
+programs running in a virtualized host before initiating PR. Here is the
+recommended sequence:</p>
+<ol class="arabic simple">
+<li>Unload the driver from the guest</li>
+<li>Unplug the VF from the guest</li>
+</ol>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">NOTE: Unplugging the VF from the guest while an application on the guest is</span>
+<span class="go">still accessing its resources may lead to VM instabilities. We recommend</span>
+<span class="go">closing all applications accessing the VF in the guest before unplugging the</span>
+<span class="go">VF.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Disable SR-IOV</li>
+<li>Perform PR</li>
+<li>Enable SR-IOV</li>
+<li>Plug the VF to the guest</li>
+<li>Load the driver in the guest</li>
+</ol>
+</div>
+<div class="section" id="fpga-virtualization">
+<h2>FPGA Virtualization<a class="headerlink" href="#fpga-virtualization" title="Permalink to this headline">¶</a></h2>
+<p>To enable accelerator access from applications running on a VM, assign
+the AF Port to a VF using the following process:</p>
+<ol class="arabic simple">
+<li>Release the Port from the PF using the <code class="docutils literal"><span class="pre">FPGA_FME_PORT_RELEASE</span></code>
+ioctl on the FME device.</li>
+<li>Use the following command to enable SR-IOV and VFs. Each VF can own a
+single Port with an AF. In the following command, N is the number of
+Port released from the PF.</li>
+</ol>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">echo N &gt; $PCI_DEVICE_PATH/sriov_numvfs</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Pass through the VFs to VMs.</li>
+<li>You access the AF on a VF from applications running on the VM using
+the same driver inside the VF.</li>
+</ol>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">You cannot assign an FME to a VF. Consequently, PR and other management functions are only available through</span>
+<span class="go">the PFs.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="driver-organization">
+<h2>Driver Organization<a class="headerlink" href="#driver-organization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pcie-module-device-driver">
+<h3>PCIe Module Device Driver<a class="headerlink" href="#pcie-module-device-driver" title="Permalink to this headline">¶</a></h3>
+<p>!## Driver Organization ##</p>
+</div>
+<div class="section" id="pcie-module-device-driver-1">
+<span id="id1"></span><h3>PCIe Module Device Driver<a class="headerlink" href="#pcie-module-device-driver-1" title="Permalink to this headline">¶</a></h3>
+<div class="figure">
+<img alt="Driver" src="../../_images/Driver_Organization.png" />
+</div>
+<p>FPGA devices appear as a PCIe devices. Once enumeration detects a PCIe
+PF or VF, the Linux OS loads the FPGA PCIe device driver,
+<code class="docutils literal"><span class="pre">intel-fpga-pci.ko</span></code>. The device driver performs the following
+functions:</p>
+<ol class="arabic simple">
+<li>Creates an FPGA container device as parent of the feature devices.</li>
+<li>Walks through the Device Feature List in PCIe device base address
+register (BAR) memory to discover feature devices and their
+sub-features. Creates platform devices for the features and
+sub-features under the container device.</li>
+<li>Supports SR-IOV.</li>
+<li>Introduces the feature device infrastructure, which abstracts
+operations for sub-features and provides common functions to feature
+device drivers.</li>
+</ol>
+</div>
+<div class="section" id="pcie-module-device-driver-functions">
+<h3>PCIe Module Device Driver Functions<a class="headerlink" href="#pcie-module-device-driver-functions" title="Permalink to this headline">¶</a></h3>
+<p>The PCIe Module Device Driver performs the following functions:</p>
+<ol class="arabic simple">
+<li>PCIe discovery, device enumeration, and feature discovery.</li>
+<li>Creates sysfs directories for the parent device, FME, and Port.</li>
+<li>Creates the platform driver instances, causing the Linux kernel to
+load their respective platform module drivers.</li>
+</ol>
+</div>
+<div class="section" id="fme-platform-module-device-driver">
+<h3>FME Platform Module Device Driver<a class="headerlink" href="#fme-platform-module-device-driver" title="Permalink to this headline">¶</a></h3>
+<p>The FME Platform Module Device Driver, <code class="docutils literal"><span class="pre">intel-fpga-fme.ko</span></code>, loads
+automatically after the PCIe driver creates the FME Platform Module. It
+provides the following features for FPGA management:</p>
+<ol class="arabic simple">
+<li>Power and thermal management, error reporting, performance reporting,
+and other infrastructure functions. You can access these functions
+via sysfs interfaces the FME driver provides.</li>
+</ol>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">The Power and thermal management function are only available on the Intel Xeon Processor with Integrated FPGA.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Partial Reconfiguration. During PR sub-feature initialization, the
+FME driver registers the FPGA Manager framework to support PR. When
+the FME receives an <code class="docutils literal"><span class="pre">FPGA_FME_PORT_PR</span></code> ioctl from user-space, it
+invokes the common interface function from the FPGA Manager to
+reconfigure the AF using PR.</li>
+<li>Port management for virtualization. The FME driver introduces two
+ioctls:</li>
+</ol>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">FPGA_FME_PORT_RELEASE</span></code> releases a Port from the PF</li>
+<li><code class="docutils literal"><span class="pre">FPGA_FME_PORT_ASSIGN</span></code> assigns a Port back to PF</li>
+</ul>
+<p>After <code class="docutils literal"><span class="pre">FPGA_FME_PORT_RELEASE</span></code> completes, you can use the PCIe driver
+SR-IOV interfaces to reassign the Port to a VF.</p>
+<p>For more information, refer to “FPGA Virtualization”.</p>
+</div>
+<div class="section" id="fme-platform-module-device-driver-functions">
+<h3>FME Platform Module Device Driver Functions<a class="headerlink" href="#fme-platform-module-device-driver-functions" title="Permalink to this headline">¶</a></h3>
+<p>The FME Platform Module Device Driver performs the the following
+functions:</p>
+<ul class="simple">
+<li>Creates the FME character device node.</li>
+<li>Creates the FME sysfs files and implements the FME sysfs file
+accessors.</li>
+<li>Implements the FME private feature sub-drivers.</li>
+<li>FME private feature sub-drivers: * FME Header * Thermal Management
+- available only on the Intel Xeon Processor with Integrated FPGA *
+Power Management - available only on the Intel Xeon Processor with
+Integrated FPGA * Global Error * Partial Reconfiguration * Global
+Performance</li>
+</ul>
+</div>
+<div class="section" id="port-platform-module-device-driver">
+<h3>Port Platform Module Device Driver<a class="headerlink" href="#port-platform-module-device-driver" title="Permalink to this headline">¶</a></h3>
+<p>After the PCIe Module Device Driver creates the Port Platform Module
+device, the FPGA Port and AF driver, <code class="docutils literal"><span class="pre">intel-fpga-afu.ko</span></code>, are
+available. This module provides an interface for user-space applications
+to access the individual accelerators, including basic reset control on
+the Port, AF MMIO region export, DMA buffer mapping service, UMsg
+notification, and remote debug functions. UMsg is only supported on the
+Intel Xeon Processor with Integrated FPGA.</p>
+</div>
+<div class="section" id="port-platform-module-device-driver-functions">
+<h3>Port Platform Module Device Driver Functions<a class="headerlink" href="#port-platform-module-device-driver-functions" title="Permalink to this headline">¶</a></h3>
+<p>The Port Platform Module Device Driver performs the the following
+functions:</p>
+<ul class="simple">
+<li>Creates the Port character device node.</li>
+<li>Creates the Port sysfs files and implements the Port sysfs file
+accessors.</li>
+<li>Implements the following Port private feature sub-drivers. * Port
+Header * AFU * Port Error * UMsg - UMsg is only supported through
+the Intel Xeon Processor with Integrated FPGA. * Signal Tap</li>
+</ul>
+</div>
+<div class="section" id="platform-specific-device-drivers">
+<h3>Platform Specific Device Drivers<a class="headerlink" href="#platform-specific-device-drivers" title="Permalink to this headline">¶</a></h3>
+<p>These drivers enable platform specific features.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="42%" />
+<col width="25%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Device
+Driver</th>
+<th class="head">Function</th>
+<th class="head">Intel PAC with
+Arria 10 GX</th>
+<th class="head">Intel PAC
+D5005</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>intel_fpg
+a_pac_iop
+ll</td>
+<td>Allows user code to read
+and set optimal clock
+frequency to driver logic
+for a given AFU</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>intel_fpg
+a_pac_hss
+i</td>
+<td>Driver for HSSI
+Configurable Ethernet
+support</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>intel_max
+10</td>
+<td>Driver to support FPGA
+flash, BMC and retrieval
+of sensor information</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>avmmi_bmc</td>
+<td>Avalon Memory Mapped
+Interface to BMC driver
+to support retrieval of
+sensor information
+support retrieval of
+sensor information</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>altera_as
+mip2</td>
+<td>Altera ASMI Parallel II
+Intel® driver to support
+flash</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>intel_gen
+eric_qspi</td>
+<td>Driver for Generic SPI
+Intel FPGA IP</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>spi_alter
+a_pac_mod</td>
+<td>Intel SPI driver to
+support BMC, FPGA Flash</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="application-fpga-device-enumeration">
+<h2>Application FPGA Device Enumeration<a class="headerlink" href="#application-fpga-device-enumeration" title="Permalink to this headline">¶</a></h2>
+<p>Applications enumerate the FPGA device from the sysfs hierarchy under
+<code class="docutils literal"><span class="pre">/sys/class/fpga</span></code>.</p>
+<p>In the example below the host includes two Intel FPGA devices. Each FPGA
+device has one FME and two Ports (AFUs).</p>
+<p>Each FPGA device has a device directory under <code class="docutils literal"><span class="pre">/sys/class/fpga</span></code>:</p>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">/sys/class/fpga/intel-fpga-dev.0</span>
+<span class="go">/sys/class/fpga/intel-fpga-dev.1</span>
+</pre></div>
+</div>
+<p>Each node has one FME and two Ports (AFUs) as child devices:</p>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">/sys/class/fpga/intel-fpga-dev.0/intel-fpga-fme.0</span>
+<span class="go">/sys/class/fpga/intel-fpga-dev.0/intel-fpga-port.0</span>
+<span class="go">/sys/class/fpga/intel-fpga-dev.0/intel-fpga-port.1</span>
+
+<span class="go">/sys/class/fpga/intel-fpga-dev.1/intel-fpga-fme.1</span>
+<span class="go">/sys/class/fpga/intel-fpga-dev.1/intel-fpga-port.2</span>
+<span class="go">/sys/class/fpga/intel-fpga-dev.1/intel-fpga-port.3</span>
+</pre></div>
+</div>
+<p>In general, the FME/Port sysfs interfaces use the following naming
+convention:</p>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">/sys/class/fpga/intel-fpga-dev.i/intel-fpga-fme.j/</span>
+<span class="go">/sys/class/fpga/intel-fpga-dev.i/intel-fpga-port.k/</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">i</span></code> consecutively numbers all of the container devices</li>
+<li><code class="docutils literal"><span class="pre">j</span></code> consecutively numbers the FMEs</li>
+<li><code class="docutils literal"><span class="pre">k</span></code> consecutively numbers all Ports</li>
+</ul>
+<p>Use the following device nodes to make <code class="docutils literal"><span class="pre">ioctl()</span></code> and <code class="docutils literal"><span class="pre">mmap()</span></code> calls:</p>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">/dev/intel-fpga-fme.j</span>
+<span class="go">/dev/intel-fpga-port.k</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pcie-driver-enumeration">
+<h2>PCIe Driver Enumeration<a class="headerlink" href="#pcie-driver-enumeration" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">intel-fpga-pci.ko</span></code> performs device enumeration. This section
+highlights the main data structures and functions of
+<code class="docutils literal"><span class="pre">intel-fpga-pci.ko</span></code>. For more detailed information refer to the source
+code, <code class="docutils literal"><span class="pre">pcie.c</span></code>.</p>
+<div class="section" id="enumeration-data-structures">
+<h3>Enumeration Data Structures<a class="headerlink" href="#enumeration-data-structures" title="Permalink to this headline">¶</a></h3>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">enum fpga_id_type {</span>
+<span class="go">    PARENT_ID,</span>
+<span class="go">    FME_ID,</span>
+<span class="go">    PORT_ID,</span>
+<span class="go">    FPGA_ID_MAX</span>
+<span class="go">};</span>
+
+<span class="go">static struct idr fpga_ids[FPGA_ID_MAX];</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_chardev_info {</span>
+<span class="go">    const char *name;</span>
+<span class="go">    dev_t devt;</span>
+<span class="go">};</span>
+
+<span class="go">struct fpga_chardev_info fpga_chrdevs[] = {</span>
+<span class="go">    { .name = FPGA_FEATURE_DEV_FME },</span>
+<span class="go">    { .name = FPGA_FEATURE_DEV_PORT },</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">static struct class *fpga_class;</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">  static struct pci_device_id cci_pcie_id_tbl[] = {</span>
+<span class="go">    {PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCIe_DEVICE_ID_RCiEP0_MCP),},</span>
+<span class="go">{PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCIe_DEVICE_ID_VF_MCP),},</span>
+<span class="go">      {PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCIe_DEVICE_ID_RCiEP0_SKX_P),},</span>
+<span class="go">      {PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCIe_DEVICE_ID_VF_SKX_P),},</span>
+<span class="go">      {PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCIe_DEVICE_ID_RCiEP0_DCP),},</span>
+<span class="go">      {PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCIe_DEVICE_ID_VF_DCP),},</span>
+<span class="go">      {0,}</span>
+<span class="go">  };</span>
+
+<span class="go">  static struct pci_driver cci_pci_driver = {</span>
+<span class="go">      .name = DRV_NAME,</span>
+<span class="go">      .id_table = cci_pcie_id_tbl,</span>
+<span class="go">      .probe = cci_pci_probe,</span>
+<span class="go">      .remove = cci_pci_remove,</span>
+<span class="go">      .sriov_configure = cci_pci_sriov_configure</span>
+<span class="go">  };</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct cci_drvdata {</span>
+<span class="go">    int device_id;</span>
+<span class="go">    struct device *fme_dev;</span>
+<span class="go">    struct mutex lock;</span>
+<span class="go">    struct list_head port_dev_list;</span>
+<span class="go">    int released_port_num;</span>
+<span class="go">    struct list_head regions;</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct build_feature_devs_info {</span>
+<span class="go">    struct pci_dev *pdev;</span>
+<span class="go">    void __iomem *ioaddr;</span>
+<span class="go">    void __iomem *ioend;</span>
+<span class="go">    int current_bar;</span>
+<span class="go">    void __iomem *pfme_hdr;</span>
+<span class="go">    struct device *parent_dev;</span>
+<span class="go">    struct platform_device *feature_dev;</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="enumeration-flow">
+<h3>Enumeration Flow<a class="headerlink" href="#enumeration-flow" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">ccidrv_init()</span></code> * Initialize <code class="docutils literal"><span class="pre">fpga_ids</span></code> using <code class="docutils literal"><span class="pre">idr_init()</span></code>. *
+Initialize <code class="docutils literal"><span class="pre">fpga_chrdevs[i].devt</span></code> using <code class="docutils literal"><span class="pre">alloc_chrdev_region()</span></code>.
+* Initialize <code class="docutils literal"><span class="pre">fpga_class</span></code> using <code class="docutils literal"><span class="pre">class_create()</span></code>. *
+<code class="docutils literal"><span class="pre">pci_register_driver(&amp;cci_pci_driver);</span></code></li>
+<li><code class="docutils literal"><span class="pre">cci_pci_probe()</span></code> * Enable the PCI device, request access to its
+regions, set PCI master mode, configure DMA.</li>
+<li><code class="docutils literal"><span class="pre">cci_pci_create_feature_devs()</span></code> <code class="docutils literal"><span class="pre">build_info_alloc_and_init()</span></code> *
+Allocate a <code class="docutils literal"><span class="pre">struct</span> <span class="pre">build_feature_devs_info</span></code>, initialize it.. *
+<code class="docutils literal"><span class="pre">.parent_dev</span></code> is set to a parent sysfs directory
+(intel-fpga-dev.*id*) that contains the FME and Port sysfs
+directories.</li>
+<li><code class="docutils literal"><span class="pre">parse_feature_list()</span></code> * Walk the BAR0 Device Feature List to
+discover the FME, the Port, and their private features.</li>
+<li><code class="docutils literal"><span class="pre">parse_feature()</span></code> <code class="docutils literal"><span class="pre">parse_feature_afus()</span></code> <code class="docutils literal"><span class="pre">parse_feature_fme()</span></code>
+* When enumeration discovers an FME: * <code class="docutils literal"><span class="pre">build_info_create_dev()</span></code>
+* Allocate a platform device for the FME, storing in
+<code class="docutils literal"><span class="pre">build_feature_devs_info.feature_dev</span></code>. * <code class="docutils literal"><span class="pre">feature_dev.id</span></code> is
+initialized to the result of <code class="docutils literal"><span class="pre">idr_alloc(fpga_ids[FME_ID],</span></code> *
+<code class="docutils literal"><span class="pre">feature_dev.parent</span></code> is set to
+<code class="docutils literal"><span class="pre">build_feature_devs_info.parent_dev</span></code>. * Allocate an array of
+<code class="docutils literal"><span class="pre">struct</span> <span class="pre">resource</span></code> in <code class="docutils literal"><span class="pre">feature_dev.resource</span></code>. * Allocate a
+<code class="docutils literal"><span class="pre">struct</span> <span class="pre">feature_platform_data</span></code>, initialize it, and store a pointer
+in <code class="docutils literal"><span class="pre">feature_dev.dev.platform_data</span></code> * <code class="docutils literal"><span class="pre">create_feature_instance()</span></code>
+<code class="docutils literal"><span class="pre">build_info_add_sub_feature()</span></code> * Initialize
+<code class="docutils literal"><span class="pre">feature_dev.resource[FME_FEATURE_ID_HEADER]</span></code>. *
+<code class="docutils literal"><span class="pre">feature_platform_data_add()</span></code> * Initialize
+<code class="docutils literal"><span class="pre">feature_platform_data.features[FME_FEATURE_ID_HEADER]</span></code>, everything
+but .fops.</li>
+<li><code class="docutils literal"><span class="pre">parse_feature()</span></code> <code class="docutils literal"><span class="pre">parse_feature_afus()</span></code> <code class="docutils literal"><span class="pre">parse_feature_port()</span></code>
+* When enumeration discovers a Port: * <code class="docutils literal"><span class="pre">build_info_create_dev()</span></code>
+* Allocate a platform device for the Port, storing in
+<code class="docutils literal"><span class="pre">build_feature_devs_info.feature_dev</span></code>. * <code class="docutils literal"><span class="pre">feature_dev.id</span></code> is
+initialized to the result of <code class="docutils literal"><span class="pre">idr_alloc(fpga_ids[PORT_ID],</span></code> *
+<code class="docutils literal"><span class="pre">feature_dev.parent</span></code> is set to
+<code class="docutils literal"><span class="pre">build_feature_devs_info.parent_dev</span></code>. * Allocate an array of
+<code class="docutils literal"><span class="pre">struct</span> <span class="pre">resource</span></code> in <code class="docutils literal"><span class="pre">feature_dev.resource</span></code>. * Allocate a
+<code class="docutils literal"><span class="pre">struct</span> <span class="pre">feature_platform_data</span></code>, initialize it, and store a pointer
+in <code class="docutils literal"><span class="pre">feature_dev.dev.platform_data</span></code> * <code class="docutils literal"><span class="pre">build_info_commit_dev()</span></code>
+* Add the <code class="docutils literal"><span class="pre">struct</span> <span class="pre">feature_platform_data.node</span></code> for the Port to the
+list of Ports in <code class="docutils literal"><span class="pre">struct</span> <span class="pre">cci_drvdata.port_dev_list</span></code> *
+<code class="docutils literal"><span class="pre">create_feature_instance()</span></code> <code class="docutils literal"><span class="pre">build_info_add_sub_feature()</span></code> *
+Initialize <code class="docutils literal"><span class="pre">feature_dev.resource[PORT_FEATURE_ID_HEADER]</span></code>. *
+<code class="docutils literal"><span class="pre">feature_platform_data_add()</span></code> * Initialize
+<code class="docutils literal"><span class="pre">feature_platform_data.features[PORT_FEATURE_ID_HEADER]</span></code>,
+everything but .fops.</li>
+<li><code class="docutils literal"><span class="pre">parse_feature()</span></code> <code class="docutils literal"><span class="pre">parse_feature_afus()</span></code>
+<code class="docutils literal"><span class="pre">parse_feature_port_uafu()</span></code> * When enumeration discovers an AFU:
+* <code class="docutils literal"><span class="pre">create_feature_instance()</span></code> <code class="docutils literal"><span class="pre">build_info_add_sub_feature()</span></code> *
+Initialize <code class="docutils literal"><span class="pre">feature_dev.resource[PORT_FEATURE_ID_UAFU]</span></code>. *
+<code class="docutils literal"><span class="pre">feature_platform_data_add()</span></code> * Initialize
+<code class="docutils literal"><span class="pre">feature_platform_data.features[PORT_FEATURE_ID_UAFU]</span></code>, everything
+but .fops.</li>
+<li><code class="docutils literal"><span class="pre">parse_feature()</span></code> <code class="docutils literal"><span class="pre">parse_feature_private()</span></code>
+<code class="docutils literal"><span class="pre">parse_feature_fme_private()</span></code> * When enumeration discovers an FME
+private feature: * <code class="docutils literal"><span class="pre">create_feature_instance()</span></code>
+<code class="docutils literal"><span class="pre">build_info_add_sub_feature()</span></code> * Initialize
+<code class="docutils literal"><span class="pre">feature_dev.resource[id]</span></code>. * <code class="docutils literal"><span class="pre">feature_platform_data_add()</span></code> *
+Initialize <code class="docutils literal"><span class="pre">feature_platform_data.features[id]</span></code>, everything but
+.fops.</li>
+<li><code class="docutils literal"><span class="pre">parse_feature()</span></code> <code class="docutils literal"><span class="pre">parse_feature_private()</span></code>
+<code class="docutils literal"><span class="pre">parse_feature_port_private()</span></code><ul>
+<li>When a Port private feature is encountered: *
+<code class="docutils literal"><span class="pre">create_feature_instance()</span></code> <code class="docutils literal"><span class="pre">build_info_add_sub_feature()</span></code> *
+Initialize <code class="docutils literal"><span class="pre">feature_dev.resource[id]</span></code>. *
+<code class="docutils literal"><span class="pre">feature_platform_data_add()</span></code> * Initialize
+<code class="docutils literal"><span class="pre">feature_platform_data.features[id]</span></code>, everything but .fops.</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">parse_ports_from_fme()</span></code> * If the driver is loaded on the Physical
+Function (PF), then.. * Run the <code class="docutils literal"><span class="pre">parse_feature_list()</span></code> flow on
+each port described in the FME header. * Use the BAR mentioned in
+each Port entry in the header.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="fme-platform-device-initialization">
+<h2>FME Platform Device Initialization<a class="headerlink" href="#fme-platform-device-initialization" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">intel-fpga-fme.ko</span></code> performs FME device initialization. This section
+highlights the main data structures and and functions. For more
+information refer to the source code, <code class="docutils literal"><span class="pre">fme-main.c</span></code>.</p>
+<div class="section" id="fme-platform-device-data-structures">
+<h3>FME Platform Device Data Structures<a class="headerlink" href="#fme-platform-device-data-structures" title="Permalink to this headline">¶</a></h3>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct feature_ops {</span>
+<span class="go">    int (*init)(struct platform_device *pdev, struct feature *feature);</span>
+<span class="go">    int (*uinit)(struct platform_device *pdev, struct feature *feature);</span>
+<span class="go">    long (*ioctl)(struct platform_device *pdev, struct feature *feature,</span>
+<span class="go">                unsigned int cmd, unsigned long arg);</span>
+<span class="go">    int (*test)(struct platform_device *pdev, struct feature *feature);</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct feature {</span>
+<span class="go">    const char *name;</span>
+<span class="go">    int resource_index;</span>
+<span class="go">    void __iomem *ioaddr;</span>
+<span class="go">    struct feature_ops *ops;</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct feature_platform_data {</span>
+<span class="go">    struct list_head node;</span>
+<span class="go">    struct mutex lock;</span>
+<span class="go">    unsigned long dev_status;</span>
+<span class="go">    struct cdev cdev;</span>
+<span class="go">    struct platform_device *dev;</span>
+<span class="go">    unsigned int disable_count;</span>
+<span class="go">    void *private;</span>
+<span class="go">    int num;</span>
+<span class="go">    int (*config_port)(struct platform_device *, u32, bool);</span>
+<span class="go">    struct platform_device *(*fpga_for_each_port)(struct platform_device *,</span>
+<span class="go">            void *, int (*match)(struct platform_device *, void *));</span>
+<span class="go">    struct feature features[0];</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct perf_object {</span>
+<span class="go">    int id;</span>
+<span class="go">    const struct attribute_group **attr_groups;</span>
+<span class="go">    struct device *fme_dev;</span>
+<span class="go">    struct list_head node;</span>
+<span class="go">    struct list_head children;</span>
+<span class="go">    struct kobject kobj;</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_fme {</span>
+<span class="go">    u8 port_id;</span>
+<span class="go">    u64 pr_err;</span>
+<span class="go">    struct device *dev_err;</span>
+<span class="go">    struct perf_object *perf_dev;</span>
+<span class="go">    struct feature_platform_data *pdata;</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fme-platform-device-initialization-flow">
+<h3>FME Platform Device Initialization Flow<a class="headerlink" href="#fme-platform-device-initialization-flow" title="Permalink to this headline">¶</a></h3>
+<div class="figure">
+<img alt="FME" src="../../_images/fme_init_flow.png" />
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">fme_probe()</span></code> <code class="docutils literal"><span class="pre">fme_dev_init()</span></code> * Initialize a
+<code class="docutils literal"><span class="pre">struct</span> <span class="pre">fpga_fme</span></code> and store it in the
+<code class="docutils literal"><span class="pre">feature_platform_data.private</span></code> field.</li>
+<li><code class="docutils literal"><span class="pre">fme_probe()</span></code> <code class="docutils literal"><span class="pre">fpga_dev_feature_init()</span></code>
+<code class="docutils literal"><span class="pre">feature_instance_init()</span></code> * Save a <code class="docutils literal"><span class="pre">struct</span> <span class="pre">feature_ops</span></code> into the
+<code class="docutils literal"><span class="pre">feature_platform_data.features</span></code> for each populated feature. *
+Call the <code class="docutils literal"><span class="pre">test</span></code> function, if any, from the struct. * Call the
+<code class="docutils literal"><span class="pre">init</span></code> function from the struct.</li>
+<li><code class="docutils literal"><span class="pre">fme_probe()</span></code> <code class="docutils literal"><span class="pre">fpga_register_dev_ops()</span></code> * Create the FME
+character device node, registering a <code class="docutils literal"><span class="pre">struct</span> <span class="pre">file_operations</span></code>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="port-platform-device-initialization">
+<h2>Port Platform Device Initialization<a class="headerlink" href="#port-platform-device-initialization" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">intel-fpga-afu.ko</span></code> performs Port device initialization. This section
+highlights the main data structures and and functions. For more detailed
+information refer to the source code, <code class="docutils literal"><span class="pre">afu.c</span></code>.</p>
+<div class="section" id="port-platform-device-data-structures">
+<h3>Port Platform Device Data Structures<a class="headerlink" href="#port-platform-device-data-structures" title="Permalink to this headline">¶</a></h3>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct feature_ops {</span>
+<span class="go">    int (*init)(struct platform_device *pdev, struct feature *feature);</span>
+<span class="go">    int (*uinit)(struct platform_device *pdev, struct feature *feature);</span>
+<span class="go">    long (*ioctl)(struct platform_device *pdev, struct feature *feature,</span>
+<span class="go">                unsigned int cmd, unsigned long arg);</span>
+<span class="go">    int (*test)(struct platform_device *pdev, struct feature *feature);</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct feature {</span>
+<span class="go">    const char *name;</span>
+<span class="go">    int resource_index;</span>
+<span class="go">    void __iomem *ioaddr;</span>
+<span class="go">    struct feature_ops *ops;</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct feature_platform_data {</span>
+<span class="go">    struct list_head node;</span>
+<span class="go">    struct mutex lock;</span>
+<span class="go">    unsigned long dev_status;</span>
+<span class="go">    struct cdev cdev;</span>
+<span class="go">    struct platform_device *dev;</span>
+<span class="go">    unsigned int disable_count;</span>
+<span class="go">    void *private;</span>
+<span class="go">    int num;</span>
+<span class="go">    int (*config_port)(struct platform_device *, u32, bool);</span>
+<span class="go">    struct platform_device *(*fpga_for_each_port)(struct platform_device *,</span>
+<span class="go">            void *, int (*match)(struct platform_device *, void *));</span>
+<span class="go">    struct feature features[0];</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_afu_region {</span>
+<span class="go">    u32 index;</span>
+<span class="go">    u32 flags;</span>
+<span class="go">    u64 size;</span>
+<span class="go">    u64 offset;</span>
+<span class="go">    u64 phys;</span>
+<span class="go">    struct list_head node;</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_afu_dma_region {</span>
+<span class="go">    u64 user_addr;</span>
+<span class="go">    u64 length;</span>
+<span class="go">    u64 iova;</span>
+<span class="go">    struct page **pages;</span>
+<span class="go">    struct rb_node node;</span>
+<span class="go">    bool in_use;</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_afu {</span>
+<span class="go">    u64 region_cur_offset;</span>
+<span class="go">    int num_regions;</span>
+<span class="go">    u8 num_umsgs;</span>
+<span class="go">    struct list_head regions;</span>
+<span class="go">    struct rb_root dma_regions;</span>
+<span class="go">    struct feature_platform_data *pdata;</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="port-platform-device-initialization-flow">
+<h3>Port Platform Device Initialization Flow<a class="headerlink" href="#port-platform-device-initialization-flow" title="Permalink to this headline">¶</a></h3>
+<div class="figure">
+<img alt="Port" src="../../_images/port_init_flow.png" />
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">afu_probe()</span></code> <code class="docutils literal"><span class="pre">afu_dev_init()</span></code> * Initialize a
+<code class="docutils literal"><span class="pre">struct</span> <span class="pre">fpga_afu</span></code> and store it in the
+<code class="docutils literal"><span class="pre">feature_platform_data.private</span></code> field.</li>
+<li><code class="docutils literal"><span class="pre">afu_probe()</span></code> <code class="docutils literal"><span class="pre">fpga_dev_feature_init()</span></code>
+<code class="docutils literal"><span class="pre">feature_instance_init()</span></code> * Save a <code class="docutils literal"><span class="pre">struct</span> <span class="pre">feature_ops</span></code> into the
+<code class="docutils literal"><span class="pre">feature_platform_data</span></code>.features for each populated feature. *
+Call the <code class="docutils literal"><span class="pre">test</span></code> function, if any, from the struct. * Call the
+<code class="docutils literal"><span class="pre">init</span></code> function from the struct.</li>
+<li><code class="docutils literal"><span class="pre">afu_probe()</span></code> <code class="docutils literal"><span class="pre">fpga_register_dev_ops()</span></code> * Create the Port
+character device node, registering a <code class="docutils literal"><span class="pre">struct</span> <span class="pre">file_operations</span></code>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="fme-ioctls">
+<h2>FME IOCTLs<a class="headerlink" href="#fme-ioctls" title="Permalink to this headline">¶</a></h2>
+<p>Call the following ioctls on an open file descriptor for
+/dev/intel-fpga-fme.*j*</p>
+<p><code class="docutils literal"><span class="pre">FPGA_GET_API_VERSION</span></code></p>
+<ul class="simple">
+<li>return the current version as an integer, starting from 0.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">FPGA_CHECK_EXTENSION</span></code></p>
+<ul class="simple">
+<li>(not currently supported).</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">FPGA_FME_PORT_RELEASE</span></code></p>
+<ul class="simple">
+<li>arg is a pointer to a:</li>
+</ul>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_fme_port_release {</span>
+<span class="go">    __u32 argsz;   // in: sizeof(struct fpga_fme_port_release)</span>
+<span class="go">    __u32 flags;   // in: must be 0</span>
+<span class="go">    __u32 port_id; // in: port ID (from 0) to release.</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">FPGA_FME_PORT_ASSIGN</span></code></p>
+<ul class="simple">
+<li>arg is a pointer to a:</li>
+</ul>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_fme_port_assign {</span>
+<span class="go">    __u32 argsz;   // in: sizeof(struct fpga_fme_port_assign)</span>
+<span class="go">    __u32 flags;   // in: must be 0</span>
+<span class="go">    __u32 port_id; // in: port ID (from 0) to assign. (must have been previously released by FPGA_FME_PORT_RELEASE)</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">FPGA_FME_PORT_PR</span></code></p>
+<ul class="simple">
+<li>arg is a pointer to a:</li>
+</ul>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_fme_port_pr {</span>
+<span class="go">    __u32 argsz;          // in: sizeof(struct fpga_fme_port_pr)</span>
+<span class="go">    __u32 flags;          // in: must be 0</span>
+<span class="go">    __u32 port_id;        // in: port ID (from 0)</span>
+<span class="go">    __u32 buffer_size;    // in: size of bitstream buffer in bytes. Must be 4-byte aligned.</span>
+<span class="go">    __u64 buffer_address; // in: process address of bitstream buffer</span>
+<span class="go">    __u64 status;         // out: error status (bitmask)</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="port-ioctls">
+<h2>Port IOCTLs<a class="headerlink" href="#port-ioctls" title="Permalink to this headline">¶</a></h2>
+<p>Call the following ioctls on an open file descriptor for
+/dev/intel-fpga-port.*k* .</p>
+<p><code class="docutils literal"><span class="pre">FPGA_GET_API_VERSION</span></code></p>
+<ul class="simple">
+<li>return the current version as an integer, starting from 0.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">FPGA_CHECK_EXTENSION</span></code></p>
+<ul class="simple">
+<li>(not currently supported).</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">FPGA_PORT_GET_INFO</span></code></p>
+<ul class="simple">
+<li>arg is a pointer to a:</li>
+</ul>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_port_info {</span>
+<span class="go">    __u32 argsz;       // in: sizeof(struct fpga_port_info)</span>
+<span class="go">    __u32 flags;       // out: returns 0</span>
+<span class="go">    __u32 num_regions; // out: number of MMIO regions, 2 (1 for AFU and 1 for STP)</span>
+<span class="go">    __u32 num_umsgs;   // out: number of UMsg&#39;s supported by the hardware</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">FPGA_PORT_GET_REGION_INFO</span></code></p>
+<ul class="simple">
+<li>arg is a pointer to a:</li>
+</ul>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_port_region_info {</span>
+<span class="go">    __u32 argsz;   // in: sizeof(struct fpga_port_region_info)</span>
+<span class="go">    __u32 flags;   // out: (bitmask) { FPGA_REGION_READ, FPGA_REGION_WRITE, FPGA_REGION_MMAP }</span>
+<span class="go">    __u32 index;   // in: FPGA_PORT_INDEX_UAFU or FPGA_PORT_INDEX_STP</span>
+<span class="go">    __u32 padding; // in: must be 0</span>
+<span class="go">    __u64 size;    // out: size of MMIO region in bytes</span>
+<span class="go">    __u64 offset;  // out: offset of MMIO region from start of device fd</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">FPGA_PORT_DMA_MAP</span></code></p>
+<ul class="simple">
+<li>arg is a pointer to a:</li>
+</ul>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_port_dma_map {</span>
+<span class="go">    __u32 argsz;     // in: sizeof(struct fpga_port_dma_map)</span>
+<span class="go">    __u32 flags;     // in: must be 0</span>
+<span class="go">    __u64 user_addr; // in: process virtual address. Must be page aligned.</span>
+<span class="go">    __u64 length;    // in: length of mapping in bytes. Must be a multiple of page size.</span>
+<span class="go">    __u64 iova;      // out: IO virtual address</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">FPGA_PORT_DMA_UNMAP</span></code></p>
+<ul class="simple">
+<li>arg is a pointer to a:</li>
+</ul>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_port_dma_unmap {</span>
+<span class="go">    __u32 argsz; // in: sizeof(struct fpga_port_dma_unmap)</span>
+<span class="go">    __u32 flags; // in: must be 0</span>
+<span class="go">    __u64 iova;  // in: IO virtual address returned by a previous FPGA_PORT_DMA_MAP</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">FPGA_PORT_RESET</span></code></p>
+<ul class="simple">
+<li>arg must be NULL.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">FPGA_PORT_UMSG_ENABLE</span></code></p>
+<ul class="simple">
+<li>arg must be NULL.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">FPGA_PORT_UMSG_DISABLE</span></code></p>
+<ul class="simple">
+<li>args must be NULL.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">FPGA_PORT_UMSG_SET_MODE</span></code></p>
+<ul class="simple">
+<li>arg is a pointer to a:</li>
+</ul>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_port_umsg_cfg {</span>
+<span class="go">    __u32 argsz;       // in: sizeof(struct fpga_port_umsg_cfg)</span>
+<span class="go">    __u32 flags;       // in: must be 0</span>
+<span class="go">    __u32 hint_bitmap; // in: UMsg hint mode bitmap. Signifies which UMsg&#39;s are enabled.</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">FPGA_PORT_UMSG_SET_BASE_ADDR</span></code></p>
+<ul class="simple">
+<li>Disable UMsg before issuing this ioctl.</li>
+<li>The buffer for the iova field must large enough for all UMsg’s
+(num_umsgs * PAGE_SIZE). * The the driver’s buffer management marks
+this buffer “in use”. * If iova is NULL, the driver’s buffer
+management marks any previous region “in use”.</li>
+<li>arg is a pointer to a:</li>
+</ul>
+<div class="code c highlight-console"><div class="highlight"><pre><span></span><span class="go">struct fpga_port_umsg_base_addr {</span>
+<span class="go">    __u32 argsz; // in: sizeof(struct fpga_port_umsg_base_addr)</span>
+<span class="go">    __u32 flags; // in: must be 0</span>
+<span class="go">    __u64 iova;  // in: IO virtual address from FPGA_PORT_DMA_MAP.</span>
+<span class="go">};</span>
+</pre></div>
+</div>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">To clear the port errors, write the exact bitmask of the current errors, for example:</span>
+
+<span class="gp">$</span> cat errors &gt; clear
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="sysfs-files">
+<h1>sysfs files<a class="headerlink" href="#sysfs-files" title="Permalink to this headline">¶</a></h1>
+<p>The registers available on the Intel Programmable Acceleration Card
+(PAC) are a subset of the registers available on the Intel Xeon
+Processor with Integrated FPGA. When the registers available for the two
+platforms differ, the tables below include a fifth column to specify
+platform support. The tables use the following abbreviations:</p>
+<ul class="simple">
+<li>Integrated FPGA - Intel Xeon Processor with Integrated FPGA</li>
+<li>PAC - Intel Programmable Acceleration Card (PAC) ## FME Header sysfs
+files ##</li>
+</ul>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="47%" />
+<col width="16%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ports_num</td>
+<td>fme_header.capability.num_ports</td>
+<td>decimal int</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>cache_size</td>
+<td>fme_header.capability.cache_size</td>
+<td>decimal int</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>fme_header.capability.fabric_verid</td>
+<td>decimal int</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>socket_id</td>
+<td>fme_header.capability.socket_id</td>
+<td>decimal int</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-even"><td>bitstream_id</td>
+<td>fme_header.bitstream_id</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>bitstream_metadata</td>
+<td>fme_header.bitstream_md</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="fme-thermal-management-sysfs-files">
+<h2>FME Thermal Management sysfs files<a class="headerlink" href="#fme-thermal-management-sysfs-files" title="Permalink to this headline">¶</a></h2>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/thermal_mgmt/</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="32%" />
+<col width="11%" />
+<col width="29%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs
+file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+<th class="head">platfo
+rm
+suppor
+t</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>threshol
+d1</td>
+<td>thermal.threshold.t
+mp_thshold1</td>
+<td>decim
+al
+int</td>
+<td>User: Read-only
+Root: Read-write</td>
+<td>Integr
+ated
+FPGA</td>
+</tr>
+<tr class="row-odd"><td>threshol
+d2</td>
+<td>thermal.threshold.t
+mp_thshold2</td>
+<td>decim
+al
+int</td>
+<td>User: Read-only
+Root: Read-write</td>
+<td>Integr
+ated
+FPGA</td>
+</tr>
+<tr class="row-even"><td>threshol
+d_trip</td>
+<td>thermal.threshold.t
+herm_trip_thshold</td>
+<td>decim
+al
+int</td>
+<td>Read-only</td>
+<td>Integr
+ated
+FPGA</td>
+</tr>
+<tr class="row-odd"><td>threshol
+d1_reach
+ed</td>
+<td>thermal.threshold.t
+hshold1_status</td>
+<td>decim
+al
+int</td>
+<td>Read-only</td>
+<td>Integr
+ated
+FPGA</td>
+</tr>
+<tr class="row-even"><td>threshol
+d2_reach
+ed</td>
+<td>thermal.threshold.t
+hshold2_status</td>
+<td>decim
+al
+int</td>
+<td>Read-only</td>
+<td>Integr
+ated
+FPGA</td>
+</tr>
+<tr class="row-odd"><td>threshol
+d1_polic
+y</td>
+<td>thermal.threshold.t
+hshold_policy</td>
+<td>decim
+al
+int</td>
+<td>User: Read-only
+Root: Read-write</td>
+<td>Integr
+ated
+FPGA</td>
+</tr>
+<tr class="row-even"><td>temperat
+ure</td>
+<td>thermal.rdsensor_fm
+1.fpga_temp</td>
+<td>decim
+al
+int</td>
+<td>Read-only</td>
+<td>Integr
+ated
+FPGA,
+PAC</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fme-power-management-sysfs-files">
+<h2>FME Power Management sysfs files<a class="headerlink" href="#fme-power-management-sysfs-files" title="Permalink to this headline">¶</a></h2>
+<p>Power management is available only for the Intel Xeon Processor with
+Integrated FPGA.</p>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/power_mgmt/</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="33%" />
+<col width="17%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs
+file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>consumed</td>
+<td>power.status.pwr_con
+sumed</td>
+<td>hex
+uint64_t</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>threshold
+1</td>
+<td>power.threshold.thre
+shold1</td>
+<td>hex
+uint64_t</td>
+<td>User: Read-only
+Root: Read-write</td>
+</tr>
+<tr class="row-even"><td>threshold
+2</td>
+<td>power.threshold.thre
+shold2</td>
+<td>hex
+uint64_t</td>
+<td>User: Read-only
+Root: Read-write</td>
+</tr>
+<tr class="row-odd"><td>threshold
+1_status</td>
+<td>power.threshold.thre
+shold1_status</td>
+<td>decimal
+unsigned</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-even"><td>threshold
+2_status</td>
+<td>power.threshold.thre
+shold2_status</td>
+<td>decimal
+unsigned</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>rtl</td>
+<td>power.status.fpga_la
+tency_report</td>
+<td>decimal
+unsigned</td>
+<td>Read-only</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fme-global-error-sysfs-files">
+<h2>FME Global Error sysfs files<a class="headerlink" href="#fme-global-error-sysfs-files" title="Permalink to this headline">¶</a></h2>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/errors/</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="33%" />
+<col width="17%" />
+<col width="11%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">acces
+s</th>
+<th class="head">platform
+support</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>pcie0_erro
+rs</td>
+<td>gerror.pcie0_err</td>
+<td>hex
+uint64_t</td>
+<td>Read-
+write</td>
+<td>Integrated
+FPGA, PAC</td>
+</tr>
+<tr class="row-odd"><td>pcie1_erro
+rs</td>
+<td>gerror.pcie1_err</td>
+<td>hex
+uint64_t</td>
+<td>Read-
+write</td>
+<td>Integrated
+FPGA</td>
+</tr>
+<tr class="row-even"><td>gbs_errors</td>
+<td>gerror.ras_gerr</td>
+<td>hex
+uint64_t</td>
+<td>Read-
+only</td>
+<td>Integrated
+FPGA, PAC</td>
+</tr>
+<tr class="row-odd"><td>bbs_errors</td>
+<td>gerror.ras_berr</td>
+<td>hex
+uint64_t</td>
+<td>Read-
+only</td>
+<td>Integrated
+FPGA, PAC</td>
+</tr>
+<tr class="row-even"><td>warning_er
+rors</td>
+<td>gerror.ras_werr.eve
+nt_warn_err</td>
+<td>hex int</td>
+<td>Read-
+write</td>
+<td>Integrated
+FPGA, PAC</td>
+</tr>
+<tr class="row-odd"><td>inject_err
+or</td>
+<td>gerror.ras_error_in
+j</td>
+<td>hex
+uint64_t</td>
+<td>Read-
+write</td>
+<td>Integrated
+FPGA, PAC</td>
+</tr>
+</tbody>
+</table>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/errors/fme-errors/</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="51%" />
+<col width="21%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>errors</td>
+<td>gerror.fme_err</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>first_error</td>
+<td>gerror.fme_first_err.err_reg_status</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-even"><td>next_error</td>
+<td>gerror.fme_next_err.err_reg_status</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>clear</td>
+<td>Clears errors, first_error, next_error</td>
+<td>various uint64_t</td>
+<td>Write-only</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">To clear the FME errors, write the exact bitmask of the current errors, for example:</span>
+</pre></div>
+</div>
+<div class="code sh highlight-console"><div class="highlight"><pre><span></span><span class="go">cat errors &gt; clear</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fme-partial-reconfiguration-sysfs-files">
+<h2>FME Partial Reconfiguration sysfs files<a class="headerlink" href="#fme-partial-reconfiguration-sysfs-files" title="Permalink to this headline">¶</a></h2>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/pr/</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="58%" />
+<col width="15%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs
+file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>interfac
+e_id</td>
+<td>pr.fme_pr_intfc_id0_h,
+pr.fme_pre_intfc_id0_l</td>
+<td>hex
+16-byte</td>
+<td>Read-o
+nly</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fme-global-performance-sysfs-files">
+<h2>FME Global Performance sysfs files<a class="headerlink" href="#fme-global-performance-sysfs-files" title="Permalink to this headline">¶</a></h2>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/dperf/clock</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="46%" />
+<col width="21%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>clock</td>
+<td>gperf.clk.afu_interf_clock</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+</tbody>
+</table>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/perf/cache/ (Not valid for
+Acceleration Stack for Intel® Xeon® CPU with FPGAs)</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="39%" />
+<col width="15%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>freeze</td>
+<td>gperf.ch_ctl.freeze</td>
+<td>decimal
+int</td>
+<td>Read-w
+rite</td>
+</tr>
+<tr class="row-odd"><td>read_hit</td>
+<td>gperf.CACHE_RD_HIT</td>
+<td>hex
+uint64_t</td>
+<td>Read-o
+nly</td>
+</tr>
+<tr class="row-even"><td>read_miss</td>
+<td>gperf.CACHE_RD_MISS</td>
+<td>hex
+uint64_t</td>
+<td>Read-o
+nly</td>
+</tr>
+<tr class="row-odd"><td>write_hit</td>
+<td>gperf.CACHE_WR_HIT</td>
+<td>hex
+uint64_t</td>
+<td>Read-o
+nly</td>
+</tr>
+<tr class="row-even"><td>write_miss</td>
+<td>gperf.CACHE_WR_MISS</td>
+<td>hex
+uint64_t</td>
+<td>Read-o
+nly</td>
+</tr>
+<tr class="row-odd"><td>hold_request</td>
+<td>gperf.CACHE_HOLD_REQ</td>
+<td>hex
+uint64_t</td>
+<td>Read-o
+nly</td>
+</tr>
+<tr class="row-even"><td>tx_req_stall</td>
+<td>gperf.CACHE_TX_REQ_STALL</td>
+<td>hex
+uint64_t</td>
+<td>Read-o
+nly</td>
+</tr>
+<tr class="row-odd"><td>rx_req_stall</td>
+<td>gperf.CACHE_RX_REQ_STALL</td>
+<td>hex
+uint64_t</td>
+<td>Read-o
+nly</td>
+</tr>
+<tr class="row-even"><td>data_write_port_cont
+ention</td>
+<td>gperf.CACHE_DATA_WR_PORT
+_CONTEN</td>
+<td>hex
+uint64_t</td>
+<td>Read-o
+nly</td>
+</tr>
+<tr class="row-odd"><td>tag_write_port_conte
+ntion</td>
+<td><a href="#id2"><span class="problematic" id="id3">gperf.CACHE_TAG_WR_PORT_</span></a>
+CONTEN</td>
+<td>hex
+uint64_t</td>
+<td>Read-o
+nly</td>
+</tr>
+</tbody>
+</table>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/perf/iommu/</p>
+<p>Power management is only available for the Intel Xeon Processor with
+Integrated FPGA.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="27%" />
+<col width="15%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>freeze</td>
+<td>gperf.vtd_ctl.freeze</td>
+<td>decimal int</td>
+<td>User: Read-only Root: Read-write</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/perf/iommu/afu*k*/</div>
+<div class="line">Power management is only available for the Intel Xeon Processor with
+Integrated FPGA.</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="42%" />
+<col width="18%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>read_transaction</td>
+<td>gperf.VTD_AFU0_MEM_RD_TRANS</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>write_transaction</td>
+<td>gperf.VTD_AFU0_MEM_WR_TRANS</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-even"><td>tlb_read_hit</td>
+<td>gperf.VTD_AFU0_TLB_RD_HIT</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>tlb_write_hit</td>
+<td>gperf.VTD_AFU0_TLB_WR_HIT</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+</tbody>
+</table>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-fme.*j*/dperf/fabric/</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="23%" />
+<col width="13%" />
+<col width="33%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs
+file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+<th class="head">platform
+support</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>enabl
+e</td>
+<td>gperf.fab_ctl
+.(enabled)</td>
+<td>decima
+l
+int</td>
+<td>User: Read-only
+Root: Read-write</td>
+<td>Integrated
+FPGA, PAC</td>
+</tr>
+<tr class="row-odd"><td>freez
+e</td>
+<td>gperf.fab_ctl
+.freeze</td>
+<td>decima
+l
+int</td>
+<td>User: Read-only
+Root: Read-write</td>
+<td>Integrated
+FPGA, PAC</td>
+</tr>
+<tr class="row-even"><td>pcie0
+_read</td>
+<td>gperf.FAB_PCI
+E0_RD</td>
+<td>hex
+uint64
+_t</td>
+<td>Read-only</td>
+<td>Integrated
+FPGA, PAC</td>
+</tr>
+<tr class="row-odd"><td>pcie0
+_writ
+e</td>
+<td>gperf.FAB_PCI
+E0_WR</td>
+<td>hex
+uint64
+_t</td>
+<td>Read-only</td>
+<td>Integrated
+FPGA, PAC</td>
+</tr>
+<tr class="row-even"><td>pcie1
+_read</td>
+<td>gperf.FAB_PCI
+E1_RD</td>
+<td>hex
+uint64
+_t</td>
+<td>Read-only</td>
+<td>Integrated
+FPGA</td>
+</tr>
+<tr class="row-odd"><td>pcie1
+_writ
+e</td>
+<td>gperf.FAB_PCI
+E1_WR</td>
+<td>hex
+uint64
+_t</td>
+<td>Read-only</td>
+<td>Integrated
+FPGA</td>
+</tr>
+<tr class="row-even"><td>upi_r
+ead</td>
+<td>gperf.FAB_UPI
+_RD</td>
+<td>hex
+uint64
+_t</td>
+<td>Read-only</td>
+<td>Integrated
+FPGA</td>
+</tr>
+<tr class="row-odd"><td>upi_w
+rite</td>
+<td>gperf.FAB_UPI
+_WR</td>
+<td>hex
+uint64
+_t</td>
+<td>Read-only</td>
+<td>Integrated
+FPGA</td>
+</tr>
+</tbody>
+</table>
+<p>intel-fpga-ev.<em>i</em>/intel-fpga/fme.*j*/dperf/fabric/port*k*/</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="26%" />
+<col width="17%" />
+<col width="13%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+<th class="head">Integrated FPGA</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>pcie0_read</td>
+<td>gperf.FAB_PCIE0_RD</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+<td>Integrated FPGA, PAC</td>
+</tr>
+<tr class="row-odd"><td>pcie0_write</td>
+<td>gperf.FAB_PCIE0_WR</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+<td>Integrated FPGA, PAC</td>
+</tr>
+<tr class="row-even"><td>pcie1_read</td>
+<td>gperf.FAB_PCIE1_RD</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+<td>Integrated FPGA</td>
+</tr>
+<tr class="row-odd"><td>pcie1_write</td>
+<td>gperf.FAB_PCIE1_WR</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+<td>Integrated FPGA</td>
+</tr>
+<tr class="row-even"><td>upi_read</td>
+<td>gperf.FAB_UPI_RD</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+<td>Integrated FPGA</td>
+</tr>
+<tr class="row-odd"><td>upi_write</td>
+<td>gperf.FAB_UPI_WR</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+<td>Integrated FPGA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="port-header-sysfs-files">
+<h2>Port Header sysfs files<a class="headerlink" href="#port-header-sysfs-files" title="Permalink to this headline">¶</a></h2>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-port.*k*/</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="55%" />
+<col width="16%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>id</td>
+<td>port_header.capability.port_number</td>
+<td>decimal int</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>ltr</td>
+<td>port_header.control.latency_tolerance</td>
+<td>decimal int</td>
+<td>Read-only</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="port-afu-header-sysfs-files">
+<h2>Port AFU Header sysfs files<a class="headerlink" href="#port-afu-header-sysfs-files" title="Permalink to this headline">¶</a></h2>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-port.*k*/</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="33%" />
+<col width="24%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>afu_id</td>
+<td>afu_header.guid</td>
+<td>hex 16-byte</td>
+<td>Read-only</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="port-error-sysfs-files">
+<h2>Port Error sysfs files<a class="headerlink" href="#port-error-sysfs-files" title="Permalink to this headline">¶</a></h2>
+<p>intel-fpga-dev.<em>i</em>/intel-fpga-port.*k*/errors/</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="34%" />
+<col width="24%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">sysfs file</th>
+<th class="head">mmio field</th>
+<th class="head">type</th>
+<th class="head">access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>errors</td>
+<td>perror.port_error</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>first_error</td>
+<td>perror.port_first_error</td>
+<td>hex uint64_t</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-even"><td>first_malformed_req</td>
+<td>perror.malreq</td>
+<td>hex 16-byte</td>
+<td>Read-only</td>
+</tr>
+<tr class="row-odd"><td>clear</td>
+<td>perror.(all errors)</td>
+<td>various uint64_t</td>
+<td>Write-only</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">To clear the Port errors, write the exact bitmask of the current errors, for example:</span>
+</pre></div>
+</div>
+<div class="code sh highlight-console"><div class="highlight"><pre><span></span><span class="go">cat errors &gt; clear</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../build_chain/fpga_driver/driver_build.html" class="btn btn-neutral float-right" title="Building the OPAE Intel FPGA driver (in-tree)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../fpga_api/fpga_python_api.html" class="btn btn-neutral float-left" title="OPAE Python API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
