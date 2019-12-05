@@ -17,45 +17,42 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../',
-              VERSION:'1.1.4',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
+  
+  
     
 
   
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="OPAE C++ Core API Reference" href="fpga_cxx_api.html" />
-    <link rel="prev" title="Building the OPAE C Library" href="../build_chain/fpga_api/api_build.html" /> 
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="OPAE" href="../../index.html"/>
+        <link rel="next" title="OPAE C++ Core API Reference" href="fpga_cxx_api.html"/>
+        <link rel="prev" title="Building the OPAE C Library" href="../build_chain/fpga_api/api_build.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav">
+<body class="wy-body-for-nav" role="document">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -99,7 +96,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul class="current">
@@ -168,6 +164,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/PACSign/PACSign.html">PACSign</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaotsu/fpgaotsu.html">fpgaotsu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/super-rsu/super-rsu.html">super-rsu</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
 <ul>
@@ -184,7 +184,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" aria-label="top navigation">
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">OPAE</a>
@@ -192,10 +192,9 @@
       </nav>
 
 
+      
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -420,69 +419,69 @@ defined in [types_enum.h](#types-enum-h).</p>
 <p>The <a class="reference internal" href="#utils_8h_1a2a3fc0d8baf294d2da980ba544368b32"><span class="std std-ref">fpgaErrStr()</span></a> function converts error codes into printable messages.</p>
 <p>OPAE also has a logging mechanism that allows a developer to get more information about why a particular call failed with a specific message. If enabled, any function that returns an error code different from FPGA_OK will also print out a message with further details. This mechanism can be enabled by setting the environment variable <code class="docutils literal"><span class="pre">LIBOPAE_LOG</span></code> to 1 before running the respective application. </p>
 <p><em>Values:</em></p>
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv27FPGA_OK">
-<span id="FPGA_OK"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da727cb0690aa450810ffc8f5371401327"></span><code class="descname">FPGA_OK</code> = 0<a class="headerlink" href="#_CPPv27FPGA_OK" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da727cb0690aa450810ffc8f5371401327"></span><code class="descname">FPGA_OK</code> = 0<a class="headerlink" href="#_CPPv27FPGA_OK" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Operation completed successfully </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv218FPGA_INVALID_PARAM">
-<span id="FPGA_INVALID_PARAM"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da72e05d22cb414d8a35945301b79302f9"></span><code class="descname">FPGA_INVALID_PARAM</code><a class="headerlink" href="#_CPPv218FPGA_INVALID_PARAM" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da72e05d22cb414d8a35945301b79302f9"></span><code class="descname">FPGA_INVALID_PARAM</code><a class="headerlink" href="#_CPPv218FPGA_INVALID_PARAM" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Invalid parameter supplied </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv29FPGA_BUSY">
-<span id="FPGA_BUSY"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da7785c48a8a9ab76b21bcd1627832fdd4"></span><code class="descname">FPGA_BUSY</code><a class="headerlink" href="#_CPPv29FPGA_BUSY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da7785c48a8a9ab76b21bcd1627832fdd4"></span><code class="descname">FPGA_BUSY</code><a class="headerlink" href="#_CPPv29FPGA_BUSY" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Resource is busy </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv214FPGA_EXCEPTION">
-<span id="FPGA_EXCEPTION"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da8527745386f7cea8d8aa64f96f2249a4"></span><code class="descname">FPGA_EXCEPTION</code><a class="headerlink" href="#_CPPv214FPGA_EXCEPTION" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da8527745386f7cea8d8aa64f96f2249a4"></span><code class="descname">FPGA_EXCEPTION</code><a class="headerlink" href="#_CPPv214FPGA_EXCEPTION" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>An exception occurred </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv214FPGA_NOT_FOUND">
-<span id="FPGA_NOT_FOUND"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da7aee5958cf7f46e9d80c4ee50d42d86c"></span><code class="descname">FPGA_NOT_FOUND</code><a class="headerlink" href="#_CPPv214FPGA_NOT_FOUND" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da7aee5958cf7f46e9d80c4ee50d42d86c"></span><code class="descname">FPGA_NOT_FOUND</code><a class="headerlink" href="#_CPPv214FPGA_NOT_FOUND" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A required resource was not found </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv214FPGA_NO_MEMORY">
-<span id="FPGA_NO_MEMORY"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da01318ecc0ead885cee673d213bb4eeab"></span><code class="descname">FPGA_NO_MEMORY</code><a class="headerlink" href="#_CPPv214FPGA_NO_MEMORY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da01318ecc0ead885cee673d213bb4eeab"></span><code class="descname">FPGA_NO_MEMORY</code><a class="headerlink" href="#_CPPv214FPGA_NO_MEMORY" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Not enough memory to complete operation </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv218FPGA_NOT_SUPPORTED">
-<span id="FPGA_NOT_SUPPORTED"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da51eacd9111ef14917f0b958bfeda4f66"></span><code class="descname">FPGA_NOT_SUPPORTED</code><a class="headerlink" href="#_CPPv218FPGA_NOT_SUPPORTED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da51eacd9111ef14917f0b958bfeda4f66"></span><code class="descname">FPGA_NOT_SUPPORTED</code><a class="headerlink" href="#_CPPv218FPGA_NOT_SUPPORTED" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Requested operation is not supported </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv214FPGA_NO_DRIVER">
-<span id="FPGA_NO_DRIVER"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da8b18856fa126c4b659346cf5decda0b5"></span><code class="descname">FPGA_NO_DRIVER</code><a class="headerlink" href="#_CPPv214FPGA_NO_DRIVER" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da8b18856fa126c4b659346cf5decda0b5"></span><code class="descname">FPGA_NO_DRIVER</code><a class="headerlink" href="#_CPPv214FPGA_NO_DRIVER" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Driver is not loaded </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv214FPGA_NO_DAEMON">
-<span id="FPGA_NO_DAEMON"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6daefcce3ebcef5f12e194f3812b43c7322"></span><code class="descname">FPGA_NO_DAEMON</code><a class="headerlink" href="#_CPPv214FPGA_NO_DAEMON" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6daefcce3ebcef5f12e194f3812b43c7322"></span><code class="descname">FPGA_NO_DAEMON</code><a class="headerlink" href="#_CPPv214FPGA_NO_DAEMON" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>FPGA Daemon (fpgad) is not running </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv214FPGA_NO_ACCESS">
-<span id="FPGA_NO_ACCESS"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da6c7a58c1e0907394fe270a539b104b0e"></span><code class="descname">FPGA_NO_ACCESS</code><a class="headerlink" href="#_CPPv214FPGA_NO_ACCESS" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da6c7a58c1e0907394fe270a539b104b0e"></span><code class="descname">FPGA_NO_ACCESS</code><a class="headerlink" href="#_CPPv214FPGA_NO_ACCESS" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Insufficient privileges or permissions </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv217FPGA_RECONF_ERROR">
-<span id="FPGA_RECONF_ERROR"></span><span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da4fe9aead9176152c1e47e600d5415e56"></span><code class="descname">FPGA_RECONF_ERROR</code><a class="headerlink" href="#_CPPv217FPGA_RECONF_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a27aaa9bd2d94c9b53602b1a7af49fc6da4fe9aead9176152c1e47e600d5415e56"></span><code class="descname">FPGA_RECONF_ERROR</code><a class="headerlink" href="#_CPPv217FPGA_RECONF_ERROR" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Error while reconfiguring FPGA </p>
 </dd></dl>
 
@@ -494,21 +493,21 @@ defined in [types_enum.h](#types-enum-h).</p>
 <dd><p>FPGA events</p>
 <p>OPAE currently defines the following event types that applications can register for. Note that not all FPGA resources and target platforms may support all event types. </p>
 <p><em>Values:</em></p>
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv220FPGA_EVENT_INTERRUPT">
-<span id="FPGA_EVENT_INTERRUPT"></span><span class="target" id="types__enum_8h_1a6eccf38d4643d14fbc51f34e03131fa6a4927c38c144629dfd0ac7b798853d18f"></span><code class="descname">FPGA_EVENT_INTERRUPT</code> = 0<a class="headerlink" href="#_CPPv220FPGA_EVENT_INTERRUPT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a6eccf38d4643d14fbc51f34e03131fa6a4927c38c144629dfd0ac7b798853d18f"></span><code class="descname">FPGA_EVENT_INTERRUPT</code> = 0<a class="headerlink" href="#_CPPv220FPGA_EVENT_INTERRUPT" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Interrupt generated by an accelerator </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv216FPGA_EVENT_ERROR">
-<span id="FPGA_EVENT_ERROR"></span><span class="target" id="types__enum_8h_1a6eccf38d4643d14fbc51f34e03131fa6ae06578392a4b6edada24bb375b05d800"></span><code class="descname">FPGA_EVENT_ERROR</code><a class="headerlink" href="#_CPPv216FPGA_EVENT_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a6eccf38d4643d14fbc51f34e03131fa6ae06578392a4b6edada24bb375b05d800"></span><code class="descname">FPGA_EVENT_ERROR</code><a class="headerlink" href="#_CPPv216FPGA_EVENT_ERROR" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Infrastructure error event </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv224FPGA_EVENT_POWER_THERMAL">
-<span id="FPGA_EVENT_POWER_THERMAL"></span><span class="target" id="types__enum_8h_1a6eccf38d4643d14fbc51f34e03131fa6ac5bbf42f4aadeb692ba00bc87d2a1d63"></span><code class="descname">FPGA_EVENT_POWER_THERMAL</code><a class="headerlink" href="#_CPPv224FPGA_EVENT_POWER_THERMAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a6eccf38d4643d14fbc51f34e03131fa6ac5bbf42f4aadeb692ba00bc87d2a1d63"></span><code class="descname">FPGA_EVENT_POWER_THERMAL</code><a class="headerlink" href="#_CPPv224FPGA_EVENT_POWER_THERMAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Infrastructure thermal event </p>
 </dd></dl>
 
@@ -519,15 +518,15 @@ defined in [types_enum.h](#types-enum-h).</p>
 <span id="fpga_accelerator_state"></span><span class="target" id="types__enum_8h_1a90d0d4dfde2d893585fb72ba51f0bfbe"></span><em class="property">enum </em><code class="descname">fpga_accelerator_state</code><a class="headerlink" href="#_CPPv222fpga_accelerator_state" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>accelerator state </p>
 <p><em>Values:</em></p>
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv225FPGA_ACCELERATOR_ASSIGNED">
-<span id="FPGA_ACCELERATOR_ASSIGNED"></span><span class="target" id="types__enum_8h_1a90d0d4dfde2d893585fb72ba51f0bfbeaa1212584ffe16949e0ed25c04a679786"></span><code class="descname">FPGA_ACCELERATOR_ASSIGNED</code> = 0<a class="headerlink" href="#_CPPv225FPGA_ACCELERATOR_ASSIGNED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a90d0d4dfde2d893585fb72ba51f0bfbeaa1212584ffe16949e0ed25c04a679786"></span><code class="descname">FPGA_ACCELERATOR_ASSIGNED</code> = 0<a class="headerlink" href="#_CPPv225FPGA_ACCELERATOR_ASSIGNED" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>accelerator is opened exclusively by another process </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv227FPGA_ACCELERATOR_UNASSIGNED">
-<span id="FPGA_ACCELERATOR_UNASSIGNED"></span><span class="target" id="types__enum_8h_1a90d0d4dfde2d893585fb72ba51f0bfbea35c1c5720c92650e289c592abfd5e2b8"></span><code class="descname">FPGA_ACCELERATOR_UNASSIGNED</code><a class="headerlink" href="#_CPPv227FPGA_ACCELERATOR_UNASSIGNED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a90d0d4dfde2d893585fb72ba51f0bfbea35c1c5720c92650e289c592abfd5e2b8"></span><code class="descname">FPGA_ACCELERATOR_UNASSIGNED</code><a class="headerlink" href="#_CPPv227FPGA_ACCELERATOR_UNASSIGNED" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>accelerator is free to be opened </p>
 </dd></dl>
 
@@ -539,15 +538,15 @@ defined in [types_enum.h](#types-enum-h).</p>
 <dd><p>OPAE FPGA resources (objects)</p>
 <p>These are the FPGA resources currently supported by the OPAE object model. </p>
 <p><em>Values:</em></p>
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv211FPGA_DEVICE">
-<span id="FPGA_DEVICE"></span><span class="target" id="types__enum_8h_1a9b2ddb9e533441e79f19d45fa0a24934a91f784c1c357473adbde7188a244219a"></span><code class="descname">FPGA_DEVICE</code> = 0<a class="headerlink" href="#_CPPv211FPGA_DEVICE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a9b2ddb9e533441e79f19d45fa0a24934a91f784c1c357473adbde7188a244219a"></span><code class="descname">FPGA_DEVICE</code> = 0<a class="headerlink" href="#_CPPv211FPGA_DEVICE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>FPGA_DEVICE objects represent FPGA devices and their management functionality. These objects can be opened (typically requires a certain privilege level or access permissions) and used for management functions like fpgaReconfigreSlot(). </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv216FPGA_ACCELERATOR">
-<span id="FPGA_ACCELERATOR"></span><span class="target" id="types__enum_8h_1a9b2ddb9e533441e79f19d45fa0a24934a5c3973a253ffaabddd0a083f05abebc7"></span><code class="descname">FPGA_ACCELERATOR</code><a class="headerlink" href="#_CPPv216FPGA_ACCELERATOR" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a9b2ddb9e533441e79f19d45fa0a24934a5c3973a253ffaabddd0a083f05abebc7"></span><code class="descname">FPGA_ACCELERATOR</code><a class="headerlink" href="#_CPPv216FPGA_ACCELERATOR" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>FPGA_ACCELERATOR objects represent allocatable units for accessing accelerated functions on the FPGA. They are frequently opened for interacting via control registers (MMIO), shared memory, or other, possibly platform-specific functions. </p>
 </dd></dl>
 
@@ -559,15 +558,15 @@ defined in [types_enum.h](#types-enum-h).</p>
 <dd><p>Buffer flags</p>
 <p>These flags can be passed to the <a class="reference internal" href="#buffer_8h_1aac3ed0146bc42c35f99610a319e87303"><span class="std std-ref">fpgaPrepareBuffer()</span></a> function. </p>
 <p><em>Values:</em></p>
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv221FPGA_BUF_PREALLOCATED">
-<span id="FPGA_BUF_PREALLOCATED"></span><span class="target" id="types__enum_8h_1a99f1b7a7fb02d7fa8e5823749b9005e5a625a9b51ada35d27da1079ff747d04db"></span><code class="descname">FPGA_BUF_PREALLOCATED</code> = (1u &lt;&lt; 0)<a class="headerlink" href="#_CPPv221FPGA_BUF_PREALLOCATED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a99f1b7a7fb02d7fa8e5823749b9005e5a625a9b51ada35d27da1079ff747d04db"></span><code class="descname">FPGA_BUF_PREALLOCATED</code> = (1u &lt;&lt; 0)<a class="headerlink" href="#_CPPv221FPGA_BUF_PREALLOCATED" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Use existing buffer </p>
 </dd></dl>
 
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv214FPGA_BUF_QUIET">
-<span id="FPGA_BUF_QUIET"></span><span class="target" id="types__enum_8h_1a99f1b7a7fb02d7fa8e5823749b9005e5abc99b8f3e50fb4eac1dbbeae4aca7957"></span><code class="descname">FPGA_BUF_QUIET</code> = (1u &lt;&lt; 1)<a class="headerlink" href="#_CPPv214FPGA_BUF_QUIET" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a99f1b7a7fb02d7fa8e5823749b9005e5abc99b8f3e50fb4eac1dbbeae4aca7957"></span><code class="descname">FPGA_BUF_QUIET</code> = (1u &lt;&lt; 1)<a class="headerlink" href="#_CPPv214FPGA_BUF_QUIET" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Suppress error messages </p>
 </dd></dl>
 
@@ -579,9 +578,9 @@ defined in [types_enum.h](#types-enum-h).</p>
 <dd><p>Open flags</p>
 <p>These flags can be passed to the <a class="reference internal" href="#access_8h_1addde6b2bafcd6632a2c0b595c6bc0ef3"><span class="std std-ref">fpgaOpen()</span></a> function. </p>
 <p><em>Values:</em></p>
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv216FPGA_OPEN_SHARED">
-<span id="FPGA_OPEN_SHARED"></span><span class="target" id="types__enum_8h_1a3a32599a1213352a3217f6e068651fc6a7eb08309368b559a0ecaf8193053a94c"></span><code class="descname">FPGA_OPEN_SHARED</code> = (1u &lt;&lt; 0)<a class="headerlink" href="#_CPPv216FPGA_OPEN_SHARED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a3a32599a1213352a3217f6e068651fc6a7eb08309368b559a0ecaf8193053a94c"></span><code class="descname">FPGA_OPEN_SHARED</code> = (1u &lt;&lt; 0)<a class="headerlink" href="#_CPPv216FPGA_OPEN_SHARED" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Open FPGA resource for shared access </p>
 </dd></dl>
 
@@ -593,9 +592,9 @@ defined in [types_enum.h](#types-enum-h).</p>
 <dd><p>Reconfiguration flags</p>
 <p>These flags can be passed to the fpgaReconfigure() function. </p>
 <p><em>Values:</em></p>
-<dl class="member">
+<dl class="enumerator">
 <dt id="_CPPv217FPGA_RECONF_FORCE">
-<span id="FPGA_RECONF_FORCE"></span><span class="target" id="types__enum_8h_1a9a4d903f00f7511b06eea9809d81aae7a3eb0a410afacbd5b85d308fc51fc8cd8"></span><code class="descname">FPGA_RECONF_FORCE</code> = (1u &lt;&lt; 0)<a class="headerlink" href="#_CPPv217FPGA_RECONF_FORCE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="types__enum_8h_1a9a4d903f00f7511b06eea9809d81aae7a3eb0a410afacbd5b85d308fc51fc8cd8"></span><code class="descname">FPGA_RECONF_FORCE</code> = (1u &lt;&lt; 0)<a class="headerlink" href="#_CPPv217FPGA_RECONF_FORCE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Reconfigure the slot without checking if it is in use </p>
 </dd></dl>
 
@@ -2519,7 +2518,9 @@ provided by the utilities API.</p>
 
 
            </div>
-           
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -2528,7 +2529,7 @@ provided by the utilities API.</p>
         <a href="fpga_cxx_api.html" class="btn btn-neutral float-right" title="OPAE C++ Core API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../build_chain/fpga_api/api_build.html" class="btn btn-neutral float-left" title="Building the OPAE C Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../build_chain/fpga_api/api_build.html" class="btn btn-neutral" title="Building the OPAE C Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -2537,11 +2538,11 @@ provided by the utilities API.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017 Intel Corporation
+        &copy; Copyright 2017 Intel Corporation.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -2554,15 +2555,36 @@ provided by the utilities API.</p>
   
 
 
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.1.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
 
   
   
-    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
    
 
 </body>

@@ -17,45 +17,42 @@
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../../',
-              VERSION:'1.1.4',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
+  
+  
     
 
   
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide" href="../../ase_userguide/ase_userguide.html" />
-    <link rel="prev" title="OPAE Installation Guide" href="../../install_guide/installation_guide.html" /> 
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="OPAE" href="../../../index.html"/>
+        <link rel="next" title="Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide" href="../../ase_userguide/ase_userguide.html"/>
+        <link rel="prev" title="OPAE Installation Guide" href="../../install_guide/installation_guide.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav">
+<body class="wy-body-for-nav" role="document">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -123,7 +120,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -153,6 +149,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/PACSign/PACSign.html">PACSign</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgaotsu/fpgaotsu.html">fpgaotsu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/super-rsu/super-rsu.html">super-rsu</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
 <ul>
@@ -169,7 +169,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" aria-label="top navigation">
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">OPAE</a>
@@ -177,10 +177,9 @@
       </nav>
 
 
+      
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -342,8 +341,8 @@ directory structure on the Linux OS. Windows and MacOS have similar
 directories and files.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="67%" />
-<col width="33%" />
+<col width="64%" />
+<col width="36%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Directory &amp; Files</th>
@@ -352,71 +351,122 @@ directories and files.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>include/opae</td>
-<td>Directory containing
-all header files</td>
+<td>Directory
+containing
+all header
+files</td>
 </tr>
 <tr class="row-odd"><td>include/opae/fpga.h</td>
-<td>Top-level header for
-user code to include</td>
+<td>Top-level
+header for
+user code
+to include</td>
 </tr>
-<tr class="row-even"><td>include/opae/access.h</td>
-<td>Header file for
-accelerator
-acquire/release,
-MMIO, memory
-management, event
-handling, and so on</td>
+<tr class="row-even"><td>include/opae/access
+.h</td>
+<td>Header
+file for
+accelerato
+r
+acquire/re
+lease,
+MMIO,
+memory
+management
+,
+event
+handling,
+and so on</td>
 </tr>
-<tr class="row-odd"><td>include/opae/bitstream.h</td>
-<td>Header file for
+<tr class="row-odd"><td>include/opae/bitstr
+eam.h</td>
+<td>Header
+file for
 bitstream
-manipulation
+manipulati
+on
 functions</td>
 </tr>
-<tr class="row-even"><td>include/opae/common.h</td>
-<td>Header file for error
-reporting functions</td>
+<tr class="row-even"><td>include/opae/common
+.h</td>
+<td>Header
+file for
+error
+reporting
+functions</td>
 </tr>
 <tr class="row-odd"><td>include/opae/enum.h</td>
-<td>Header file for AFU
-enumeration functions</td>
+<td>Header
+file for
+AFU
+enumeratio
+n
+functions</td>
 </tr>
-<tr class="row-even"><td>include/opae/manage.h</td>
-<td>Header file for FPGA
-management functions</td>
+<tr class="row-even"><td>include/opae/manage
+.h</td>
+<td>Header
+file for
+FPGA
+management
+functions</td>
 </tr>
-<tr class="row-odd"><td>include/opae/types.h</td>
-<td>Various type
-definitions</td>
+<tr class="row-odd"><td>include/opae/types.
+h</td>
+<td>Various
+type
+definition
+s</td>
 </tr>
 <tr class="row-even"><td>lib</td>
-<td>Directory containing
-shared library files</td>
+<td>Directory
+containing
+shared
+library
+files</td>
 </tr>
 <tr class="row-odd"><td>lib/libopae-c.so</td>
-<td>The shared dynamic
-library for linking
-with the user
-application</td>
+<td>The shared
+dynamic
+library
+for
+linking
+with the
+user
+applicatio
+n</td>
 </tr>
 <tr class="row-even"><td>doc</td>
-<td>Directory containing
-API documentation</td>
+<td>Directory
+containing
+API
+documentat
+ion</td>
 </tr>
 <tr class="row-odd"><td>doc/html</td>
-<td>Directory for
-documentation of HTML
+<td>Directory
+for
+documentat
+ion
+of HTML
 format</td>
 </tr>
 <tr class="row-even"><td>doc/latex</td>
-<td>Directory for
-documentation of
-LaTex format</td>
+<td>Directory
+for
+documentat
+ion
+of LaTex
+format</td>
 </tr>
 <tr class="row-odd"><td>doc/man</td>
-<td>Directory for
-documentation of Unix
-man page format</td>
+<td>Directory
+for
+documentat
+ion
+of Unix
+man page
+format</td>
 </tr>
 </tbody>
 </table>
@@ -480,84 +530,83 @@ manual</a>.</p>
 <colgroup>
 <col width="16%" />
 <col width="19%" />
-<col width="11%" />
-<col width="11%" />
-<col width="44%" />
+<col width="14%" />
+<col width="14%" />
+<col width="37%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Function
-ality</th>
+<tr class="row-odd"><th class="head">Functional
+ity</th>
 <th class="head">API Call</th>
 <th class="head">FPGA</th>
-<th class="head">Accel
-erato
-r</th>
+<th class="head">Accelera
+tor</th>
 <th class="head">Description</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>Enumerat
-ion</td>
-<td><code class="docutils literal"><span class="pre">fpgaEnum</span>
-<span class="pre">erate()</span></code></td>
+<tr class="row-even"><td>Enumeratio
+n</td>
+<td><code class="docutils literal"><span class="pre">fpgaEnumer</span>
+<span class="pre">ate()</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Query FPGA resources that
 match certain properties</td>
 </tr>
-<tr class="row-odd"><td>Enumerat
-ion:
-Properti
-es</td>
-<td><code class="docutils literal"><span class="pre">fpga[Get</span>
-<span class="pre">,</span> <span class="pre">Update,</span>
-<span class="pre">Clear,</span> <span class="pre">Clo</span>
-<span class="pre">ne,</span> <span class="pre">Destro</span>
-<span class="pre">y</span> <span class="pre">Properti</span>
-<span class="pre">es]()</span></code></td>
+<tr class="row-odd"><td>Enumeratio
+n:
+Properties</td>
+<td><code class="docutils literal"><span class="pre">fpga[Get,</span>
+<span class="pre">Update,</span> <span class="pre">Clea</span>
+<span class="pre">r,</span> <span class="pre">Clone,</span> <span class="pre">De</span>
+<span class="pre">stroy</span> <span class="pre">Proper</span>
+<span class="pre">ties]()</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
-<td>Manage <code class="docutils literal"><span class="pre">fpga_properties</span></code>
-life cycle</td>
+<td>Manage
+<code class="docutils literal"><span class="pre">fpga_properties</span></code> life
+cycle</td>
 </tr>
 <tr class="row-even"><td>&#160;</td>
-<td><code class="docutils literal"><span class="pre">fpgaProp</span>
-<span class="pre">ertiesGet[</span>
-<span class="pre">Prop]()</span></code></td>
+<td><code class="docutils literal"><span class="pre">fpgaProper</span>
+<span class="pre">tiesGet[Prop</span>
+<span class="pre">]()</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
-<td>Get the specified property
-<em>Prop</em>, from the <a class="reference external" href="#fpga-resource-properties">FPGA
-Resource
+<td>Get the specified
+property <em>Prop</em>, from the
+<a class="reference external" href="#fpga-resource-properties">FPGA Resource
 Properties</a>
 table</td>
 </tr>
 <tr class="row-odd"><td>&#160;</td>
-<td><code class="docutils literal"><span class="pre">fpgaProp</span>
-<span class="pre">ertiesSet[</span>
-<span class="pre">Prop]()</span></code></td>
+<td><code class="docutils literal"><span class="pre">fpgaProper</span>
+<span class="pre">tiesSet[Prop</span>
+<span class="pre">]()</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
-<td>Set the specified property
-<em>Prop</em>, from the <a class="reference external" href="#fpga-resource-properties">FPGA
-Resource
+<td>Set the specified
+property <em>Prop</em>, from the
+<a class="reference external" href="#fpga-resource-properties">FPGA Resource
 Properties</a>
 table</td>
 </tr>
 <tr class="row-even"><td>Access:
-Ownershi
-p</td>
-<td><code class="docutils literal"><span class="pre">fpga[Ope</span>
-<span class="pre">n,</span> <span class="pre">Close](</span>
-<span class="pre">)</span></code></td>
+Ownership</td>
+<td><dl class="first last docutils">
+<dt><a href="#id1"><span class="problematic" id="id2">``</span></a>fpga[Open,</dt>
+<dd>Close]()``</dd>
+</dl>
+</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Acquire/release ownership</td>
 </tr>
 <tr class="row-odd"><td>Access:
 Reset</td>
-<td><code class="docutils literal"><span class="pre">fpgaRese</span>
-<span class="pre">t()</span></code></td>
+<td><code class="docutils literal"><span class="pre">fpgaReset(</span>
+<span class="pre">)</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Reset an accelerator</td>
@@ -565,39 +614,38 @@ Reset</td>
 <tr class="row-even"><td>Access:
 Event
 handling</td>
-<td><code class="docutils literal"><span class="pre">fpga[Reg</span>
-<span class="pre">ister,</span> <span class="pre">Unr</span>
-<span class="pre">egister]Ev</span>
-<span class="pre">ent()</span></code></td>
+<td><a href="#id3"><span class="problematic" id="id4">``</span></a>fpga[Regis
+ter, Unregis
+ter]Event()`
+`</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Register/unregister an
-event to be notified about</td>
+event to be notified
+about</td>
 </tr>
 <tr class="row-odd"><td>&#160;</td>
-<td><code class="docutils literal"><span class="pre">fpga[Cre</span>
-<span class="pre">ate,</span> <span class="pre">Destr</span>
-<span class="pre">oy]EventHa</span>
-<span class="pre">ndle()</span></code></td>
+<td><a href="#id5"><span class="problematic" id="id6">``</span></a>fpga[Creat
+e, Destroy]E
+ventHandle()
+``</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Manage
-<code class="docutils literal"><span class="pre">fpga_event_handle</span></code> life
-cycle</td>
+<code class="docutils literal"><span class="pre">fpga_event_handle</span></code>
+life cycle</td>
 </tr>
 <tr class="row-even"><td>Access:
 UMsg</td>
-<td><code class="docutils literal"><span class="pre">fpgaGetN</span>
-<span class="pre">umUmsg()</span></code>
-,
-<code class="docutils literal"><span class="pre">fpgaSetU</span>
-<span class="pre">msgAttribu</span>
-<span class="pre">tes()</span></code>,
-<code class="docutils literal"><span class="pre">fpgaTrig</span>
-<span class="pre">gerUmsg()`</span>
-<span class="pre">`,</span>
-<span class="pre">``fpgaGetU</span>
-<span class="pre">msgPtr()</span></code></td>
+<td><code class="docutils literal"><span class="pre">fpgaGetNum</span>
+<span class="pre">Umsg()</span></code>,
+<code class="docutils literal"><span class="pre">fpgaSetUms</span>
+<span class="pre">gAttributes(</span>
+<span class="pre">)</span></code>,
+<code class="docutils literal"><span class="pre">fpgaTrigge</span>
+<span class="pre">rUmsg()</span></code>,
+<code class="docutils literal"><span class="pre">fpgaGetUms</span>
+<span class="pre">gPtr()</span></code></td>
 <td>Yes</td>
 <td>No</td>
 <td>Low-latency accelerator
@@ -605,71 +653,71 @@ notification mechanism.</td>
 </tr>
 <tr class="row-odd"><td>Access:
 MMIO</td>
-<td><code class="docutils literal"><span class="pre">fpgaMapM</span>
-<span class="pre">MIO()</span></code>,
-<code class="docutils literal"><span class="pre">fpgaUnMa</span>
-<span class="pre">pMMIO()</span></code></td>
+<td><code class="docutils literal"><span class="pre">fpgaMapMMI</span>
+<span class="pre">O()</span></code>,
+<code class="docutils literal"><span class="pre">fpgaUnMapM</span>
+<span class="pre">MIO()</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Map/unmap MMIO space</td>
 </tr>
 <tr class="row-even"><td>&#160;</td>
-<td><a href="#id1"><span class="problematic" id="id2">``</span></a>fpgaGetM
-MIOInfo()`
-`</td>
+<td><code class="docutils literal"><span class="pre">fpgaGetMMI</span>
+<span class="pre">OInfo()</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Get information about the
 specified MMIO space</td>
 </tr>
 <tr class="row-odd"><td>&#160;</td>
-<td><code class="docutils literal"><span class="pre">fpgaRead</span>
-<span class="pre">MMIO[32,</span> <span class="pre">6</span>
-<span class="pre">4]()</span></code></td>
+<td><a href="#id7"><span class="problematic" id="id8">``</span></a>fpgaReadMM
+IO[32, 64]()
+``</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Read a 32-bit or 64-bit
 value from MMIO space</td>
 </tr>
 <tr class="row-even"><td>&#160;</td>
-<td><code class="docutils literal"><span class="pre">fpgaWrit</span>
-<span class="pre">eMMIO[32,</span>
-<span class="pre">64]()</span></code></td>
+<td><code class="docutils literal"><span class="pre">fpgaWriteM</span>
+<span class="pre">MIO[32,</span> <span class="pre">64](</span>
+<span class="pre">)</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Write a 32-bit or 64-bit
 value to MMIO space</td>
 </tr>
 <tr class="row-odd"><td>Memory
-manageme
-nt:
+management
+:
 Shared
 memory</td>
-<td><code class="docutils literal"><span class="pre">fpga[Pre</span>
-<span class="pre">pare,</span> <span class="pre">Rele</span>
-<span class="pre">ase]Buffer</span>
-<span class="pre">()</span></code></td>
+<td><code class="docutils literal"><span class="pre">fpga[Prepa</span>
+<span class="pre">re,</span> <span class="pre">Release]</span>
+<span class="pre">Buffer()</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Manage memory buffer
-shared between the calling
-process and an accelerator</td>
+shared between the
+calling process and an
+accelerator</td>
 </tr>
 <tr class="row-even"><td>&#160;</td>
-<td><code class="docutils literal"><span class="pre">fpgaGetI</span>
-<span class="pre">OVA()</span></code></td>
+<td><code class="docutils literal"><span class="pre">fpgaGetIOV</span>
+<span class="pre">A()</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
-<td>Return the virtual address
-of a shared memory buffer</td>
+<td>Return the virtual
+address of a shared
+memory buffer</td>
 </tr>
-<tr class="row-odd"><td>Manageme
-nt:
-Reconfig
-uration</td>
-<td><code class="docutils literal"><span class="pre">fpgaReco</span>
-<span class="pre">nfigureSlo</span>
-<span class="pre">t()</span></code></td>
+<tr class="row-odd"><td>Management
+:
+Reconfigur
+ation</td>
+<td><a href="#id9"><span class="problematic" id="id10">``</span></a>fpgaReconf
+igureSlot()`
+`</td>
 <td>Yes</td>
 <td>No</td>
 <td>Replace an existing AFU
@@ -677,8 +725,8 @@ with a new one</td>
 </tr>
 <tr class="row-even"><td>Error
 report</td>
-<td><code class="docutils literal"><span class="pre">fpgaErrS</span>
-<span class="pre">tr()</span></code></td>
+<td><code class="docutils literal"><span class="pre">fpgaErrStr</span>
+<span class="pre">()</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Map an error code to a
@@ -696,24 +744,26 @@ columns state whether or not the Property is available for the FPGA or
 Accelerator objects.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="35%" />
-<col width="25%" />
-<col width="20%" />
-<col width="20%" />
+<col width="32%" />
+<col width="24%" />
+<col width="22%" />
+<col width="22%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Property</th>
 <th class="head">FPGA</th>
-<th class="head">Accelerator</th>
-<th class="head">Description</th>
+<th class="head">Acceler
+ator</th>
+<th class="head">Descrip
+tion</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>Parent</td>
 <td>No</td>
 <td>Yes</td>
-<td><code class="docutils literal"><span class="pre">fpga_toke</span>
-<span class="pre">n</span></code>
+<td><code class="docutils literal"><span class="pre">fpga_</span>
+<span class="pre">token</span></code>
 of the
 parent
 object</td>
@@ -721,15 +771,19 @@ object</td>
 <tr class="row-odd"><td>ObjectType</td>
 <td>Yes</td>
 <td>Yes</td>
-<td>The type of
+<td>The
+type of
 the
-resource:
+resourc
+e:
 either
-<code class="docutils literal"><span class="pre">FPGA_DEVI</span>
-<span class="pre">CE</span></code>
-or
-<code class="docutils literal"><span class="pre">FPGA_ACCE</span>
-<span class="pre">LERATOR</span></code></td>
+<code class="docutils literal"><span class="pre">FPGA_</span>
+<span class="pre">DEVICE`</span>
+<span class="pre">`</span>
+<span class="pre">or</span>
+<span class="pre">``FPGA_</span>
+<span class="pre">ACCELER</span>
+<span class="pre">ATOR</span></code></td>
 </tr>
 <tr class="row-even"><td>Bus</td>
 <td>Yes</td>
@@ -748,142 +802,192 @@ number</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>The PCI
-function
+functio
+n
 number</td>
 </tr>
 <tr class="row-odd"><td>SocketId</td>
 <td>Yes</td>
 <td>Yes</td>
-<td>The socket
+<td>The
+socket
 ID</td>
 </tr>
 <tr class="row-even"><td>DeviceId</td>
 <td>Yes</td>
 <td>Yes</td>
-<td>The device
+<td>The
+device
 ID</td>
 </tr>
 <tr class="row-odd"><td>NumSlots</td>
 <td>Yes</td>
 <td>No</td>
-<td>Number of
-AFU slots
-available
+<td>Number
+of AFU
+slots
+availab
+le
 on an
-<code class="docutils literal"><span class="pre">FPGA_DEVI</span>
-<span class="pre">CE</span></code>
-resource</td>
+<a href="#id11"><span class="problematic" id="id12">``</span></a><a href="#id25"><span class="problematic" id="id26">FPGA_</span></a>
+DEVICE`
+`
+resourc
+e</td>
 </tr>
 <tr class="row-even"><td>BBSID</td>
 <td>Yes</td>
 <td>No</td>
-<td>The FPGA
-Interface
+<td>The
+FPGA
+Interfa
+ce
 Manager
-(FIM) ID of
+(FIM)
+ID of
 an
-<code class="docutils literal"><span class="pre">FPGA_DEVI</span>
-<span class="pre">CE</span></code>
-resource</td>
+<a href="#id13"><span class="problematic" id="id14">``</span></a><a href="#id27"><span class="problematic" id="id28">FPGA_</span></a>
+DEVICE`
+`
+resourc
+e</td>
 </tr>
 <tr class="row-odd"><td>BBSVersion</td>
 <td>Yes</td>
 <td>No</td>
 <td>The FIM
-version of
-an
-<code class="docutils literal"><span class="pre">FPGA_DEVI</span>
-<span class="pre">CE</span></code>
-resource</td>
+version
+of an
+<a href="#id15"><span class="problematic" id="id16">``</span></a><a href="#id29"><span class="problematic" id="id30">FPGA_</span></a>
+DEVICE`
+`
+resourc
+e</td>
 </tr>
 <tr class="row-even"><td>VendorId</td>
 <td>Yes</td>
 <td>No</td>
-<td>The vendor
-ID of an
-<code class="docutils literal"><span class="pre">FPGA_DEVI</span>
-<span class="pre">CE</span></code>
-resource</td>
+<td>The
+vendor
+ID of
+an
+<a href="#id17"><span class="problematic" id="id18">``</span></a><a href="#id31"><span class="problematic" id="id32">FPGA_</span></a>
+DEVICE`
+`
+resourc
+e</td>
 </tr>
 <tr class="row-odd"><td>Model</td>
 <td>Yes</td>
 <td>No</td>
-<td>The model
+<td>The
+model
 of an
-<code class="docutils literal"><span class="pre">FPGA_DEVI</span>
-<span class="pre">CE</span></code>
-resource</td>
+<a href="#id19"><span class="problematic" id="id20">``</span></a><a href="#id33"><span class="problematic" id="id34">FPGA_</span></a>
+DEVICE`
+`
+resourc
+e</td>
 </tr>
-<tr class="row-even"><td>LocalMemorySize</td>
-<td>Yes</td>
-<td>No</td>
-<td>The local
-memory size
-of an
-<code class="docutils literal"><span class="pre">FPGA_DEVI</span>
-<span class="pre">CE</span></code>
-resource</td>
-</tr>
-<tr class="row-odd"><td>Capabilities</td>
+<tr class="row-even"><td>LocalMemory
+Size</td>
 <td>Yes</td>
 <td>No</td>
 <td>The
-capabilitie
-s
+local
+memory
+size of
+an
+<a href="#id21"><span class="problematic" id="id22">``</span></a><a href="#id35"><span class="problematic" id="id36">FPGA_</span></a>
+DEVICE`
+`
+resourc
+e</td>
+</tr>
+<tr class="row-odd"><td>Capabilitie
+s</td>
+<td>Yes</td>
+<td>No</td>
+<td>The
+capabil
+ities
 of an
-<code class="docutils literal"><span class="pre">FPGA_DEVI</span>
-<span class="pre">CE</span></code>
-resource</td>
+<a href="#id23"><span class="problematic" id="id24">``</span></a><a href="#id37"><span class="problematic" id="id38">FPGA_</span></a>
+DEVICE`
+`
+resourc
+e</td>
 </tr>
 <tr class="row-even"><td>GUID</td>
 <td>Yes</td>
 <td>Yes</td>
-<td>The GUID of
+<td>The
+GUID of
 an
-<code class="docutils literal"><span class="pre">FPGA_DEVI</span>
-<span class="pre">CE</span></code>
-or
-<code class="docutils literal"><span class="pre">FPGA_ACCE</span>
-<span class="pre">LERATOR</span></code>
-resource</td>
+<code class="docutils literal"><span class="pre">FPGA_</span>
+<span class="pre">DEVICE`</span>
+<span class="pre">`</span>
+<span class="pre">or</span>
+<span class="pre">``FPGA_</span>
+<span class="pre">ACCELER</span>
+<span class="pre">ATOR</span></code>
+resourc
+e</td>
 </tr>
 <tr class="row-odd"><td>NumMMIO</td>
 <td>No</td>
 <td>Yes</td>
-<td>The number
+<td>The
+number
 of MMIO
-space of an
-<code class="docutils literal"><span class="pre">FPGA_ACCE</span>
-<span class="pre">LERATOR</span></code>
-resource</td>
+space
+of an
+<code class="docutils literal"><span class="pre">FPGA_</span>
+<span class="pre">ACCELER</span>
+<span class="pre">ATOR</span></code>
+resourc
+e</td>
 </tr>
-<tr class="row-even"><td>NumInterrupts</td>
+<tr class="row-even"><td>NumInterrup
+ts</td>
 <td>No</td>
 <td>Yes</td>
-<td>The number
+<td>The
+number
 of
-interrupts
+interru
+pts
 of an
-<code class="docutils literal"><span class="pre">FPGA_ACCE</span>
-<span class="pre">LERATOR</span></code>
-resource</td>
+<code class="docutils literal"><span class="pre">FPGA_</span>
+<span class="pre">ACCELER</span>
+<span class="pre">ATOR</span></code>
+resourc
+e</td>
 </tr>
-<tr class="row-odd"><td>AcceleratorState</td>
+<tr class="row-odd"><td>Accelerator
+State</td>
 <td>No</td>
 <td>Yes</td>
-<td>The state
+<td>The
+state
 of an
-<code class="docutils literal"><span class="pre">FPGA_ACCE</span>
-<span class="pre">LERATOR</span></code>
-resource:
+<code class="docutils literal"><span class="pre">FPGA_</span>
+<span class="pre">ACCELER</span>
+<span class="pre">ATOR</span></code>
+resourc
+e:
 either
-<code class="docutils literal"><span class="pre">FPGA_ACCE</span>
-<span class="pre">LERATOR_ASS</span>
-<span class="pre">IGNED</span></code>
-or
-<code class="docutils literal"><span class="pre">FPGA_ACCE</span>
-<span class="pre">LERATOR_UNA</span>
-<span class="pre">SSIGNED</span></code></td>
+<code class="docutils literal"><span class="pre">FPGA_</span>
+<span class="pre">ACCELER</span>
+<span class="pre">ATOR_AS</span>
+<span class="pre">SIGNED`</span>
+<span class="pre">`</span>
+<span class="pre">or</span>
+<span class="pre">``FPGA_</span>
+<span class="pre">ACCELER</span>
+<span class="pre">ATOR_UN</span>
+<span class="pre">ASSIGNE</span>
+<span class="pre">D</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -898,8 +1002,8 @@ unexpected behavior. When using the OPAE C API, always check the API
 return codes.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="36%" />
-<col width="64%" />
+<col width="38%" />
+<col width="62%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Error Code</th>
@@ -1107,7 +1211,9 @@ accelerator into the calling process’s virtual memory space.</p>
 
 
            </div>
-           
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -1116,7 +1222,7 @@ accelerator into the calling process’s virtual memory space.</p>
         <a href="../../ase_userguide/ase_userguide.html" class="btn btn-neutral float-right" title="Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../../install_guide/installation_guide.html" class="btn btn-neutral float-left" title="OPAE Installation Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../../install_guide/installation_guide.html" class="btn btn-neutral" title="OPAE Installation Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1125,11 +1231,11 @@ accelerator into the calling process’s virtual memory space.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017 Intel Corporation
+        &copy; Copyright 2017 Intel Corporation.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1142,15 +1248,36 @@ accelerator into the calling process’s virtual memory space.</p>
   
 
 
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.1.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
 
   
   
-    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
    
 
 </body>

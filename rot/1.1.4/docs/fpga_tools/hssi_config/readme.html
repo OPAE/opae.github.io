@@ -17,45 +17,42 @@
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../../',
-              VERSION:'1.1.4',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
+  
+  
     
 
   
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="hssi_loopback" href="../hssi_loopback/readme.html" />
-    <link rel="prev" title="userclk" href="../userclk/userclk.html" /> 
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="OPAE" href="../../../index.html"/>
+        <link rel="next" title="hssi_loopback" href="../hssi_loopback/readme.html"/>
+        <link rel="prev" title="super-rsu" href="../super-rsu/super-rsu.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav">
+<body class="wy-body-for-nav" role="document">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -99,7 +96,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -129,6 +125,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PACSign/PACSign.html">PACSign</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaotsu/fpgaotsu.html">fpgaotsu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super-rsu/super-rsu.html">super-rsu</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
 <ul class="current">
@@ -169,7 +169,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" aria-label="top navigation">
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">OPAE</a>
@@ -177,10 +177,9 @@
       </nav>
 
 
+      
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
 
@@ -344,54 +343,45 @@ of 0 would use a resource path as follows:</p>
 columns. The following table provides the column specifications:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="4%" />
-<col width="21%" />
-<col width="75%" />
+<col width="8%" />
+<col width="23%" />
+<col width="69%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">C
-o
-l
-u
-m
-n</th>
+<tr class="row-odd"><th class="head">Colu
+mn</th>
 <th class="head">Name</th>
 <th class="head">Description</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>1</td>
-<td>Register
-type.</td>
+<td>Register type.</td>
 <td>Can be either <code class="docutils literal"><span class="pre">FPGA_RX</span></code>, <code class="docutils literal"><span class="pre">FPGA_TX</span></code>,
 <code class="docutils literal"><span class="pre">RTMR_RX</span></code>, <code class="docutils literal"><span class="pre">RTMR_TX</span></code> (or their corresponding
 numeric values, 1-4).</td>
 </tr>
 <tr class="row-odd"><td>2</td>
-<td>Lane or
-Channel</td>
+<td>Lane or Channel</td>
 <td>0-15 for XCVR lanes on FPGA, 0-3 for retimer
 channels. -1 to designate all lanes or channels.</td>
 </tr>
 <tr class="row-even"><td>3</td>
-<td>Device
-address (on
-I2C bus)</td>
+<td>Device address
+(on I2C bus)</td>
 <td>Only applies to retimer registers. 0 - 3, -1 to
 designate all devices.</td>
 </tr>
 <tr class="row-odd"><td>4</td>
-<td>Register
-address (or
-offset)</td>
+<td>Register address
+(or offset)</td>
 <td>Examples: 0x213, 0x100.</td>
 </tr>
 <tr class="row-even"><td>5</td>
-<td>Register
-value to
-write</td>
-<td>Examples: 0x1, 1, 0. Applies only when loading
-or writing registers.</td>
+<td>Register value
+to write</td>
+<td>Examples: 0x1, 1, 0. Applies only when loading or
+writing registers.</td>
 </tr>
 </tbody>
 </table>
@@ -462,13 +452,12 @@ summary of ack times prints to stdout. This argument is optional.</p>
 <h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="25%" />
-<col width="60%" />
-<col width="15%" />
+<col width="27%" />
+<col width="55%" />
+<col width="18%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Document
-Version</th>
+<tr class="row-odd"><th class="head">Document Version</th>
 <th class="head">Intel Acceleration Stack Version</th>
 <th class="head">Changes</th>
 </tr>
@@ -477,8 +466,7 @@ Version</th>
 <tr class="row-even"><td>2018.05.21</td>
 <td>1.1 Beta. (Supported with Intel
 Quartus Prime Pro Edition 17.1.)</td>
-<td>Correcte
-d
+<td>Corrected
 typos.</td>
 </tr>
 </tbody>
@@ -488,7 +476,9 @@ typos.</td>
 
 
            </div>
-           
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -497,7 +487,7 @@ typos.</td>
         <a href="../hssi_loopback/readme.html" class="btn btn-neutral float-right" title="hssi_loopback" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../userclk/userclk.html" class="btn btn-neutral float-left" title="userclk" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../super-rsu/super-rsu.html" class="btn btn-neutral" title="super-rsu" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -506,11 +496,11 @@ typos.</td>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017 Intel Corporation
+        &copy; Copyright 2017 Intel Corporation.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -523,15 +513,36 @@ typos.</td>
   
 
 
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.1.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
 
   
   
-    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
    
 
 </body>

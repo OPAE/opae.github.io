@@ -5,9 +5,9 @@ _hssi_loopback_ - Software utility to run HSSI loopback tests on FPGA
 
 
 ## SYNOPSIS ##
-`hssi_loopback [[--bus|-b <bus number>] [--device | -d <device number>] [--function | -f <function number>]]|[--socket-id <socket-id>]
-      [--mode|-m auto|e40|e10] 
-      [send [<source port> [<destination port>] [--packet-count|-c <count>] [--packet-delay|-d <delay>] [--packet-length|-l <length>]] |status [clear] | stop | readmacs`
+`hssi_loopback [[--bus|-b <bus number>] [--device | -d <device number>] [--function | -f <function number>]]|[--socket-id <socket-id>]`
+`[--mode|-m auto|e40|e10] [send [<source port> [<destination port>] [--packet-count|-c <count>] [--packet-delay|-d <delay>] [--packet-length|-l <length>]]` 
+`|status [clear] | stop | readmacs`
 
 ## DESCRIPTION ##
 

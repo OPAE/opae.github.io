@@ -219,15 +219,22 @@ The Port Platform Module Device Driver performs the the following functions:
 
 These drivers enable platform specific features.
 
-| Device Driver | Function | Intel PAC with Arria 10 GX | Intel PAC D5005 |
-|:---------------------|:-----------------------------------------------|:-----------------------------|:---------------------|
-| intel_fpga_pac_iopll | Allows user code to read and set optimal clock frequency to driver logic for a given AFU | No | Yes |
-| intel_fpga_pac_hssi | Driver for HSSI Configurable Ethernet support | Yes | Yes |
-| intel_max10 | Driver to support FPGA flash, BMC and retrieval of sensor information | No | Yes |
-| avmmi_bmc | Avalon Memory Mapped Interface to BMC driver to support retrieval of sensor information support retrieval of sensor information | Yes | No |
-| altera_asmip2 | Altera ASMI Parallel II Intel&reg; driver to support flash | Yes | No |
-| intel_generic_qspi | Driver for Generic SPI Intel FPGA IP | No | Yes |
-| spi_altera_pac_mod | Intel SPI driver to support BMC, FPGA Flash | No | Yes | 
+| Device Driver | Function | Intel PAC with Arria 10 GX | Intel PAC D5005 | Intel FPGA PAC N3000 | Intel PAC with Intel Arria10 GX FPGA |
+|:---------------------|:-----------------------------------------------|:-----------------------------|:---------------------|:---------------------|
+| i2c-altera | I2C Master driver to retrieve MAC address from MAC PROM. | No | Yes | No |
+| intel-generic-qspi | QSPI master driver used to access flash. This driver is not used when Intel PAC has been upgraded to enable Root of Trust. |	Yes | Yes |	No |
+| intel-on-chip-flash | Supports read/write access to flash and on-chip MAX10 Flash using the mtd device. |	Yes | Yes |	No |
+| altera-asmip2 | Altera ASMI Parallel II Intel&reg; driver to support flash read and write. | No | No | Yes |
+| spi-altera-mod | SPI master driver. It enables communication with MAX10. | Yes | Yes | No |
+| spi-nor-mod | SPI-nor driver to support flash. Used during the non-RoT to RoT (Root of trust) update process. | Yes |	Yes | Yes |
+| intel-max10 | Driver to support FPGA flash, BMC and retrieval of sensor information |	Yes | Yes |	No |
+| avmmi-bmc | Avalon Memory Mapped Interface to BMC driver to support retrieval of sensor information |	No | No | Yes |
+| intel-fpga-pac-hssi | Driver for HSSI Configurable Ethernet support |	Yes	| No | Yes |
+| intel-fpga-pac-iopll | Driver for the IOPLL. Allows user code to read and set optimal clock frequency to drive logic for a given AFU. | Yes |	No | No |
+| pac_n3000_net | Network device driver for Intel&reg; PAC N3000. This allows to retrieve link status and link statistics by creating network interface for PHY/MAC pairs on the line side. | No | Yes | No |
+| c827_retimer | C827 Retimer driver. It retrieves retimer link status and register with pac_n3000_net driver. | No | Yes | No |
+| ifpga-sec-mgr | Security manager class driver. This driver enables read write routines for secure updates. Required by fpgasupdate tool. | Yes | Yes | Yes |
+
 
 ## Application FPGA Device Enumeration ##
 
