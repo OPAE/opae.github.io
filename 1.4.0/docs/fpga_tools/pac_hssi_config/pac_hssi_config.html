@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SYNOPSIS &mdash; OPAE</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="OPAE" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_api/api_build.html">Building OPAE SDK Artifacts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_cxx_api.html">OPAE C++ Core API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_python_api.html">OPAE Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/plug_guide/readme.html">Plugin Developer’s Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgabist/fpgabist.html">fpgabist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaflash/fpgaflash.html">fpgaflash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaflash/superrsu.html">super-rsu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super-rsu/super-rsu.html">Super Remote System Update User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_config/readme.html">hssi_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_loopback/readme.html">hssi_loopback</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE support on Intel FPGA PCIe driver and Linux PCIe FPGA DFL driver</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_dfl_drv/fpga_dfl_drv.html">Enable OPAE on FPGA PCIe drivers</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">OPAE</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+    <li>SYNOPSIS</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/docs/fpga_tools/pac_hssi_config/pac_hssi_config.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>```eval_rst # pac_hssi_config #</p>
+<div class="section" id="synopsis">
+<h1>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h1>
+<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">pac_hssi_config</span><span class="p">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="n">subcommand</span> <span class="p">[</span><span class="n">subarg</span><span class="p">]</span> <span class="p">[</span><span class="n">bdf</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="description">
+<h1>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal"><span class="pre">pac_hssi_config.py</span></code> tool exercises the Ethernet 10 Gbps (10GbE)
+and 40GbE transceivers for designs using the Intel® Programmable
+Acceleration Card (PAC) with Intel Arria® 10 GX FPGA. This tool does not
+support the Intel Xeon® Processor with Integrated FPGA.</p>
+<div class="figure">
+<img alt="PAC" src="../../../_images/dcp_hssi_arch.PNG" />
+</div>
+<p>The two required arguments to the <code class="docutils literal"><span class="pre">pac_hssi_config.py</span></code> tool specify
+the subcommand and bus, device, and function (BDF) for the PCIe device
+under test. You must provide the BDF parameter for systems with more
+than one PCIe card.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you do not provide the BDF when required, the command prints a list of valid BDFs for the system. You can also
+determine the BDF using the <code class="docutils literal"><span class="pre">lspci</span></code> command.</p>
+</div>
+<p>For usage help, type the following at a command prompt:</p>
+<p><code class="docutils literal"><span class="pre">pac_hssi_config.py</span> <span class="pre">[-h|--help]</span></code></p>
+<p>To configure the network ports, send data, and read statistics, use the
+following form of the <code class="docutils literal"><span class="pre">pac_hssi_config.py</span></code> script:</p>
+<p><code class="docutils literal"><span class="pre">pac_hssi_config.py</span> <span class="pre">subcommand</span> <span class="pre">[subarg]</span> <span class="pre">[bdf]</span></code></p>
+<p>Only a subset of subcommand arguments support <code class="docutils literal"><span class="pre">subarg</span></code>.</p>
+<div class="section" id="table-1-general-subcommands">
+<h2>Table 1. General Subcommands<a class="headerlink" href="#table-1-general-subcommands" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="30%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Subcommand</th>
+<th class="head">Subarg</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">stat</span></code></td>
+<td>N/A</td>
+<td>Prints high
+speed serial
+interface
+(HSSI)
+controller
+statistics.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">eeprom</span></code></td>
+<td>N/A</td>
+<td>Reads the
+128-bit
+unique board
+ID, MAC
+address, and
+board-specifi
+c
+IDs from
+EEPROM.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="table-2-10-40-gbe-traffic-generation-subcommands">
+<h2>Table 2. 10/40 GbE Traffic Generation Subcommands<a class="headerlink" href="#table-2-10-40-gbe-traffic-generation-subcommands" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="30%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Subcommand</th>
+<th class="head">Subarg</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">e10init</span></code>
+and
+<code class="docutils literal"><span class="pre">e40init</span></code></td>
+<td>N/A</td>
+<td>Initializes
+HSSI PHY to
+10GbE or
+40GbE mode.
+Clears
+statistics
+and enable
+internal HSSI
+transceiver
+loopback.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">e10loop</span></code>
+and
+<code class="docutils literal"><span class="pre">e40loop</span></code></td>
+<td>On/Off</td>
+<td>Turns on or
+off internal
+HSSI
+transceiver
+loopback.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">e10reset</span></code>
+and
+<code class="docutils literal"><span class="pre">e40reset</span></code></td>
+<td>On/Off</td>
+<td>Asserts or
+deasserts AFU
+reset. Clears
+packet
+statistics
+and disables
+internal HSSI
+transceiver
+loopback.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">e10send</span></code>
+and
+<code class="docutils literal"><span class="pre">e40send</span></code></td>
+<td>N/A</td>
+<td>Sends
+1,000,000
+1500-byte
+packets. For
+10GbE sends
+packets on
+all four
+ports. 40GbE
+has a single
+port.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">e10stat</span></code>
+and
+<code class="docutils literal"><span class="pre">e40stat</span></code></td>
+<td>N/A</td>
+<td>Prints packet
+statistics.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id1"><span class="problematic" id="id2">``</span></a>e10statclr`
+`
+and
+<a href="#id3"><span class="problematic" id="id4">``</span></a>e40statclr`
+`</td>
+<td>N/A</td>
+<td>Clears packet
+statistics.
+Use this
+command after
+switching
+loopback
+modes to
+clear any
+transient
+statistics
+accumulated
+during the
+mode switch.</td>
+</tr>
+</tbody>
+</table>
+<p>The transceiver equalization <code class="docutils literal"><span class="pre">eqwrite</span></code> and <code class="docutils literal"><span class="pre">eqread</span></code> subcommands
+write and read transceiver equalization settings. These subcommands
+require you to specify the transceiver channel, the equalization
+setting, and the value (for writes). Use the following form for the
+<code class="docutils literal"><span class="pre">eqwrite</span></code> command:</p>
+<p><code class="docutils literal"><span class="pre">pac_hssi_config.py</span> <span class="pre">eqwrite</span> <span class="pre">[transceiver</span> <span class="pre">channel</span> <span class="pre">number]</span> <span class="pre">[equalization</span> <span class="pre">setting]</span> <span class="pre">[equalization</span> <span class="pre">value]</span> <span class="pre">[bdf]</span></code></p>
+<p>Use the following form for the <code class="docutils literal"><span class="pre">eqread</span></code>command:</p>
+<p><code class="docutils literal"><span class="pre">pac_hssi_config.py</span> <span class="pre">eqread</span> <span class="pre">[transceiver</span> <span class="pre">channel</span> <span class="pre">number]</span> <span class="pre">[equalization</span> <span class="pre">setting]</span> <span class="pre">[bdf]</span></code></p>
+</div>
+<div class="section" id="table-3-transceiver-equalization-subcommands">
+<h2>Table 3. Transceiver Equalization Subcommands<a class="headerlink" href="#table-3-transceiver-equalization-subcommands" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="22%" />
+<col width="25%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Subcommand</th>
+<th class="head">Channel
+Number</th>
+<th class="head">Equalization
+Setting</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">eqwrite</span></code></td>
+<td>0-3</td>
+<td>0 =
+Continuous
+time-linear
+equalization
+(CTLE) 1 =
+Variable gain
+amplifier
+(VGA) 2 =
+DCGAIN 3 =
+Pre-emphasis
+first
+post-tap 4 =
+Pre-emphasis
+second
+post-tap 5 =
+Pre-emphasis
+first pre-tap
+6 =
+Pre-emphasis
+second
+pre-tap 7 =
+Differential
+output
+voltage (VOD)</td>
+<td>Specifies the
+value for the
+specified
+equalization
+setting.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">eqread</span></code></td>
+<td>0-3</td>
+<td>0 =
+Continuous
+time-linear
+equalization
+(CTLE) 1 =
+Variable gain
+amplifier
+(VGA) 2 =
+DCGAIN 3 =
+Pre-emphasis
+first
+post-tap 4 =
+Pre-emphasis
+second
+post-tap 5 =
+Pre-emphasis
+first pre-tap
+6 =
+Pre-emphasis
+second
+pre-tap 7 =
+Differential
+output
+voltage (VOD)</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p>For more information about reconfiguring transceiver analog parameter
+settings In Arria® 10 devices, refer to “Changing PMA Analog Parameters”
+in the <a class="reference external" href="https://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/hb/arria-10/ug_arria10_xcvr_phy.pdf">Intel® Arria® 10 Transceiver PHY User
+Guide</a>.</p>
+</div>
+</div>
+<div class="section" id="revision-history">
+<h1>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="53%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Date</th>
+<th class="head">Intel Acceleration Stack
+Version</th>
+<th class="head">Changes Made</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>2018.05.
+21</td>
+<td>DCP 1.1 Beta (works with
+Quartus Prime Pro 17.1.1)</td>
+<td>Added the
+following
+subcommands to
+the
+<code class="docutils literal"><span class="pre">pac_hssi_confi</span>
+<span class="pre">g.py</span></code>
+tool: <code class="docutils literal"><span class="pre">eeprom</span></code>
+<code class="docutils literal"><span class="pre">eqwrite</span></code>
+<code class="docutils literal"><span class="pre">eqread</span></code> Added
+links to related
+information.
+Fixed typos.</td>
+</tr>
+<tr class="row-odd"><td>2018.04.
+13</td>
+<td>DCP 1.1 Alpha (works with
+Quartus Prime Pro 17.1.1)</td>
+<td>Initial release.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.4.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
