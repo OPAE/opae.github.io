@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>fpgabist &mdash; OPAE</title>
+  <title>bitstreaminfo &mdash; OPAE</title>
   
 
   
@@ -34,8 +34,8 @@
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
     <link rel="top" title="OPAE" href="../../../index.html"/>
-        <link rel="next" title="fpgainfo" href="../fpgainfo/fpgainfo.html"/>
-        <link rel="prev" title="coreidle" href="../coreidle/coreidle.html"/> 
+        <link rel="next" title="hssi_config" href="../hssi_config/readme.html"/>
+        <link rel="prev" title="super-rsu" href="../super-rsu/super-rsu.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -109,17 +109,7 @@
 <p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../coreidle/coreidle.html">coreidle</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">fpgabist</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#positional-arguments">POSITIONAL ARGUMENTS</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#optional-arguments">OPTIONAL ARGUMENTS</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">EXAMPLES</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#revision-history">Revision History</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgabist/fpgabist.html">fpgabist</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
@@ -135,7 +125,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgaotsu/fpgaotsu.html">fpgaotsu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../super-rsu/super-rsu.html">super-rsu</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../bitstream_info/bitstream_info.html">bitstreaminfo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">bitstreaminfo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">TROUBLESHOOTING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#revision-history">Revision History</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
 <ul>
@@ -171,11 +168,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../../index.html">Docs</a> &raquo;</li>
       
-    <li>fpgabist</li>
+    <li>bitstreaminfo</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../../_sources/docs/fpga_tools/fpgabist/fpgabist.md.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/docs/fpga_tools/bitstream_info/bitstream_info.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -185,113 +182,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="fpgabist">
-<h1>fpgabist<a class="headerlink" href="#fpgabist" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="bitstreaminfo">
+<h1>bitstreaminfo<a class="headerlink" href="#bitstreaminfo" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">fpgabist</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="n">device_id</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">bus</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">device</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="n">function</span><span class="p">]</span> <span class="p">[</span><span class="n">path_to_gbs1</span> <span class="n">path_to_gbs2</span> <span class="p">...]</span>
-</pre></div>
-</div>
+<p><code class="docutils literal"><span class="pre">bitstreaminfo</span> <span class="pre">[--verbose</span> <span class="pre">|</span> <span class="pre">-v]</span> <span class="pre">file</span> <span class="pre">{file}</span></code></p>
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">fpgabist</span></code> tool performs self-diagnostic tests on supported FPGA
-platforms.</p>
-<p>The tool accepts one or more Accelerator Function (AF) binaries from a
-predetermined set of AFs. Depending on the available binaries, the tool
-runs appropriate tests and reports hardware issues.</p>
-<p><code class="docutils literal"><span class="pre">fpgabist</span></code> always uses <code class="docutils literal"><span class="pre">fpgainfo</span></code> to report system information
-before running any hardware tests.</p>
-<p>Currently, <code class="docutils literal"><span class="pre">fpgabist</span></code> accepts the following AFs: 1. nlb_mode_3: The
-native loopback (NLB) test implements a loopback from TX to RX. Use it
-to verify basic functionality and to measure bandwidth. 2. dma_afu: The
-direct memory access (DMA) AFU test transfers data from host memory to
-FPGA-attached local memory.</p>
-<p>The installation includes the AF files, but you can also compile the AFs
-from the source.</p>
-<p>If there are multiple PCIe® devices, use -b, -d, -f to specify the BDF
-for the specific PCIe® device.</p>
+<p>The <code class="docutils literal"><span class="pre">bitstreaminfo</span></code> command displays authentication information
+contained within each provided <code class="docutils literal"><span class="pre">file</span></code> on the command line. This
+includes any JSON header strings, authentication header block
+information, and a small portion of the payload.</p>
+<p><code class="docutils literal"><span class="pre">--verbose</span></code></p>
+<p>Print verbose (debugging) messages along with bitstream security
+content.</p>
+<p><code class="docutils literal"><span class="pre">file</span> <span class="pre">{file}</span></code></p>
+<p>A list of one or more bitstream files which have been passed through the
+<code class="docutils literal"><span class="pre">PACSign</span></code> command and contain authentication headers.</p>
 </div>
-<div class="section" id="positional-arguments">
-<h2>POSITIONAL ARGUMENTS<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">[path_to_gbs1</span> <span class="pre">path_to_gbs2</span> <span class="pre">...]</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Paths</span> <span class="n">to</span> <span class="n">Accelerator</span> <span class="n">Function</span> <span class="p">(</span><span class="n">AF</span><span class="p">)</span> <span class="n">files</span><span class="p">.</span>
-</pre></div>
-</div>
-<div class="section" id="optional-arguments">
-<h3>OPTIONAL ARGUMENTS<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h3>
-<p>You can use the single letter or the full parameter name for the command
-line arguments.</p>
-<p><code class="docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">usage</span> <span class="n">information</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">-i</span> <span class="pre">device_id,</span> <span class="pre">--device-id</span> <span class="pre">device_id</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="n">ID</span> <span class="k">for</span> <span class="n">Intel</span> <span class="n">FPGA</span><span class="p">.</span> <span class="n">Default</span> <span class="nl">is</span><span class="p">:</span> <span class="mh">0x09c4</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">-B</span> <span class="pre">bus,</span> <span class="pre">--bus</span> <span class="pre">bus</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Bus</span> <span class="n">number</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">FPGA</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">-D</span> <span class="pre">device,</span> <span class="pre">--device</span> <span class="pre">device</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="n">number</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">FPGA</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">-F</span> <span class="pre">function,</span> <span class="pre">--function</span> <span class="pre">function</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Function</span> <span class="n">number</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">FPGA</span>
-</pre></div>
-</div>
-</div>
+<div class="section" id="troubleshooting">
+<h2>TROUBLESHOOTING<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>To gather more debug output, use the <code class="docutils literal"><span class="pre">--verbose</span></code> option.</p>
 </div>
 <div class="section" id="examples">
 <h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">fpgabist</span> <span class="pre">&lt;path_to_gbs_files&gt;/dma_afu.gbs</span> <span class="pre">&lt;path_to_gbs_files&gt;/nlb_3.gbs</span></code></p>
-<p>Runs <code class="docutils literal"><span class="pre">fpgabist</span></code> on any platform in the system that matches the default
-device ID. This command runs both the DMA and NLB_MODE_3 tests.</p>
-<p><code class="docutils literal"><span class="pre">fpgabist</span> <span class="pre">-i</span> <span class="pre">09c4</span> <span class="pre">-b</span> <span class="pre">5</span> <span class="pre">&lt;path</span> <span class="pre">to</span> <span class="pre">gbs&gt;/dma_afu.gbs</span></code></p>
-<p>Runs <code class="docutils literal"><span class="pre">fpgabist</span></code> the DMA test on the PCIe® Endpoint with <code class="docutils literal"><span class="pre">device_id</span></code>
-09c4 on bus 5.</p>
+<p><code class="docutils literal"><span class="pre">bitstreaminfo</span> <span class="pre">firmware.bin</span></code> <code class="docutils literal"><span class="pre">bitstreaminfo</span> <span class="pre">-v</span> <span class="pre">firmware.bin</span></code></p>
 </div>
 <div class="section" id="revision-history">
 <h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="17%" />
-<col width="53%" />
-<col width="31%" />
+<col width="26%" />
+<col width="47%" />
+<col width="26%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Date</th>
-<th class="head">Intel Acceleration Stack
-Version</th>
-<th class="head">Changes Made</th>
+<tr class="row-odd"><th class="head">Document Version</th>
+<th class="head">Intel Acceleration Stack Version</th>
+<th class="head">Changes</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>2018.10.
-15</td>
-<td>1.2. (Supported with Intel
-Quartus Prime Pro Edition
-17.1.1.)</td>
-<td>No changes from
-previous
-release.</td>
-</tr>
-<tr class="row-odd"><td>2018.05.
-21</td>
-<td>DCP 1.1 Beta (works with
-Quartus Prime Pro 17.1.1)</td>
-<td>Made the
-following
-changes:
-Expanded
-descriptions of
-<code class="docutils literal"><span class="pre">nlb_mode_3</span></code>
-and<code class="docutils literal"><span class="pre">dma_afu</span></code>
-tests. Added a
-second example
-command.</td>
+<tr class="row-even"><td>2019.12.20</td>
+<td>1.2.1 Beta</td>
+<td>Initial release.</td>
 </tr>
 </tbody>
 </table>
@@ -305,10 +240,10 @@ command.</td>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../fpgainfo/fpgainfo.html" class="btn btn-neutral float-right" title="fpgainfo" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../hssi_config/readme.html" class="btn btn-neutral float-right" title="hssi_config" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../coreidle/coreidle.html" class="btn btn-neutral" title="coreidle" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../super-rsu/super-rsu.html" class="btn btn-neutral" title="super-rsu" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
