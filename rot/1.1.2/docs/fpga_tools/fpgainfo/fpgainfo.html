@@ -135,6 +135,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../pacd/pacd.html">pacd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PACSign/PACSign.html">PACSign</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaotsu/fpgaotsu.html">fpgaotsu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super-rsu/super-rsu.html">super-rsu</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
 <ul>
@@ -196,8 +200,8 @@
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>fpgainfo displays FPGA information derived from sysfs files. The command
 argument is one of the following: <code class="docutils literal"><span class="pre">errors</span></code>, <code class="docutils literal"><span class="pre">power</span></code>, <code class="docutils literal"><span class="pre">temp</span></code>,
-<code class="docutils literal"><span class="pre">port</span></code>, <code class="docutils literal"><span class="pre">fme</span></code> or <code class="docutils literal"><span class="pre">bmc</span></code>. Some commands may also have other
-arguments or options that control their behavior.</p>
+<code class="docutils literal"><span class="pre">port</span></code>, <code class="docutils literal"><span class="pre">fme</span></code>, <code class="docutils literal"><span class="pre">bmc</span></code>, or <code class="docutils literal"><span class="pre">security</span></code>. Some commands may also have
+other arguments or options that control their behavior.</p>
 <p>For systems with multiple FPGA devices, you can specify the BDF to limit
 the output to the FPGA resource with the corresponding PCIe
 configuration. If not specified, information displays for all resources
@@ -221,12 +225,16 @@ Interface Manager (FIM) ID.</p>
 <p><code class="docutils literal"><span class="pre">bmc</span></code></p>
 <p>Show all Board Management Controller sensor values for the FPGA
 resource, if available.</p>
+<p><code class="docutils literal"><span class="pre">security</span></code></p>
+<p>Show all security-related information available on the FPGA device. This
+includes root entry hash values, code signing key cancellations, and
+flash update counters.</p>
 </div>
 </div>
 <div class="section" id="optional-arguments">
 <h2>OPTIONAL ARGUMENTS<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">--help,</span> <span class="pre">-h</span></code></p>
-<p>Prints help information and exit.</p>
+<p>Prints help information and exits.</p>
 </div>
 <div class="section" id="common-arguments">
 <h2>COMMON ARGUMENTS<a class="headerlink" href="#common-arguments" title="Permalink to this headline">¶</a></h2>

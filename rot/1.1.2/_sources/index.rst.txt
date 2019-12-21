@@ -63,6 +63,10 @@ The main documentation for the site is organized into following sections:
    docs/fpga_tools/pacd/pacd
    docs/fpga_tools/packager/packager
    docs/fpga_tools/userclk/userclk
+   docs/fpga_tools/PACSign/PACSign
+   docs/fpga_tools/fpgasupdate/fpgasupdate
+   docs/fpga_tools/fpgaotsu/fpgaotsu
+   docs/fpga_tools/super-rsu/super-rsu
 
 .. _afu-tools-docs:
 

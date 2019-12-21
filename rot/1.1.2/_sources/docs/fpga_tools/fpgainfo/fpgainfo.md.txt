@@ -8,7 +8,7 @@ fpgainfo [-h | --help] [<args>] <command> [<command-args>]
 
 ## DESCRIPTION ##
 fpgainfo displays FPGA information derived from sysfs files. The command argument is one of the following:
-`errors`, `power`, `temp`, `port`, `fme` or `bmc`. 
+`errors`, `power`, `temp`, `port`, `fme`, `bmc`, or `security`. 
 Some commands may also have other arguments or options that control their behavior.
 
 For systems with multiple FPGA devices, you can specify the BDF to limit the output to the FPGA resource
@@ -42,10 +42,15 @@ and the FPGA Interface Manager (FIM) ID.
 
 Show all Board Management Controller sensor values for the FPGA resource, if available.
 
+`security`
+
+Show all security-related information available on the FPGA device.  This includes root entry hash values,
+code signing key cancellations, and flash update counters.
+
 ## OPTIONAL ARGUMENTS ##
 `--help, -h`
 
-Prints help information and exit.
+Prints help information and exits.
 
 ## COMMON ARGUMENTS ##
 The following arguments are common to all commands and are optional.

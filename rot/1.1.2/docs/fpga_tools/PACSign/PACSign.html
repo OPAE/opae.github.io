@@ -1,0 +1,595 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PACSign &mdash; OPAE</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="OPAE" href="../../../index.html"/>
+        <link rel="next" title="fpgasupdate" href="../fpgasupdate/fpgasupdate.html"/>
+        <link rel="prev" title="userclk" href="../userclk/userclk.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_api/api_build.html">Building the OPAE C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_cxx_api.html">OPAE C++ Core API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_python_api.html">OPAE Python API Reference</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgabist/fpgabist.html">fpgabist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaflash/fpgaflash.html">fpgaflash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pacd/pacd.html">pacd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PACSign</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bitstream-types">BITSTREAM TYPES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#required-options">REQUIRED OPTIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">OPTIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">NOTES</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#update">UPDATE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cancel">CANCEL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rk-256-rk-384-1">RK_256 / RK_384[^1]</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#revision-history">Revision History</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaotsu/fpgaotsu.html">fpgaotsu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super-rsu/super-rsu.html">super-rsu</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_config/readme.html">hssi_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_loopback/readme.html">hssi_loopback</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">OPAE</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+    <li>PACSign</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/docs/fpga_tools/PACSign/PACSign.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pacsign">
+<h1>PACSign<a class="headerlink" href="#pacsign" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">python</span> <span class="pre">PACSign.py</span> <span class="pre">[-h]</span> <span class="pre">{FIM,SR,BBS,BMC,BMC_FW,AFU,PR,GBS}</span> <span class="pre">...</span></code></p>
+<p><code class="docutils literal"><span class="pre">python</span> <span class="pre">PACSign.py</span> <span class="pre">&lt;CMD&gt;</span>&#160; <span class="pre">[-h]</span> <span class="pre">-t</span> <span class="pre">{UPDATE,CANCEL,RK_256,RK_384}</span> <span class="pre">-H</span> <span class="pre">HSM_MANAGER</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">[-C</span> <span class="pre">HSM_CONFIG]</span> <span class="pre">[-r</span> <span class="pre">ROOT_KEY]</span> <span class="pre">[-k</span> <span class="pre">CODE_SIGNING_KEY]</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">[-d</span> <span class="pre">CSK_ID]</span> <span class="pre">[-i</span> <span class="pre">INPUT_FILE]</span> <span class="pre">[-o</span> <span class="pre">OUTPUT_FILE]</span> <span class="pre">[-y]</span> <span class="pre">[-v]</span></code></p>
+</div>
+<div class="section" id="description">
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">The <code class="docutils literal"><span class="pre">PACSign</span></code> utility inserts authentication markers into bitstreams
+targeted for the following programmable acceleration cards (PACs): *
+Intel® PAC with Intel Arria® 10 GX FPGA * Intel FPGA PAC D5005 *
+Intel PAC N3000 <code class="docutils literal"><span class="pre">PACSign</span></code> uses a root key and an optional code
+signing key to digitally sign the</div>
+<div class="line">bitstreams to validate their origin. The PACs will not program
+bitstreams without proper authentication.</div>
+</div>
+<p>The current PACs only support elliptical curve keys with the curve type
+<code class="docutils literal"><span class="pre">secp256r1</span></code> or <code class="docutils literal"><span class="pre">prime256v1</span></code>. The <code class="docutils literal"><span class="pre">PACSign</span></code> command supports
+hardware security modules (HSMs) for both <code class="docutils literal"><span class="pre">OpenSSL</span></code> and <code class="docutils literal"><span class="pre">PKCS</span> <span class="pre">#11</span></code>.</p>
+</div>
+<div class="section" id="bitstream-types">
+<h2>BITSTREAM TYPES<a class="headerlink" href="#bitstream-types" title="Permalink to this headline">¶</a></h2>
+<p>The first required argument to <code class="docutils literal"><span class="pre">PACSign</span></code> is the bitstream type
+identifier.</p>
+<p><code class="docutils literal"><span class="pre">{SR,FIM,BBS,BMC,BMC_FW,PR,AFU,GBS}</span></code></p>
+<p>Supported image types. <code class="docutils literal"><span class="pre">FIM</span></code> and <code class="docutils literal"><span class="pre">BBS</span></code> are aliases for the static
+region (<code class="docutils literal"><span class="pre">SR</span></code>). <code class="docutils literal"><span class="pre">BMC_FW</span></code> is an alias for the board management
+controller (<code class="docutils literal"><span class="pre">BMC</span></code>). <code class="docutils literal"><span class="pre">AFU</span></code> and <code class="docutils literal"><span class="pre">GBS</span></code> are aliases for the partial
+reconfiguration (<code class="docutils literal"><span class="pre">PR</span></code>) region.</p>
+<p><code class="docutils literal"><span class="pre">SR</span> <span class="pre">(FIM,</span> <span class="pre">BBS)</span></code></p>
+<p>Static FPGA image</p>
+<p><code class="docutils literal"><span class="pre">BMC</span> <span class="pre">(BMC_FW)</span></code></p>
+<p>BMC image, including firmware for some PACs</p>
+<p><code class="docutils literal"><span class="pre">PR</span> <span class="pre">(AFU,</span> <span class="pre">GBS)</span></code></p>
+<p>Reconfigurable FPGA image</p>
+</div>
+<div class="section" id="required-options">
+<h2>REQUIRED OPTIONS<a class="headerlink" href="#required-options" title="Permalink to this headline">¶</a></h2>
+<p>All bitstream types must specify the following information: * An
+operation that the <code class="docutils literal"><span class="pre">PACSign</span></code> command performs * The name and optional
+parameter file for a key signing module</p>
+<p><code class="docutils literal"><span class="pre">-t,</span> <span class="pre">--cert_type</span> <span class="pre">&lt;type&gt;</span></code></p>
+<p>The following operations are available:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>`UPDATE` - add authentication data to the bitstream.
+`CANCEL` - create a code signing key cancellation bitstream.
+`RK_256` - create a bitstream to program a 256-bit root entry hash into the device.
+`RK_384` - create a bitstream to program a 384-bit root entry hash into the device. Currently
+           available PACs do not support a 384-bit root entry hash.
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-H,</span> <span class="pre">--HSM_manager</span> <span class="pre">&lt;module&gt;</span></code></p>
+<p>The module name for a module that interfaces to a HSM. <code class="docutils literal"><span class="pre">PACSign</span></code>
+includes both the <code class="docutils literal"><span class="pre">openssl_manager</span></code> and the <code class="docutils literal"><span class="pre">pkcs11_manager</span></code> to
+handle keys and signing operations.</p>
+<p><code class="docutils literal"><span class="pre">-C,</span> <span class="pre">--HSM_config</span> <span class="pre">&lt;cfg&gt;</span></code> (optional)</p>
+<p>The argument to this option is passed verbatim to the specified HSM. For
+<code class="docutils literal"><span class="pre">pkcs11_manager</span></code>, this option specifies a <code class="docutils literal"><span class="pre">JSON</span></code> file describing the
+PKCS #11 capable HSM’s parameters.</p>
+</div>
+<div class="section" id="options">
+<h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">-r,</span> <span class="pre">--root_key</span> <span class="pre">&lt;keyID&gt;</span></code></p>
+<p>The key identifier that the HSM uses to identify the root key to be used
+for the selected operation.</p>
+<p><code class="docutils literal"><span class="pre">-k,</span> <span class="pre">--code_signing_key</span> <span class="pre">&lt;keyID&gt;</span></code></p>
+<p>The key identifier that the HSM uses to identify the code signing key to
+be used for the selected operation.</p>
+<p><code class="docutils literal"><span class="pre">-d,</span> <span class="pre">--csk_id</span> <span class="pre">&lt;csk_num&gt;</span></code></p>
+<p>Only used for type <code class="docutils literal"><span class="pre">CANCEL</span></code>. Specifies the key number of the code
+signing key to cancel.</p>
+<p><code class="docutils literal"><span class="pre">-i,</span> <span class="pre">--input_file</span> <span class="pre">&lt;file&gt;</span></code></p>
+<p>Only used for <code class="docutils literal"><span class="pre">UPDATE</span></code> operations. Specifies the file name containing
+the data to be signed.</p>
+<p><code class="docutils literal"><span class="pre">-o,</span> <span class="pre">--output_file</span> <span class="pre">&lt;file&gt;</span></code></p>
+<p>Specifies the file name for the signed output bitstream.</p>
+<p><code class="docutils literal"><span class="pre">-y,</span> <span class="pre">--yes</span></code></p>
+<p>Silently answer all queries from <code class="docutils literal"><span class="pre">PACSign</span></code> in the affirmative.</p>
+<p><code class="docutils literal"><span class="pre">-v,</span> <span class="pre">--verbose</span></code></p>
+<p>Can be specified multiple times. Increases the verbosity of <code class="docutils literal"><span class="pre">PACSign</span></code>.
+Once enables non-fatal warnings to be displayed. Twice enables progress
+information. Three or more occurrences enables very verbose debugging
+information.</p>
+</div>
+<div class="section" id="notes">
+<h2>NOTES<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<p>Different certification types require different sets of options. The
+table below describes the options required based on certification type:</p>
+<div class="section" id="update">
+<h3>UPDATE<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="19%" />
+<col width="25%" />
+<col width="13%" />
+<col width="17%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#160;</th>
+<th class="head">root_key</th>
+<th class="head">code_signing_key</th>
+<th class="head">csk_id</th>
+<th class="head">input_file</th>
+<th class="head">output_file</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>SR</td>
+<td>Optional <a class="footnote-reference" href="#id7" id="id1">[1]</a></td>
+<td>Optional <a class="footnote-reference" href="#id8" id="id2">[2]</a></td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>BMC</td>
+<td>Optional <a class="footnote-reference" href="#id9" id="id3">[3]</a></td>
+<td>Optional <a class="footnote-reference" href="#id10" id="id4">[4]</a></td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>PR</td>
+<td>Optional <a class="footnote-reference" href="#id11" id="id5">[5]</a></td>
+<td>Optional <a class="footnote-reference" href="#id12" id="id6">[6]</a></td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="cancel">
+<h3>CANCEL<a class="headerlink" href="#cancel" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="15%" />
+<col width="26%" />
+<col width="13%" />
+<col width="18%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#160;</th>
+<th class="head">root_key</th>
+<th class="head">code_signing_key</th>
+<th class="head">csk_id</th>
+<th class="head">input_file</th>
+<th class="head">output_file</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>SR</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>BMC</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>PR</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rk-256-rk-384-1">
+<h3>RK_256 / RK_384[^1]<a class="headerlink" href="#rk-256-rk-384-1" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="15%" />
+<col width="26%" />
+<col width="13%" />
+<col width="18%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#160;</th>
+<th class="head">root_key</th>
+<th class="head">code_signing_key</th>
+<th class="head">csk_id</th>
+<th class="head">input_file</th>
+<th class="head">output_file</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>SR</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>BMC</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>PR</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The following command generates a root hash programming PR bitstream.
+The generated file can be an input to the <code class="docutils literal"><span class="pre">fpgasupdate</span></code> command to
+program the root hash for PR operations into the device flash. You can
+only program the root hash one time.</p>
+<p><code class="docutils literal"><span class="pre">python</span> <span class="pre">PACSign.py</span> <span class="pre">PR</span> <span class="pre">-t</span> <span class="pre">RK_256</span> <span class="pre">-o</span> <span class="pre">pr_rhp.bin</span> <span class="pre">-H</span> <span class="pre">openssl_manager</span> <span class="pre">-r</span> <span class="pre">key_pr_root_public_256.pem</span></code></p>
+<p>The following command adds authentication blocks to <code class="docutils literal"><span class="pre">hello_afu.gbs</span></code>
+signed by both provided keys and writes the result to
+<code class="docutils literal"><span class="pre">s_hello_afu.gbs</span></code>. For signed bitstreams, the newly-generated block
+replaces the old signature block.</p>
+<p><code class="docutils literal"><span class="pre">python</span> <span class="pre">PACSign.py</span> <span class="pre">PR</span> <span class="pre">-t</span> <span class="pre">update</span> <span class="pre">-H</span> <span class="pre">openssl_manager</span> <span class="pre">-i</span> <span class="pre">hello_afu.gbs</span> <span class="pre">-o</span> <span class="pre">s_hello_afu.gbs</span> <span class="pre">-r</span> <span class="pre">key_pr_root_public_256.pem</span> <span class="pre">-k</span> <span class="pre">key_pr_csk0_public_256.pem</span></code></p>
+<p>The following command generates a code signing key cancellation
+bitstream to cancel code signing key number 4 for all BMC operations.
+After this command runs the PAC rejects BMC images that CSK 4 signed.</p>
+<p><code class="docutils literal"><span class="pre">python</span> <span class="pre">PACSign.py</span> <span class="pre">BMC</span> <span class="pre">-t</span> <span class="pre">cancel</span> <span class="pre">-H</span> <span class="pre">openssl_manager</span> <span class="pre">-o</span> <span class="pre">csk4_cancel.gbs</span> <span class="pre">-r</span> <span class="pre">key_bmc_root_public_256.pem</span> <span class="pre">-d</span> <span class="pre">4</span></code></p>
+</div>
+<div class="section" id="revision-history">
+<h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="55%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Document Version</th>
+<th class="head">Intel Acceleration Stack Version</th>
+<th class="head">Changes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>2019.07.08</td>
+<td>1.2.1 Beta. (Supported with Intel
+Quartus Prime Pro Edition 19.2.)</td>
+<td>Initial
+revision.</td>
+</tr>
+<tr class="row-odd"><td>2019.10.04</td>
+<td>2.0.1 Beta. (Supported with Intel
+Quartus Prime Pro Edition 19.2.)</td>
+<td>Editorial
+changes
+only.</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>For <code class="docutils literal"><span class="pre">UPDATE</span></code> type, you must specify both keys to produce an
+authenticated bitstream. Omitting one key generates a valid, but
+unauthenticated bitstream. You can only load the unauthenticated
+bitstream on a PAC with no root entry hash programmed for that
+bitstream type.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>For <code class="docutils literal"><span class="pre">UPDATE</span></code> type, you must specify both keys to produce an
+authenticated bitstream. Omitting one key generates a valid, but
+unauthenticated bitstream. You can only load the unauthenticated
+bitstream on a PAC with no root entry hash programmed for that
+bitstream type.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>For <code class="docutils literal"><span class="pre">UPDATE</span></code> type, you must specify both keys to produce an
+authenticated bitstream. Omitting one key generates a valid, but
+unauthenticated bitstream. You can only load the unauthenticated
+bitstream on a PAC with no root entry hash programmed for that
+bitstream type.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>For <code class="docutils literal"><span class="pre">UPDATE</span></code> type, you must specify both keys to produce an
+authenticated bitstream. Omitting one key generates a valid, but
+unauthenticated bitstream. You can only load the unauthenticated
+bitstream on a PAC with no root entry hash programmed for that
+bitstream type.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>For <code class="docutils literal"><span class="pre">UPDATE</span></code> type, you must specify both keys to produce an
+authenticated bitstream. Omitting one key generates a valid, but
+unauthenticated bitstream. You can only load the unauthenticated
+bitstream on a PAC with no root entry hash programmed for that
+bitstream type.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td>For <code class="docutils literal"><span class="pre">UPDATE</span></code> type, you must specify both keys to produce an
+authenticated bitstream. Omitting one key generates a valid, but
+unauthenticated bitstream. You can only load the unauthenticated
+bitstream on a PAC with no root entry hash programmed for that
+bitstream type.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../fpgasupdate/fpgasupdate.html" class="btn btn-neutral float-right" title="fpgasupdate" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../userclk/userclk.html" class="btn btn-neutral" title="userclk" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.1.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

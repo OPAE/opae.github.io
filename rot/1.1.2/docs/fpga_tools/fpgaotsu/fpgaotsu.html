@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>userclk &mdash; OPAE</title>
+  <title>fpgaotsu &mdash; OPAE</title>
   
 
   
@@ -34,8 +34,8 @@
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
     <link rel="top" title="OPAE" href="../../../index.html"/>
-        <link rel="next" title="PACSign" href="../PACSign/PACSign.html"/>
-        <link rel="prev" title="packager" href="../packager/packager.html"/> 
+        <link rel="next" title="super-rsu" href="../super-rsu/super-rsu.html"/>
+        <link rel="prev" title="fpgasupdate" href="../fpgasupdate/fpgasupdate.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -120,16 +120,32 @@
 <li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pacd/pacd.html">pacd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">userclk</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">EXAMPLES</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">OPTIONS</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PACSign/PACSign.html">PACSign</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpgaotsu/fpgaotsu.html">fpgaotsu</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">fpgaotsu</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#positional-arguments">POSITIONAL ARGUMENTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-arguments">OPTIONAL ARGUMENTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">EXAMPLE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fpga-d5005-card">FPGA D5005 card:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fpga-n3000-card">FPGA N3000 card:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-steps">Testing steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#one-time-update-install-steps">one-time update install steps:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#one-time-update-tool-input-specs">one-time update tool input specs:</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fpgaotsu-n3000-json">fpgaotsu_n3000.json:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fpgaotsu-d5005-json">fpgaotsu_d5005.json:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../super-rsu/super-rsu.html">super-rsu</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
@@ -166,11 +182,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../../index.html">Docs</a> &raquo;</li>
       
-    <li>userclk</li>
+    <li>fpgaotsu</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../../_sources/docs/fpga_tools/userclk/userclk.md.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/docs/fpga_tools/fpgaotsu/fpgaotsu.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -180,68 +196,96 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="userclk">
-<h1>userclk<a class="headerlink" href="#userclk" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="fpgaotsu">
+<h1>fpgaotsu<a class="headerlink" href="#fpgaotsu" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">userclk</span> <span class="pre">[-B</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-D</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-F</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[-S</span> <span class="pre">&lt;socket&gt;]</span> <span class="pre">[-P</span> <span class="pre">&lt;Port</span> <span class="pre">id&gt;]</span> <span class="pre">[-H</span> <span class="pre">&lt;User</span> <span class="pre">clock</span> <span class="pre">high</span> <span class="pre">frequency&gt;]</span> <span class="pre">-L</span> <span class="pre">&lt;User</span> <span class="pre">clock</span> <span class="pre">low</span> <span class="pre">frequency&gt;]</span></code></p>
+<p><code class="docutils literal"><span class="pre">fpgaotsu.py</span> <span class="pre">[-h]</span> <span class="pre">[--rsu-only]</span> <span class="pre">[--rsu]</span> <span class="pre">[-v]</span> <span class="pre">fpgaotsu_json</span></code></p>
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>userclk sets the frequency range for an AFU.</p>
+<p>One-time update tool updates non Root of Trust PCIe FPGA cards to Root
+of Trust (RoT) PCIe FPGA cards. Tool updates NIOS factory, NIOS user,
+BMC root key hash, SR key hash, MAX10 device tree, FPGA factory image,
+FPGA user, NIOS boot loader, MAX10 factory and MAX10 user to Root of
+Trust firmware.</p>
+<div class="section" id="positional-arguments">
+<h3>POSITIONAL ARGUMENTS<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">{fpgaotsu_json}</span></code></p>
+<p>Specifies the input json file or manifest.</p>
 </div>
-<div class="section" id="examples">
-<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">./userclk</span>&#160; <span class="pre">-B</span> <span class="pre">0x5e</span> <span class="pre">-H</span> <span class="pre">400</span> <span class="pre">-L</span> <span class="pre">200</span></code></p>
-<p>Sets AFU frequency.</p>
+<div class="section" id="optional-arguments">
+<h3>OPTIONAL ARGUMENTS<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Print</span> <span class="n">usage</span> <span class="n">information</span><span class="p">.</span>
+</pre></div>
 </div>
-<div class="section" id="options">
-<h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">-B,--bus</span></code></p>
-<p>FPGA Bus number.</p>
-<p><code class="docutils literal"><span class="pre">-D,--device</span></code></p>
-<p>FPGA Device number.</p>
-<p><code class="docutils literal"><span class="pre">-F,--function</span></code></p>
-<p>FPGA function number.</p>
-<p><code class="docutils literal"><span class="pre">-S,--socket</span></code></p>
-<p>FPGA socket number.</p>
-<p><code class="docutils literal"><span class="pre">-P,--port</span></code></p>
-<p>Port ID.</p>
-<p><code class="docutils literal"><span class="pre">-H,--freq-high</span></code></p>
-<p>User clock high frequency.</p>
-<p><code class="docutils literal"><span class="pre">-L,--freq-low</span></code></p>
-<p>User clock low frequency.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="17%" />
-<col width="53%" />
-<col width="31%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Date</th>
-<th class="head">Intel Acceleration Stack
-Version</th>
-<th class="head">Changes Made</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>2018.10.
-15</td>
-<td>1.2. (Supported with Intel
-Quartus Prime Pro Edition
-17.1.1.)</td>
-<td>No changes from
-previous
-release.</td>
-</tr>
-<tr class="row-odd"><td>2018.05.
-21</td>
-<td>DCP 1.1 Beta (works with
-Quartus Prime Pro 17.1.1)</td>
-<td>Fixed typos.</td>
-</tr>
-</tbody>
-</table>
+<p><code class="docutils literal"><span class="pre">--rsu-only</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Reset</span> <span class="n">fpga</span> <span class="n">pcie</span> <span class="n">card</span> <span class="n">and</span> <span class="n">loads</span> <span class="n">updated</span> <span class="n">firmware</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--rsu</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>Updates fpga with Root of Trust firmware and Reset fpga pcie card.
+
+`-v --verbose`
+
+Enables debug logging.
+</pre></div>
+</div>
+</div>
+<div class="section" id="example">
+<h3>EXAMPLE<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">fpgaotsu.py</span> <span class="pre">/usr/share/opae/d5005/one-time-update/fpgaotsu_d5005.json</span></code></p>
+<p>Programs all FPGA D5005 cards with Root of Trust firmware.</p>
+<p><code class="docutils literal"><span class="pre">fpgaotsu.py</span> <span class="pre">/usr/share/opae/n3000/one-time-update/fpgaotsu_d3000.json</span></code></p>
+<p>Programs all FPGA N3000 cards with Root of Trust firmware.</p>
+<div class="section" id="fpga-d5005-card">
+<h4>FPGA D5005 card:<a class="headerlink" href="#fpga-d5005-card" title="Permalink to this headline">¶</a></h4>
+<p>User has to power cycle system after updating Root of Trust with
+one-time update tool.</p>
+</div>
+<div class="section" id="fpga-n3000-card">
+<h4>FPGA N3000 card:<a class="headerlink" href="#fpga-n3000-card" title="Permalink to this headline">¶</a></h4>
+<p>One-time update tool reset fpga pcie card two times after updating RoT
+firmware, Boot to Max10 factory image after first reset and boot to FPGA
+factory image after second reset. No need to power cycle system, fpga
+card reset loads to Root of Trust firmware.</p>
+</div>
+</div>
+</div>
+<div class="section" id="testing-steps">
+<h2>Testing steps<a class="headerlink" href="#testing-steps" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="one-time-update-install-steps">
+<h3>one-time update install steps:<a class="headerlink" href="#one-time-update-install-steps" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c"><div class="highlight"><pre><span></span>1. Install from opae-one-time-update.rpm
+   This should install dependencies:
+   * opae-intel-fpga-driver
+   * opae-tools-extra
+   * Security-Tools
+2. Verify one-time update files (firmware and manifest) installed in
+   * /usr/share/opae/n3000/one-time-update
+   * /usr/share/opae/d5005/one-time-update
+
+3. Update FPGA N3000 card with temporary max10 image to access second flash.
+   1. sudo fpgaflash bmc_img usr/share/opae/n3000/one-time-update/max10_system_revd_dual_v111.1.13_temporary_cfm0_auto.rpd --rsu
+   2. Verify sysfs attributes /sys/class/fpga/intel-fpga-dev.*/intel-fpga-fme.*/spi-altera.*.auto/spi_master/spi*/spi*.*/intel-generic-qspi.*.auto
+
+4. Run &quot;fpgaotsu.py /usr/share/opae/n3000/one-time-update/fpgaotsu_n3000.json&quot; for intel fpga N3000 card or
+   Run &quot;fpgaotsu.py /usr/share/opae/d5005/one-time-update/fpgaotsu_d5005.json&quot; for intel fpga D5005 card
+   * Updates Nios, MAX10 and FPGA images for FPGA N3000 and D5005.
+   * User has to power cycle FPGA D5005 card system after updating Root of Trust firmware.
+</pre></div>
+</div>
+</div>
+<div class="section" id="one-time-update-tool-input-specs">
+<h3>one-time update tool input specs:<a class="headerlink" href="#one-time-update-tool-input-specs" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="fpgaotsu-n3000-json">
+<h4>fpgaotsu_n3000.json:<a class="headerlink" href="#fpgaotsu-n3000-json" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="fpgaotsu-d5005-json">
+<h4>fpgaotsu_d5005.json:<a class="headerlink" href="#fpgaotsu-d5005-json" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
 </div>
 </div>
 
@@ -252,10 +296,10 @@ Quartus Prime Pro 17.1.1)</td>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../PACSign/PACSign.html" class="btn btn-neutral float-right" title="PACSign" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../super-rsu/super-rsu.html" class="btn btn-neutral float-right" title="super-rsu" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../packager/packager.html" class="btn btn-neutral" title="packager" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../fpgasupdate/fpgasupdate.html" class="btn btn-neutral" title="fpgasupdate" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
