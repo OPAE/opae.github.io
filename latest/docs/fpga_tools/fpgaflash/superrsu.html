@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>super-rsu &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../../',
+              VERSION:'1.4.0',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Super Remote System Update User Guide" href="../super-rsu/super-rsu.html" />
+    <link rel="prev" title="fpgaflash" href="fpgaflash.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_api/api_build.html">Building OPAE SDK Artifacts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_cxx_api.html">OPAE C++ Core API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_python_api.html">OPAE Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_api/plug_guide/readme.html">Plugin Developer’s Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../coreidle/coreidle.html">coreidle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgabist/fpgabist.html">fpgabist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpgaflash.html">fpgaflash</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">super-rsu</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#positional-arguments">POSITIONAL ARGUMENTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-arguments">OPTIONAL ARGUMENTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">CONFIGURATION</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../super-rsu/super-rsu.html">Super Remote System Update User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_config/readme.html">hssi_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_loopback/readme.html">hssi_loopback</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE support on Intel FPGA PCIe driver and Linux PCIe FPGA DFL driver</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_dfl_drv/fpga_dfl_drv.html">Enable OPAE on FPGA PCIe drivers</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OPAE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>super-rsu</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/docs/fpga_tools/fpgaflash/superrsu.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="super-rsu">
+<h1>super-rsu<a class="headerlink" href="#super-rsu" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">super</span><span class="o">-</span><span class="n">rsu</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">verify</span><span class="p">]</span> <span class="o">|</span> <span class="p">[</span> <span class="p">[</span><span class="o">--</span><span class="n">log</span><span class="o">-</span><span class="n">level</span> <span class="p">{</span><span class="n">trace</span><span class="p">,</span><span class="n">debug</span><span class="p">,</span><span class="n">error</span><span class="p">,</span><span class="n">warn</span><span class="p">,</span><span class="n">info</span><span class="p">,</span><span class="n">notset</span><span class="p">}]</span>
+          <span class="p">[</span><span class="o">--</span><span class="n">log</span><span class="o">-</span><span class="n">file</span> <span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">rsu</span><span class="o">-</span><span class="n">only</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">with</span><span class="o">-</span><span class="n">rsu</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">force</span><span class="o">-</span><span class="n">flash</span><span class="p">]</span> <span class="p">]</span>
+    <span class="n">rsu_config</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="description">
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>super-rsu is a tool that can be used for flashing image files and
+commanding an Intel PAC device to perform RSU (remote system update - or
+a board reboot). Performing an RSU on an Intel PAC device will cause it
+to reload any firmware or programmable logic and restart its execution,
+a requirement for any updated firmware or programmable logic to take
+effect.</p>
+<p>At the core of super-rsu is its configuration file (referred to in this
+document as ‘rsu_config’) which is essentially a manifest file for
+identifying both the target device and the binary images (and their
+versions) to be flashed.</p>
+<p>At a high level, the flow of super-rsu should be: 1. Read and parse
+rsu_config file 2. Use product identifiers (like vendor, device and any
+additional vendor, device pairs that may be present in the PCIe bus) to
+locate all compatible devices on the PCIe bus. 3. For every device found
+on the system, update the device using the flash images defined in the
+“flash” section in the rsu_config data (or nvmupdate section). Each item
+in the “flash” section is a “flash spec” that contains: * The flash
+type (“user”, “bmc_fw”, “bmc_img”, …) * The filename of the image to
+flash. super-rsu will look for this file first in the same directory of
+the rsu_config file, and then look in the current working directory. *
+The version of the image. * An optional “force” indicator * An
+optional “requires” indicator The “nvmupdate” section is used to
+describe an Ethernet firmware file and its version. 4. Using the data in
+the “nvmupdate” and “flash” sections, the update routine involves: * If
+an “nvmupdate” section is present: 1. Locate the file on the file system
+to use to flash the Ethernet device. 2. Call nvmupdate to get an
+“inventory” of devices matching the vendor and device id in this
+section. 3. Use this data to dynamically generate an nvmupdate
+compatible configuration file. 4. Call nvmupdate with the generated
+configuration file to flash the Ethernet interfaces in the Vista Creek
+card (if version reported by system does not match the version in this
+section). * For each spec in the “flash” section: 1. Locate the file on
+the file system to use to flash. 2. Compare the version listed in the
+“flash spec” to version reported by the target component. 3. Create a
+task to call fpgaflash if either of the following conditions is met (and
+the revision specified is compatible): * The “force” indicator is
+present and set to true. * The version in the spec does not match the
+version reported by the system OR the flash type is factory type. * For
+each task created from the “flash” section: 1. Call fpgaflash with the
+command line arguments that correspond to the flash type and the file
+name in the spec used to create the task. This opens and controls the
+execution of fpgaflash in another process.</p>
+<p><em>NOTE</em>: If the system reports a revision for one of the components being
+flashed, this revision must be in the set of revisions listed in the
+manifest. Example: if the system reports ‘a’ for bmc_img and the
+manifest includes ‘ab’, then the image will be flashed.</p>
+<p><em>NOTE</em>: Each update routine is run in a thread specific to a device
+located on the PCIe bus. Every task in an update routine involves
+opening a new process that is controlled and managed by its update
+routine thread. If a task includes a timeout and the timeout is reached,
+a termination request will be sent to its process and it will be counted
+as a failure. If a global timeout is reached in the main thread, a
+termination request will be sent to each thread performing the update.
+Consequently, the update routine will give the current task extra time
+before terminating the process. The RSU operation will only be performed
+if requested with either <code class="docutils literal"><span class="pre">--with-rsu</span></code> command line argument or with
+the <code class="docutils literal"><span class="pre">--rsu-only</span></code> command line argument. The former will perform the
+RSU command upon successful completion of flash operations. The latter
+will skip the process of version matching and flashing images and will
+only perform the RSU command. It is recommended that super-rsu be
+executed again if any flash operation is interrupted.</p>
+</div>
+<div class="section" id="positional-arguments">
+<h2>POSITIONAL ARGUMENTS<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">rsu</span> <span class="pre">config</span></code></p>
+<p>Specifies the name of the file containing the RSU configuration (in JSON
+format)</p>
+</div>
+<div class="section" id="optional-arguments">
+<h2>OPTIONAL ARGUMENTS<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Print</span> <span class="n">usage</span> <span class="n">information</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--verify</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Compare</span> <span class="n">versions</span> <span class="n">of</span> <span class="n">flashable</span> <span class="n">components</span> <span class="n">on</span> <span class="n">the</span> <span class="n">system</span> <span class="n">against</span> <span class="n">the</span> <span class="n">manifest</span><span class="p">.</span>
+<span class="n">Return</span> <span class="n">non</span><span class="o">-</span><span class="n">zero</span> <span class="n">exit</span> <span class="k">if</span> <span class="n">compatible</span> <span class="n">components</span> <span class="n">are</span> <span class="n">not</span> <span class="n">up</span> <span class="n">to</span> <span class="n">date</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-n,</span> <span class="pre">--dry-run</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>Don&#39;t perform any updates, just a dry run.
+This will print out commands that can be executed
+in a Linux shell.
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--log-level</span> <span class="pre">{trace,debug,error,warn,info,notset}</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>Log level to use. Default is &#39;info&#39;.
+</pre></div>
+</div>
+<p>`–log-file (default: /tmp/super-rsu.log)</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Emit</span> <span class="n">log</span> <span class="n">messages</span> <span class="p">(</span><span class="n">with</span> <span class="n">DEBUG</span> <span class="n">level</span><span class="p">)</span> <span class="n">to</span> <span class="n">filename</span>
+<span class="nl">_NOTE_</span><span class="p">:</span> <span class="n">The</span> <span class="k">default</span> <span class="n">log</span> <span class="n">file</span> <span class="p">(</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">super</span><span class="o">-</span><span class="n">rsu</span><span class="p">.</span><span class="n">log</span><span class="p">)</span> <span class="n">is</span> <span class="n">set</span> <span class="n">to</span> <span class="n">rollover</span> <span class="n">every</span>
+<span class="n">time</span> <span class="n">super</span><span class="o">-</span><span class="n">rsu</span> <span class="n">is</span> <span class="n">executed</span><span class="p">.</span> <span class="n">This</span> <span class="n">will</span> <span class="n">create</span> <span class="n">numbered</span> <span class="n">backups</span> <span class="n">before</span>
+<span class="n">truncating</span> <span class="n">the</span> <span class="n">log</span> <span class="n">file</span><span class="p">.</span> <span class="n">The</span> <span class="n">maximum</span> <span class="n">number</span> <span class="n">of</span> <span class="n">backups</span> <span class="n">is</span> <span class="mf">50.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--rsu-only</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Only</span> <span class="n">perform</span> <span class="n">the</span> <span class="n">RSU</span> <span class="n">command</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--with-rsu</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Perform</span> <span class="n">RSU</span> <span class="n">after</span> <span class="n">updating</span> <span class="n">flash</span> <span class="n">components</span><span class="p">(</span><span class="n">experimental</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--force-flash</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Flash</span> <span class="n">all</span> <span class="n">images</span> <span class="n">regardless</span> <span class="n">of</span> <span class="n">versions</span> <span class="n">matching</span> <span class="n">or</span> <span class="n">not</span><span class="p">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>CONFIGURATION<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The following is the JSON schema expected by super-rsu. Any deviance
+from this schema may result in errors executing super-rsu.</p>
+<div class="code json highlight-c"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s">&quot;definitions&quot;</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="s">&quot;$schema&quot;</span><span class="o">:</span> <span class="s">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+  <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;http://example.com/root.json&quot;</span><span class="p">,</span>
+  <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Root Schema&quot;</span><span class="p">,</span>
+  <span class="s">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s">&quot;product&quot;</span><span class="p">,</span>
+    <span class="s">&quot;vendor&quot;</span><span class="p">,</span>
+    <span class="s">&quot;device&quot;</span><span class="p">,</span>
+    <span class="s">&quot;flash&quot;</span>
+  <span class="p">],</span>
+  <span class="s">&quot;optional&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s">&quot;nvmupdate&quot;</span><span class="p">,</span>
+  <span class="p">],</span>
+  <span class="s">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s">&quot;product&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/product&quot;</span><span class="p">,</span>
+      <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+      <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Product Schema&quot;</span><span class="p">,</span>
+      <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+      <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s">&quot;n3000&quot;</span>
+      <span class="p">],</span>
+      <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^(.*)$&quot;</span>
+    <span class="p">},</span>
+    <span class="s">&quot;vendor&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/vendor&quot;</span><span class="p">,</span>
+      <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+      <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Vendor Schema&quot;</span><span class="p">,</span>
+      <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+      <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s">&quot;0x8086&quot;</span>
+      <span class="p">],</span>
+      <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^((0x)?[A-Fa-f0-9]{4})$&quot;</span>
+    <span class="p">},</span>
+    <span class="s">&quot;device&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/device&quot;</span><span class="p">,</span>
+      <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+      <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Device Schema&quot;</span><span class="p">,</span>
+      <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+      <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s">&quot;0x0b30&quot;</span>
+      <span class="p">],</span>
+      <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^((0x)?[A-Fa-f0-9]{4})$&quot;</span>
+    <span class="p">},</span>
+    <span class="s">&quot;nvmupdate&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/nvmupdate&quot;</span><span class="p">,</span>
+      <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;object&quot;</span><span class="p">,</span>
+      <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The nvmupdate Schema&quot;</span><span class="p">,</span>
+      <span class="s">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s">&quot;vendor&quot;</span><span class="p">,</span>
+        <span class="s">&quot;device&quot;</span><span class="p">,</span>
+        <span class="s">&quot;filename&quot;</span><span class="p">,</span>
+        <span class="s">&quot;version&quot;</span>
+      <span class="p">],</span>
+      <span class="s">&quot;optional&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s">&quot;interfaces&quot;</span>
+      <span class="p">],</span>
+      <span class="s">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">&quot;vendor&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/nvmupdate/vendor&quot;</span><span class="p">,</span>
+          <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+          <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The nvmupdate Vendor Schema&quot;</span><span class="p">,</span>
+          <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+          <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+             <span class="s">&quot;0x8086&quot;</span>
+          <span class="p">],</span>
+          <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^((0x)?[A-Fa-f0-9]{4})$&quot;</span>
+        <span class="p">},</span>
+        <span class="s">&quot;device&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/nvmupdate/device&quot;</span><span class="p">,</span>
+          <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+          <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The nvmupdate Device Schema&quot;</span><span class="p">,</span>
+          <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+          <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+            <span class="s">&quot;0x0d58&quot;</span>
+          <span class="p">],</span>
+          <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^((0x)?[A-Fa-f0-9]{4})$&quot;</span>
+        <span class="p">},</span>
+        <span class="s">&quot;interfaces&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/nvmupdate/interfaces&quot;</span><span class="p">,</span>
+          <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;number&quot;</span><span class="p">,</span>
+          <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The nvmupdate Interfaces Schema&quot;</span><span class="p">,</span>
+          <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;1&quot;</span><span class="p">,</span>
+          <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+            <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span>
+          <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s">&quot;filename&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/nvmupdate/filename&quot;</span><span class="p">,</span>
+          <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+          <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The nvmupdate Filename Schema&quot;</span><span class="p">,</span>
+          <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+          <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+            <span class="s">&quot;PSG_XL710_6p80_XLAUI_NCSI_CFGID2p61_Dual_DID_0D58_800049C6.bin&quot;</span>
+          <span class="p">],</span>
+          <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^(.*)$&quot;</span>
+        <span class="p">},</span>
+        <span class="s">&quot;version&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/nvmupdate/version&quot;</span><span class="p">,</span>
+          <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+          <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The nvmupdate Version Schema&quot;</span><span class="p">,</span>
+          <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+          <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+            <span class="s">&quot;800049C6&quot;</span>
+          <span class="p">],</span>
+          <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^((0x)?[A-Fa-f0-9]{8})$&quot;</span>
+        <span class="p">},</span>
+        <span class="s">&quot;timeout&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/nvmupdate/timeout&quot;</span><span class="p">,</span>
+          <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+          <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Timeout Schema&quot;</span><span class="p">,</span>
+          <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+          <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+            <span class="s">&quot;10m&quot;</span>
+          <span class="p">],</span>
+          <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^([0-9]+(</span><span class="se">\\</span><span class="s">.[0-9]+)?([dhms]))+$&quot;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s">&quot;flash&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/flash&quot;</span><span class="p">,</span>
+      <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;array&quot;</span><span class="p">,</span>
+      <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Flash Schema&quot;</span><span class="p">,</span>
+      <span class="s">&quot;items&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/flash/items&quot;</span><span class="p">,</span>
+        <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;object&quot;</span><span class="p">,</span>
+        <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Items Schema&quot;</span><span class="p">,</span>
+        <span class="s">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span>
+          <span class="s">&quot;filename&quot;</span><span class="p">,</span>
+          <span class="s">&quot;type&quot;</span><span class="p">,</span>
+          <span class="s">&quot;version&quot;</span><span class="p">,</span>
+          <span class="s">&quot;revision&quot;</span>
+        <span class="p">],</span>
+  <span class="s">&quot;optional&quot;</span><span class="o">:</span> <span class="p">[</span>
+          <span class="s">&quot;enabled&quot;</span><span class="p">,</span>
+          <span class="s">&quot;force&quot;</span><span class="p">,</span>
+    <span class="s">&quot;timeout&quot;</span><span class="p">,</span>
+    <span class="s">&quot;requires&quot;</span>
+  <span class="p">],</span>
+        <span class="s">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s">&quot;enabled&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/flash/items/properties/enabled&quot;</span><span class="p">,</span>
+      <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;boolean&quot;</span><span class="p">,</span>
+      <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Enabled Schema&quot;</span><span class="p">,</span>
+      <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;true&quot;</span>
+    <span class="p">},</span>
+          <span class="s">&quot;filename&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/flash/items/properties/filename&quot;</span><span class="p">,</span>
+            <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+            <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Filename Schema&quot;</span><span class="p">,</span>
+            <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+            <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+              <span class="s">&quot;vista_creek_qspi_xip_v1.0.6.ihex&quot;</span>
+            <span class="p">],</span>
+            <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^(.*)$&quot;</span>
+          <span class="p">},</span>
+          <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/flash/items/properties/type&quot;</span><span class="p">,</span>
+            <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+            <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Type Schema&quot;</span><span class="p">,</span>
+            <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+            <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+              <span class="s">&quot;bmc_fw&quot;</span>
+            <span class="p">],</span>
+            <span class="s">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s">&quot;user&quot;</span><span class="p">,</span> <span class="s">&quot;bmc_fw&quot;</span><span class="p">,</span> <span class="s">&quot;bmc_img&quot;</span><span class="p">,</span> <span class="s">&quot;dtb&quot;</span><span class="p">,</span> <span class="s">&quot;factory_only&quot;</span><span class="p">,</span>
+      <span class="s">&quot;phy_eeprom&quot;</span><span class="p">]</span>
+          <span class="p">},</span>
+          <span class="s">&quot;version&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/flash/items/properties/version&quot;</span><span class="p">,</span>
+            <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+            <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Version Schema&quot;</span><span class="p">,</span>
+            <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+            <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+              <span class="s">&quot;1.0.6&quot;</span>
+            <span class="p">],</span>
+            <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^</span><span class="se">\\</span><span class="s">d+</span><span class="se">\\</span><span class="s">.</span><span class="se">\\</span><span class="s">d+</span><span class="se">\\</span><span class="s">.</span><span class="se">\\</span><span class="s">d+$&quot;</span>
+          <span class="p">},</span>
+          <span class="s">&quot;force&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/flash/items/properties/force&quot;</span><span class="p">,</span>
+            <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;boolean&quot;</span><span class="p">,</span>
+            <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Force Schema&quot;</span><span class="p">,</span>
+            <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="nb">false</span><span class="p">,</span>
+            <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+              <span class="nb">true</span>
+            <span class="p">]</span>
+          <span class="p">},</span>
+          <span class="s">&quot;revision&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/flash/items/properties/revision&quot;</span><span class="p">,</span>
+            <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+            <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Revision Schema&quot;</span><span class="p">,</span>
+            <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+            <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+              <span class="s">&quot;C&quot;</span>
+            <span class="p">],</span>
+            <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^([A-Za-z])$&quot;</span>
+          <span class="p">},</span>
+          <span class="s">&quot;timeout&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/nvmupdate/timeout&quot;</span><span class="p">,</span>
+            <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+            <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Timeout Schema&quot;</span><span class="p">,</span>
+            <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+            <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+              <span class="s">&quot;10m&quot;</span>
+            <span class="p">],</span>
+            <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^([0-9]+(\.[0-9]+)?([dhms]))+$&quot;</span>
+          <span class="p">},</span>
+          <span class="s">&quot;requires&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s">&quot;$id&quot;</span><span class="o">:</span> <span class="s">&quot;#/properties/flash/items/properties/requires&quot;</span><span class="p">,</span>
+            <span class="s">&quot;type&quot;</span><span class="o">:</span> <span class="s">&quot;string&quot;</span><span class="p">,</span>
+            <span class="s">&quot;title&quot;</span><span class="o">:</span> <span class="s">&quot;The Requires Schema&quot;</span><span class="p">,</span>
+            <span class="s">&quot;default&quot;</span><span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+            <span class="s">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+              <span class="s">&quot;bmc_img &gt;= 1.0.12&quot;</span>
+            <span class="p">],</span>
+            <span class="s">&quot;pattern&quot;</span><span class="o">:</span> <span class="s">&quot;^(([a-z_]+) ((&lt;&gt;!=)?=) ([0-9a-z</span><span class="se">\\</span><span class="s">.]+)$&quot;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../super-rsu/super-rsu.html" class="btn btn-neutral float-right" title="Super Remote System Update User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fpgaflash.html" class="btn btn-neutral float-left" title="fpgaflash" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -23,7 +23,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../../',
-              VERSION:'1.3.0',
+              VERSION:'1.4.0',
               LANGUAGE:'en',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -151,7 +151,7 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_api/api_build.html">Building the OPAE C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_api/api_build.html">Building OPAE SDK Artifacts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_api/fpga_cxx_api.html">OPAE C++ Core API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_api/fpga_python_api.html">OPAE Python API Reference</a></li>
@@ -160,9 +160,7 @@
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
 <ul>
@@ -173,6 +171,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaflash/fpgaflash.html">fpgaflash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaflash/superrsu.html">super-rsu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/super-rsu/super-rsu.html">Super Remote System Update User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgamux/fpgamux.html">fpgamux</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaport/fpgaport.html">fpgaport</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
@@ -419,17 +419,14 @@ hardware using this bitstream.</p>
 <p>The OPAE software release includes the ASE. The current OPAE ASE release
 supports both Acceleration Stack for the Intel Xeon Processor with
 Integrated FPGA and Acceleration Stack for the Intel PAC card.</p>
-<p>The ASE is available only on 64-bit Linux Operating Systems. ASE
-performance is better on a 64-bit RTL simulator; however, the ASE also
-supports for 32-bit ModelSim. Consult your RTL simulator vendor for
-Synopsys or Mentor Graphics for specific simulation requirements.</p>
-<p>The current ASE version supports the following RTL Simulators:</p>
-<ul class="simple">
-<li>Synopsys VCS-MX (tested versions) * VCS-MX H2013.06-SP1 * VCS-MX
-J2014.12-SP3 * VCS-MX K2015.09-SP1 * VCS-MX L2016.06</li>
-<li>Mentor Graphics Modelsim-SE and Questasim (tested versions) *
-QuestaSim 10.5b * ModelSim-SE 10.5a * QuestaSim 10.4d</li>
-</ul>
+<p>The ASE is available only on 64-bit Linux operating systems with one of
+the following simulators: * 64-bit Synopsys* RTL Simulator (minimum
+version VCS-MX H2013.06-SP1) * 32 and 64-bit Mentor Graphics* Modelsim
+SE Simulator (minimum version 10.5a) * 64-bit Mentor Graphics*
+QuestaSim Simulator (minimum version 10.4d)</p>
+<p>ASE performance is better on a 64-bit RTL simulator. Consult your RTL
+simulator vendor for Synopsys or Mentor Graphics for specific simulation
+requirements.</p>
 <p>The ASE uses Inter-Process Communication (IPC) constructs. Under most
 circumstances these constructs operate without glitches. The following
 Linux locations should exist and be writeable. In most Linux
@@ -755,7 +752,7 @@ distribution. The <code class="docutils literal"><span class="pre">/tmp</span></
 <span class="gp">#</span> $ cmake &lt;Path to CMakeLists.txt&gt;
 <span class="gp">#</span> Install directory, in this example it is &lt;Path  to opae&gt;/myinst/
 
-<span class="gp">$</span> cmake ../ -DBUILD_ASE<span class="o">=</span>YES -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/tmp/opae/myinst/
+<span class="gp">$</span> cmake ../ -DOPAE_BUILD_SIM<span class="o">=</span>YES -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/tmp/opae/myinst/
 <span class="go">-- The C compiler identification is GNU 4.8.4</span>
 <span class="go">-- The CXX compiler identification is GNU 4.8.4</span>
 <span class="go">-- Check for working C compiler: /usr/bin/cc</span>

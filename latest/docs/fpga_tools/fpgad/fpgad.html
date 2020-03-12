@@ -23,7 +23,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../../../',
-              VERSION:'1.3.0',
+              VERSION:'1.4.0',
               LANGUAGE:'en',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -103,7 +103,7 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_api/api_build.html">Building the OPAE C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_api/api_build.html">Building OPAE SDK Artifacts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_cxx_api.html">OPAE C++ Core API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/fpga_python_api.html">OPAE Python API Reference</a></li>
@@ -112,9 +112,7 @@
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html#sysfs-files">sysfs files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (in-tree)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html#building-the-opae-intel-fpga-driver-out-of-tree">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
 <ul class="current">
@@ -131,6 +129,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgaflash/fpgaflash.html">fpgaflash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgaflash/superrsu.html">super-rsu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super-rsu/super-rsu.html">Super Remote System Update User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgamux/fpgamux.html">fpgamux</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
@@ -213,7 +213,7 @@
 <h1>fpgad<a class="headerlink" href="#fpgad" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">fpgad</span> <span class="pre">--daemon</span> <span class="pre">[--directory=&lt;dir&gt;]</span> <span class="pre">[--logfile=&lt;file&gt;]</span> <span class="pre">[--pidfile=&lt;file&gt;]</span> <span class="pre">[--umask=&lt;mode&gt;]</span> <span class="pre">[--socket=&lt;sock&gt;]</span> <span class="pre">[--null-bitstream=&lt;file&gt;]</span></code>
+<p><code class="docutils literal"><span class="pre">fpgad</span> <span class="pre">--daemon</span> <span class="pre">[--version]</span> <span class="pre">[--directory=&lt;dir&gt;]</span> <span class="pre">[--logfile=&lt;file&gt;]</span> <span class="pre">[--pidfile=&lt;file&gt;]</span> <span class="pre">[--umask=&lt;mode&gt;]</span> <span class="pre">[--socket=&lt;sock&gt;]</span> <span class="pre">[--null-bitstream=&lt;file&gt;]</span></code>
 <code class="docutils literal"><span class="pre">fpgad</span> <span class="pre">[--socket=&lt;sock&gt;]</span> <span class="pre">[--null-bitstream=&lt;file&gt;]</span></code></p>
 </div>
 <div class="section" id="description">
@@ -229,6 +229,10 @@ Accelerator Card (PAC).</p>
 before the API calls <code class="docutils literal"><span class="pre">fpgaRegisterEvent</span></code> and <code class="docutils literal"><span class="pre">fpgaUnregisterEvent</span></code>
 can succeed.</p>
 <p>Use SIGINT to stop <code class="docutils literal"><span class="pre">fpgad</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">-v,</span> <span class="pre">--version</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">version</span> <span class="n">information</span> <span class="n">and</span> <span class="n">exits</span><span class="p">.</span>
+</pre></div>
+</div>
 <p><code class="docutils literal"><span class="pre">-d,</span> <span class="pre">--daemon</span></code></p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">When</span> <span class="n">specified</span><span class="p">,</span> <span class="n">fpgad</span> <span class="n">executes</span> <span class="n">as</span> <span class="n">a</span> <span class="n">system</span> <span class="n">daemon</span> <span class="n">process</span><span class="p">.</span>
 </pre></div>
