@@ -268,13 +268,13 @@ If kwargs is not empty, then one properties object is created using the kwargs.<
 
 <dl class="function">
 <dt id="opae.fpga.open">
-<code class="descclassname">opae.fpga.</code><code class="descname">open</code><span class="sig-paren">(</span><em>tok: opae.fpga._opae.token</em>, <em>flags: int=0L</em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::handle<a class="headerlink" href="#opae.fpga.open" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">opae.fpga.</code><code class="descname">open</code><span class="sig-paren">(</span><em>tok: opae.fpga._opae.token</em>, <em>flags: int = 0</em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::handle<a class="headerlink" href="#opae.fpga.open" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new handle object from a token.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="opae.fpga.register_event">
-<code class="descclassname">opae.fpga.</code><code class="descname">register_event</code><span class="sig-paren">(</span><em>handle: opae.fpga._opae.handle</em>, <em>event_type: opae.fpga._opae.fpga_event_type</em>, <em>flags: int=0L</em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::event<a class="headerlink" href="#opae.fpga.register_event" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">opae.fpga.</code><code class="descname">register_event</code><span class="sig-paren">(</span><em>handle: opae.fpga._opae.handle</em>, <em>event_type: opae.fpga._opae.fpga_event_type</em>, <em>flags: int = 0</em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::event<a class="headerlink" href="#opae.fpga.register_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factory method used to create events registered to a particular event type.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -493,7 +493,7 @@ It is used to query information about a resource,
 or to acquire ownership by calling fpga.open module method.</p>
 <dl class="method">
 <dt id="opae.fpga.token.find">
-<code class="descname">find</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.token</em>, <em>name: unicode</em>, <em>flags: int=0L</em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::sysobject<a class="headerlink" href="#opae.fpga.token.find" title="Permalink to this definition">¶</a></dt>
+<code class="descname">find</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.token</em>, <em>name: unicode</em>, <em>flags: int = 0</em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::sysobject<a class="headerlink" href="#opae.fpga.token.find" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a sysobject instance from a valid token object.
 Args:</p>
 <blockquote>
@@ -533,7 +533,7 @@ Closes the resource identified by this handle and currently does nothing with th
 
 <dl class="method">
 <dt id="opae.fpga.handle.read_csr32">
-<code class="descname">read_csr32</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.handle</em>, <em>offset: int</em>, <em>csr_space: int=0L</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.handle.read_csr32" title="Permalink to this definition">¶</a></dt>
+<code class="descname">read_csr32</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.handle</em>, <em>offset: int</em>, <em>csr_space: int = 0</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.handle.read_csr32" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read 32 bits from a CSR belonging to a resource associated with a handle.
 Args:</p>
 <blockquote>
@@ -543,7 +543,7 @@ csr_space: The CSR space to read from. Default is 0.</div></blockquote>
 
 <dl class="method">
 <dt id="opae.fpga.handle.read_csr64">
-<code class="descname">read_csr64</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.handle</em>, <em>offset: int</em>, <em>csr_space: int=0L</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.handle.read_csr64" title="Permalink to this definition">¶</a></dt>
+<code class="descname">read_csr64</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.handle</em>, <em>offset: int</em>, <em>csr_space: int = 0</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.handle.read_csr64" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read 64 bits from a CSR belonging to a resource associated with a handle.
 Args:</p>
 <blockquote>
@@ -560,7 +560,7 @@ The accelerator must be opened.</p>
 
 <dl class="method">
 <dt id="opae.fpga.handle.write_csr32">
-<code class="descname">write_csr32</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.handle</em>, <em>offset: int</em>, <em>value: int</em>, <em>csr_space: int=0L</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#opae.fpga.handle.write_csr32" title="Permalink to this definition">¶</a></dt>
+<code class="descname">write_csr32</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.handle</em>, <em>offset: int</em>, <em>value: int</em>, <em>csr_space: int = 0</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#opae.fpga.handle.write_csr32" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write 32 bits to a CSR belonging to a resource associated with a handle.
 Args:</p>
 <blockquote>
@@ -571,7 +571,7 @@ csr_space: The CSR space to write from. Default is 0.</div></blockquote>
 
 <dl class="method">
 <dt id="opae.fpga.handle.write_csr64">
-<code class="descname">write_csr64</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.handle</em>, <em>offset: int</em>, <em>value: int</em>, <em>csr_space: int=0L</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#opae.fpga.handle.write_csr64" title="Permalink to this definition">¶</a></dt>
+<code class="descname">write_csr64</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.handle</em>, <em>offset: int</em>, <em>value: int</em>, <em>csr_space: int = 0</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#opae.fpga.handle.write_csr64" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write 64 bits to a CSR belonging to a resource associated with a handle.
 Args:</p>
 <blockquote>
@@ -721,7 +721,7 @@ Raises <cite>RuntimeError</cite> if the sysobject instance is a container type.<
 
 <dl class="method">
 <dt id="opae.fpga.sysobject.find">
-<code class="descname">find</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.sysobject</em>, <em>name: unicode</em>, <em>flags: int=0L</em><span class="sig-paren">)</span> &#x2192; opae.fpga._opae.sysobject<a class="headerlink" href="#opae.fpga.sysobject.find" title="Permalink to this definition">¶</a></dt>
+<code class="descname">find</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.sysobject</em>, <em>name: unicode</em>, <em>flags: int = 0</em><span class="sig-paren">)</span> &#x2192; opae.fpga._opae.sysobject<a class="headerlink" href="#opae.fpga.sysobject.find" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a sysobject instance from a valid sysobject.
 The parent sysobject must be a container type object.</p>
 </dd></dl>
