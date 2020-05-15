@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>fpgaflash &mdash; OPAE</title>
+  <title>fpgasupdate &mdash; OPAE</title>
   
 
   
@@ -43,7 +43,9 @@
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" /> 
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="mmlink" href="../mmlink/mmlink.html" />
+    <link rel="prev" title="fpgaport" href="../fpgaport/fpgaport.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -112,14 +114,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../fpgabist/fpgabist.html">fpgabist</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">fpgasupdate</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">TROUBLESHOOTING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#revision-history">Revision History</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
@@ -168,13 +177,13 @@
     
       <li><a href="../../../index.html">Docs</a> &raquo;</li>
         
-      <li>fpgaflash</li>
+      <li>fpgasupdate</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/docs/fpga_tools/fpgaflash/fpgaflash.md.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/docs/fpga_tools/fpgasupdate/fpgasupdate.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -187,52 +196,50 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="fpgaflash">
-<h1>fpgaflash<a class="headerlink" href="#fpgaflash" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="fpgasupdate">
+<h1>fpgasupdate<a class="headerlink" href="#fpgasupdate" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">fpgaflash</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">{</span><span class="n">user</span><span class="p">,</span><span class="n">factory</span><span class="p">}</span> <span class="n">file</span> <span class="p">[</span><span class="n">bdf</span><span class="p">]</span>
-</pre></div>
-</div>
+<p><code class="docutils literal"><span class="pre">fpgasupdate</span> <span class="pre">[--log-level=&lt;level&gt;]</span> <span class="pre">file</span> <span class="pre">[bdf]</span></code></p>
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>fpgaflash updates the static FIM image loaded from flash at power-on.</p>
-<p>If there are multiple devices in the system, fpgaflash must specify a
-BDF to select the correct device. If no BDF is specified, fpgaflash
-prints out the BDFs of any compatible devices.</p>
+<p>The <code class="docutils literal"><span class="pre">fpgasupdate</span></code> command implements a secure firmware update for the
+following programmable accelerator cards (PACs): * Intel® PAC with
+Intel Arria® 10 GX FPGA * Intel FPGA PAC D5005 * Intel PAC N3000</p>
+<p><code class="docutils literal"><span class="pre">--log-level</span> <span class="pre">&lt;level&gt;</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>Specifies the `log-level` which is the level of information output to your command tool.
+The following seven levels  are available: `state`, `ioctl`, `debug`, `info`, `warning`,
+`error`, `critical`. Setting `--log-level=state` provides the most verbose output.
+Setting `--log-level=ioctl` provides the second most information, and so on. The default
+level is `info`.
+</pre></div>
 </div>
-<div class="section" id="positional-arguments">
-<h2>POSITIONAL ARGUMENTS<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">{user,</span> <span class="pre">factory}</span></code></p>
-<p>Specifies the type of flash programming.</p>
-<p><code class="docutils literal"><span class="pre">user</span></code></p>
-<p>Only reprograms the user image in flash.</p>
-<p><code class="docutils literal"><span class="pre">factory</span></code></p>
-<p>Reprograms the entire flash. A catastrophic failure during a factory
-update such as a power outage requires a USB cable and <code class="docutils literal"><span class="pre">quartus_pgm</span></code>
-to recover.</p>
 <p><code class="docutils literal"><span class="pre">file</span></code></p>
-<p>Specifies the Raw Programming Data File (rpd) to program into flash.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Specifies</span> <span class="n">the</span> <span class="n">secure</span> <span class="n">update</span> <span class="n">firmware</span> <span class="n">file</span> <span class="n">to</span> <span class="n">be</span> <span class="n">programmed</span><span class="p">.</span> <span class="n">This</span> <span class="n">file</span> <span class="n">may</span> <span class="n">be</span> <span class="n">to</span> <span class="n">program</span> <span class="n">a</span>
+<span class="k">static</span> <span class="n">region</span> <span class="p">(</span><span class="n">SR</span><span class="p">),</span> <span class="n">programmable</span> <span class="n">region</span> <span class="p">(</span><span class="n">PR</span><span class="p">),</span> <span class="n">root</span> <span class="n">entry</span> <span class="n">hash</span><span class="p">,</span> <span class="n">key</span> <span class="n">cancellation</span><span class="p">,</span> <span class="n">or</span> <span class="n">other</span>
+<span class="n">device</span><span class="o">-</span><span class="n">specific</span> <span class="n">firmware</span><span class="p">.</span>
+</pre></div>
+</div>
 <p><code class="docutils literal"><span class="pre">bdf</span></code></p>
-<p>Specifies the bus, device and function (BDF) of device to program such
-as 04:00.0 or 0000:04:00.0. This flag is optional when there is a single
-device in the system.</p>
-</div>
-<div class="section" id="optional-arguments">
-<h2>OPTIONAL ARGUMENTS<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Print</span> <span class="n">usage</span> <span class="n">information</span><span class="p">.</span>
+<div class="highlight-c"><div class="highlight"><pre><span></span>The PCIe&amp;reg; address of the PAC to program. `bdf` is of the form `[ssss:]bb:dd:f`,
+corresponding to PCIe segment, bus, device, function. The segment is optional. If
+you do not specify a segment, the segment defaults to `0000`. If the system has only
+one PAC you can omit the `bdf` and let `fpgasupdate`  determine the address
+automatically.
 </pre></div>
 </div>
 </div>
-<div class="section" id="example">
-<h2>EXAMPLE<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">fpgaflash</span> <span class="pre">user</span> <span class="pre">new_image.rpd</span> <span class="pre">0000:04:00.0</span></code></p>
-<p>Programs new_image.rpd to flash of device with BDF 0000:04:00.0.</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">## Revision History ##</span>
-</pre></div>
+<div class="section" id="troubleshooting">
+<h2>TROUBLESHOOTING<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>To gather more debug output, decrease the <code class="docutils literal"><span class="pre">--log-level</span></code> parameter.</p>
 </div>
+<div class="section" id="examples">
+<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">fpgasupdate</span> <span class="pre">firmware.bin</span></code> <code class="docutils literal"><span class="pre">fpgasupdate</span> <span class="pre">firmware.bin</span> <span class="pre">05:00.0</span></code><code class="docutils literal"><span class="pre">fpgasupdate</span> <span class="pre">firmware.bin</span> <span class="pre">0001:04:02.0</span> <span class="pre">--log-level=ioctl</span></code></p>
+</div>
+<div class="section" id="revision-history">
+<h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="25%" />
@@ -247,14 +254,18 @@ Version</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>2018.05.21</td>
-<td>1.1 Beta. (Supported with Intel
-Quartus Prime Pro Edition 17.1.1.)</td>
-<td>No
-changes
-from
-previous
+<tr class="row-even"><td>2019.07.26</td>
+<td>1.2.1 Beta</td>
+<td>Initial
 release.</td>
+</tr>
+<tr class="row-odd"><td>2019.10.04</td>
+<td>2.0.1 Beta (Supported with Intel
+Quartus Prime Pro Edition 19.2.)</td>
+<td>Editoria
+l
+changes
+only.</td>
 </tr>
 </tbody>
 </table>
@@ -266,6 +277,15 @@ release.</td>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mmlink/mmlink.html" class="btn btn-neutral float-right" title="mmlink" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../fpgaport/fpgaport.html" class="btn btn-neutral float-left" title="fpgaport" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

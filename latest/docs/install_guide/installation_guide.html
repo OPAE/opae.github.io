@@ -100,9 +100,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#system-compatibility">System compatibility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-download-the-opae-sdk">How to download the OPAE SDK</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#driver-installation-with-dkms-rpm-and-deb-packages">Driver installation with DKMS rpm and deb packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#driver-build-installation-with-driver-source-package">Driver build/installation with driver source package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#manual-driver-build-from-rpm-package">Manual Driver build from RPM package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#opae-sdk-build-installation-from-opae-sdk-source">OPAE SDK build/installation from OPAE SDK source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-python-distributions-for-tools">Building python distributions for tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-opae-sdk-rpm-and-deb-packages-from-the-source">Building OPAE SDK rpm and deb packages from the source</a></li>
@@ -128,33 +125,19 @@
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/coreidle/coreidle.html">coreidle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgabist/fpgabist.html">fpgabist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaconf/fpgaconf.html">fpgaconf</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaflash/fpgaflash.html">fpgaflash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaflash/superrsu.html">super-rsu</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/super-rsu/super-rsu.html">Super Remote System Update User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/userclk/userclk.html">userclk</a></li>
-</ul>
-<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_config/readme.html">hssi_config</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_loopback/readme.html">hssi_loopback</a></li>
-</ul>
-<p class="caption"><span class="caption-text">OPAE support on Intel FPGA PCIe driver and Linux PCIe FPGA DFL driver</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_dfl_drv/fpga_dfl_drv.html">Enable OPAE on FPGA PCIe drivers</a></li>
 </ul>
 
             
@@ -227,21 +210,18 @@
 <h2>System compatibility<a class="headerlink" href="#system-compatibility" title="Permalink to this headline">¶</a></h2>
 <p>The OPAE SDK has been tested on the following configurations.</p>
 <ul class="simple">
-<li>Hardware: Tightly coupled FPGA products and programmable FPGA
-acceleration cards for Intel® Xeon® processors</li>
-<li>Operating System: Tested on Red Hat Enterprise Linux 7.3 and 7.4,
-Ubuntu 16.04, SUSE SLE 12 SP3 and CentOS 7.4, with Linux kernels 3.10
-through 4.7</li>
-<li>Integrated FPGA FIM (FPGA Interface Manager) version: 6.4.0</li>
-<li>Arria(R) 10 GX FPGA FIM version: 1.0.3 (1.0 Production)</li>
+<li>Hardware: Intel(R) FPGA Programmable Acceleration Cards: Arria(R) 10
+GX, D5005, and N3000.</li>
+<li>Operating System: Tested on Fedora 31, with Linux kernel 5.7.</li>
+<li>Arria&amp;reg 10 GX FPGA FIM version: 1.0.3 (1.0 Production)</li>
 </ul>
 </div>
 <div class="section" id="how-to-download-the-opae-sdk">
 <h2>How to download the OPAE SDK<a class="headerlink" href="#how-to-download-the-opae-sdk" title="Permalink to this headline">¶</a></h2>
 <p>OPAE SDK releases are available on
-<a class="reference external" href="https://github.com/OPAE/opae-sdk/releases">GitHub</a>. There, you can
-also find the driver source code and DKMS packages for the respective
-SDK release.</p>
+<a class="reference external" href="https://github.com/OPAE/opae-sdk/releases">GitHub</a>. Source code for
+the OPAE DFL device driver for Linux is also available on
+<a class="reference external" href="https://github.com/OPAE/linux-dfl">GitHub</a>.</p>
 <p>The various componentes of OPAE are available via the following
 compressed tar files and RPM packages.</p>
 <ul class="simple">
@@ -279,92 +259,6 @@ required:</p>
 <li>libhwloc.x86_64</li>
 </ul>
 </div>
-<div class="section" id="driver-installation-with-dkms-rpm-and-deb-packages">
-<h2>Driver installation with DKMS rpm and deb packages<a class="headerlink" href="#driver-installation-with-dkms-rpm-and-deb-packages" title="Permalink to this headline">¶</a></h2>
-<p>Install rpm package:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum install opae-intel-fpga-driver-&lt;release&gt;.x86_64.rpm
-</pre></div>
-</div>
-<p>Uninstall rpm package:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo yum remove opae-intel-fpga-driver-&lt;release&gt;
-</pre></div>
-</div>
-<p>Install deb package:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo dpkg -i opae-intel-fpga-driver_&lt;release&gt;_amd64.deb
-</pre></div>
-</div>
-<p>Uninstall deb package:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo dpkg -r opae-intel-fpga-driver
-</pre></div>
-</div>
-<p>During the installation process, the tool will compile the driver from
-source then install the driver automatically. Driver installed by these
-packages will be automatically install again after system reboot.</p>
-</div>
-<div class="section" id="driver-build-installation-with-driver-source-package">
-<h2>Driver build/installation with driver source package<a class="headerlink" href="#driver-build-installation-with-driver-source-package" title="Permalink to this headline">¶</a></h2>
-<p>Using the following command to untar the source tar ball:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> tar zxvf opae-intel-fpga-driver-&lt;release&gt;.tar.gz
-</pre></div>
-</div>
-<p>Following directory shall be extracted at the working directory where
-the above command is executed.</p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">opae-intel-fpga-driver-&lt;release&gt;</span></code></li>
-</ul>
-<p>Build the fpga driver from source with following procedures:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> opae-intel-fpga-driver-&lt;release&gt;
-<span class="gp">$</span> make
-</pre></div>
-</div>
-<p>Following kernel modules shall be generated from source:</p>
-<ul class="simple">
-<li>fpga-mgr-mod.ko</li>
-<li>intel-fpga-afu.ko</li>
-<li>intel-fpga-fme.ko</li>
-<li>intel-fpga-pci.ko</li>
-</ul>
-<p>Install the above modules in the following order:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo insmod fpga-mgr-mod.ko
-<span class="gp">$</span> sudo insmod intel-fpga-pci.ko
-<span class="gp">$</span> sudo insmod intel-fpga-fme.ko
-<span class="gp">$</span> sudo insmod intel-fpga-afu.ko
-</pre></div>
-</div>
-<p>Use lsmod to check if all 4 modules are installed correctly or not:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> lsmod <span class="p">|</span> grep fpga
-</pre></div>
-</div>
-<p>Output should look like:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">intel_fpga_fme         36864  0</span>
-<span class="go">intel_fpga_afu         28672  0</span>
-<span class="go">intel_fpga_pci         28672  2 intel_fpga_afu,intel_fpga_fme</span>
-<span class="go">fpga_mgr_mod           16384  1 intel_fpga_fme</span>
-</pre></div>
-</div>
-<p>Remove the driver modules in the following order:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo rmmod intel-fpga-afu
-<span class="gp">$</span> sudo rmmod intel-fpga-fme
-<span class="gp">$</span> sudo rmmod intel-fpga-pci
-<span class="gp">$</span> sudo rmmod fpga-mgr-mod
-</pre></div>
-</div>
-</div>
-<div class="section" id="manual-driver-build-from-rpm-package">
-<h2>Manual Driver build from RPM package<a class="headerlink" href="#manual-driver-build-from-rpm-package" title="Permalink to this headline">¶</a></h2>
-<p>Use the following command to extract the driver source files from the
-rpm:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir opae-intel-fpga-driver-&lt;release&gt;
-<span class="gp">$</span> <span class="nb">cd</span> opae-intel-fpga-driver-&lt;release&gt;
-<span class="gp">$</span> rpm2cpio ../opae-intel-fpga-driver-&lt;release&gt;.rpm <span class="p">|</span> cpio -idmv
-</pre></div>
-</div>
-<p>Build the fpga driver from source with the following procedure:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> ./usr/src/intel-fpga-&lt;release&gt;
-<span class="gp">$</span> make
-</pre></div>
-</div>
-</div>
 <div class="section" id="opae-sdk-build-installation-from-opae-sdk-source">
 <h2>OPAE SDK build/installation from OPAE SDK source<a class="headerlink" href="#opae-sdk-build-installation-from-opae-sdk-source" title="Permalink to this headline">¶</a></h2>
 <p>Using the following command to untar the source tar ball:</p>
@@ -395,7 +289,7 @@ issue the following:</p>
 something else by adding <code class="docutils literal"><span class="pre">-DCMAKE_INSTALL_PREFIX=&lt;new</span> <span class="pre">prefix&gt;</span></code> to the
 <code class="docutils literal"><span class="pre">cmake</span></code> command above.</p>
 <p>Please see Quick Start Guide on how to run the hello_fpga sample to
-verify libopae-c &amp; driver are built correctly.</p>
+verify libopae-c and driver are built correctly.</p>
 </div>
 <div class="section" id="building-python-distributions-for-tools">
 <h2>Building python distributions for tools<a class="headerlink" href="#building-python-distributions-for-tools" title="Permalink to this headline">¶</a></h2>
@@ -507,14 +401,13 @@ these commands:</p>
 <div class="section" id="fpga-device-access-permissions">
 <h2>FPGA Device Access Permissions<a class="headerlink" href="#fpga-device-access-permissions" title="Permalink to this headline">¶</a></h2>
 <p>Access to FPGA accelerators and devices is controlled using file access
-permissions on the Intel® FPGA device files, <code class="docutils literal"><span class="pre">/dev/intel-fpga-fme.*</span></code>
-and <code class="docutils literal"><span class="pre">/dev/intel-fpga-port.*</span></code>, as well as to the files reachable
-through <code class="docutils literal"><span class="pre">/sys/class/fpga/</span></code>.</p>
+permissions on the Intel® FPGA device files, <code class="docutils literal"><span class="pre">/dev/dfl-fme.*</span></code> and
+<code class="docutils literal"><span class="pre">/dev/dfl-port.*</span></code>, as well as to the files reachable through
+<code class="docutils literal"><span class="pre">/sys/class/fpga_region/</span></code>.</p>
 <p>In order to allow regular (non-root) users to access accelerators, you
-need to grant them read and write permissions on
-<code class="docutils literal"><span class="pre">/dev/intel/fpga-port.*</span></code> (with <code class="docutils literal"><span class="pre">*</span></code> denoting the respective socket,
-i.e.&nbsp;0 or 1). E.g.:</p>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo chmod a+rw /dev/intel-fpga-port.0
+need to grant them read and write permissions on <code class="docutils literal"><span class="pre">/dev/dfl-port.*</span></code>
+(with <code class="docutils literal"><span class="pre">*</span></code> denoting the respective socket, i.e.&nbsp;0 or 1). E.g.:</p>
+<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo chmod a+rw /dev/dfl-port.0
 </pre></div>
 </div>
 </div>
@@ -549,7 +442,7 @@ modify the application’s systemd service file and add the line:</p>
 </div>
 <div class="section" id="hugepage-settings">
 <h2>Hugepage Settings<a class="headerlink" href="#hugepage-settings" title="Permalink to this headline">¶</a></h2>
-<p>Users need to configure system hugepage to reserve 2MB-hugepages or
+<p>Users need to configure system hugepages to reserve 2MB-hugepages or
 1GB-hugepages. For example, the ‘hello_fpga’ sample requires several
 2MB-hugepages. And the <em>fpgadiag</em> tool requires several 1GB-hugepages.</p>
 <p>The command below reserves 20 2M-hugepages:</p>

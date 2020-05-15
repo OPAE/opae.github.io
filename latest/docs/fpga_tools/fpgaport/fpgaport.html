@@ -44,8 +44,8 @@
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="mmlink" href="../mmlink/mmlink.html" />
-    <link rel="prev" title="fpgamux" href="../fpgamux/fpgamux.html" /> 
+    <link rel="next" title="fpgasupdate" href="../fpgasupdate/fpgasupdate.html" />
+    <link rel="prev" title="fpgainfo" href="../fpgainfo/fpgainfo.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -112,20 +112,14 @@
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../coreidle/coreidle.html">coreidle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgabist/fpgabist.html">fpgabist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpgaflash/fpgaflash.html">fpgaflash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpgaflash/superrsu.html">super-rsu</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../super-rsu/super-rsu.html">Super Remote System Update User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">fpgaport</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
@@ -135,18 +129,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#revision-history">Revision History</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
-</ul>
-<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../hssi_config/readme.html">hssi_config</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hssi_loopback/readme.html">hssi_loopback</a></li>
-</ul>
-<p class="caption"><span class="caption-text">OPAE support on Intel FPGA PCIe driver and Linux PCIe FPGA DFL driver</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_dfl_drv/fpga_dfl_drv.html">Enable OPAE on FPGA PCIe drivers</a></li>
 </ul>
 
             
@@ -215,7 +201,7 @@
 <h1>fpgaport<a class="headerlink" href="#fpgaport" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">fpgaport</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">{</span><span class="n">assign</span><span class="p">,</span><span class="n">release</span><span class="p">}</span> <span class="n">device</span> <span class="n">port</span>
+<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">fpgaport</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">N</span> <span class="n">NUMVFS</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">X</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">{</span><span class="n">assign</span><span class="p">,</span><span class="n">release</span><span class="p">}</span> <span class="n">device</span> <span class="p">[</span><span class="n">port</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -233,21 +219,43 @@ non-virtualization use case.</p>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">device</span></code></p>
-<p>The FPGA device being targeted with this action.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">FPGA</span> <span class="n">device</span> <span class="n">being</span> <span class="n">targeted</span> <span class="n">with</span> <span class="n">this</span> <span class="n">action</span><span class="p">.</span>
+</pre></div>
+</div>
 <p><code class="docutils literal"><span class="pre">port</span></code></p>
-<p>The number of the port.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">port</span><span class="p">.</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="optional-arguments">
 <h2>OPTIONAL ARGUMENTS<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">-N</span> <span class="pre">NUMVFS,</span> <span class="pre">--numvfs</span> <span class="pre">NUMVFS</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Create</span> <span class="n">NUMVFS</span> <span class="n">virtual</span> <span class="n">functions</span><span class="p">.</span> <span class="n">The</span> <span class="n">typical</span> <span class="n">value</span> <span class="n">is</span> <span class="mf">1.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">-X,</span> <span class="pre">--destroy-vfs</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Destroy</span> <span class="n">all</span> <span class="n">virtual</span> <span class="n">functions</span> <span class="n">prior</span> <span class="n">to</span> <span class="n">assigning</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--debug</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Display</span> <span class="n">additional</span> <span class="n">log</span> <span class="n">information</span><span class="p">.</span>
+</pre></div>
+</div>
 <p><code class="docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
-<p>Print usage information.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Print</span> <span class="n">usage</span> <span class="n">information</span><span class="p">.</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="example">
 <h2>EXAMPLE<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">fpgaport</span> <span class="pre">release</span> <span class="pre">/dev/intel-fpga-fme.0</span> <span class="pre">0</span></code></p>
-<p>Release port 0 from physical function control.</p>
-<p><code class="docutils literal"><span class="pre">fpgaport</span> <span class="pre">assign</span> <span class="pre">/dev/intel-fpga-fme.0</span> <span class="pre">0</span></code></p>
-<p>Assign port 0 to physical function control.</p>
+<p><code class="docutils literal"><span class="pre">fpgaport</span> <span class="pre">release</span> <span class="pre">/dev/dfl-fme.0</span> <span class="pre">0</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Release</span> <span class="n">port</span> <span class="mi">0</span> <span class="n">from</span> <span class="n">physical</span> <span class="n">function</span> <span class="n">control</span><span class="p">.</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">fpgaport</span> <span class="pre">assign</span> <span class="pre">/dev/dfl-fme.0</span> <span class="pre">0</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Assign</span> <span class="n">port</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">physical</span> <span class="n">function</span> <span class="n">control</span><span class="p">.</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="revision-history">
 <h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
@@ -287,10 +295,10 @@ release.</td>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../mmlink/mmlink.html" class="btn btn-neutral float-right" title="mmlink" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../fpgasupdate/fpgasupdate.html" class="btn btn-neutral float-right" title="fpgasupdate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../fpgamux/fpgamux.html" class="btn btn-neutral float-left" title="fpgamux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../fpgainfo/fpgainfo.html" class="btn btn-neutral float-left" title="fpgainfo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

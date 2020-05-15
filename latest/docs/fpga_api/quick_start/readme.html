@@ -97,7 +97,6 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-the-opae-intel-fpga-drivers">Installing the OPAE Intel® FPGA drivers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-the-opae-sdk-from-rpm-or-deb-packages">Installing the OPAE SDK from rpm or deb packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-and-installing-the-opae-sdk-from-source">Building and installing the OPAE SDK from source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuring-the-fpga-loading-an-fpga-afu">Configuring the FPGA (loading an FPGA AFU)</a></li>
@@ -120,33 +119,19 @@
 <p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../build_chain/fpga_driver/driver_build.html">Building the OPAE Intel FPGA driver (out-of-tree)</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/coreidle/coreidle.html">coreidle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgabist/fpgabist.html">fpgabist</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgaconf/fpgaconf.html">fpgaconf</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgaflash/fpgaflash.html">fpgaflash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgaflash/superrsu.html">super-rsu</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/super-rsu/super-rsu.html">Super Remote System Update User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgamux/fpgamux.html">fpgamux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/userclk/userclk.html">userclk</a></li>
-</ul>
-<p class="caption"><span class="caption-text">OPAE AFU Tools</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/hssi_config/readme.html">hssi_config</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_tools/hssi_loopback/readme.html">hssi_loopback</a></li>
-</ul>
-<p class="caption"><span class="caption-text">OPAE support on Intel FPGA PCIe driver and Linux PCIe FPGA DFL driver</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../fpga_dfl_drv/fpga_dfl_drv.html">Enable OPAE on FPGA PCIe drivers</a></li>
 </ul>
 
             
@@ -225,13 +210,10 @@ exposes the underlying FPGA resources as a set of features accessible
 from within software programs running on the host.</p>
 <p>These features include the acceleration logic preconfigured on the
 device, as well as functions to manage and reconfigure the device.
-Hence, the library is able to enalbe user applications to transparently
+Hence, the library is able to enable user applications to transparently
 and seamlessly leverage FPGA-based acceleration.</p>
 <p>In this document, we will explore the initial steps on how to setup the
 required libraries and utilities to use the FPGA devices.</p>
-</div>
-<div class="section" id="installing-the-opae-intel-fpga-drivers">
-<h2>Installing the OPAE Intel® FPGA drivers<a class="headerlink" href="#installing-the-opae-intel-fpga-drivers" title="Permalink to this headline">¶</a></h2>
 <p>If you do not have access to an Intel® Xeon® processor with integrated
 FPGA, or a programmable FPGA acceleration card for Intel® Xeon®
 processors, you will not be able to run the examples below. However, you
@@ -239,27 +221,13 @@ can still make use of the AFU simulation environment (ASE) to develop
 and test accelerator RTL with OPAE applications.</p>
 <p>For more information about ASE, see the <a class="reference external" href="../../ase_userguide/ase_userguide.html">OPAE AFU Simulation Environment
 (ASE) User Guide</a>.</p>
-<p>As part of the OPAE SDK release, we provide DKMS-based RPM and DEB
-packages for distributions using RPM (e.g.&nbsp;Redhat, Fedora, Centos) and
-DEB (eg. Ubuntu) package managers. Download these package from the
-respective <a class="reference external" href="https://github.com/OPAE/opae-sdk/releases">release page on
-GitHub</a> - they are named
-<code class="docutils literal"><span class="pre">opae-intel-fpga-driver-x.y.z-r.x86_64.rpm</span></code> and
-<code class="docutils literal"><span class="pre">opae-intel-fpga-driver_x.y.z-r_amd64.deb</span></code>, with <code class="docutils literal"><span class="pre">x.y.z-r</span></code> being the
-respective OPAE release’s version number.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The packages require that the DKMS (Dynamic Kernel Module System)
-package, version greater than 2.2, is already installed.</p>
+<p class="last">The AFU simulation environment is not available for the Intel PAC N3000.</p>
 </div>
-<p>For RPM-based distributions:</p>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span>$ sudo yum install opae-intel-fpga-driver-&lt;release&gt;.x86_64.rpm
-</pre></div>
-</div>
-<p>For DEB-based distributions:</p>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span>$ sudo dpkg -i opae-intel-fpga-driver_&lt;release&gt;_amd64.deb
-</pre></div>
-</div>
+<p>The source for the OPAE SDK Linux device drivers is available at the
+<a class="reference external" href="https://github.com/OPAE/linux-dfl">OPAE Linux DFL drivers
+repository</a>.</p>
 </div>
 <div class="section" id="installing-the-opae-sdk-from-rpm-or-deb-packages">
 <h2>Installing the OPAE SDK from rpm or deb packages<a class="headerlink" href="#installing-the-opae-sdk-from-rpm-or-deb-packages" title="Permalink to this headline">¶</a></h2>
@@ -357,13 +325,13 @@ for the location of the NLB’s green bitstream. You also can verify
 if the NLB green bitstream has already been loaded into the FPGA
 slot by typing the following command and checking the output
 matches the following:</p>
-<p>$ cat /sys/class/fpga/intel-fpga-dev.0/intel-fpga-port.0/afu_id</p>
+<p>$ cat /sys/class/fpga_region/region0/dfl-port.0/afu_id</p>
 <p class="last">d8424dc4a4a3c413f89e433683f9040b</p>
 </div>
 </div>
 <div class="section" id="building-a-sample-application">
 <h2>Building a sample application<a class="headerlink" href="#building-a-sample-application" title="Permalink to this headline">¶</a></h2>
-<p>The library source include code samples. Use these samples to learn how
+<p>The library source includes code samples. Use these samples to learn how
 to call functions in the library. Build and run these samples as quick
 sanity checks to determine if your installation and environment are set
 up properly.</p>
@@ -371,7 +339,7 @@ up properly.</p>
 example of using the library. This code searches for a predefined and
 known AFU called “Native Loopback Adapter” on the FPGA. If found, it
 acquires ownership and then interacts with the AFU by sending it a 2MB
-message and waiting for the message being echoed back. This coe
+message and waiting for the message being echoed back. This code
 exercises all major components of the API except for AFU
 reconfiguration: AFU search, enumeration, access, MMIO, and memory
 management.</p>
@@ -570,7 +538,8 @@ Done
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>In order to successfully run hello_fpga, user need to configure system hugepage to reserve 2M-hugepages.
+<p>In order to successfully run hello_fpga, the user needs to configure
+system hugepage to reserve 2M-hugepages.
 For example, the command below reserves 20 2M-hugepages:</p>
 <p>$ echo 20 | sudo tee /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages</p>
 <p>For x86_64 architecture CPU, user can use following command to find out avaiable huge page sizes:</p>
