@@ -128,7 +128,6 @@
 </ul>
 <p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgabist/fpgabist.html">fpgabist</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaconf/fpgaconf.html">fpgaconf</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
@@ -222,41 +221,30 @@ GX, D5005, and N3000.</li>
 <a class="reference external" href="https://github.com/OPAE/opae-sdk/releases">GitHub</a>. Source code for
 the OPAE DFL device driver for Linux is also available on
 <a class="reference external" href="https://github.com/OPAE/linux-dfl">GitHub</a>.</p>
-<p>The various componentes of OPAE are available via the following
-compressed tar files and RPM packages.</p>
-<ul class="simple">
-<li>Source packages for the SDK and the drivers</li>
-</ul>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">opae-sdk-&lt;release&gt;.tar.gz                   (BSD License)   (all src for libopae-c, tools, samples, headers and ASE)</span>
-<span class="go">opae-sdk-&lt;release&gt;.zip                      (BSD License)   (ZIP archive, same content as opae-sdk-&lt;release&gt;.tar.gz)</span>
-<span class="go">opae-intel-fpga-driver-&lt;release&gt;.tar.gz     (GPLv2 License) (driver sources)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li>Binary package for the drivers</li>
-</ul>
-<div class="code console highlight-console"><div class="highlight"><pre><span></span><span class="go">opae-intel-fpga-drv-&lt;release&gt;-1.x86_64.rpm  (GPLv2 License) (dkms and driver src to generate \*.ko at installation)</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="software-requirements">
 <h2>Software requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h2>
 <p>For building the kernel driver, the kernel development environment is
 required.</p>
-<ul class="simple">
-<li>gcc &gt;= 4.8.5</li>
-<li>cmake &gt;= 2.8</li>
-<li>dkms.noarch (Release is tested with 2.2.0.3-34)</li>
-</ul>
 <p>For building libopae-c, tools and samples, the following dependences are
 required:</p>
+<p>RHEL/Fedora</p>
 <ul class="simple">
-<li>libuuid-devel.x86_64: (tested with 2.23.2-33.el7)</li>
-<li>libuuid.x86_64: (tested with 2.23.2-33.el7)</li>
-<li>json-c-devel.x86_64: json-c-devel-0.11-4.el7_0.x86_64.rpm</li>
-<li>json-c.x86_64: (tested with 0.11-4.el7_0)</li>
-<li>cmake.x86_64: (tested with 2.8.12.2-2.el7)</li>
-<li>libhwloc.x86_64</li>
+<li>libuuid-devel.x86_64</li>
+<li>json-c-devel.x86_64</li>
+<li>cmake.x86_64</li>
+<li>hwloc-devel.x86_64</li>
+<li>tbb-devel.x86_64</li>
+<li>python3-devel.x86_64</li>
+</ul>
+<p>Debian/Ubuntu</p>
+<ul class="simple">
+<li>uuid-dev</li>
+<li>libjson-c-dev</li>
+<li>cmake</li>
+<li>libhwloc-dev</li>
+<li>libtbb-dev</li>
+<li>python3-dev</li>
 </ul>
 </div>
 <div class="section" id="opae-sdk-build-installation-from-opae-sdk-source">
