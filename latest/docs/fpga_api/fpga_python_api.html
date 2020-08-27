@@ -478,7 +478,7 @@ It is used to query information about a resource,
 or to acquire ownership by calling fpga.open module method.</p>
 <dl class="method">
 <dt id="opae.fpga.token.find">
-<code class="descname">find</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.token</em>, <em>name: unicode</em>, <em>flags: int = 0</em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::sysobject<a class="headerlink" href="#opae.fpga.token.find" title="Permalink to this definition">¶</a></dt>
+<code class="descname">find</code><span class="sig-paren">(</span><em>self: opae.fpga._opae.token</em>, <em>name: unicode</em>, <em>flags: int = fpga_sysobject_flags.SYSOBJECT_GLOB</em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::sysobject<a class="headerlink" href="#opae.fpga.token.find" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find a sysobject instance from a valid token object.
 Args:</p>
 <blockquote>
