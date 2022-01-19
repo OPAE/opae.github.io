@@ -1,0 +1,1204 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="OPAE Python Bindings" href="../pyopae/README.html" />
+    <link rel="prev" title="OPAE C API Programming Guide" href="../fpga_api/prog_guide/readme.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#intended-audience">Intended Audience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#afu-simulation-environment-ase-overview">AFU Simulation Environment (ASE) Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ase-capabilities">ASE Capabilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ase-limitations">ASE Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ase-based-afu-design-workflow">ASE-Based AFU Design Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#system-requirements">System Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#package-description">Package Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ase-scripts">ASE Scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-tool-set-up">Simulation Tool Set Up</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ase-environment-check">ASE Environment Check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#afu-simulation-using-the-ase">AFU Simulation Using the ASE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#afu-sim-setup">afu_sim_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rtl-src-config">rtl_src_config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generate-ase-environment-py">generate_ase_environment.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cleaning-the-ase-environment">Cleaning the ASE Environment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ase-usage">ASE Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#afu-build-instructions">AFU Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ase-application-client-build-instructions">ASE Application (Client) Build Instructions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ase-simulator-server-build-instructions">ASE Simulator (Server) Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ase-runtime-instructions">ASE Runtime Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recommendations">Recommendations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ase-example">ASE Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#operation-reference">Operation Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ase-simulator-makefile-switches">ASE Simulator Makefile Switches</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ase-makefile-build-flow">ASE Makefile Build Flow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ase-makefile-targets">ASE Makefile Targets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ase-makefile-variables">ASE Makefile Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ase-runtime-configuration-options">ASE Runtime Configuration Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging-verbosity-control">Logging Verbosity Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting-and-error-reference">Troubleshooting and Error Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#revision-history">Revision History</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyopae/README.html">OPAE Python Bindings</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_api/api_build.html">Building OPAE SDK Artifacts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/fpga_api.html">OPAE C API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/fpga_cxx_api.html">OPAE C++ Core API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/fpga_python_api.html">OPAE Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_api/plug_guide/readme.html">Plugin Developer’s Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaport/fpgaport.html">fpgaport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/packager/packager.html">packager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi/hssi.html">hssi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/opaevfio/opaevfio.html">opaevfio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/pci_device/pci_device.html">pci_device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/opae.io/opae.io.html">opae.io</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OPAE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/docs/ase_userguide/ase_userguide.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="intel-accelerator-functional-unit-afu-simulation-environment-ase-user-guide">
+<h1>Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide<a class="headerlink" href="#intel-accelerator-functional-unit-afu-simulation-environment-ase-user-guide" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="intended-audience">
+<h2>Intended Audience<a class="headerlink" href="#intended-audience" title="Permalink to this headline">¶</a></h2>
+<p>The <em>Accelerator Functional Unit (AFU) Accelerator Simulation Environment (ASE) User Guide</em> addresses both beginning and experienced developers. To be successful, you should have knowledge and experience
+in the following areas:</p>
+<ul class="simple">
+<li><p>C/C++</p></li>
+<li><p>Verilog/SystemVerilog</p></li>
+<li><p>RTL simulators such as Synopsys VCS-MX* or Mentor Graphics ModelSim-SE* or QuestaSim*</p></li>
+</ul>
+<p>Alternatively, you can create a team that includes developers who specialize in either RTL or software development.
+Previous FPGA place and route (PAR) experience is not required to be successful, but PAR experience is also a useful skill.</p>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The ASE provides a consistent transaction-level hardware interface and software API
+that allows you to develop a production-quality Accelerated Functional Unit (AFU) and host software application.
+The ASE supports both the Intel Xeon® Processor with Integrated FPGA and the Intel Acceleration Stack for Intel
+Xeon CPU with FPGAs also called the Intel Programmable Acceleration Card (PAC). The figures in this user guide illustrate
+the Intel PAC with Arria® 10 GX FPGA. The figures show a local memory that is only available on the PAC.</p>
+<p>To use the ASE Environment you must have source code in a language that RTL simulators can interpret. The following languages are possible:</p>
+<ul class="simple">
+<li><p>Verilog</p></li>
+<li><p>SystemVerilog</p></li>
+<li><p>VHDL</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ASE supports one AFU and one application at a time. The ASE does not support multiple-slot simulation.</p>
+</div>
+<p><img alt="Supported Platforms" src="../../_images/platform_rev1.PNG" /></p>
+<div class="section" id="afu-simulation-environment-ase-overview">
+<h3>AFU Simulation Environment (ASE) Overview<a class="headerlink" href="#afu-simulation-environment-ase-overview" title="Permalink to this headline">¶</a></h3>
+<p>ASE is a dual-process simulator. One process runs an AFU RTL simulation. The other process connects to software that
+runs on the RTL AFU simulation. This unified simulation environment reduces AFU hardware and software development time.
+The OPAE software distribution includes the ASE.</p>
+<p><img alt="Block Diagram" src="../../_images/ase_overview_rev1.PNG" /></p>
+<p>The ASE provides two interfaces:</p>
+<ul class="simple">
+<li><p>Software: OPAE API implemented in the C programming language.</p></li>
+<li><p>Hardware: Core Cache Interface (CCI-P) specification implemented in SystemVerilog.</p></li>
+</ul>
+<p>Use these interfaces to deploy your IP on the Integrated FPGA Platform or the Intel PAC with Arria 10 GX FPGA.</p>
+</div>
+<div class="section" id="ase-capabilities">
+<h3>ASE Capabilities<a class="headerlink" href="#ase-capabilities" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The ASE provides a protocol checker to ensure protocol correctness. The ASE also provides methods to identify potential issues early,
+before in-system deployment.</p></li>
+<li><p>The ASE can help identify certain lock conditions and Configuration and Status Registers (CSR) address mapping and pointer
+math errors.</p></li>
+<li><p>The ASE tracks memory requested from the accelerator. The memory model immediately
+flags illegal memory transactions to locations outside of requested memory spaces. Consequently, you can fix incorrect memory
+accesses early, during the simulation phase.</p></li>
+<li><p>The ASE does not guarantee that you can synthesize an AFU. After you verify the AFU RTL functionality in the ASE,
+use the ASE and the Intel Quartus® Prime Pro Edition software iteratively to generate the Accelerator Function (AF).</p></li>
+<li><p>The ASE provides a data hazard checker that identifies CCI-P traffic patterns that may cause Write After Write (WAW),
+Read After Write (RAW), and Write After Read (WAR) hazards. Debug these transactions using a waveform viewer
+or avoid them by using a relevant <a class="reference external" href="https://github.com/OPAE/intel-fpga-bbb/wiki/BBB_cci_mpf">Memory Properties Factory</a>
+(MPF) shim.</p></li>
+<li><p>The ASE does not require administrator privileges. After installing all the required tools, you can run the ASE on a plain
+vanilla user Linux machine.</p></li>
+</ul>
+</div>
+<div class="section" id="ase-limitations">
+<h3>ASE Limitations<a class="headerlink" href="#ase-limitations" title="Permalink to this headline">¶</a></h3>
+<p>When using ASE in the application development cycle, consider the following limitations:</p>
+<ul class="simple">
+<li><p>The ASE is a transaction-level simulator. It does not model either Intel UPI- or PCIe-specific packet structures and protocol layers.</p></li>
+<li><p>The ASE does not simulate caching and is not a cache simulator. It cannot reliably simulate cache collisions or
+capacity issues.</p></li>
+<li><p>Although ASE models some latency parameters, it cannot model real-time system-specific latency. It is also not
+an accurate timing simulation of the design or latency and bandwidth of the real system. The ASE models enable
+you to develop functionally correct accelerators.</p></li>
+<li><p>The ASE does not simulate multi-AFU or multi-socket configurations.</p></li>
+</ul>
+</div>
+<div class="section" id="ase-based-afu-design-workflow">
+<h3>ASE-Based AFU Design Workflow<a class="headerlink" href="#ase-based-afu-design-workflow" title="Permalink to this headline">¶</a></h3>
+<p><img alt="ASE-based AFU Design Workflow" src="../../_images/workflow_rev1.PNG" /></p>
+<p>AFU development using the ASE includes the following four stages:</p>
+<ol class="simple">
+<li><p>Learning/Training: Learn to use ASE and understand the interface specifications and platform. Review sample code to get an
+understanding of the CCI-P specification and OPAE API function calls. Run samples in an ASE simulation.</p></li>
+<li><p>Development Phase: Use the ASE to develop AFU RTL and software application in a single workflow. Develop RTL from the specification
+or by modifying existing sample RTL. The ASE includes a behavioral model of the FPGA Interface Manager (FIM) IP that
+provides immediate feedback on functionality during the development phase. The ASE flags errors in CCI-P protocols,
+transactions, and memory accesses. Consequently, you can fix these errors before moving to the time-consuming bitstream
+generation phase.</p></li>
+<li><p>Bitstream Generation: Once AFU RTL and software are functionally correct, open the AFU RTL in the Intel Quartus Prime Pro
+Edition software. Run the place and route (PAR) tools for your platform.</p></li>
+</ol>
+<p>Use the Synthesis reports to correct problems in the AFU RTL. Then, return to the development phase and revalidate in ASE.
+Bitstream generation can take hours depending on design complexity, area, and so on. After successful bitstream generation,
+perform timing analysis to check for timing corners, setup and hold violations, clock closure, and so on. After correcting
+failures found during timing analysis, revalidate in the ASE environment. When the AFU is error-free, generate the Accelerator
+Function (AF) bitstream that represents the AFU.</p>
+<ol class="simple">
+<li><p>In-system Deployment: Test the AF in system hardware. Use Signal Tap to debug problems. Develop platform-specific software
+optimizations.</p></li>
+</ol>
+<p><img alt="Synthesize the AFU Design" src="../../_images/portability_rev1.PNG" /></p>
+<p>The AFU RTL code and OPAE software code you create in the ASE is compatible with the Intel Quartus Prime PAR software if the following two conditions are true:</p>
+<ul class="simple">
+<li><p>The AFU RTL code is synthesizable.</p></li>
+<li><p>The AFU RTL code meets timing.</p></li>
+</ul>
+<p>In the simulation environment, complete the following steps to create an AF bitstream and program the hardware:</p>
+<ol class="simple">
+<li><p>Compile the AFU RTL in either the Synopsys VCS-MX or in the Mentor Graphics ModelSim-SE
+or QuestaSim simulators.</p></li>
+<li><p>Compile the software application for an ASE-specific implementation of the OPAE API.</p></li>
+<li><p>Synthesize the AFU RTL in the Intel Quartus Prime Pro software to generate a bitstream.</p></li>
+<li><p>Program the hardware using this bitstream.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ASE only operates using the AFU RTL source code. It cannot take the AF bitstream as input.</p>
+</div>
+</div>
+</div>
+<div class="section" id="system-requirements">
+<h2>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
+<p>The OPAE software release includes the ASE. The current OPAE ASE release supports both Acceleration Stack for the Intel Xeon Processor
+with Integrated FPGA and Acceleration Stack for the Intel PAC card.</p>
+<p>The ASE is available only on 64-bit Linux operating systems with one of the following simulators:</p>
+<ul class="simple">
+<li><p>64-bit Synopsys* RTL Simulator (minimum version VCS-MX H2013.06-SP1)</p></li>
+<li><p>32 and 64-bit Mentor Graphics* Modelsim SE Simulator (minimum version 10.5a)</p></li>
+<li><p>64-bit Mentor Graphics* QuestaSim Simulator (minimum version 10.4d)</p></li>
+</ul>
+<p>ASE performance is better on a 64-bit RTL simulator.
+Consult your RTL simulator vendor for Synopsys or Mentor Graphics for specific simulation requirements.</p>
+<p>The ASE uses Inter-Process Communication (IPC) constructs. Under most circumstances these constructs operate without glitches.
+The following Linux locations should exist and be writeable. In most Linux distributions, <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> comes pre-mounted as a
+default option.</p>
+<p>Here are the other ASE requirements:</p>
+<ul class="simple">
+<li><p>C-Compiler: gcc 4.8.5 or above</p>
+<ul>
+<li><p>Boost Development libraries</p></li>
+<li><p>UUID Development libraries</p></li>
+<li><p>JSON Development libraries</p></li>
+<li><p>Please see the dependencies of the OPAE System library build process</p></li>
+</ul>
+</li>
+<li><p>CMake: version 2.8.11 or above</p></li>
+<li><p>GLIBC: version 2.19 or above</p></li>
+<li><p>Python: version 2.7 or above</p></li>
+<li><p>Intel Quartus Prime Pro Edition: The ASE must find the <code class="docutils literal notranslate"><span class="pre">$QUARTUS_HOME/eda/sim_lib/</span></code> directory. You specify this directory
+during project definition in the Intel Quartus Prime Pro Edition software.</p></li>
+</ul>
+<p>The ASE provides the <code class="docutils literal notranslate"><span class="pre">env_check.sh</span></code> bash script in the <code class="docutils literal notranslate"><span class="pre">/sw/opae-x.x.x/ase/scripts</span></code> directory. Run this script to
+verify the your installation.</p>
+<p>Check the RTL simulator product information for supported operating systems, installation notes, and other related information.
+The RTL simulator must be able to perform the following functions:</p>
+<ul class="simple">
+<li><p>Compilation of the SystemVerilog Direct Programming Interface (DPI) constructs</p></li>
+<li><p>Compilation of the standard examples that are included in the installation</p></li>
+<li><p>Support for SystemC</p></li>
+</ul>
+</div>
+<div class="section" id="package-description">
+<h2>Package Description<a class="headerlink" href="#package-description" title="Permalink to this headline">¶</a></h2>
+<p>Download the ASE as source or in RPM format.</p>
+<p>The source directory tree is:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>    OPAE_BASEDIR
+        <span class="p">|</span>-- ase
+        <span class="p">|</span>   <span class="p">|</span>-- api
+        <span class="p">|</span>   <span class="p">|</span>   -- src
+        <span class="p">|</span>   <span class="p">|</span>-- <span class="k">in</span>
+        <span class="p">|</span>   <span class="p">|</span>-- rtl
+        <span class="p">|</span>   <span class="p">|</span>   -- dcp_emif_model
+        <span class="p">|</span>   <span class="p">|</span>-- scripts
+        <span class="p">|</span>   <span class="p">|</span>-- sw
+        <span class="p">|</span>
+        <span class="p">|</span>-- cmake
+        <span class="p">|</span>-- common
+        <span class="p">|</span>   <span class="p">|</span>-- include
+        <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- opae
+        <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>--safe_string
+        <span class="p">|</span>
+        <span class="p">|</span>-- doc
+        <span class="p">|</span>-- libopae
+        <span class="p">|</span>-- libopaecxx
+        <span class="p">|</span>-- platforms
+        <span class="p">|</span>-- pyopae
+        <span class="p">|</span>-- safe_string
+        <span class="p">|</span>-- samples
+        <span class="p">|</span>-- scripts
+        <span class="p">|</span>-- tools
+</pre></div>
+</div>
+<p>This directory tree shows the package structure of the ASE distribution. The following directories implement and run the ASE simulator:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ase</span></code>: This is the ASE simulator implementation directory. It contains the following subdirectories:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">api/src</span></code>: This directory contains the OPAE Intel ASE implementation as a compiled library. You can link statically
+or dynamically to this library.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rtl</span></code>: This directory contains the RTL components of the ASE. You can compile this RTL for either platform.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dcp_emif_model</span></code>: This is the local DDR memory model for PAC card. Compile this model for PAC
+mode simulations.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts</span></code>: This directory contains several useful scripts. Refer to the <a class="reference external" href="#ase-scripts">ASE Scripts</a>
+Section for more information.</p></li>
+<li><p><code class="docutils literal notranslate"> <span class="pre">sw</span></code>: This directory contains the software components of the ASE. All simulations require the software components.
+The GNU Compiler Collection (GCC) compiles these components.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">common</span></code>: This directory contains the OPAE library definitions. It defines various macros for access to an FPGA in
+an OPAE context.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">libopae</span></code>: This library is the Intel platform-specific implementation of the OPAE API.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">platforms</span></code>: This directory contains scripts and RTL to manage the connection between a platform and the AFU top-level interface.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts</span></code>: This directory contains test build scripts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tools</span></code>: This directory contains the FPGA tools including the fpgadiag and fpgaconfig tools.</p></li>
+</ul>
+<div class="section" id="ase-scripts">
+<h3>ASE Scripts<a class="headerlink" href="#ase-scripts" title="Permalink to this headline">¶</a></h3>
+<p>The ASE distribution under the <code class="docutils literal notranslate"><span class="pre">ase/scripts</span></code> includes several scripts. Use these scripts to initialize, set up,
+and clean an existing ASE simulation environment.</p>
+<div class="section" id="simulation-tool-set-up">
+<h4>Simulation Tool Set Up<a class="headerlink" href="#simulation-tool-set-up" title="Permalink to this headline">¶</a></h4>
+<p>Use <code class="docutils literal notranslate"><span class="pre">ase/scripts/ase_setup_template.sh</span></code> as a template script to set up the required tools. This script has many empty
+placeholders for site- and environment-specific information. Consult your Electronic Design Automation (EDA) tools  administrator,
+or the RTL simulator user guides for help setting up the tools.</p>
+</div>
+<div class="section" id="ase-environment-check">
+<h4>ASE Environment Check<a class="headerlink" href="#ase-environment-check" title="Permalink to this headline">¶</a></h4>
+<p>This script checks the status of the OS distribution, distro, and available system libraries. This check is a non-exhaustive.
+It looks for only the most important dependencies, such as the GCC version, GLIBC version, and so on.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    $ ./ase/scripts/env_check.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="afu-simulation-using-the-ase">
+<h4>AFU Simulation Using the ASE<a class="headerlink" href="#afu-simulation-using-the-ase" title="Permalink to this headline">¶</a></h4>
+<p>Before configuring the ASE, follow the instructions for building the OPAE SDK and ensure that either the OPAE
+installed <code class="docutils literal notranslate"><span class="pre">bin</span></code> or the OPAE build tree <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory is on your shell’s <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
+<p>To simulate an AFU, replicate the ASE source tree and add the AFU-specific configuration. The OPAE installation includes
+several scripts to accomplish this task. The primary script, <code class="docutils literal notranslate"><span class="pre">afu_sim_setup</span></code>, is in the OPAE <code class="docutils literal notranslate"><span class="pre">bin</span></code>
+directory.</p>
+<p>Refer to the <a class="reference external" href="#ase-example">ASE Example</a> section below for a sample workload definition and execution flow.</p>
+</div>
+<div class="section" id="afu-sim-setup">
+<h4>afu_sim_setup<a class="headerlink" href="#afu-sim-setup" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">afu_sim_setup</span></code> script reads a file containing a list of RTL sources (&lt;rtl_sources.txt&gt;) and configures a simulation
+environment for the specified sources. The <code class="docutils literal notranslate"><span class="pre">afu_sim_setup</span></code> command copies your base ASE environment to the &lt;target dir&gt;.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    $ afu_sim_setup --sources<span class="o">=</span>&lt;rtl_sources.txt&gt; &lt;target dir&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The only required argument to the <code class="docutils literal notranslate"><span class="pre">afu_sim_setup</span></code> command is the directory for the new AFU environment. Here are the
+optional arguments:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--help</span></code> The <code class="docutils literal notranslate"><span class="pre">help</span></code> argument lists all the arguments to <code class="docutils literal notranslate"><span class="pre">afu_sim_setup</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--platform</span></code>: The <code class="docutils literal notranslate"><span class="pre">platform</span></code>argument specifies any platform defined in the platform database, including both
+the Integrated FPGA Platform or the Intel PAC. This argument is generally not required when a hardware platform
+release is installed. In that case, the OPAE_PLATFORM_ROOT environment variable points to the hardware release,
+which defines the platform.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">afu_sim_setup</span></code> is a wrapper for the following scripts. You can also access both of these scripts directly:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rtl_src_config</span></code>: This script transforms the list of RTL sources into simulator configuration files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">generate_ase_environment.py</span></code>: This script instantiates your simulated platform configuration.</p></li>
+</ul>
+</div>
+<div class="section" id="rtl-src-config">
+<h4>rtl_src_config<a class="headerlink" href="#rtl-src-config" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">/platforms/scripts/rtl_src_config</span></code> script maps a simple text file containing a list of RTL source files to an
+ASE configuration file for simulation or an Intel Quartus Prime Pro configuration file for synthesis. <code class="docutils literal notranslate"><span class="pre">rtl_src_config</span></code> also
+defines preprocessor variables. Source configuration files may be hierarchical, with one file including another. <code class="docutils literal notranslate"><span class="pre">rtl_src_config</span></code>
+can construct ASE-based simulation trees or Quartus build trees.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">rtl_src_config</span> <span class="pre">--help</span></code> for a list of options and the required command syntax.</p>
+</div>
+<div class="section" id="generate-ase-environment-py">
+<h4>generate_ase_environment.py<a class="headerlink" href="#generate-ase-environment-py" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">/ase/scripts/generate_ase_environment.py</span></code> generates platform configuration files. <code class="docutils literal notranslate"><span class="pre">afu_sim_setup</span></code> invokes it
+automatically. A legacy mode in <code class="docutils literal notranslate"><span class="pre">generate_ase_environment.py</span></code> performs a brute-force check of the specified AFU RTL
+directories, attempting to define a compilation. This brute-force mode is
+imperfect and lists every file ending in <code class="docutils literal notranslate"><span class="pre">.sv,</span> <span class="pre">.vs,</span> <span class="pre">.vhd,</span> <span class="pre">or</span> <span class="pre">.v</span></code> and directories separated by <code class="docutils literal notranslate"><span class="pre">+</span></code>. It also may fail
+when compilation is order-dependent.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">generate_ase_environment.py</span> <span class="pre">--help</span></code> for a list of arguments.</p>
+<ul class="simple">
+<li><p>The script requires a directory path to your RTL AFU.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-t</span></code>: The default for the optional <code class="docutils literal notranslate"><span class="pre">-t</span></code> (tool) argument is <code class="docutils literal notranslate"><span class="pre">VCS</span></code>. For Mentor tools, use the <code class="docutils literal notranslate"><span class="pre">QUESTA</span></code> option.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: The default for the optional <code class="docutils literal notranslate"><span class="pre">-p</span></code> (platform) argument is <code class="docutils literal notranslate"><span class="pre">intg_xeon</span></code> which stands for the Integrated FPGA
+Platform. Use <code class="docutils literal notranslate"><span class="pre">discrete</span></code> for the Intel PAC.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: The optional exclusions argument lists exclusions for path searches.</p></li>
+</ul>
+<p>The Synopsys and Mentor Graphics RTL simulators generate the following scripts.</p>
+<ul class="simple">
+<li><p>Synopsys: Creates <code class="docutils literal notranslate"><span class="pre">synopsys_sim.setup</span></code> and <code class="docutils literal notranslate"><span class="pre">vcs_run.tcl</span></code> in the <code class="docutils literal notranslate"><span class="pre">VCS</span></code> configuration directory.</p></li>
+<li><p>Mentor Graphics: Creates <code class="docutils literal notranslate"><span class="pre">vsim_run.tcl</span></code> in the <code class="docutils literal notranslate"><span class="pre">QUESTA</span></code> configuration directory.</p></li>
+</ul>
+<p>The run-time simultation uses the <code class="docutils literal notranslate"><span class="pre">.tcl</span></code> files.</p>
+<p>Details on generated files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">vlog_files.list</span></code>: Lists all the Verilog and SystemVerilog files found in the AFU directory path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vhdl_files.list</span></code>: Lists all the VHDL files found in the AFU directory path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code>: Ties the above two files into <code class="docutils literal notranslate"><span class="pre">DUT_VLOG_SRC_LIST</span></code> and <code class="docutils literal notranslate"><span class="pre">DUT_VHD_SRC_LIST</span></code> Makefile variables.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">ASE_PLATFORM</span></code>: Sets the platform type to the default type or the type you specify.</p></li>
+<li><p>Set additional VCS or QUESTA options using the <code class="docutils literal notranslate"><span class="pre">SNPS_{VLOGAN,VHDLAN,VCS}_OPT</span></code> or <code class="docutils literal notranslate"><span class="pre">MENT_{VLOG,VCOM,VSIM}_OPT</span></code> options
+in the Makefile. Refer to <a class="reference external" href="#ase-makefile-variables">ASE Makefile Variables</a> for more information.</p></li>
+</ul>
+</li>
+</ul>
+<p>The simulation files use absolute paths when possible. To improve portability across users and groups, substitute  environment
+variables in the generated files that build and run the simulator.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must manually check this file for correctness before using it in the simulation.</p>
+</div>
+</div>
+<div class="section" id="cleaning-the-ase-environment">
+<h4>Cleaning the ASE Environment<a class="headerlink" href="#cleaning-the-ase-environment" title="Permalink to this headline">¶</a></h4>
+<p>Use the ASE cleanup script located in <code class="docutils literal notranslate"><span class="pre">scripts/ipc_clean.py</span></code> to kill zombie simulation processes and temporary files left
+behind by failed simulation processes or crashes.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    $ ./ase/scripts/ipc_clean.py
+
+    <span class="c1">############################################################</span>
+    <span class="c1">#                                                          #</span>
+    <span class="c1">#                ASE IPC Cleanup script                    #</span>
+    <span class="c1">#                                                          #</span>
+    <span class="c1">############################################################</span>
+    IPC mounts seem to be readable... will attempt cleaning up IPC constructs by user <span class="s1">&#39; user_foo &#39;</span>
+    Removing .ase_ready file ...
+    Type <span class="s1">&#39;y&#39;</span> to clean up all zombie ase_simv processes : y
+    Going ahead with cleaning up ASE processes opened by  user_foo
+    $
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="ase-usage">
+<h2>ASE Usage<a class="headerlink" href="#ase-usage" title="Permalink to this headline">¶</a></h2>
+<p>The AFU ASE is a server-client simulation environment. The AFU RTL is the server process. The software application
+compiled and linked to the  OPAE ASE library is the client process. Communication between server and client uses named pipes.
+The ASE abstracts most of the simulation infrastructure. You do not need to modify it.</p>
+<p><img alt="ASE Server-Client Process Flow" src="../../_images/ase_server_client_process_rev2.PNG" /></p>
+<ul class="simple">
+<li><p><strong>Server Process</strong>:</p>
+<ul>
+<li><p>The server process interfaces to 3rd-Party RTL Simulator packages. The server process currently supports Mentor
+Modelsim-SE*  Questasim* and Synopsys CS-MX* via the SystemVerilog-DPI library and simulator software interface.</p></li>
+<li><p>Named pipes implement communication to the client.  Named pipes also implement control, status and session management.
+The server process includes a pipe event monitoring engine.</p></li>
+<li><p>SystemVerilog manages the CCI-P interface. All CCI-P events are logged and time stamped.</p></li>
+<li><p>The server also includes a CCI-P protocol checker that checks CCI-P transactions originating in the AFU. This checker
+identifies CCI-P protocol issues, hazards, race conditions, and so on.</p></li>
+<li><p>The buffer allocation calls map to POSIX Shared Memory (<code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code>). The server-client processes share information
+about these buffers using named pipes.</p></li>
+</ul>
+</li>
+</ul>
+<p>.. note::</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">The Physical addresses generated in ASE are not realistic and are not replicable in-system.</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Client Process</strong>:</p>
+<ul>
+<li><p>The client implements an OPAE interface and a library to access the ASE platform functionality including MMIO,
+Buffer management, and session control. The features available depend on the platform you specify at build time.
+These functions are available using the OPAE API.</p></li>
+<li><p>The client process also provides a physical memory model that simulates the RTL AFU access to physical
+addresses. The physical memory model simulates address translation from virtual addresses to physical addresses.</p></li>
+<li><p>A compiled program compiles and links to the ASE implementation of OPAE library. All OPAE calls route to ASE
+instead of the OPAE platform driver.</p></li>
+</ul>
+</li>
+</ul>
+<p>Separate build scripts build the server and client processes.</p>
+<ul class="simple">
+<li><p>Server: A makefile in the <code class="docutils literal notranslate"><span class="pre">ase</span></code> directory compiles the ASE server process, containing the ASE Software, SystemVerilog
+engines and the AFU RTL logic code.</p></li>
+<li><p>Client: The main <code class="docutils literal notranslate"><span class="pre">cmake</span></code> script in the root of the distribution builds the OPAE library implementations for the System
+and ASE.  The cmake script installs the library in the  <code class="docutils literal notranslate"><span class="pre">lib</span></code> directory.</p></li>
+</ul>
+<div class="section" id="afu-build-instructions">
+<h3>AFU Build Instructions<a class="headerlink" href="#afu-build-instructions" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="ase-application-client-build-instructions">
+<h4>ASE Application (Client) Build Instructions<a class="headerlink" href="#ase-application-client-build-instructions" title="Permalink to this headline">¶</a></h4>
+<p>Follow these instructions if you are building the OPAE SDK from a source tar file. Otherwise go directly to the Application build step.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In these instructions, the directory <code class="docutils literal notranslate"><span class="pre">/tmp/opae/</span></code> is the base directory where you install the OPAE API software
+distribution. The <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> prefix may point to any system or user directory.</p>
+<p>The ASE Source directory points to <code class="docutils literal notranslate"><span class="pre">/tmp/opae/ase/</span></code></p>
+</div>
+<ul class="simple">
+<li><p>To build the OPAE libraries:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Change directory to the opae directory</span>
+    $ <span class="nb">cd</span> /tmp/opae/
+
+    <span class="c1"># Check contents</span>
+    $ ls
+    ase cmake common doc libopae platforms safe_string samples scripts tools AUTHORS CMakeLists.txt COPYING
+    README RELEASE_NOTES
+
+    <span class="c1"># Create an out-of-build directory, and change to it</span>
+    $ mkdir mybuild
+    $ <span class="nb">cd</span> mybuild
+
+    <span class="c1"># Configure the software build using cmake (see options)</span>
+    <span class="c1"># $ cmake &lt;Path to CMakeLists.txt&gt;</span>
+    <span class="c1"># Install directory, in this example it is &lt;Path  to opae&gt;/myinst/</span>
+
+    $ cmake ../ -DOPAE_BUILD_SIM<span class="o">=</span>YES -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/tmp/opae/myinst/
+    -- The C compiler identification is GNU <span class="m">4</span>.8.4
+    -- The CXX compiler identification is GNU <span class="m">4</span>.8.4
+    -- Check <span class="k">for</span> working C compiler: /usr/bin/cc
+    -- Check <span class="k">for</span> working C compiler: /usr/bin/cc -- works
+    .
+    .
+    .
+    -- Configuring <span class="k">done</span>
+    -- Generating <span class="k">done</span>
+    -- Build files have been written to: /tmp/opae/mybuild
+
+    <span class="c1"># Build and install libraries</span>
+    $ make
+    $ make install
+
+    <span class="c1"># The environment Variable PATH should point to /myinst/bin</span>
+    <span class="c1"># Check library install paths</span>
+    $ <span class="nb">cd</span> /tmp/opae/myinst/
+    $ ls
+    doc  include  lib
+
+    $ ls lib
+    libopae-c-ase.so  libopae-c.so  libopae-c.so.0  libopae-c.so.0.1.0 ...
+</pre></div>
+</div>
+<p>Build the software application for the ASE using <code class="docutils literal notranslate"><span class="pre">libopae-c-ase.so</span></code> and the <code class="docutils literal notranslate"><span class="pre">gcc</span></code> command.
+You can build the software application using one of the following three methods:</p>
+<div class="section" id="dynamically-linking-libopae-c-ase-so">
+<h5>Dynamically Linking libopae-c-ase.so<a class="headerlink" href="#dynamically-linking-libopae-c-ase-so" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Change directory to &lt;Path to Directory&gt;/opae/samples/</span>
+    <span class="c1">#   The UUID code requires the -luuid argument</span>
+    <span class="c1">#   Linking to the  ASE library requires the  -lopae-c-ase argument</span>
+    <span class="c1">#</span>
+    $ gcc -g -o hello_fpga hello_fpga.c -L /tmp/opae/myinst/lib/ -I /tmp/opae/myinst/include/ -luuid -lpthread -lopae-c-ase -std<span class="o">=</span>c99
+
+    <span class="c1"># When running the application be sure the relevant LD_LIBRARY_PATH variable is set</span>
+    $ ./hello_fpga
+</pre></div>
+</div>
+</div>
+<div class="section" id="dynamically-linking-to-the-system-library-and-then-overriding-it">
+<h5>Dynamically Linking to the System Library and then Overriding It<a class="headerlink" href="#dynamically-linking-to-the-system-library-and-then-overriding-it" title="Permalink to this headline">¶</a></h5>
+<p>The ASE implementation of the OPAE library simulates system behavior. Consequently, the application may also link dynamically
+to the System library, <code class="docutils literal notranslate"><span class="pre">libopae-c.so</span></code> and <code class="docutils literal notranslate"><span class="pre">libopae-c-ase.so</span></code>, and then override the system library with the
+<code class="docutils literal notranslate"><span class="pre">LD_PRELOAD</span></code> environment.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Change directory to &lt;Path to Directory&gt;/opae/samples/</span>
+    <span class="c1">#   The UUID code requires the -luuid argument</span>
+    <span class="c1">#   Linking to the  ASE library requires the  -lopae-c-ase argument</span>
+    <span class="c1">#</span>
+    $ gcc -g -o hello_fpga hello_fpga.c -L /tmp/opae/myinst/lib/ -I /tmp/opae/myinst/include/ -luuid -lpthread -lopae-c -std<span class="o">=</span>c99
+
+    <span class="c1"># When running the application be sure the relevant LD_LIBRARY_PATH variable is set</span>
+    <span class="c1"># You must also set the ASE_WORKDIR environment variable</span>
+    $ <span class="nv">LD_PRELOAD</span><span class="o">=</span>libopae-c-ase.so ./hello_fpga
+</pre></div>
+</div>
+</div>
+<div class="section" id="compiling-the-libopae-c-ase-so-library-with-the-opae-software-application">
+<h5>Compiling the libopae-c-ase.so Library with the OPAE Software Application<a class="headerlink" href="#compiling-the-libopae-c-ase-so-library-with-the-opae-software-application" title="Permalink to this headline">¶</a></h5>
+<p>Use the OPAE ASE library implementation and compile it to the OPAE software application directly in one command using GCC.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Compile command</span>
+    $ gcc -g -o hello_fpga_ase hello_fpga.c /tmp/opae/myinst/lib/libopae-c-ase.so -I /tmp/opae/myinst/include/ -std<span class="o">=</span>c99 -luuid
+
+	<span class="c1"># When running the application, start the simulator, then set LD_LIBRARY_PATH and ASE_WORKDIR</span>
+	$ ./hello_fpga_ase
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="ase-simulator-server-build-instructions">
+<h4>ASE Simulator (Server) Build Instructions<a class="headerlink" href="#ase-simulator-server-build-instructions" title="Permalink to this headline">¶</a></h4>
+<p>ASE uses a platform differentiation key in the simulator Makefile to enable different platform features and produces a
+simulator configuration based on the differentiation key. These keys are set automatically by <code class="docutils literal notranslate"><span class="pre">afu_sim_setup</span></code> and
+<code class="docutils literal notranslate"><span class="pre">generate_ase_environment.py</span></code>.</p>
+<p>You must note the following required build configurations:</p>
+<p>| Configuration | Description | Default |
+|:—————|:————|:——–|
+| <code class="docutils literal notranslate"><span class="pre">ASE_PLATFORM</span></code> | This is the platform differentiator. It must be set in <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code> to point to the required simulator features. <br><code class="docutils literal notranslate"><span class="pre">FPGA_PLATFORM_INTG_XEON</span></code> and <code class="docutils literal notranslate"><span class="pre">FPGA_PLATFORM_DISCRETE</span></code> are the only legal values. | <code class="docutils literal notranslate"><span class="pre">FPGA_PLATFORM_INTG_XEON</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">SIMULATOR</span></code> | This must be set in <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code> to point to the correct RTL simulator. <br><code class="docutils literal notranslate"><span class="pre">VCS</span></code> and <code class="docutils literal notranslate"><span class="pre">QUESTA</span></code> are the only legal values. | <code class="docutils literal notranslate"><span class="pre">VCS</span></code> |
+|<code class="docutils literal notranslate"><span class="pre">DUT_VLOG_SRC_LIST</span></code>, <code class="docutils literal notranslate"><span class="pre">DUT_VHDL_SRC_LIST</span></code>, and <code class="docutils literal notranslate"><span class="pre">DUT_INCDIR</span></code> | These options point to AFU Verilog, VHDL and include path settings required for RTL simulators to build the simulation model correctly. | None supplied — You must specify this. |</p>
+<p>For more information on other switches, refer to <a class="reference external" href="#ase-makefile-targets">ASE Makefile targets</a></p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">scripts/generate_ase_environment.py</span></code> script to generate the AFU-specific files for the simulator build.
+This script is not infallible and
+requires manual inspection of generated configurations to achieve correct results.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Edit <cite>ase_sources.mk</cite> to add AFU RTL-specific define macros or include paths.</p>
+</div>
+<p>You may use the <a class="reference external" href="#generate_ase_environment.py">Generate ASE Environment</a> script to generate the required AFU <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code> and <code class="docutils literal notranslate"><span class="pre">vlog_files.list</span></code> files.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># change to ASE directory</span>
+    $ <span class="nb">cd</span> /tmp/opae/ase/
+
+    <span class="c1"># Use the scripts/generate_ase_environment.py</span>
+    $ ./scripts/generate_ase_environment.py -t VCS -p discrete &lt;Path to sample RTL&gt;
+    .
+    .
+    .
+    <span class="c1"># Edit files as needed.</span>
+
+    $ ls
+    ase_sources.mk  vcs_run.tcl  synopsys_sim.setup  vlog_files.list  ...
+</pre></div>
+</div>
+<p>You may need to check  <code class="docutils literal notranslate"><span class="pre">vlog_files.list</span></code> and <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code> files for correctness. Now, build the simulator
+with a ‘make’ command.</p>
+<div class="highlight-{.shell} notranslate"><div class="highlight"><pre><span></span>
+    $ cd &lt;opae&gt;/ase/
+    $ make
+    .
+    .
+
+    $ ls work/ase_simv
+    work/ase_simv
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="ase-runtime-instructions">
+<h3>ASE Runtime Instructions<a class="headerlink" href="#ase-runtime-instructions" title="Permalink to this headline">¶</a></h3>
+<p>The ASE server-client simulator makes the server before the client. Here are the run-time options:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    $ make sim <span class="se">\</span>
+        <span class="o">[</span><span class="nv">SIMULATOR</span><span class="o">=</span>&lt;VCS<span class="p">|</span>QUESTA&gt;<span class="o">]</span> <span class="se">\</span>
+        <span class="o">[</span><span class="nv">ASE_CONFIG</span><span class="o">=</span>&lt;Path to ase.cfg&gt;<span class="o">]</span> <span class="se">\</span>
+        <span class="o">[</span><span class="nv">ASE_SCRIPT</span><span class="o">=</span>&lt;Path to ase_regress.sh <span class="k">if</span> <span class="nv">ASE_MODE</span><span class="o">=</span><span class="m">4</span>&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Use two terminal windows to start the simulation.</p>
+<ul class="simple">
+<li><p>Terminal 1: Runs <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sim</span></code>. The ASE initializes and the AFU issues a reset and then waits for incoming transactions.
+The software application must wait until the “Ready for Simulation” message displays.</p></li>
+</ul>
+<p>Specify the environment variable <code class="docutils literal notranslate"><span class="pre">ASE_WORKDIR</span></code> Terminal 1.</p>
+<div class="highlight-{.shell} notranslate"><div class="highlight"><pre><span></span>
+    # Invoke the simulator
+    $ make sim
+    SIMULATOR=VCS
+    CC=gcc
+    #################################################################
+    #                                                               #
+    #             OPAE Intel(R) Xeon(R) + FPGA Library              #
+    #               AFU Simulation Environment (ASE)                #
+    #                                                               #
+    #################################################################
+    ASE platform set to MCP_SKYLAKE mode
+    .
+    .
+    .
+    SIM-SV: Transaction Logger started
+    SIM-SV: Simulator started...
+    SIM-C : +CONFIG /tmp/opae/ase/ase.cfg file found !
+    SIM-C : +SCRIPT /tmp/opae/ase/ase_regress.sh file found !
+    SIM-C : PID of simulator is 41819
+    SIM-C : Reading /tmp/opae/ase/ase.cfg configuration file
+    SIM-C : ASE was started in Mode 1 (Server-Client without SIMKILL)
+            ASE mode                   ... Server-Client mode without SIMKILL
+            Inactivity kill-switch     ... DISABLED
+            Reuse simulation seed      ... ENABLED
+            ASE Seed                   ... 1234
+            ASE Transaction view       ... ENABLED
+            User Clock Frequency       ... 312.500000 MHz, T_uclk = 3200 ps
+            Amount of physical memory  ... 128 GB
+
+    .
+    .
+    .
+    SIM-C : ** ATTENTION : BEFORE running the software application **
+        Set env(ASE_WORKDIR) in the terminal where application will run (copy-and-paste) =&gt;
+        $SHELL   | Run:
+        ---------|---------------------------------------------------
+        bash/zsh | export ASE_WORKDIR=/tmp/opae/ase/work
+        tcsh/csh | setenv ASE_WORKDIR /tmp/opae/ase/work
+        For any other $SHELL, consult your Linux administrator
+
+        SIM-C : Ready for simulation...
+        SIM-C : Press CTRL-C to close simulator...
+
+</pre></div>
+</div>
+<p>You can close Terminal 1 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sim</span></code>by issuing a <code class="docutils literal notranslate"><span class="pre">SIGTERM</span></code> to the relevant <code class="docutils literal notranslate"><span class="pre">ase_simv</span></code> process or by typing  <code class="docutils literal notranslate"><span class="pre">CTRL-C</span></code>.</p>
+<ul class="simple">
+<li><p>Terminal: First set the environment variable <code class="docutils literal notranslate"><span class="pre">ASE_WORKDIR</span></code> as specified in Terminal 1. In this example <code class="docutils literal notranslate"><span class="pre">ASE_WORKDIR</span></code>
+is set to <code class="docutils literal notranslate"><span class="pre">/tmp/opae/ase/work</span></code>.  Then, start the software application.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Set ASE_WORKDIR environment variable</span>
+    $ <span class="nb">export</span> <span class="nv">ASE_WORKDIR</span><span class="o">=</span>/tmp/opae/ase/work/
+
+    <span class="c1"># Run the application</span>
+    $ <span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/tmp/opae/myinst/lib/
+    $ <span class="nv">LD_PRELOAD</span><span class="o">=</span>libopae-c-ase.so ./hello_fpga
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After the application exits, the simulation is complete. Close the simulator to allow the waveform dump
+process to complete. In Terminal 1, type the <code class="docutils literal notranslate"><span class="pre">CTRL-C</span></code> command.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    &lt;Simulator running&gt;
+    .
+    .
+    .
+    SIM-C : Ready to run next <span class="nb">test</span>
+    818602500C0Tx AlmFull toggled from <span class="m">1</span> to <span class="m">0</span>
+
+    818602500C1Tx AlmFull toggled from <span class="m">1</span> to <span class="m">0</span>
+
+    &lt;CTRL-C Key hit&gt;
+
+    ^CSIM-C : Closing message queue and unlinking...
+    SIM-C : Unlinking Shared memory regions....
+    SIM-C : Session code file removed
+    SIM-C : Removing message queues and buffer handles ...
+    SIM-C : Cleaning session files...
+    SIM-C : Simulation generated log files
+        Transactions file       <span class="p">|</span> <span class="nv">$ASE_WORKDIR</span>/ccip_transactions.tsv
+        Workspaces info         <span class="p">|</span> <span class="nv">$ASE_WORKDIR</span>/workspace_info.log
+        ASE seed                <span class="p">|</span> <span class="nv">$ASE_WORKDIR</span>/ase_seed.txt
+
+    SIM-C : Tests <span class="nv">run</span>     <span class="o">=</span>&gt; <span class="m">1</span>
+    SIM-C : Sending <span class="nb">kill</span> command...
+    SIM-SV: Simulation <span class="nb">kill</span> <span class="nb">command</span> received...
+
+    Transaction count <span class="p">|</span>       VA      VL0      VH0      VH1 <span class="p">|</span>    MCL-1    MCL-2    MCL-4
+    <span class="o">========================================================================================</span>
+    MMIOWrReq           <span class="m">9</span> <span class="p">|</span>
+    MMIORdReq           <span class="m">2</span> <span class="p">|</span>
+    MMIORdRsp           <span class="m">2</span> <span class="p">|</span>
+    UMsgHint            <span class="m">0</span> <span class="p">|</span>
+    UMsgData            <span class="m">0</span> <span class="p">|</span>
+    RdReq           <span class="m">16384</span> <span class="p">|</span>        <span class="m">0</span>        <span class="m">0</span>    <span class="m">16384</span>        <span class="m">0</span> <span class="p">|</span>    <span class="m">16384</span>        <span class="m">0</span>        <span class="m">0</span>
+    RdResp          <span class="m">16384</span> <span class="p">|</span>        <span class="m">0</span>        <span class="m">0</span>    <span class="m">16384</span>        <span class="m">0</span> <span class="p">|</span>
+    WrReq           <span class="m">16385</span> <span class="p">|</span>        <span class="m">0</span>        <span class="m">0</span>    <span class="m">16385</span>        <span class="m">0</span> <span class="p">|</span>    <span class="m">16385</span>        <span class="m">0</span>        <span class="m">0</span>
+    WrResp          <span class="m">16385</span> <span class="p">|</span>        <span class="m">0</span>        <span class="m">0</span>    <span class="m">16385</span>        <span class="m">0</span> <span class="p">|</span>    <span class="m">16385</span>        <span class="m">0</span>        <span class="m">0</span>
+    WrFence             <span class="m">1</span> <span class="p">|</span>        <span class="m">0</span>        <span class="m">0</span>        <span class="m">1</span>        <span class="m">0</span> <span class="p">|</span>
+    WrFenRsp            <span class="m">1</span> <span class="p">|</span>        <span class="m">0</span>        <span class="m">0</span>        <span class="m">1</span>        <span class="m">0</span> <span class="p">|</span>
+
+    <span class="nv">$finish</span> called from file <span class="s2">&quot;/tmp/opae/ase/rtl/ccip_emulator.sv&quot;</span>, line <span class="m">2657</span>.
+    <span class="nv">$finish</span> at simulation <span class="nb">time</span>           <span class="m">1514962500</span>
+    V C S   S i m u l a t i o n   R e p o r t
+    Time: <span class="m">1514962500</span> ps
+    CPU Time:    <span class="m">142</span>.500 seconds<span class="p">;</span>       Data structure size:   <span class="m">1</span>.1Mb
+    Tue Jun <span class="m">20</span> <span class="m">13</span>:29:13 <span class="m">2017</span>
+</pre></div>
+</div>
+<p>Upon completion, the simulation generates the following files:</p>
+<ul class="simple">
+<li><p>Waveform dump: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">wave</span></code> opens the waveform for the selected tool.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">inter.vpd</span></code>: VCS Waveform file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vsim.wlf</span></code>: Mentor/Questa waveform file.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$ASE_WORKDIR/ccip_transactions.tsv</span></code>: CCI-P Events log listing all events observed on the CCI-P interface. The timestamps
+indicate the corresponding time interval in the waveform dump VPD file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$ASE_WORKDIR/workspace_info.log</span></code>: Information about buffers the simulation opened.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$ASE_WORKDIR/ase_seed.txt</span></code>: Information about the simulation seed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$ASE_WORKDIR/ccip_warnings_and_errors.txt</span></code>: Information about CCI-P warnings and errors.</p></li>
+</ul>
+</div>
+<div class="section" id="recommendations">
+<h3>Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>The ASE <code class="docutils literal notranslate"><span class="pre">ccip_logger.sv</span></code> module logs CCI-P events for designs that use the CCI-P protocol. This module allows
+you to compare transactions and traffic flow through the CCI-P interfaces.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use a different file name for each instantiation of the of the <code class="docutils literal notranslate"><span class="pre">ccip_logger</span></code>.</p>
+</div>
+<p><img alt="ASE CCI-P Logger Reuse" src="../../_images/ccip_logger_reuse_rev1.PNG" /></p>
+<ol class="simple">
+<li><p>The ASE shutdowns simulations gracefully,  closing all mutexes, locks, POSIX structures safely before exiting via the
+<code class="docutils literal notranslate"><span class="pre">$finish</span></code> statement in SystemVerilog. If your AFU design uses <code class="docutils literal notranslate"><span class="pre">$error</span></code> or <code class="docutils literal notranslate"><span class="pre">$finish</span></code> to identify error conditions
+while simulating, consider using the handle <code class="docutils literal notranslate"><span class="pre">start_simkill_countdown()</span></code> instead. <code class="docutils literal notranslate"><span class="pre">start_simkill_countdown()</span></code> calls
+<code class="docutils literal notranslate"><span class="pre">$finish</span></code> after completing the steps for a graceful shutdown.</p></li>
+<li><p>You can script ASE simulations. When the simulator is ready for use, the simulation writes a lock file,
+<code class="docutils literal notranslate"><span class="pre">$ASE_WORKDIR/.ase_ready</span></code>, to the work directory.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Start Simulator in background</span>
+    make sim <span class="p">&amp;</span>
+
+    <span class="c1"># Wait for simulator readiness</span>
+    <span class="c1"># When .ase_ready is available in the $ASE_WORKDIR, the ASE is ready for simulation</span>
+    <span class="k">while</span> <span class="o">[</span> ! -f <span class="nv">$ASE_WORKDIR</span>/.ase_ready.pid <span class="o">]</span>
+    <span class="k">do</span>
+        sleep <span class="m">1</span>
+    <span class="k">done</span>
+
+    <span class="c1"># Start application</span>
+    <span class="nb">cd</span> <span class="nv">$PATH_TO_APPLICATION</span>
+
+    <span class="c1"># Export ASE_WORKDIR variable</span>
+    <span class="nb">export</span> <span class="nv">ASE_WORKDIR</span><span class="o">={</span>Path to simulator mentioned <span class="k">in</span> ASE green printout<span class="o">}</span>
+    ./Application
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>To reduce simulation time, make the following changes to the default simulation settings:</p>
+<ul class="simple">
+<li><p>Turn OFF wave dumps: Check your RTL vendor’s recommendation on switching off wave form dumps. In some cases, is possible
+to generate wave dumps for specific module hierarchies.</p></li>
+<li><p>Turn OFF display messages by setting  <code class="docutils literal notranslate"><span class="pre">ENABLE_CL_VIEW</span> <span class="pre">=</span> <span class="pre">0</span></code> in  <code class="docutils literal notranslate"><span class="pre">ase.cfg</span></code>.</p></li>
+</ul>
+</li>
+<li><p>To generate random CCI-P transactions for every run, modify the ASE latency model, <code class="docutils literal notranslate"><span class="pre">$ASE_SRCDIR/rtl/platform.vh</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">*_LATRANGE</span></code> constraint defines a min/max pair:</p></li>
+</ol>
+<div class="highlight-{.verilog} notranslate"><div class="highlight"><pre><span></span>
+    `define X_LATRANGE     min, max
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> values are the minimum and maximum cycle counts for responses returning to the AFU. Simulation
+assigns transactions a random latency in the (min, max) range. The larger the difference between (min, max), the larger the
+standard deviation of latency for a given type of transaction. You can specify different (min, max) values for different
+transaction types.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The latency values specified for simulation are for testing only. They may not accurately represent the real
+latencies of your system hardware.</p>
+</div>
+<div class="highlight-{.verilog} notranslate"><div class="highlight"><pre><span></span>
+    /*
+     * Latency model
+     * Coded as a Min,Max tuple
+     * -------------------------------------------------------
+     * RDLINE_LATRANGE : ReadLine turnaround time
+     * WRLINE_LATRANGE : WriteLine turnaround time
+     * UMSG_LATRANGE   : UMsg latency
+     * INTR_LATRANGE   : Interrupt turnaround time
+     *
+     * LAT_UNDEFINED   : Undefined latency
+     *
+     */
+    `define MMIO_LATENCY                15
+    `define RDLINE_S_LATRANGE          20,118
+    `define RDLINE_I_LATRANGE          20,118
+    `define WRLINE_M_LATRANGE          20,118
+    `define WRLINE_I_LATRANGE          20,118
+    `define UMSG_START2HINT_LATRANGE   39,41
+    `define UMSG_HINT2DATA_LATRANGE    41,45
+    `define UMSG_START2DATA_LATRANGE   82,85
+    `define INTR_LATRANGE              10,15
+
+    `define LAT_UNDEFINED              300
+
+    `define RDWR_VL_LATRANGE           20,118
+    `define RDWR_VH_LATRANGE           140,180
+
+    `define ASE_MAX_LATENCY            300
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>The ASE includes a CCI-P protocol checker, <code class="docutils literal notranslate"><span class="pre">$ASE_SRCDIR/rtl/ccip_checker.sv</span></code>. Use this module to verify CCI-P compliance.
+The checker sniffs transactions, conditions and header settings and flags warnings or errors. Identify multiple issue
+classes in the <code class="docutils literal notranslate"><span class="pre">hw/ccip_sniffer.sv</span></code>. The ASE logs all warnings and errors in <code class="docutils literal notranslate"><span class="pre">$ASE_WORKDIR/ccip_warnings_and_errors.txt</span></code>.</p></li>
+</ol>
+<p><img alt="ASE Error Example" src="../../_images/ase_error_example.png" /></p>
+<ul class="simple">
+<li><p>Memory errors in transactions: Memory errors have the highest severity. The simulation stops immediately. The ASE logs
+memory errors, including timestamps, in  <code class="docutils literal notranslate"><span class="pre">$ASE_WORKDIR/ase_memory_error.log</span></code>.</p></li>
+<li><p>Protocol warnings: Warnings do not stop the simulation. The ASE logs warnings in <code class="docutils literal notranslate"><span class="pre">$ASE_WORKDIR/ccip_warning_and_errors.txt</span></code>.</p></li>
+<li><p>The ASE may also log memory hazards (RAW, WAR and WAW hazards).</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="ase-example">
+<h2>ASE Example<a class="headerlink" href="#ase-example" title="Permalink to this headline">¶</a></h2>
+<p>A tutorial for CCI-P systems is available in a separate <a class="reference external" href="https://github.com/OPAE/intel-fpga-bbb">Basic Building Blocks repository</a>
+in the <a class="reference external" href="https://github.com/OPAE/intel-fpga-bbb/tree/master/samples/tutorial">samples/tutorial</a> tree. The first example,
+<a class="reference external" href="https://github.com/OPAE/intel-fpga-bbb/tree/master/samples/tutorial/01_hello_world">01_hello_world</a> follows the
+<code class="docutils literal notranslate"><span class="pre">afu_sim_setup</span></code> flow described above. Start with the tutorial’s
+<a class="reference external" href="https://github.com/OPAE/intel-fpga-bbb/blob/master/samples/tutorial/README">README</a> file for configuration and execution
+instructions. The example defines a set of sources and walks through the process of creating an ASE tree, running the
+simulator and connecting it to a host program.</p>
+<!-- ### Using Basic Building Blocks (BBB) in ASE ### --><!-- #### Using CCI-P Asynchronous Shim in ASE #### --><!-- #### Using Memory Protocol Factory (MPF) in ASE #### --></div>
+<div class="section" id="operation-reference">
+<h2>Operation Reference<a class="headerlink" href="#operation-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ase-simulator-makefile-switches">
+<h3>ASE Simulator Makefile Switches<a class="headerlink" href="#ase-simulator-makefile-switches" title="Permalink to this headline">¶</a></h3>
+<p>The ASE Makefile template comprises many targets and switches. Build your own compilation script for more complex simulations.</p>
+<p>For a complete listing including the versions supported, see <a class="reference external" href="#system-requirements">System Requirements</a> section.</p>
+<div class="section" id="ase-makefile-build-flow">
+<h4>ASE Makefile Build Flow<a class="headerlink" href="#ase-makefile-build-flow" title="Permalink to this headline">¶</a></h4>
+<p>Complete the following steps to compile ASE Simulator:</p>
+<ol class="simple">
+<li><p>Compile Software objects of ASE into a library file
+*First compile the Software components located in the <code class="docutils literal notranslate"><span class="pre">ase/sw/</span></code> directory into a software library.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Define <code class="docutils literal notranslate"><span class="pre">SIM_SIDE</span></code> as a compilation macro when compiling the ASE simulator objects. The <code class="docutils literal notranslate"><span class="pre">SIM_SIDE</span></code>
+switch is for simulation software, not the OPAE ASE software library.</p>
+</div>
+<ol class="simple">
+<li><p>Compile The ASE SystemVerilog files located in the <code class="docutils literal notranslate"><span class="pre">ase/rtl/</span></code> directory.
+Compile ASE RTL the platform components for the Integrated FPGA Platform or the Intel PAC into the
+simulation databases. For the PAC, compile the embedded memory interface (EMIF) Memory controller
+model into the ASE environment. If the simulation requires the Intel FPGA Gate libraries, compile
+the models into the ASE environment.</p></li>
+<li><p>Compile AFU components into the ASE environment.
+Use the RTL simulator software tools to compile the AFU components. Use Synopsys or Mentor utilities to compile
+VHDL or SystemVerilog components.</p></li>
+</ol>
+</div>
+<div class="section" id="ase-makefile-targets">
+<h4>ASE Makefile Targets<a class="headerlink" href="#ase-makefile-targets" title="Permalink to this headline">¶</a></h4>
+<p>| Target             | Description |
+|:——————-|:————|
+| <code class="docutils literal notranslate"><span class="pre">all</span></code>          | Default build target, builds a simulator in Synopsys VCS-MX |
+| <code class="docutils literal notranslate"><span class="pre">header</span></code>       | Print version and preamble |
+| <code class="docutils literal notranslate"><span class="pre">check</span></code>        | Environment check |
+| <code class="docutils literal notranslate"><span class="pre">sw_build</span></code>     | Build <code class="docutils literal notranslate"><span class="pre">ase/sw/</span></code> components into a software library. The <code class="docutils literal notranslate"><span class="pre">SIM_SIDE</span></code> switch builds the simulator software components |
+| <code class="docutils literal notranslate"><span class="pre">help</span></code>         | Print help information |
+| <code class="docutils literal notranslate"><span class="pre">vcs_build</span></code>    | Synopsys VCS-MX template build flow |
+| <code class="docutils literal notranslate"><span class="pre">questa_build</span></code> | Mentor Graphics Modelsim-SE/QuestaSim template build flow |
+| <code class="docutils literal notranslate"><span class="pre">sim</span></code>          | Start the ASE Simulator |
+| <code class="docutils literal notranslate"><span class="pre">wave</span></code>         | Open selected RTL waveform viewer |
+| <code class="docutils literal notranslate"><span class="pre">clean</span></code>        | Clean build, simulation, and log files |
+| <code class="docutils literal notranslate"><span class="pre">distclean</span></code>    | Clean distribution - removes the AFU configuration files |</p>
+</div>
+<div class="section" id="ase-makefile-variables">
+<h4>ASE Makefile Variables<a class="headerlink" href="#ase-makefile-variables" title="Permalink to this headline">¶</a></h4>
+<p>| Makefile target    | Description | Default value |
+|:——————-|:————|:————–|
+| <code class="docutils literal notranslate"><span class="pre">VCS_HOME</span></code>           | Synopsys VCS-MX installation path | Installation tool specific |
+| <code class="docutils literal notranslate"><span class="pre">MTI_HOME</span></code>           | Mentor installation path | Installation tool  specific |
+| <code class="docutils literal notranslate"><span class="pre">QUARTUS_HOME</span></code>       | Intel Quartus Prime Pro installation path | Installation tool  specific |
+| <code class="docutils literal notranslate"><span class="pre">ASE_PLATFORM</span></code>       | Platform selection switch: <br> Specify either tightly-coupled FPGA or programmable FPGA acceleration card using <code class="docutils literal notranslate"><span class="pre">FPGA_PLATFORM_INTG_XEON</span></code> and <code class="docutils literal notranslate"><span class="pre">FPGA_PLATFORM_DISCRETE</span></code>, respectively | <code class="docutils literal notranslate"><span class="pre">FPGA_PLATFORM_INTG_XEON</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">SIMULATOR</span></code>          | Simulator Key to environment <br>Defined values <code class="docutils literal notranslate"><span class="pre">VCS</span></code> or <code class="docutils literal notranslate"><span class="pre">QUESTA</span></code> | <code class="docutils literal notranslate"><span class="pre">VCS</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">ASE_SRCDIR</span></code>         | ASE source location | Current source path |
+| <code class="docutils literal notranslate"><span class="pre">ASE_WORKDIR</span></code>        | Location where ASE runs, usually <code class="docutils literal notranslate"><span class="pre">$ASE_SRCDIR/work</span></code> | Environment-specific execution path |
+| <code class="docutils literal notranslate"><span class="pre">WORK</span></code>               | Simulation library compilation location | <code class="docutils literal notranslate"><span class="pre">work</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">ASE_DISABLE_LOGGER</span></code> | Switch to disable logger build | <code class="docutils literal notranslate"><span class="pre">0</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">ASE_DISABLE_CHECKER</span></code>| Switch to disable checker build <br>WARNING: Disabling this checker may have side effects on protocol correctness | <code class="docutils literal notranslate"><span class="pre">0</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">GLS_SIM</span></code>            | Enable gate simulation build | <code class="docutils literal notranslate"><span class="pre">1</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">GLS_VERILOG_OPT</span></code>    | Libraries that enable Intel gate simulation | Quartus EDA simulation library paths|
+| <code class="docutils literal notranslate"><span class="pre">ASE_CONFIG</span></code>         | ASE Run-time configuration file (described <a class="reference external" href="#ase-runtime-configuration-options">here</a>) | <code class="docutils literal notranslate"><span class="pre">$ASE_SRCDIR/ase.cfg</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">ASE_SCRIPT</span></code>         | ASE Regression script path | <code class="docutils literal notranslate"><span class="pre">$ASE_SRCDIR/ase_regress.sh</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">TIMESCALE</span></code>          | Simulator timescale | <code class="docutils literal notranslate"><span class="pre">1ps/1ps</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">ASEHW_FILE_LIST</span></code>    | ASE RTL File list | Refer to  <code class="docutils literal notranslate"><span class="pre">ase/Makefile</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">ASE_MEM_FILE_LIST</span></code>  | ASE RTL file list for programmable FPGA acceleration card mode memory | Refer to  <code class="docutils literal notranslate"><span class="pre">ase/Makefile</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">ASE_INCDIR</span></code>         | ASE Include directory paths | Refer to  <code class="docutils literal notranslate"><span class="pre">ase/Makefile</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">ASE_TOP</span></code>            | ASE top level entity (must not be changed) | <code class="docutils literal notranslate"><span class="pre">ase_top</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">CC_OPT</span></code>             | ASE Software Library compiler build options| <code class="docutils literal notranslate"><span class="pre">-g</span> <span class="pre">-m64</span> <span class="pre">-fPIC</span> <span class="pre">-D</span> <span class="pre">SIM_SIDE=1</span> <span class="pre">-I</span> <span class="pre">$(ASE_SRCDIR)/sw/</span> <span class="pre">-D</span> <span class="pre">SIMULATOR=VCS</span> <span class="pre">-D</span> <span class="pre">$(ASE_PLATFORM)</span> <span class="pre">-Wall</span> <span class="pre">-I</span> <span class="pre">$(VCS_HOME)/include/</span> </code> |
+| <code class="docutils literal notranslate"><span class="pre">ASE_LD_SWITCHES</span></code>    | ASE Software Linker switches | <code class="docutils literal notranslate"><span class="pre">-lrt</span> <span class="pre">-lpthread</span> <span class="pre">-lstdc++</span> <span class="pre">-luuid</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">SNPS_VHDLAN_OPT</span></code>    | Synopsys VCS-MX VHDL compile options (add extra options to <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code>) | Refer to  <code class="docutils literal notranslate"><span class="pre">ase/Makefile</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">SNPS_VLOGAN_OPT</span></code>    | Synopsys VCS-MX SystemVerilog compile options (add extra options to <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code>) | Refer to  <code class="docutils literal notranslate"><span class="pre">ase/Makefile</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">SNPS_VCS_OPT</span></code>       | Synopsys VCS-MX options for building simulator executable (add extra options to <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code>) | Refer to  <code class="docutils literal notranslate"><span class="pre">ase/Makefile</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">SNPS_SIM_OPT</span></code>       | Synopsys VCS-MX Simulation options (add extra options may to  <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code>) | Refer to  <code class="docutils literal notranslate"><span class="pre">ase/Makefile</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">MENT_VCOM_OPT</span></code>      | Mentor Modelsim-SE/Questasim VHDL compile options  (add extra options to <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code>) | Refer to  <code class="docutils literal notranslate"><span class="pre">ase/Makefile</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">MENT_VLOG_OPT</span></code>      | Mentor Modelsim-SE/Questasim {System}Verilog compile options  (add extra options to <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code>) | Refer to <code class="docutils literal notranslate"><span class="pre">ase/Makefile</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">MENT_VSIM_OPT</span></code>      | Mentor Modelsim-SE/Questasim VHDL simulation options  (add extra options to <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code>) | Refer to  <code class="docutils literal notranslate"><span class="pre">ase/Makefile</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">DUT_VLOG_SRC_LIST</span></code>  | Points to a text file listing AFU {System}Verilog files (usually <code class="docutils literal notranslate"><span class="pre">vlog_files.list</span></code>) | User generated |
+| <code class="docutils literal notranslate"><span class="pre">DUT_VHDL_SRC_LIST</span></code>  | Points to a text file listing AFU VHDL files (usually <code class="docutils literal notranslate"><span class="pre">vhdl_files.list</span></code> | User generated |
+| <code class="docutils literal notranslate"><span class="pre">DUT_INCDIR</span></code>         | Lists AFU include directories separated by a ‘+’ (usually in <code class="docutils literal notranslate"><span class="pre">ase_sources.mk</span></code>) | User generated |</p>
+</div>
+</div>
+<div class="section" id="ase-runtime-configuration-options">
+<h3>ASE Runtime Configuration Options<a class="headerlink" href="#ase-runtime-configuration-options" title="Permalink to this headline">¶</a></h3>
+<p>The ASE configuration file configures simulator behavior. An example configuration script is available at <code class="docutils literal notranslate"><span class="pre">ase/ase.cfg</span></code></p>
+<p>| Switch Name              | Default                            | Description |
+|:————————-|:———————————–|:————|
+| <code class="docutils literal notranslate"><span class="pre">ASE_MODE</span></code>               | 1                                  | ASE mode has the following valid values: <br>1 : Standard Server-Client Mode<br>2 : Simulator stops after <code class="docutils literal notranslate"><span class="pre">ASE_TIMEOUT</span></code> clocks<br>3 : Software shuts down simulator when client application releases session<br> 4 : Regression mode invoked by script<br>&gt;=5 : Ignored (revert to <code class="docutils literal notranslate"><span class="pre">ASE_MODE=1</span></code>) |
+| <code class="docutils literal notranslate"><span class="pre">ASE_TIMEOUT</span></code>            | 50000 (only if <code class="docutils literal notranslate"><span class="pre">ASE_MODE=2</span></code>)        | Watchdog timer shuts down simulator after <code class="docutils literal notranslate"><span class="pre">ASE_TIMEOUT</span></code> clocks of CCI-P interface inactivity. |
+| <code class="docutils literal notranslate"><span class="pre">ASE_NUM_TESTS</span></code>          | 500 (only if <code class="docutils literal notranslate"><span class="pre">ASE_MODE=4</span></code>)          | Number of tests in regression mode. If incorrectly set,  the simulator may exit pre-maturely or stall waiting for tests to get started. |
+| <code class="docutils literal notranslate"><span class="pre">ENABLE_REUSE_D</span></code>      | 1                                  | When set to 1, reuses the simulation seed, so that CCI-P transactions replay with the previous addresses. <br>When set to 0, obtains a new seed. |
+| <code class="docutils literal notranslate"><span class="pre">ASE_SEED</span></code>                | 1234 (only if <code class="docutils literal notranslate"><span class="pre">ENABLE_REUSE_SEED=1</span></code>) | ASE seed setting, enabled when <code class="docutils literal notranslate"><span class="pre">ENABLE_REUSE_SEED</span></code> is set to 1, otherwise the simulations uses a different seed. <br>At the end of the simulation, the ASE writes the current seed to  <code class="docutils literal notranslate"><span class="pre">$ASE_WORKDIR/ase_seed.txt</span></code>. |
+| <code class="docutils literal notranslate"><span class="pre">ENABLE_CL_VIEW</span></code>         | 1                                  | The ASE prints all CCI-P transactions. On long simulation runs, setting <code class="docutils literal notranslate"><span class="pre">ENABLE_CL_VIEW</span></code> to 0 may reduce simulation time. |
+| <code class="docutils literal notranslate"><span class="pre">PHYS_MEMORY_AVAILABLE_GB</span></code> | 32                                 | Restricts ASE address generation the specified memory range. |</p>
+</div>
+<div class="section" id="logging-verbosity-control">
+<h3>Logging Verbosity Control<a class="headerlink" href="#logging-verbosity-control" title="Permalink to this headline">¶</a></h3>
+<p>ASE provides the following three levels for logging message verbosity. By default, these messages print to <code class="docutils literal notranslate"><span class="pre">stdout</span></code>:</p>
+<ul class="simple">
+<li><p>ASE_INFO: Prints mandatory information messages required to specify operation.</p></li>
+<li><p>ASE_ERR: Prints error messages during operation.</p></li>
+<li><p>ASE_MSG: Prints general messages indicating check points in the ASE. Suppress these messages by setting the environment
+variable <code class="docutils literal notranslate"><span class="pre">ASE_LOG</span></code> to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+</ul>
+<p>The following command  suppresses the ASE_MSG category:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    $ <span class="nv">ASE_LOG</span><span class="o">=</span><span class="m">0</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span>libopae-c-ase ./hello_fpga
+</pre></div>
+</div>
+<p>You cannot suppress warnings and errors.</p>
+</div>
+<div class="section" id="troubleshooting-and-error-reference">
+<h3>Troubleshooting and Error Reference<a class="headerlink" href="#troubleshooting-and-error-reference" title="Permalink to this headline">¶</a></h3>
+<p>The following list of ASE errors and warnings is not comprehensive:</p>
+<p>| Observation               | Problem           | Next Steps           |
+|:————————–|:——————|:———————|
+| Either all transactions are not seen or simulation ends earlier than expected. | ASE Simulation inactivity is too short for the application use-case to be successfully simulated in the ASE. | If using <code class="docutils literal notranslate"><span class="pre">ASE_MODE=2</span></code> (Daemon with timeout), in the <code class="docutils literal notranslate"><span class="pre">ase.cfg</span></code> file, increase the <code class="docutils literal notranslate"><span class="pre">ASE_TIMEOUT</span></code> setting or  disable <code class="docutils literal notranslate"><span class="pre">ASE_TIMEOUT</span></code>. |
+| ASE simulation build error - compilation, or linking failed | GCC version might be too old. | In the <code class="docutils literal notranslate"><span class="pre">ase</span></code> directory try the following command  <br> <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">make</span> <span class="pre">sw_build</span></code> <br>ASE builds correctly with GCC 4.8.5 or higher. Use the <code class="docutils literal notranslate"><span class="pre">ase/scripts/env_check.sh</span></code> script to identify issues. |
+| Synopsys VCS-MX dumped stack while compiling or running | Possible corruption of compiled objects or problems with incremental compilation. | Clean the ASE environment using <br><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">make</span> <span class="pre">clean</span></code> <br> If this command fails, clean the distribution with <br><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">./distclean.sh</span></code><br>then rebuild the simulation. |
+| ERROR: Too many open files | Past ASE simulation runs did not close cleanly and may have left behind open IPC instances. | Use the  <code class="docutils literal notranslate"><span class="pre">$ASE_SRCDIR/scripts/ipc_clean.py</span></code> script to clean IPC instances. <br>Check if the <a class="reference external" href="#system-requirements">System Requirements</a> have been met. <br>If problems continue, increase resource limits for your Linux distribution. |
+| <code class="docutils literal notranslate"> <span class="pre">$ASE_WORKDIR</span></code> environment variable has not been set up | Application cannot find a valid simulation session | Follow the steps printed when the ASE simulation starts. These instructions are in green text. |
+| <code class="docutils literal notranslate"> <span class="pre">.ase_timestamp</span></code> cannot be opened at <code class="docutils literal notranslate"><span class="pre">&lt;DIRECTORY&gt;</span></code> | Simulator may not have been started yet. Note that when started, the simulator prints: <br>Ready for Simulation<br><code class="docutils literal notranslate"><span class="pre">$ASE_WORKDIR</span></code> may not set up correctly. | Check the ASE_WORKDIR  environment variable. <br><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">echo</span> <span class="pre">$ASE_WORKDIR</span> </code> <br>Wait for simulator to print:<br> <code class="docutils literal notranslate"><span class="pre">Ready</span> <span class="pre">for</span> <span class="pre">Simulation</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">ase_sources.mk:</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory</span></code> | ASE Environment has not been generated. | Generate an AFU RTL listing (in <code class="docutils literal notranslate"><span class="pre">vlog_files.list</span></code> and <code class="docutils literal notranslate"> <span class="pre">ase_sources.mk</span></code>) configuration. <br> You can use <code class="docutils literal notranslate"><span class="pre">ase/scripts/generate_ase_environment.py</span></code>to generate these files. |
+| An ASE instance is probably still running in current directory. | An ASE simulation is already running in the <code class="docutils literal notranslate"><span class="pre">$ASE_WORKDIR</span></code> directory. | If the simulation process is unusable or unreachable, use the <code class="docutils literal notranslate"><span class="pre">ase/scripts/ipc_clean.py</span></code> script to clean the simulation temporary files using: <br><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">make</span> <span class="pre">clean</span></code>. <br> Then rebuild the simulator. |</p>
+</div>
+</div>
+<div class="section" id="revision-history">
+<h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
+<p>| Document Version |  Intel Acceleration Stack Version  | Changes  |
+| —————- |————————————|———-|
+|2018.04.16 | 1.1 Alpha. <br>(Supported with Intel Quartus Prime Pro Edition 17.1.1.) | Made the following changes: <br> * Added <code class="docutils literal notranslate"><span class="pre">afu_sim_setup</span></code> script which reads a file containing a list of RTL sources and constructs an ASE tree to compile and simulate. <br> * Added <code class="docutils literal notranslate"><span class="pre">/platforms/scripts/rtl_src_config</span></code> script which maps a simple text file containing a list of RTL source files to an ASE configuration. <br> * Updated figures to show the hardware available in the Intel PAC with Arria® 10 GX FPGA. |</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../pyopae/README.html" class="btn btn-neutral float-right" title="OPAE Python Bindings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../fpga_api/prog_guide/readme.html" class="btn btn-neutral float-left" title="OPAE C API Programming Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
