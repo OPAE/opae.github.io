@@ -19,7 +19,7 @@ The main documentation for the site is organized into following sections:
    docs/install_guide/installation_guide
    docs/fpga_api/prog_guide/readme
    docs/ase_userguide/ase_userguide
-   docs/README
+   docs/pyopae/README
 
 .. _api-docs:
 
@@ -54,8 +54,17 @@ The main documentation for the site is organized into following sections:
    docs/fpga_tools/fpgad/fpgad
    docs/fpga_tools/fpgadiag/README
    docs/fpga_tools/fpgainfo/fpgainfo
-   docs/fpga_tools/fpgaport/fpgaport
    docs/fpga_tools/fpgasupdate/fpgasupdate
    docs/fpga_tools/mmlink/mmlink
    docs/fpga_tools/packager/packager
    docs/fpga_tools/userclk/userclk
+   docs/fpga_tools/hssi/hssi
+   docs/fpga_tools/opaevfio/opaevfio
+   docs/fpga_tools/pci_device/pci_device
+   docs/fpga_tools/opae.io/opae.io
+   docs/fpga_tools/host_exerciser/host_exerciser
+   docs/fpga_tools/hssi_ethernet/hssistats
+   docs/fpga_tools/hssi_ethernet/hssimac
+   docs/fpga_tools/hssi_ethernet/hssiloopback
+   docs/fpga_tools/rsu/rsu
+

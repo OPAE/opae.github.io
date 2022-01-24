@@ -20,20 +20,10 @@
   <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../../',
-              VERSION:'1.4.0',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -43,7 +33,8 @@
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" /> 
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="HSSI ethernet loopback" href="../hssi_ethernet/hssiloopback.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -67,7 +58,7 @@
             
             
               <div class="version">
-                1.4.0
+                2.0.10
               </div>
             
           
@@ -97,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyopae/README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -112,16 +103,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../fpgaconf/fpgaconf.html">fpgaconf</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi/hssi.html">hssi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opaevfio/opaevfio.html">opaevfio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pci_device/pci_device.html">pci_device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opae.io/opae.io.html">opae.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../host_exerciser/host_exerciser.html">host_exerciser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssistats.html">HSSI ethernet statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssimac.html">HSSI ethernet mac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssiloopback.html">HSSI ethernet loopback</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">rsu</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mode-1-rsu">Mode 1: RSU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mode-2-default-fpga-image">Mode 2: Default FPGA Image</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#positional-arguments">POSITIONAL ARGUMENTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-arguments">OPTIONAL ARGUMENTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example">EXAMPLE</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -190,55 +200,82 @@
 <h1>rsu<a class="headerlink" href="#rsu" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">rsu</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span><span class="p">]</span> <span class="p">{</span><span class="n">bmcimg</span><span class="p">,</span><span class="n">fpga</span><span class="p">}</span> <span class="p">[</span><span class="n">bdf</span><span class="p">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rsu [-h] [-d] {bmc,bmcimg,retimer,fpga,sdm,fpgadefault} [PCIE_ADDR]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>Perform RSU (remote system update) operation on PAC device given its
-PCIe address. An RSU operation sends an instruction to the device to
-trigger a power cycle of the card only. This will force reconfiguration
-from flash for either BMC image (on devices that support it) or the FPGA</p>
+<div class="section" id="mode-1-rsu">
+<h3>Mode 1: RSU<a class="headerlink" href="#mode-1-rsu" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rsu bmc --page=(user|factory) [PCIE_ADDR]</span>
+<span class="go">rsu retimer [PCIE_ADDR]</span>
+<span class="go">rsu fpga --page=(user1|user2|factory) [PCIE_ADDR]</span>
+<span class="go">rsu sdm [PCIE_ADDR]</span>
+</pre></div>
+</div>
+<p>Perform RSU (remote system update) operation on PAC device
+given its PCIe address.
+An RSU operation sends an instruction to the device to trigger
+a power cycle of the card only. This will force reconfiguration
+from flash for either BMC, Retimer, SDM, (on devices that support these)
+or the FPGA.</p>
+</div>
+<div class="section" id="mode-2-default-fpga-image">
+<h3>Mode 2: Default FPGA Image<a class="headerlink" href="#mode-2-default-fpga-image" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rsu fpgadefault --page=(user1|user2|factory) --fallback=&lt;csv&gt; [PCIE_ADDR]</span>
+</pre></div>
+</div>
+<p>Set the default FPGA boot sequence. The –page option determines
+the primary FPGA boot image. The –fallback option allows a comma-separated
+list of values to specify fallback images.</p>
+</div>
 </div>
 <div class="section" id="positional-arguments">
 <h2>POSITIONAL ARGUMENTS<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">{bmcimg,fpga}</span></code></p>
-<p>type of operation</p>
-<p><code class="docutils literal"><span class="pre">bdf</span></code> PCIe address of device to do rsu (e.g.&nbsp;04:00.0 or 0000:04:00.0)</p>
+<p><code class="docutils literal notranslate"><span class="pre">{bmc,bmcimg,retimer,fpga,sdm,fpgadefault}</span></code></p>
+<p>type of RSU operation or set Default FPGA Image operation.</p>
+<p><code class="docutils literal notranslate"><span class="pre">PCIE_ADDR</span></code>
+PCIe address of device to do rsu (e.g. 04:00.0 or 0000:04:00.0)</p>
 </div>
 <div class="section" id="optional-arguments">
 <h2>OPTIONAL ARGUMENTS<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code> show this help message and exit</p>
-<p><code class="docutils literal"><span class="pre">-f,</span> <span class="pre">--factory</span></code> reload from factory bank</p>
-<p><code class="docutils literal"><span class="pre">-d,</span> <span class="pre">--debug</span></code> log debug statements</p>
+<p><code class="docutils literal notranslate"><span class="pre">-h,</span> <span class="pre">--help</span></code>
+show this help message and exit</p>
+<p><code class="docutils literal notranslate"><span class="pre">-d,</span> <span class="pre">--debug</span></code>
+log debug statements</p>
 </div>
 <div class="section" id="example">
 <h2>EXAMPLE<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>This will trigger a boot of the BMC image for a device with a pci
-address of 25:00.0. NOTE: Both BMC and FPGA images will be reconfigured
-from user bank.</p>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="cp"># rsu bmcimg 25:00.0</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>rsu bmc --page<span class="o">=</span>user <span class="m">25</span>:00.0
 </pre></div>
 </div>
-<p>This will trigger a factory boot of the BMC image for a device with a
-pci address of 25:00.0. NOTE: Both BMC image will be reconfigured from
-factory bank and the</p>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="cp"># rsu bmcimg 25:00.0 -f</span>
+<p>Triggers a boot of the BMC image (user page) for the device with PCIe
+address 25:00.0.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>rsu bmc --page<span class="o">=</span>factory <span class="m">25</span>:00.0
 </pre></div>
 </div>
-<p>This will trigger a reconfiguration of the FPGA only for a device with a
-pci address of 25:00.0. NOTE: The FPGA image will be reconfigured from
-user bank.</p>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="cp"># rsu fpga 25:00.0</span>
+<p>Triggers a factory boot of the BMC image for the device with
+PCIe address 25:00.0.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>rsu fpga --page<span class="o">=</span>user2 <span class="m">25</span>:00.0
 </pre></div>
 </div>
-<p>This will trigger a factory reconfiguration of the FPGA only for a
-device with a pci address of 25:00.0. NOTE: The FPGA image will be
-reconfigured from the factory bank.</p>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="cp"># rsu fpga 25:00.0 -f</span>
+<p>Triggers a reconfiguration of the FPGA (user2 page) for the
+device with PCIe address 25:00.0.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>rsu fpga --page<span class="o">=</span>factory <span class="m">25</span>:00.0
 </pre></div>
 </div>
+<p>Triggers a factory reconfiguration of the FPGA for the device
+with PCIe address 25:00.0.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>rsu sdm <span class="m">25</span>:00.0
+</pre></div>
+</div>
+<p>Triggers a reconfiguration of the SDM for the device with
+PCIE address 25:00.0.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>rsu fpgadefault --page<span class="o">=</span>factory --fallback<span class="o">=</span>user1,user2 <span class="m">25</span>:00.0
+</pre></div>
+</div>
+<p>Sets the FPGA boot sequence to factory with fallbacks user1, user2.</p>
 </div>
 </div>
 
@@ -247,6 +284,13 @@ reconfigured from the factory bank.</p>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../hssi_ethernet/hssiloopback.html" class="btn btn-neutral float-left" title="HSSI ethernet loopback" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

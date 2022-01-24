@@ -20,20 +20,10 @@
   <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../../',
-              VERSION:'1.4.0',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -67,7 +57,7 @@
             
             
               <div class="version">
-                1.4.0
+                2.0.10
               </div>
             
           
@@ -97,7 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyopae/README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -117,11 +107,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi/hssi.html">hssi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opaevfio/opaevfio.html">opaevfio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pci_device/pci_device.html">pci_device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opae.io/opae.io.html">opae.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../host_exerciser/host_exerciser.html">host_exerciser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssistats.html">HSSI ethernet statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssimac.html">HSSI ethernet mac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssiloopback.html">HSSI ethernet loopback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rsu/rsu.html">rsu</a></li>
 </ul>
 
             
@@ -190,46 +188,50 @@
 <h1>fecmode (N3000 specific tool)<a class="headerlink" href="#fecmode-n3000-specific-tool" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="n">fecmode</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">mode</span><span class="o">&gt;</span><span class="p">][</span><span class="o">&lt;</span><span class="n">args</span><span class="o">&gt;</span><span class="p">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">fecmode [&lt;mode&gt;][&lt;args&gt;]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>Fecmode changes FEC mode of external ethernet PHY, this tool only
-support on N3000 Card.</p>
+<p>Fecmode changes FEC mode of external ethernet PHY, this tool only support on N3000 Card.</p>
 </div>
 <div class="section" id="positional-arguments">
 <h2>POSITIONAL ARGUMENTS<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">--segment,</span> <span class="pre">-S</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">--segment,</span> <span class="pre">-S</span></code></p>
 <p>segment number of the PCIe device.</p>
-<p><code class="docutils literal"><span class="pre">--bus,</span> <span class="pre">-B</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">--bus,</span> <span class="pre">-B</span></code></p>
 <p>bus number of the PCIe device.</p>
-<p><code class="docutils literal"><span class="pre">--device,</span> <span class="pre">-D</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">--device,</span> <span class="pre">-D</span></code></p>
 <p>device number of the PCIe device.</p>
-<p><code class="docutils literal"><span class="pre">--function,</span> <span class="pre">-F</span></code> function number of the PCIe device</p>
-<p><code class="docutils literal"><span class="pre">--rsu,</span> <span class="pre">-r</span></code> reboot card only if mode is not configured</p>
-<p><code class="docutils literal"><span class="pre">--debug,</span> <span class="pre">-d</span></code> output debug information</p>
+<p><code class="docutils literal notranslate"><span class="pre">--function,</span> <span class="pre">-F</span></code>
+function number of the PCIe device</p>
+<p><code class="docutils literal notranslate"><span class="pre">--rsu,</span> <span class="pre">-r</span></code>
+reboot card only if mode is not configured</p>
+<p><code class="docutils literal notranslate"><span class="pre">--debug,</span> <span class="pre">-d</span></code>
+output debug information</p>
 </div>
 <div class="section" id="fec-mode">
 <h2>FEC Mode<a class="headerlink" href="#fec-mode" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">no</span></code> no FEC.</p>
-<p><code class="docutils literal"><span class="pre">kr</span></code> BaseR FEC (Fire-Code) correction – 4 orders</p>
-<p><code class="docutils literal"><span class="pre">rs</span></code> Reed-Solomon FEC correction – 7 orders</p>
+<p><code class="docutils literal notranslate"><span class="pre">no</span></code>
+no FEC.</p>
+<p><code class="docutils literal notranslate"><span class="pre">kr</span></code>
+BaseR FEC (Fire-Code) correction – 4 orders</p>
+<p><code class="docutils literal notranslate"><span class="pre">rs</span></code>
+Reed-Solomon FEC correction – 7 orders</p>
 </div>
 <div class="section" id="example">
 <h2>EXAMPLE<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This command change FEC mode to “kr”:</p>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="cp"># fecmode -B 0x25 kr</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>fecmode -B 0x25 kr
 </pre></div>
 </div>
-<p>This command reboot card (no need to specify bus number if there is only
-one card):</p>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="cp"># fecmode -r</span>
+<p>This command reboot card (no need to specify bus number if there is only one card):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>fecmode -r
 </pre></div>
 </div>
 <p>This command display the current FEC mode:</p>
-<div class="code console highlight-c"><div class="highlight"><pre><span></span><span class="cp"># fecmode</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>fecmode
 </pre></div>
 </div>
 </div>
