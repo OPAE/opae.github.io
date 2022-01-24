@@ -38,6 +38,41 @@ The source for the OPAE SDK Linux device drivers is available at the
 [OPAE Linux DFL drivers repository](https://github.com/OPAE/linux-dfl).
 
 ``
+## Build the OPAE Linux device drivers from source ##
+For building the OPAE kernel and kernel driver, the kernel development environment is required. So before you build the kernel, you must install the required packages. Run the following commands:
+
+We using Federa 32 as an example.
+```console
+$ sudo yum install gcc gcc-c++ make kernel-headers kernel-devel elfutils-libelf-devel ncurses-devel openssl-devel bison flex
+```
+
+Download the OPAE upstream kernel tree from github.
+```console
+$ git clone https://github.com/OPAE/linux-dfl.git -b fpga-upstream-dev-5.8.0
+```
+
+Configure the kernel.
+```console
+$ cd linux-dfl
+$ cp /boot/config-`uname -r` .config
+$ cat configs/n3000_d5005_defconfig >> .config 
+$ echo 'CONFIG_LOCALVERSION="-dfl"' >> .config
+$ echo 'CONFIG_LOCALVERSION_AUTO=y' >> .config
+$ make olddefconfig
+```
+
+Compile and install the new kernel.
+```console
+$ make -j
+$ sudo make modules_install
+$ sudo make install
+```
+When installed finished, reboot your system.
+When the system login again, check the kernel version is correctly or not.
+```console
+[figo@localhost linux-dfl]$ uname -a
+Linux localhost.localdomain 5.8.0-rc1-dfl-g73e16386cda0 #6 SMP Wed Aug 19 08:38:32 EDT 2020 x86_64 x86_64 x86_64 GNU/Linux
+```
 
 ## Building and installing the OPAE SDK from source ##
 Download the OPAE SDK source package from the respective [release page on
@@ -66,6 +101,7 @@ by adding `-DCMAKE_INSTALL_PREFIX=<new prefix>` to the `cmake` command above.
 The remainder of this guide assumes you installed into `/usr/local`.
 
 ## Configuring the FPGA (loading an FPGA AFU)##
+
 
 The *fpgaconf* tool exercises the AFU reconfiguration
 functionality. It shows how to read a bitstream from a disk file,
@@ -113,6 +149,11 @@ Usage:
     $ cat /sys/class/fpga_region/region0/dfl-port.0/afu_id
 
     d8424dc4a4a3c413f89e433683f9040b
+```
+```eval_rst
+.. note::
+    The fpgaconf tool is not available for the Intel PAC N3000. The NLB is
+    alrealy include in AFU.
 ```
 
 ## Building a sample application ##
@@ -329,6 +370,19 @@ $ gcc -std=c99 hello_fpga.c -I/usr/local/include -L/usr/local/lib -lopae-c -luui
     `libuuid` and `libjson-c`. But they are not distributed as part of the
     library. Make sure you have these libraries properly installed.
 ```
+
+```eval_rst
+.. note:
+    The layout of AFU is difference between the N3000 card and Rush Creek/Darby Creek.
+    In N3000 card, the NLB and DMA are contained in the AFU, so we need to do enumeration again in AFU to discover the NLB
+    To run the hello_fpga application on N3000 card, it should use the `c` argument to support N3000 card.
+$ sudo ./hello_fpga -c
+    Running Test
+    Running on bus 0x08.
+    AFU NLB0 found @ 28000
+    Done Running Test
+
+```
 To run the *hello_fpga* application; just issue:
 
 ```console
@@ -336,6 +390,109 @@ $ sudo ./hello_fpga
 
 Running Test
 Done
+
+```
+
+## Setup IOFS Release1 Bitstream on FPGA PCIe card  ##
+
+Program IOFS Release1 bitstream on FPGA D5005 or N6000 cards and reboot system.
+
+Run command: lspci | grep acc
+
+```3b:00.0 Processing accelerators: Intel Corporation Device af00 (rev 01)```
+
+Number of virtual functions supported by bitstream
+
+``` 
+   cat /sys/bus/pci/devices/0000:3b:00.0/sriov_totalvfs 
+   output: 3
+```
+
+Enable FPGA virtual functions
+
+``` 
+   sudo sh -c "echo 3 > /sys/bus/pci/devices/0000:3b:00.0/sriov_numvfs"
+```
+
+List of FPGA PF and VF's
+
+``` 
+Physical Functions (PFs):
+  3b:00.0 Processing accelerators: Intel Corporation Device af00 (rev 01)
+
+Virtual Functions (VFs).
+  3b:00.1 Processing accelerators: Intel Corporation Device af01 (rev 01)
+  3b:00.2 Processing accelerators: Intel Corporation Device af01 (rev 01)
+  3b:00.3 Processing accelerators: Intel Corporation Device af01 (rev 01)
+``` 
+
+Bind vfio-pcie driver to FPGA virtual functions
+
+``` 
+   sudo opaevfio  -i 0000:3b:00.1 -u userid -g groupid
+   sudo opaevfio  -i 0000:3b:00.2 -u userid -g groupid
+   sudo opaevfio  -i 0000:3b:00.3 -u userid -g groupid
+```
+
+list of fpga accelerators 
+
+``` 
+command: fpgainfo port
+
+  //****** PORT ******//
+  Object Id                        : 0x600D000000000000
+  PCIe s:b:d.f                     : 0000:3b:00.3
+  Device Id                        : 0xAF00
+  Socket Id                        : 0xFF
+  Accelerator Id                   : 43425ee6-92b2-4742-b03a-bd8d4a533812
+  Accelerator GUID                 : 43425ee6-92b2-4742-b03a-bd8d4a533812
+  //****** PORT ******//
+  Object Id                        : 0x400D000000000000
+  PCIe s:b:d.f                     : 0000:3b:00.2
+  Device Id                        : 0xAF00
+  Socket Id                        : 0xFF
+  Accelerator Id                   : 8568AB4E-6bA5-4616-BB65-2A578330A8EB
+  Accelerator GUID                 : 8568AB4E-6bA5-4616-BB65-2A578330A8EB
+  //****** PORT ******//
+  Object Id                        : 0x200D000000000000
+  PCIe s:b:d.f                     : 0000:3b:00.1
+  Device Id                        : 0xAF00
+  Socket Id                        : 0xFF
+  Accelerator Id                   : 56e203e9-864f-49a7-b94b-12284c31e02b
+  Accelerator GUID                 : 56e203e9-864f-49a7-b94b-12284c31e02b
+```
+
+FPGA VF1/3b:00.1/Host Exerciser Loopback Accelerator GUID: 56E203E9-864F-49A7-B94B-12284C31E02B
+
+FPGA VF2/3b:00.2/Host Exerciser Memory Accelerator GUID: 8568AB4E-6bA5-4616-BB65-2A578330A8EB
+
+FPGA VF3/3b:00.3/Host Exerciser HSSI Accelerator GUID: 43425ee6-92b2-4742-b03a-bd8d4a533812
+
+
+Unbind pcie-vfio dirver to FPGA virtual functions
+
+``` 
+   sudo opaevfio  -r 0000:3b:00.1
+```
+
+Host Exerciser Loopback (HE-LBK) AFU can move data between host memory and FPGA.
+
+``` 
+  host_exerciser lpbk
+  
+  [lpbk] [info] starting test run, count of 1
+  Input Config:0
+  Allocate SRC Buffer
+  Allocate DST Buffer
+  Allocate DSM Buffer
+  Start Test
+  Test Completed
+  Host Exerciser swtest msg:0
+  Host Exerciser numReads:32
+  Host Exerciser numWrites:32
+  Host Exerciser numPendReads:0
+  Host Exerciser numPendWrites:0
+  [lpbk] [info] Test lpbk(1): PASS
 
 ```
 

@@ -20,20 +20,10 @@
   <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../',
-              VERSION:'1.4.0',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -67,7 +57,7 @@
             
             
               <div class="version">
-                1.4.0
+                2.0.10
               </div>
             
           
@@ -97,7 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">OPAE Python Bindings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyopae/README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -117,11 +107,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaport/fpgaport.html">fpgaport</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_tools/userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi/hssi.html">hssi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/opaevfio/opaevfio.html">opaevfio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/pci_device/pci_device.html">pci_device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/opae.io/opae.io.html">opae.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/host_exerciser/host_exerciser.html">host_exerciser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_ethernet/hssistats.html">HSSI ethernet statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_ethernet/hssimac.html">HSSI ethernet mac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_ethernet/hssiloopback.html">HSSI ethernet loopback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/rsu/rsu.html">rsu</a></li>
 </ul>
 
             
@@ -190,23 +188,18 @@
 <h1>Enable OPAE on FPGA PCIe drivers<a class="headerlink" href="#enable-opae-on-fpga-pcie-drivers" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p>FPGA PCIe driver for PCIe-based Field-Programmable Gate Array (FPGA)
-solutions which implement the Device Feature List (DFL). This driver
-provides interfaces for user space applications to configure, enumerate,
-open and access FPGA accelerators on the FPGA DFL devices. additionally,
-it also enables system level management functions such as FPGA partial
-reconfiguration, power management, virtualization with DFL framework and
-DFL feature device drivers.</p>
-<p>OPAE 1.4.0 release supports both FPGA Intel Linux driver as well as
-Linux FPGA DFL driver patch set2. Linux PCIe FPGA DFL driver supports
-Intel FPGA devices.</p>
+<p>FPGA PCIe driver for PCIe-based Field-Programmable Gate Array (FPGA) solutions which implement
+the Device Feature List (DFL). This driver provides interfaces for user space applications to
+configure, enumerate, open and access FPGA accelerators on the FPGA DFL devices. additionally, it
+also enables system level management functions such as FPGA partial reconfiguration, power management,
+virtualization with DFL framework and DFL feature device drivers.</p>
+<p>OPAE 1.4.0 release supports both FPGA Intel Linux driver as well as Linux FPGA DFL driver patch set2.
+Linux PCIe FPGA DFL driver supports Intel FPGA devices.</p>
 <p>FPGA DFL Linux driver source code patchset2 available
-<a class="reference external" href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/drivers?h=linux-5.4.y">https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/drivers?h=linux-5.4.y</a></p>
+https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/drivers?h=linux-5.4.y</p>
 <p>FPGA DFL Linux driver source code patchset1 available
-<a class="reference external" href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/drivers/fpga?h=v4.19.14">https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/drivers/fpga?h=v4.19.14</a></p>
-<div class="figure">
-<img alt="FPGA" src="../../_images/pcie_dfl_drv_arch.PNG" />
-</div>
+https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/drivers/fpga?h=v4.19.14</p>
+<p><img alt="FPGA PCIe driver Architecture" src="../../_images/pcie_dfl_drv_arch.PNG" /></p>
 </div>
 
 

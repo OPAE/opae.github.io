@@ -20,20 +20,10 @@
   <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../../',
-              VERSION:'1.4.0',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -69,7 +59,7 @@
             
             
               <div class="version">
-                1.4.0
+                2.0.10
               </div>
             
           
@@ -99,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyopae/README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -119,16 +109,25 @@
 <li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#revision-history">Revision History</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi/hssi.html">hssi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opaevfio/opaevfio.html">opaevfio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pci_device/pci_device.html">pci_device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opae.io/opae.io.html">opae.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../host_exerciser/host_exerciser.html">host_exerciser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssistats.html">HSSI ethernet statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssimac.html">HSSI ethernet mac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssiloopback.html">HSSI ethernet loopback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rsu/rsu.html">rsu</a></li>
 </ul>
 
             
@@ -197,96 +196,77 @@
 <h1>fpgaconf<a class="headerlink" href="#fpgaconf" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">fpgaconf</span> <span class="pre">[-hvVn]</span> <span class="pre">[--segment</span> <span class="pre">&lt;segment&gt;]</span> <span class="pre">[-B</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-D</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-F</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[-S</span> <span class="pre">&lt;socket&gt;]</span> <span class="pre">&lt;gbs&gt;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">fpgaconf</span> <span class="pre">[-hvVn]</span> <span class="pre">[-S</span> <span class="pre">&lt;segment&gt;]</span> <span class="pre">[-B</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-D</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-F</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[PCI_ADDR]</span> <span class="pre">&lt;gbs&gt;</span></code></p>
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">fpgaconf</span></code> configures the FPGA with the accelerator function (AF). It
-also checks the AF for compatibility with the targeted FPGA and the FPGA
-Interface Manager (FIM). <code class="docutils literal"><span class="pre">fpgaconf</span></code> takes the following arguments:</p>
-<p><code class="docutils literal"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">usage</span> <span class="n">information</span><span class="p">.</span>
+<p><code class="docutils literal notranslate"><span class="pre">fpgaconf</span></code> configures the FPGA with the accelerator function (AF). It also checks the AF for compatibility with
+the targeted FPGA and the FPGA Interface Manager (FIM). <code class="docutils literal notranslate"><span class="pre">fpgaconf</span></code> takes the following arguments:</p>
+<p><code class="docutils literal notranslate"><span class="pre">-h,</span> <span class="pre">--help</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">usage</span> <span class="n">information</span><span class="p">.</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">-v,</span> <span class="pre">--version</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">version</span> <span class="n">information</span> <span class="n">and</span> <span class="n">exits</span><span class="p">.</span>
+<p><code class="docutils literal notranslate"><span class="pre">-v,</span> <span class="pre">--version</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">version</span> <span class="n">information</span> <span class="n">and</span> <span class="n">exits</span><span class="p">.</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">-V,</span> <span class="pre">--verbose</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">more</span> <span class="n">verbose</span> <span class="n">messages</span> <span class="k">while</span> <span class="n">enumerating</span> <span class="n">and</span> <span class="n">configuring</span><span class="p">.</span> <span class="n">Can</span> <span class="n">be</span>
+<p><code class="docutils literal notranslate"><span class="pre">-V,</span> <span class="pre">--verbose</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Prints</span> <span class="n">more</span> <span class="n">verbose</span> <span class="n">messages</span> <span class="k">while</span> <span class="n">enumerating</span> <span class="n">and</span> <span class="n">configuring</span><span class="p">.</span> <span class="n">Can</span> <span class="n">be</span>
 <span class="n">requested</span> <span class="n">more</span> <span class="n">than</span> <span class="n">once</span><span class="p">.</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">-n,</span> <span class="pre">--dry-run</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Performs</span> <span class="n">enumeration</span><span class="p">.</span> <span class="n">Skips</span> <span class="n">any</span> <span class="n">operations</span> <span class="n">with</span> <span class="n">side</span><span class="o">-</span><span class="n">effects</span> <span class="n">such</span> <span class="n">as</span> <span class="n">the</span>
-<span class="n">actual</span> <span class="n">AF</span> <span class="n">configuration</span><span class="p">.</span>
+<p><code class="docutils literal notranslate"><span class="pre">-n,</span> <span class="pre">--dry-run</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Performs</span> <span class="n">enumeration</span><span class="p">.</span> <span class="n">Skips</span> <span class="n">any</span> <span class="n">operations</span> <span class="n">with</span> <span class="n">side</span><span class="o">-</span><span class="n">effects</span> <span class="n">such</span> <span class="n">as</span> <span class="n">the</span>
+<span class="n">actual</span> <span class="n">AF</span> <span class="n">configuration</span><span class="p">.</span> 
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">--segment</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">segment</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
+<p><code class="docutils literal notranslate"><span class="pre">-S,</span> <span class="pre">--segment</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">segment</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">-B,</span> <span class="pre">--bus</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">bus</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
+<p><code class="docutils literal notranslate"><span class="pre">-B,</span> <span class="pre">--bus</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">bus</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">-D,</span> <span class="pre">--device</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">device</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
+<p><code class="docutils literal notranslate"><span class="pre">-D,</span> <span class="pre">--device</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">device</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span> 
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">-F,</span> <span class="pre">--function</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">function</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
+<p><code class="docutils literal notranslate"><span class="pre">-F,</span> <span class="pre">--function</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">PCIe</span> <span class="n">function</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">-S,</span> <span class="pre">--socket</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Socket</span> <span class="n">number</span> <span class="n">of</span> <span class="n">the</span> <span class="n">target</span> <span class="n">FPGA</span><span class="p">.</span>
+<p><code class="docutils literal notranslate"><span class="pre">--force</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Reconfigure</span> <span class="n">the</span> <span class="n">AFU</span> <span class="n">even</span> <span class="k">if</span> <span class="n">it</span> <span class="n">is</span> <span class="n">in</span> <span class="n">use</span><span class="p">.</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">--force</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Reconfigure</span> <span class="n">the</span> <span class="n">AFU</span> <span class="n">even</span> <span class="k">if</span> <span class="n">it</span> <span class="n">is</span> <span class="n">in</span> <span class="n">use</span><span class="p">.</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">fpgaconf</span></code> enumerates available FPGA devices in the system and selects
-compatible FPGAs for configuration. If more than one FPGA is compatible
-with the AF, <code class="docutils literal"><span class="pre">fpgaconf</span></code> exits and asks you to be more specific in
-selecting the target FPGAs by specifying a socket number or a PCIe BDF.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fpgaconf</span></code> enumerates available FPGA devices in the system and selects
+compatible FPGAs for configuration. If more than one FPGA is
+compatible with the AF, <code class="docutils literal notranslate"><span class="pre">fpgaconf</span></code> exits and asks you to be
+more specific in selecting the target FPGAs by specifying a
+a PCIe BDF.</p>
 </div>
 <div class="section" id="examples">
 <h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">fpgaconf</span> <span class="pre">my_af.gbs</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Program</span> <span class="s">&quot;my_af.gbs&quot;</span> <span class="n">to</span> <span class="n">a</span> <span class="n">compatible</span> <span class="n">FPGA</span><span class="p">.</span>
+<p><code class="docutils literal notranslate"><span class="pre">fpgaconf</span> <span class="pre">my_af.gbs</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Program</span> <span class="s">&quot;my_af.gbs&quot;</span> <span class="n">to</span> <span class="n">a</span> <span class="n">compatible</span> <span class="n">FPGA</span><span class="p">.</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">fpgaconf</span> <span class="pre">-V</span> <span class="pre">-s</span> <span class="pre">0</span> <span class="pre">my_af.gbs</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Program</span> <span class="s">&quot;my_af.gbs&quot;</span> <span class="n">to</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="n">in</span> <span class="n">socket</span> <span class="mi">0</span><span class="p">,</span> <span class="k">if</span> <span class="n">compatible</span><span class="p">,</span>
+<p><code class="docutils literal notranslate"><span class="pre">fpgaconf</span> <span class="pre">-V</span> <span class="pre">-B</span> <span class="pre">0x3b</span> <span class="pre">my_af.gbs</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Program</span> <span class="s">&quot;my_af.gbs&quot;</span> <span class="n">to</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="n">in</span> <span class="n">bus</span> <span class="mh">0x3b</span><span class="p">,</span> <span class="k">if</span> <span class="n">compatible</span><span class="p">,</span>
 <span class="k">while</span> <span class="n">printing</span> <span class="n">out</span> <span class="n">slightly</span> <span class="n">more</span> <span class="n">verbose</span> <span class="n">information</span><span class="p">.</span>
-
-<span class="cp">## Revision History ##</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
-<colgroup>
-<col width="25%" />
-<col width="60%" />
-<col width="15%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Document
-Version</th>
-<th class="head">Intel Acceleration Stack Version</th>
-<th class="head">Changes</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>2018.05.21</td>
-<td>1.1 Beta. (Supported with Intel
-Quartus Prime Pro Edition 17.1.1.)</td>
-<td>Correcte
-d
-typos.</td>
-</tr>
-</tbody>
-</table>
+<p><code class="docutils literal notranslate"><span class="pre">fpgaconf</span> <span class="pre">0000:3b:00.0</span> <span class="pre">my_af.gbs</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Program</span> <span class="s">&quot;my_af.gbs&quot;</span> <span class="n">to</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="n">at</span> <span class="n">address</span> <span class="mo">0000</span><span class="o">:</span><span class="mi">3</span><span class="nl">b</span><span class="p">:</span><span class="mf">00.0</span><span class="p">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="revision-history">
+<h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
+<p>| Document Version |  Intel Acceleration Stack Version  | Changes  |
+| —————- |————————————|———-|
+|2018.05.21 | 1.1 Beta. <br>(Supported with Intel Quartus Prime Pro Edition 17.1.1.) | Corrected typos. |</p>
 </div>
 </div>
 

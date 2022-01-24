@@ -20,20 +20,10 @@
   <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../../',
-              VERSION:'1.4.0',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -67,7 +57,7 @@
             
             
               <div class="version">
-                1.4.0
+                2.0.10
               </div>
             
           
@@ -97,7 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyopae/README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -117,11 +107,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi/hssi.html">hssi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opaevfio/opaevfio.html">opaevfio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pci_device/pci_device.html">pci_device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opae.io/opae.io.html">opae.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../host_exerciser/host_exerciser.html">host_exerciser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssistats.html">HSSI ethernet statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssimac.html">HSSI ethernet mac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssiloopback.html">HSSI ethernet loopback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rsu/rsu.html">rsu</a></li>
 </ul>
 
             
@@ -190,60 +188,33 @@
 <h1>coreidle<a class="headerlink" href="#coreidle" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">coreidle</span> <span class="pre">[-v]</span> <span class="pre">[-B</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-D</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-F</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[-S</span> <span class="pre">&lt;socket&gt;]</span> <span class="pre">[-G</span> <span class="pre">&lt;GBS</span> <span class="pre">path&gt;]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">coreidle</span> <span class="pre">[-v]</span> <span class="pre">[-B</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-D</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-F</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[-S</span> <span class="pre">&lt;socket&gt;]</span> <span class="pre">[-G</span> <span class="pre">&lt;GBS</span> <span class="pre">path&gt;]</span> </code></p>
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">coreidle</span></code> parses the Accelerator Function Unit (AFU) metadata and
-extracts power information. <code class="docutils literal"><span class="pre">coreidle</span></code> calculates the FPGA power and
-calculates the number of online and idle cores. It moves threads from
-idle cores to online cores. <code class="docutils literal"><span class="pre">coreidle</span></code> is only available the
-Integrated FPGA Platform. You cannot run <code class="docutils literal"><span class="pre">coreidle</span></code> on the PCIe
-Accelerator Card (PAC).</p>
+<p><code class="docutils literal notranslate"><span class="pre">coreidle</span></code> parses the Accelerator Function Unit (AFU) metadata and extracts power information. <code class="docutils literal notranslate"><span class="pre">coreidle</span></code> calculates
+the FPGA power and calculates the number of online and idle cores. It moves threads from idle cores to online cores.
+<code class="docutils literal notranslate"><span class="pre">coreidle</span></code> is only available the Integrated FPGA Platform. You cannot run <code class="docutils literal notranslate"><span class="pre">coreidle</span></code> on the PCIe Accelerator Card (PAC).</p>
 </div>
 <div class="section" id="examples">
 <h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">./coreidle</span>&#160; <span class="pre">-B</span> <span class="pre">0x5e</span> <span class="pre">-G</span> <span class="pre">/home/lab/gbs/mode0.gbs</span></code></p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">Idle</span> <span class="n">cores</span> <span class="n">to</span> <span class="n">run</span> <span class="n">online</span> <span class="n">cores</span> <span class="n">at</span> <span class="n">maximum</span> <span class="n">capacity</span><span class="p">.</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">./coreidle</span>&#160; <span class="pre">-B</span> <span class="pre">0x5e</span> <span class="pre">-G</span> <span class="pre">/home/lab/gbs/mode0.gbs</span></code></p>
+<p>Idle cores to run online cores at maximum capacity.</p>
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">-v,--version</span></code> Prints version information and exit.</p>
-<p><code class="docutils literal"><span class="pre">-B,--bus</span></code> FPGA bus number.</p>
-<p><code class="docutils literal"><span class="pre">-D,--device</span></code> FPGA device number.</p>
-<p><code class="docutils literal"><span class="pre">-F,--functio</span></code> FPGA function number.</p>
-<p><code class="docutils literal"><span class="pre">-S,--socket</span></code> FPGA socket number.</p>
-<p><code class="docutils literal"><span class="pre">-G,--gbs</span></code> Green bitstream file path.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-v,--version</span></code> Prints version information and exit.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-B,--bus</span></code> FPGA bus number.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-D,--device</span></code> FPGA device number.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-F,--functio</span></code> FPGA function number.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-S,--socket</span></code> FPGA socket number.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-G,--gbs</span></code> Green bitstream file path.</p>
 </div>
 <div class="section" id="revision-history">
 <h2>Revision History<a class="headerlink" href="#revision-history" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="25%" />
-<col width="60%" />
-<col width="15%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Document
-Version</th>
-<th class="head">Intel Acceleration Stack Version</th>
-<th class="head">Changes</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>2018.05.21</td>
-<td>1.1 Beta. (Supported with Intel
-Quartus Prime Pro Edition 17.1.1.)</td>
-<td>No
-changes
-from
-previous
-release.</td>
-</tr>
-</tbody>
-</table>
+<p>| Document Version |  Intel Acceleration Stack Version  | Changes  |
+| —————- |————————————|———-|
+|2018.05.21 | 1.1 Beta. <br>(Supported with Intel Quartus Prime Pro Edition 17.1.1.) | No changes from previous release. |</p>
 </div>
 </div>
 

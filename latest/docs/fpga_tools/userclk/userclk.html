@@ -20,20 +20,10 @@
   <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../../',
-              VERSION:'1.4.0',
-              LANGUAGE:'en',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -44,6 +34,7 @@
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hssi" href="../hssi/hssi.html" />
     <link rel="prev" title="packager" href="../packager/packager.html" /> 
 </head>
 
@@ -68,7 +59,7 @@
             
             
               <div class="version">
-                1.4.0
+                2.0.10
               </div>
             
           
@@ -98,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../README.html">OPAE Python Bindings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyopae/README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
 <ul>
@@ -118,7 +109,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fpgad/fpgad.html">fpgad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgadiag/README.html">fpgadiag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgainfo/fpgainfo.html">fpgainfo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fpgaport/fpgaport.html">fpgaport</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mmlink/mmlink.html">mmlink</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packager/packager.html">packager</a></li>
@@ -129,6 +119,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#options">OPTIONS</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi/hssi.html">hssi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opaevfio/opaevfio.html">opaevfio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pci_device/pci_device.html">pci_device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opae.io/opae.io.html">opae.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../host_exerciser/host_exerciser.html">host_exerciser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssistats.html">HSSI ethernet statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssimac.html">HSSI ethernet mac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hssi_ethernet/hssiloopback.html">HSSI ethernet loopback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rsu/rsu.html">rsu</a></li>
 </ul>
 
             
@@ -197,7 +196,7 @@
 <h1>userclk<a class="headerlink" href="#userclk" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="synopsis">
 <h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">userclk</span> <span class="pre">[-v]</span> <span class="pre">[-B</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-D</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-F</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[-S</span> <span class="pre">&lt;socket&gt;]</span> <span class="pre">[-P</span> <span class="pre">&lt;Port</span> <span class="pre">id&gt;]</span> <span class="pre">[-H</span> <span class="pre">&lt;User</span> <span class="pre">clock</span> <span class="pre">high</span> <span class="pre">frequency&gt;]</span> <span class="pre">-L</span> <span class="pre">&lt;User</span> <span class="pre">clock</span> <span class="pre">low</span> <span class="pre">frequency&gt;]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">userclk</span> <span class="pre">[-hv]</span> <span class="pre">[-S</span> <span class="pre">&lt;segment&gt;]</span> <span class="pre">[-B</span> <span class="pre">&lt;bus&gt;]</span> <span class="pre">[-D</span> <span class="pre">&lt;device&gt;]</span> <span class="pre">[-F</span> <span class="pre">&lt;function&gt;]</span> <span class="pre">[PCI_ADDR]</span> <span class="pre">[-H</span> <span class="pre">&lt;User</span> <span class="pre">clock</span> <span class="pre">high</span> <span class="pre">frequency&gt;]</span> <span class="pre">-L</span> <span class="pre">&lt;User</span> <span class="pre">clock</span> <span class="pre">low</span> <span class="pre">frequency&gt;]</span></code></p>
 </div>
 <div class="section" id="description">
 <h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
@@ -205,46 +204,28 @@
 </div>
 <div class="section" id="examples">
 <h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">./userclk</span>&#160; <span class="pre">-B</span> <span class="pre">0x5e</span> <span class="pre">-H</span> <span class="pre">400</span> <span class="pre">-L</span> <span class="pre">200</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">./userclk</span> <span class="pre">-B</span> <span class="pre">0x5e</span> <span class="pre">-H</span> <span class="pre">400</span> <span class="pre">-L</span> <span class="pre">200</span></code></p>
 <p>Sets AFU frequency.</p>
 </div>
 <div class="section" id="options">
 <h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">-v,--version</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">-v,--version</span></code></p>
 <p>Prints version information and exits.</p>
-<p><code class="docutils literal"><span class="pre">-B,--bus</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">-S,--segment</span></code></p>
+<p>FPGA segment number.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-B,--bus</span></code></p>
 <p>FPGA Bus number.</p>
-<p><code class="docutils literal"><span class="pre">-D,--device</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">-D,--device</span></code></p>
 <p>FPGA Device number.</p>
-<p><code class="docutils literal"><span class="pre">-F,--function</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">-F,--function</span></code></p>
 <p>FPGA function number.</p>
-<p><code class="docutils literal"><span class="pre">-S,--socket</span></code></p>
-<p>FPGA socket number.</p>
-<p><code class="docutils literal"><span class="pre">-P,--port</span></code></p>
-<p>Port ID.</p>
-<p><code class="docutils literal"><span class="pre">-H,--freq-high</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">-H,--freq-high</span> </code></p>
 <p>User clock high frequency.</p>
-<p><code class="docutils literal"><span class="pre">-L,--freq-low</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">-L,--freq-low</span> </code></p>
 <p>User clock low frequency.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="15%" />
-<col width="67%" />
-<col width="18%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Date</th>
-<th class="head">Intel Acceleration Stack Version</th>
-<th class="head">Changes Made</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>2018.05.21</td>
-<td>DCP 1.1 Beta (works with Quartus Prime Pro 17.1.1)</td>
-<td>Fixed typos.</td>
-</tr>
-</tbody>
-</table>
+<p>| Date | Intel Acceleration Stack Version | Changes Made |
+|:——|—————————-|:————–|
+|2018.05.21| DCP 1.1 Beta (works with Quartus Prime Pro 17.1.1) |  Fixed typos. |</p>
 </div>
 </div>
 
@@ -255,6 +236,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../hssi/hssi.html" class="btn btn-neutral float-right" title="hssi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../packager/packager.html" class="btn btn-neutral float-left" title="packager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
