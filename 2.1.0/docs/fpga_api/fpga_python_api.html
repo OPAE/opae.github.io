@@ -1,0 +1,796 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OPAE Python API Reference &mdash; OPAE</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Plugin Developer’s Guide" href="plug_guide/readme.html" />
+    <link rel="prev" title="OPAE C++ Core API Reference" href="fpga_cxx_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> OPAE
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">OPAE User Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_start/readme.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prog_guide/readme.html">OPAE C API Programming Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyopae/README.html">OPAE Python Bindings</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Libraries</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../build_chain/fpga_api/api_build.html">Building OPAE SDK Artifacts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_api.html">OPAE C API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpga_cxx_api.html">OPAE C++ Core API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OPAE Python API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-opae.fpga">Module Types, Methods, and Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fundamental-types">Fundamental Types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#properties">Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#token">Token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handle">Handle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#event">Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shared-buffer">Shared Buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error">Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sysobject">SysObject</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plug_guide/readme.html">Plugin Developer’s Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE Linux Kernel Drivers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../drv_arch/drv_arch.html">Open Programmable Accelerator Engine (OPAE) Linux Device Driver Architecture</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OPAE FPGA Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgaconf/fpgaconf.html">fpgaconf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgad/fpgad.html">fpgad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgadiag/README.html">fpgadiag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgainfo/fpgainfo.html">fpgainfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/fpgasupdate/fpgasupdate.html">fpgasupdate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/mmlink/mmlink.html">mmlink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/packager/packager.html">packager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/userclk/userclk.html">userclk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi/hssi.html">hssi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/opaevfio/opaevfio.html">opaevfio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/pci_device/pci_device.html">pci_device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/opae.io/opae.io.html">opae.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/host_exerciser/host_exerciser.html">host_exerciser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_ethernet/hssistats.html">HSSI ethernet statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_ethernet/hssimac.html">HSSI ethernet mac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/hssi_ethernet/hssiloopback.html">HSSI ethernet loopback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fpga_tools/rsu/rsu.html">rsu</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OPAE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>OPAE Python API Reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/docs/fpga_api/fpga_python_api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opae-python-api-reference">
+<h1>OPAE Python API Reference<a class="headerlink" href="#opae-python-api-reference" title="Permalink to this headline">¶</a></h1>
+<p>The reference documentation for the OPAE Python API and is grouped into the
+following sections:</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#module-opae.fpga" id="id5">Module Types, Methods, and Constants</a></p></li>
+<li><p><a class="reference internal" href="#fundamental-types" id="id6">Fundamental Types</a></p>
+<ul>
+<li><p><a class="reference internal" href="#properties" id="id7">Properties</a></p></li>
+<li><p><a class="reference internal" href="#token" id="id8">Token</a></p></li>
+<li><p><a class="reference internal" href="#handle" id="id9">Handle</a></p></li>
+<li><p><a class="reference internal" href="#event" id="id10">Event</a></p></li>
+<li><p><a class="reference internal" href="#shared-buffer" id="id11">Shared Buffer</a></p></li>
+<li><p><a class="reference internal" href="#error" id="id12">Error</a></p></li>
+<li><p><a class="reference internal" href="#sysobject" id="id13">SysObject</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="module-opae.fpga">
+<span id="module-types-methods-and-constants"></span><h2><a class="toc-backref" href="#id5">Module Types, Methods, and Constants</a><a class="headerlink" href="#module-opae.fpga" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="opae.fpga.allocate_shared_buffer">
+<code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">allocate_shared_buffer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">opae.fpga._opae.handle</span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::shared_buffer<a class="headerlink" href="#opae.fpga.allocate_shared_buffer" title="Permalink to this definition">¶</a></dt>
+<dd><p>shared_buffer factory method - allocate a shared buffer object.
+Args:</p>
+<blockquote>
+<div><p>handle: An accelerator handle object that identifies an open accelerator
+obect to share the buffer with.
+len: The length in bytes of the requested buffer.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt id="opae.fpga.enumerate">
+<code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">enumerate</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opae.fpga.enumerate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic">
+<li><p>enumerate(arg0: List[opae.fpga._opae.properties]) -&gt; List[opae::fpga::types::token]</p>
+<blockquote>
+<div><p>Get a list of tokens for the given search criteria.</p>
+<p>Args:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>props(list): A list of properties objects that define the search criteria.</dt><dd><p>All OPAE properties in each properties object make up one filter.
+All properties objects are combined in a union.</p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>enumerate(<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs) -&gt; List[opae::fpga::types::token]</p>
+<blockquote>
+<div><p>Get a list of tokens from zero or one filters as defined by kwargs.
+If kwargs is empty, then no filter is used.
+If kwargs is not empty, then one properties object is created using the kwargs.</p>
+</div></blockquote>
+</li>
+</ol>
+</dd></dl>
+
+<dl class="py function">
+<dt id="opae.fpga.errors">
+<code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">errors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">opae.fpga._opae.token</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>opae.fpga._opae.error<span class="p">]</span><a class="headerlink" href="#opae.fpga.errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of error objects in an FPGA resource.
+Each error object represents an error register contained in the resource.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>tok(token): Token representing an FPGA resource.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="opae.fpga.open">
+<code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">open</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tok</span><span class="p">:</span> <span class="n">opae.fpga._opae.token</span></em>, <em class="sig-param"><span class="n">flags</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::handle<a class="headerlink" href="#opae.fpga.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new handle object from a token.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="opae.fpga.register_event">
+<code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">register_event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handle</span><span class="p">:</span> <span class="n">opae.fpga._opae.handle</span></em>, <em class="sig-param"><span class="n">event_type</span><span class="p">:</span> <span class="n">opae.fpga._opae.fpga_event_type</span></em>, <em class="sig-param"><span class="n">flags</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::event<a class="headerlink" href="#opae.fpga.register_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factory method used to create events registered to a particular event type.</p>
+<dl>
+<dt>Args:</dt><dd><p>handle: A handle to an OPAE resource.
+type(fpga_event_type): The event type to register for. Valid event types are:</p>
+<blockquote>
+<div><p>EVENT_ERROR, EVENT_INTERRUPT, EVENT_POWER_THERMAL</p>
+</div></blockquote>
+<p>flags: Event registration flags that control registration behavior.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="fundamental-types">
+<h2><a class="toc-backref" href="#id6">Fundamental Types</a><a class="headerlink" href="#fundamental-types" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="properties">
+<h3><a class="toc-backref" href="#id7">Properties</a><a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="opae.fpga.properties">
+<em class="property">class </em><code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">properties</code><a class="headerlink" href="#opae.fpga.properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>properties class is a container class for OPAE resource properties.</p>
+<dl class="py method">
+<dt id="opae.fpga.properties.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opae.fpga.properties.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic">
+<li><p>__init__(self: opae.fpga._opae.properties, <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs) -&gt; None</p>
+<blockquote>
+<div><p>Create a new properties object. If kwargs is not included then the
+properties object is created with no property values set.
+If one of the kwargs keys is an OPAE property name then the kwargs
+value is used to initialize the corresponding value in the
+properties object.</p>
+<p>Kwargs:</p>
+<blockquote>
+<div><p>parent (token): Token object representing parent resource.</p>
+<p>guid (str): GUID (as a string) of the resource.</p>
+<p>type (fpga_objtype): The object type - DEVICE or ACCELERATOR.</p>
+<p>segment (uint16_t) : The PCIe segment (or domain) number.</p>
+<p>bus (uint8_t) : The PCIe bus number.</p>
+<p>device (uint8_t) : The PCIe device number.</p>
+<p>function (uint8_t) : The PCIe function number.</p>
+<p>socket_id (uint8_t): The socket ID encoded in the FIM.</p>
+<p>num_slots (uint32_t): Number of slots available in the FPGA.</p>
+<p>num_errors (uint32_t): Number of error registers in the resource.</p>
+<p>bbs_id (uint64_t): The BBS ID encoded in the FIM.</p>
+<p>bbs_version (tuple): The version of the BBS.</p>
+<p>vendor_id (uint16_t): The vendor ID in PCI config space.</p>
+<p>device_id (uint16_t): The device ID in PCI config space.</p>
+<p>model (str): The model of the FPGA.</p>
+<p>local_memory_size (uint64_t): The size (in bytes) of the FPGA local memory.</p>
+<p>num_mmio (uint32_t): The number of mmio spaces.</p>
+<p>num_interrupts (uint32_t): The number of interrupts supported by an accelerator.</p>
+<p>accelerator_state (fpga_accelerator_state): The state of the accelerator - ASSIGNED or UNASSIGNED.</p>
+<p>object_id (uint64_t): The 64-bit number unique within a single node or system.</p>
+<p>interface (fpga_interface): The interface type - IFC_DFL, IFC_VFIO, or IFC_SIM.</p>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>__init__(self: opae.fpga._opae.properties, arg0: opae::fpga::types::token) -&gt; None</p>
+<blockquote>
+<div><p>Get properties from a token object.
+Args:</p>
+<blockquote>
+<div><p>tok (token): The token to read properties from.</p>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>__init__(self: opae.fpga._opae.properties, arg0: opae::fpga::types::handle) -&gt; None</p>
+<blockquote>
+<div><p>Get properties from a handle object.
+Args:</p>
+<blockquote>
+<div><p>h (handle): The handle to read properties from.</p>
+</div></blockquote>
+</div></blockquote>
+</li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.accelerator_state">
+<em class="property">property </em><code class="sig-name descname">accelerator_state</code><a class="headerlink" href="#opae.fpga.properties.accelerator_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the state of an accelerator.
+The accelerator state is of type fpga_accelerator_state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.bbs_id">
+<em class="property">property </em><code class="sig-name descname">bbs_id</code><a class="headerlink" href="#opae.fpga.properties.bbs_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the BBS ID property of a resource.
+The resource must be of type DEVICE</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.bbs_version">
+<em class="property">property </em><code class="sig-name descname">bbs_version</code><a class="headerlink" href="#opae.fpga.properties.bbs_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the BBS version property of a resource.
+The resource must be of type DEVICE</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.bus">
+<em class="property">property </em><code class="sig-name descname">bus</code><a class="headerlink" href="#opae.fpga.properties.bus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the PCIe bus property of a resource.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.capabilities">
+<em class="property">property </em><code class="sig-name descname">capabilities</code><a class="headerlink" href="#opae.fpga.properties.capabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the capabilities property of a resource.
+This is taken directly from the capabilities CSR in the FIM.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.device">
+<em class="property">property </em><code class="sig-name descname">device</code><a class="headerlink" href="#opae.fpga.properties.device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the PCIe device property of a resource.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.function">
+<em class="property">property </em><code class="sig-name descname">function</code><a class="headerlink" href="#opae.fpga.properties.function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the PCIe function property of a resource.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.model">
+<em class="property">property </em><code class="sig-name descname">model</code><a class="headerlink" href="#opae.fpga.properties.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the model property of a resource.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.num_interrupts">
+<em class="property">property </em><code class="sig-name descname">num_interrupts</code><a class="headerlink" href="#opae.fpga.properties.num_interrupts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the number of interrupt vectors supported by a resource.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.num_mmio">
+<em class="property">property </em><code class="sig-name descname">num_mmio</code><a class="headerlink" href="#opae.fpga.properties.num_mmio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the number of mmio spaces in a resource.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.num_slots">
+<em class="property">property </em><code class="sig-name descname">num_slots</code><a class="headerlink" href="#opae.fpga.properties.num_slots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the number of slots property of a resource.
+The resource must be of type DEVICE</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.object_id">
+<em class="property">property </em><code class="sig-name descname">object_id</code><a class="headerlink" href="#opae.fpga.properties.object_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the Object ID  property of a resource. The object id is
+a 64-bit identifier that is unique within a single node or system.
+I represents a similar concept as the token but can be serialized
+for use across processes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.parent">
+<em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#opae.fpga.properties.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the token representing a parent object of a resource.
+The resource must be of type ACCELERATOR</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.socket_id">
+<em class="property">property </em><code class="sig-name descname">socket_id</code><a class="headerlink" href="#opae.fpga.properties.socket_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the Socket ID  property of a resource. The socket id is
+encoded in of the FIM CSRs</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.properties.vendor_id">
+<em class="property">property </em><code class="sig-name descname">vendor_id</code><a class="headerlink" href="#opae.fpga.properties.vendor_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the vendor ID  property of a resource.
+The vendor ID is part of the PCI ID and is assigned by the
+PCI SIG consortium.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="token">
+<h3><a class="toc-backref" href="#id8">Token</a><a class="headerlink" href="#token" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="opae.fpga.token">
+<em class="property">class </em><code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">token</code><a class="headerlink" href="#opae.fpga.token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Token for referencing an OPAE resource.</p>
+<p>A token object serves as a reference so a specific resource in the system.
+Holding a token does not constitute ownership of an OPAE resource.
+It is used to query information about a resource,
+or to acquire ownership by calling fpga.open module method.</p>
+<dl class="py method">
+<dt id="opae.fpga.token.find">
+<code class="sig-name descname">find</code><span class="sig-paren">(</span><em class="sig-param">self: opae.fpga._opae.token</em>, <em class="sig-param">name: str</em>, <em class="sig-param">flags: int = &lt;fpga_sysobject_flags.SYSOBJECT_GLOB: 2&gt;</em><span class="sig-paren">)</span> &#x2192; opae::fpga::types::sysobject<a class="headerlink" href="#opae.fpga.token.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a sysobject instance from a valid token object.
+Args:</p>
+<blockquote>
+<div><p>flags: Flags that control behavior of finding sub-objects.
+SYSOBJECT_GLOB is used to indicate that wildcard patterns (*) are allowed.
+SYSOBJECT_RECURSE_ONE is used to indicate that the find routine should recurse one level.
+SYSOBJECT_RECURSE_ALL is used to indicate that the find routine should recurse to all children.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="handle">
+<h3><a class="toc-backref" href="#id9">Handle</a><a class="headerlink" href="#handle" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="opae.fpga.handle">
+<em class="property">class </em><code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">handle</code><a class="headerlink" href="#opae.fpga.handle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="opae.fpga.handle.__enter__">
+<code class="sig-name descname">__enter__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.handle</span></em><span class="sig-paren">)</span> &#x2192; opae.fpga._opae.handle<a class="headerlink" href="#opae.fpga.handle.__enter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Context manager protocol enter function.
+Simply returns the handle object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.handle.__exit__">
+<code class="sig-name descname">__exit__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.handle</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#opae.fpga.handle.__exit__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Context manager protocol exit function.
+Closes the resource identified by this handle and currently does nothing with the exit arguments.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.handle.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.handle</span></em><span class="sig-paren">)</span> &#x2192; opae.fpga._opae.fpga_result<a class="headerlink" href="#opae.fpga.handle.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>“Close an accelerator associated with handle.”</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.handle.read_csr32">
+<code class="sig-name descname">read_csr32</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.handle</span></em>, <em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">csr_space</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.handle.read_csr32" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read 32 bits from a CSR belonging to a resource associated with a handle.
+Args:</p>
+<blockquote>
+<div><p>offset: The register offset.
+csr_space: The CSR space to read from. Default is 0.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.handle.read_csr64">
+<code class="sig-name descname">read_csr64</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.handle</span></em>, <em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">csr_space</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.handle.read_csr64" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read 64 bits from a CSR belonging to a resource associated with a handle.
+Args:</p>
+<blockquote>
+<div><p>offset: The register offset.
+csr_space: The CSR space to read from. Default is 0.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.handle.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.handle</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#opae.fpga.handle.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the accelerator associated with this handle.
+The accelerator must be opened.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.handle.write_csr32">
+<code class="sig-name descname">write_csr32</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.handle</span></em>, <em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">csr_space</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#opae.fpga.handle.write_csr32" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write 32 bits to a CSR belonging to a resource associated with a handle.
+Args:</p>
+<blockquote>
+<div><p>offset: The register offset.
+value: The 32-bit value to write to the register.
+csr_space: The CSR space to write from. Default is 0.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.handle.write_csr64">
+<code class="sig-name descname">write_csr64</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.handle</span></em>, <em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">csr_space</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#opae.fpga.handle.write_csr64" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write 64 bits to a CSR belonging to a resource associated with a handle.
+Args:</p>
+<blockquote>
+<div><p>offset: The register offset.
+value: The 64-bit value to write to the register.
+csr_space: The CSR space to write from. Default is 0.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="event">
+<h3><a class="toc-backref" href="#id10">Event</a><a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="opae.fpga.event">
+<em class="property">class </em><code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">event</code><a class="headerlink" href="#opae.fpga.event" title="Permalink to this definition">¶</a></dt>
+<dd><p>event object are used to register for OPAE events.
+Currently, the event types are:</p>
+<blockquote>
+<div><p>EVENT_ERROR
+EVENT_INTERRUPT
+EVENT_POWER_THERMAL</p>
+</div></blockquote>
+<dl class="py method">
+<dt id="opae.fpga.event.os_object">
+<code class="sig-name descname">os_object</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.event</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.event.os_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an OS specific object from the event which can be used to subscribe for
+events. On Linux, the object corresponds to a file descriptor that can be
+used with select/poll/epoll calls.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="shared-buffer">
+<h3><a class="toc-backref" href="#id11">Shared Buffer</a><a class="headerlink" href="#shared-buffer" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="opae.fpga.shared_buffer">
+<em class="property">class </em><code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">shared_buffer</code><a class="headerlink" href="#opae.fpga.shared_buffer" title="Permalink to this definition">¶</a></dt>
+<dd><p>shared_buffer represents a system memory buffer that can be shared with the accelerator.
+It implements the Python buffer protocol and can be converted to a native bytearray object.</p>
+<dl class="py method">
+<dt id="opae.fpga.shared_buffer.compare">
+<code class="sig-name descname">compare</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.shared_buffer</span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">opae.fpga._opae.shared_buffer</span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.shared_buffer.compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare this shared_buffer (the first len bytes)  object with another one.
+Returns 0 if the two buffers (up to len) are equal.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.shared_buffer.fill">
+<code class="sig-name descname">fill</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.shared_buffer</span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#opae.fpga.shared_buffer.fill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill the buffer with a given value.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>value: The value to use when filling the buffer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.shared_buffer.io_address">
+<code class="sig-name descname">io_address</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.shared_buffer</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.shared_buffer.io_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the address of the buffer suitable for programming into the
+accelerator device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.shared_buffer.size">
+<code class="sig-name descname">size</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.shared_buffer</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.shared_buffer.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the length of the buffer in bytes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.shared_buffer.wsid">
+<code class="sig-name descname">wsid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.shared_buffer</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.shared_buffer.wsid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the underlying buffer’s workspace ID.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="error">
+<h3><a class="toc-backref" href="#id12">Error</a><a class="headerlink" href="#error" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="opae.fpga.error">
+<em class="property">class </em><code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">error</code><a class="headerlink" href="#opae.fpga.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>error object is used to represent an error register in an FPGA resource.
+It holds two read-only properties, <cite>name</cite> and <cite>can_clear</cite> and it can also
+be used to read the raw register value from its corresponding error register.</p>
+<dl class="py method">
+<dt id="opae.fpga.error.can_clear">
+<em class="property">property </em><code class="sig-name descname">can_clear</code><a class="headerlink" href="#opae.fpga.error.can_clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates if the error register can be cleared - read-only property</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.error.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#opae.fpga.error.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Error register name - read-only property</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.error.read_value">
+<code class="sig-name descname">read_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.error</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.error.read_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the raw value from the error register.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="sysobject">
+<h3><a class="toc-backref" href="#id13">SysObject</a><a class="headerlink" href="#sysobject" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="opae.fpga.sysobject">
+<em class="property">class </em><code class="sig-prename descclassname">opae.fpga.</code><code class="sig-name descname">sysobject</code><a class="headerlink" href="#opae.fpga.sysobject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wraps the OPAE fpga_object primitive as a Python object.</p>
+<dl class="py method">
+<dt id="opae.fpga.sysobject.__getattr__">
+<code class="sig-name descname">__getattr__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.sysobject</span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; opae.fpga._opae.sysobject<a class="headerlink" href="#opae.fpga.sysobject.__getattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a sysobject instance from a valid sysobject.
+The parent sysobject must be a container type object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.sysobject.__getitem__">
+<code class="sig-name descname">__getitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opae.fpga.sysobject.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic">
+<li><p>__getitem__(self: opae.fpga._opae.sysobject, arg0: str) -&gt; opae.fpga._opae.sysobject</p>
+<blockquote>
+<div><p>Get a sysobject instance from a valid sysobject.
+The parent sysobject must be a container type object.</p>
+</div></blockquote>
+</li>
+<li><p>__getitem__(self: opae.fpga._opae.sysobject, arg0: int) -&gt; object</p>
+<blockquote>
+<div><p>Get a byte from the sysobject at a given index.
+Raises <cite>RuntimeError</cite> if the sysobject instance is a container type.</p>
+</div></blockquote>
+</li>
+<li><p>__getitem__(self: opae.fpga._opae.sysobject, arg0: slice) -&gt; str</p>
+<blockquote>
+<div><p>Get a slice of bytes from the sysobject at a given offset.
+Raises <cite>RuntimeError</cite> if the sysobject instance is a container type.</p>
+</div></blockquote>
+</li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.sysobject.bytes">
+<code class="sig-name descname">bytes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.sysobject</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#opae.fpga.sysobject.bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get bytes from the sysobject.
+Raises <cite>RuntimeError</cite> if the sysobject instance is a container type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.sysobject.find">
+<code class="sig-name descname">find</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.sysobject</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">flags</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span> &#x2192; opae.fpga._opae.sysobject<a class="headerlink" href="#opae.fpga.sysobject.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a sysobject instance from a valid sysobject.
+The parent sysobject must be a container type object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.sysobject.read64">
+<code class="sig-name descname">read64</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.sysobject</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.sysobject.read64" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.sysobject.size">
+<code class="sig-name descname">size</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.sysobject</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#opae.fpga.sysobject.size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="opae.fpga.sysobject.write64">
+<code class="sig-name descname">write64</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n">opae.fpga._opae.sysobject</span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#opae.fpga.sysobject.write64" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="plug_guide/readme.html" class="btn btn-neutral float-right" title="Plugin Developer’s Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fpga_cxx_api.html" class="btn btn-neutral float-left" title="OPAE C++ Core API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017 Intel Corporation
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
