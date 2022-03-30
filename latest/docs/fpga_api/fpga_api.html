@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                2.0.10
+                2.1.0
               </div>
             
           
@@ -88,7 +88,6 @@
 <li class="toctree-l1"><a class="reference internal" href="quick_start/readme.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install_guide/installation_guide.html">OPAE Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prog_guide/readme.html">OPAE C API Programming Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyopae/README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
@@ -607,7 +606,7 @@ defined in [types_enum.h](#types-enum-h).</p>
 <span id="_CPPv317fpga_token_header"></span><span id="_CPPv217fpga_token_header"></span><span id="fpga_token_header"></span><span class="target" id="structfpga__token__header"></span><em class="property">struct </em><code class="sig-name descname">fpga_token_header</code><a class="headerlink" href="#_CPPv417fpga_token_header" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;opae/types.h&gt;</em><p>Internal token type header</p>
 <p>Each plugin (dfl: libxfpga.so, vfio: libopae-v.so) implements its own proprietary token type. This header <em>must</em> appear at offset zero within that structure.</p>
-<p>eg, see opae-libs/plugins/xfpga/types_int.h:struct _fpga_token and opae-libs/plugins/vfio/opae_vfio.h:struct _vfio_token. </p>
+<p>eg, see lib/plugins/xfpga/types_int.h:struct _fpga_token and lib/plugins/vfio/opae_vfio.h:struct _vfio_token. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
@@ -2169,7 +2168,7 @@ buffers with an accelerator (buffer.h), and using low-latency notifications
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="cpp function">
 <dt id="_CPPv415fpgaWriteMMIO6411fpga_handle8uint32_t8uint64_t8uint64_t">
-<span id="_CPPv315fpgaWriteMMIO6411fpga_handle8uint32_t8uint64_t8uint64_t"></span><span id="_CPPv215fpgaWriteMMIO6411fpga_handle8uint32_t8uint64_t8uint64_t"></span><span id="fpgaWriteMMIO64__fpga_handle.uint32_t.uint64_t.uint64_t"></span><span class="target" id="opae-libs_2include_2opae_2mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaWriteMMIO64</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint64_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415fpgaWriteMMIO6411fpga_handle8uint32_t8uint64_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv315fpgaWriteMMIO6411fpga_handle8uint32_t8uint64_t8uint64_t"></span><span id="_CPPv215fpgaWriteMMIO6411fpga_handle8uint32_t8uint64_t8uint64_t"></span><span id="fpgaWriteMMIO64__fpga_handle.uint32_t.uint64_t.uint64_t"></span><span class="target" id="include_2opae_2mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaWriteMMIO64</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint64_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415fpgaWriteMMIO6411fpga_handle8uint32_t8uint64_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Write 64 bit value to MMIO space</p>
 <p>This function will write to MMIO space of the target object at a specified offset.</p>
 <p><dl class="simple">
@@ -2188,7 +2187,7 @@ buffers with an accelerator (buffer.h), and using low-latency notifications
 
 <dl class="cpp function">
 <dt id="_CPPv414fpgaReadMMIO6411fpga_handle8uint32_t8uint64_tP8uint64_t">
-<span id="_CPPv314fpgaReadMMIO6411fpga_handle8uint32_t8uint64_tP8uint64_t"></span><span id="_CPPv214fpgaReadMMIO6411fpga_handle8uint32_t8uint64_tP8uint64_t"></span><span id="fpgaReadMMIO64__fpga_handle.uint32_t.uint64_t.uint64_tP"></span><span class="target" id="opae-libs_2include_2opae_2mmio_8h_1a011ba900710ddf70c13ca089c4742187"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaReadMMIO64</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint64_t *<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414fpgaReadMMIO6411fpga_handle8uint32_t8uint64_tP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv314fpgaReadMMIO6411fpga_handle8uint32_t8uint64_tP8uint64_t"></span><span id="_CPPv214fpgaReadMMIO6411fpga_handle8uint32_t8uint64_tP8uint64_t"></span><span id="fpgaReadMMIO64__fpga_handle.uint32_t.uint64_t.uint64_tP"></span><span class="target" id="include_2opae_2mmio_8h_1a011ba900710ddf70c13ca089c4742187"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaReadMMIO64</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint64_t *<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414fpgaReadMMIO6411fpga_handle8uint32_t8uint64_tP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Read 64 bit value from MMIO space</p>
 <p>This function will read from MMIO space of the target object at a specified offset.</p>
 <p><dl class="simple">
@@ -2207,7 +2206,7 @@ buffers with an accelerator (buffer.h), and using low-latency notifications
 
 <dl class="cpp function">
 <dt id="_CPPv415fpgaWriteMMIO3211fpga_handle8uint32_t8uint64_t8uint32_t">
-<span id="_CPPv315fpgaWriteMMIO3211fpga_handle8uint32_t8uint64_t8uint32_t"></span><span id="_CPPv215fpgaWriteMMIO3211fpga_handle8uint32_t8uint64_t8uint32_t"></span><span id="fpgaWriteMMIO32__fpga_handle.uint32_t.uint64_t.uint32_t"></span><span class="target" id="opae-libs_2include_2opae_2mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaWriteMMIO32</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint32_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415fpgaWriteMMIO3211fpga_handle8uint32_t8uint64_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv315fpgaWriteMMIO3211fpga_handle8uint32_t8uint64_t8uint32_t"></span><span id="_CPPv215fpgaWriteMMIO3211fpga_handle8uint32_t8uint64_t8uint32_t"></span><span id="fpgaWriteMMIO32__fpga_handle.uint32_t.uint64_t.uint32_t"></span><span class="target" id="include_2opae_2mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaWriteMMIO32</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint32_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415fpgaWriteMMIO3211fpga_handle8uint32_t8uint64_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Write 32 bit value to MMIO space</p>
 <p>This function will write to MMIO space of the target object at a specified offset.</p>
 <p><dl class="simple">
@@ -2226,7 +2225,7 @@ buffers with an accelerator (buffer.h), and using low-latency notifications
 
 <dl class="cpp function">
 <dt id="_CPPv414fpgaReadMMIO3211fpga_handle8uint32_t8uint64_tP8uint32_t">
-<span id="_CPPv314fpgaReadMMIO3211fpga_handle8uint32_t8uint64_tP8uint32_t"></span><span id="_CPPv214fpgaReadMMIO3211fpga_handle8uint32_t8uint64_tP8uint32_t"></span><span id="fpgaReadMMIO32__fpga_handle.uint32_t.uint64_t.uint32_tP"></span><span class="target" id="opae-libs_2include_2opae_2mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaReadMMIO32</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint32_t *<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414fpgaReadMMIO3211fpga_handle8uint32_t8uint64_tP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv314fpgaReadMMIO3211fpga_handle8uint32_t8uint64_tP8uint32_t"></span><span id="_CPPv214fpgaReadMMIO3211fpga_handle8uint32_t8uint64_tP8uint32_t"></span><span id="fpgaReadMMIO32__fpga_handle.uint32_t.uint64_t.uint32_tP"></span><span class="target" id="include_2opae_2mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaReadMMIO32</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, uint32_t *<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414fpgaReadMMIO3211fpga_handle8uint32_t8uint64_tP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Read 32 bit value from MMIO space</p>
 <p>This function will read from MMIO space of the target object at a specified offset.</p>
 <p><dl class="simple">
@@ -2245,7 +2244,7 @@ buffers with an accelerator (buffer.h), and using low-latency notifications
 
 <dl class="cpp function">
 <dt id="_CPPv416fpgaWriteMMIO51211fpga_handle8uint32_t8uint64_tPKv">
-<span id="_CPPv316fpgaWriteMMIO51211fpga_handle8uint32_t8uint64_tPKv"></span><span id="_CPPv216fpgaWriteMMIO51211fpga_handle8uint32_t8uint64_tPKv"></span><span id="fpgaWriteMMIO512__fpga_handle.uint32_t.uint64_t.voidCP"></span><span class="target" id="opae-libs_2include_2opae_2mmio_8h_1a9cf56711df0f234686426c58d8b00cb0"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaWriteMMIO512</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, <em class="property">const</em> void *<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416fpgaWriteMMIO51211fpga_handle8uint32_t8uint64_tPKv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv316fpgaWriteMMIO51211fpga_handle8uint32_t8uint64_tPKv"></span><span id="_CPPv216fpgaWriteMMIO51211fpga_handle8uint32_t8uint64_tPKv"></span><span id="fpgaWriteMMIO512__fpga_handle.uint32_t.uint64_t.voidCP"></span><span class="target" id="include_2opae_2mmio_8h_1a9cf56711df0f234686426c58d8b00cb0"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaWriteMMIO512</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t <em>offset</em>, <em class="property">const</em> void *<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416fpgaWriteMMIO51211fpga_handle8uint32_t8uint64_tPKv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Write 512 bit value to MMIO space</p>
 <p>512 bit MMIO writes may not be supported on all platforms.</p>
 <p>This function will write to MMIO space of the target object at a specified offset.</p>
@@ -2265,13 +2264,13 @@ buffers with an accelerator (buffer.h), and using low-latency notifications
 
 <dl class="cpp function">
 <dt id="_CPPv411fpgaMapMMIO11fpga_handle8uint32_tPP8uint64_t">
-<span id="_CPPv311fpgaMapMMIO11fpga_handle8uint32_tPP8uint64_t"></span><span id="_CPPv211fpgaMapMMIO11fpga_handle8uint32_tPP8uint64_t"></span><span id="fpgaMapMMIO__fpga_handle.uint32_t.uint64_tPP"></span><span class="target" id="opae-libs_2include_2opae_2mmio_8h_1a2903267d37ea5c64522b0addce74da5f"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaMapMMIO</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t **<em>mmio_ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411fpgaMapMMIO11fpga_handle8uint32_tPP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv311fpgaMapMMIO11fpga_handle8uint32_tPP8uint64_t"></span><span id="_CPPv211fpgaMapMMIO11fpga_handle8uint32_tPP8uint64_t"></span><span id="fpgaMapMMIO__fpga_handle.uint32_t.uint64_tPP"></span><span class="target" id="include_2opae_2mmio_8h_1a2903267d37ea5c64522b0addce74da5f"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaMapMMIO</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em>, uint64_t **<em>mmio_ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411fpgaMapMMIO11fpga_handle8uint32_tPP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Map MMIO space</p>
 <p>This function will return a pointer to the specified MMIO space of the target object in process virtual memory, if supported by the target. Some MMIO spaces may be restricted to privileged processes, depending on the used handle and type.</p>
 <p>After mapping the respective MMIO space, you can access it through direct pointer operations (observing supported access sizes and alignments of the target platform and accelerator).</p>
 <p><p>If the caller passes in NULL for mmio_ptr, no mapping will be performed, and no virtual address will be returned, though the call will return </p>
-<code class="docutils literal notranslate"><span class="pre">FPGA_OK</span></code>. This implies that all accesses will be performed through <a class="reference internal" href="#opae-libs_2include_2opae_2mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"><span class="std std-ref">fpgaReadMMIO32()</span></a>, <a class="reference internal" href="#opae-libs_2include_2opae_2mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"><span class="std std-ref">fpgaWriteMMIO32()</span></a>, fpgeReadMMIO64(), and <a class="reference internal" href="#opae-libs_2include_2opae_2mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"><span class="std std-ref">fpgaWriteMMIO64()</span></a>. This is the only supported case for ASE.<dl class="simple">
-<dt><strong>Note</strong></dt><dd><p>Some targets (such as the ASE simulator) do not support memory-mapping of IO register spaces and will not return a pointer to an actually mapped space. Instead, they will return <code class="docutils literal notranslate"><span class="pre">FPGA_NOT_SUPPORTED</span></code>. Usually, these platforms still allow the application to issue MMIO operations using <a class="reference internal" href="#opae-libs_2include_2opae_2mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"><span class="std std-ref">fpgaReadMMIO32()</span></a>, <a class="reference internal" href="#opae-libs_2include_2opae_2mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"><span class="std std-ref">fpgaWriteMMIO32()</span></a>, fpgeReadMMIO64(), and <a class="reference internal" href="#opae-libs_2include_2opae_2mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"><span class="std std-ref">fpgaWriteMMIO64()</span></a>.</p>
+<code class="docutils literal notranslate"><span class="pre">FPGA_OK</span></code>. This implies that all accesses will be performed through <a class="reference internal" href="#include_2opae_2mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"><span class="std std-ref">fpgaReadMMIO32()</span></a>, <a class="reference internal" href="#include_2opae_2mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"><span class="std std-ref">fpgaWriteMMIO32()</span></a>, fpgeReadMMIO64(), and <a class="reference internal" href="#include_2opae_2mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"><span class="std std-ref">fpgaWriteMMIO64()</span></a>. This is the only supported case for ASE.<dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>Some targets (such as the ASE simulator) do not support memory-mapping of IO register spaces and will not return a pointer to an actually mapped space. Instead, they will return <code class="docutils literal notranslate"><span class="pre">FPGA_NOT_SUPPORTED</span></code>. Usually, these platforms still allow the application to issue MMIO operations using <a class="reference internal" href="#include_2opae_2mmio_8h_1a81dc89da3e94e26efff1af1eeebb7f5d"><span class="std std-ref">fpgaReadMMIO32()</span></a>, <a class="reference internal" href="#include_2opae_2mmio_8h_1ae538bfe7158d1911c5e749bbc063aa3d"><span class="std std-ref">fpgaWriteMMIO32()</span></a>, fpgeReadMMIO64(), and <a class="reference internal" href="#include_2opae_2mmio_8h_1a6df7f745d9b9d47582714fe8e2d1a761"><span class="std std-ref">fpgaWriteMMIO64()</span></a>.</p>
 </dd>
 </dl>
 </p>
@@ -2291,7 +2290,7 @@ buffers with an accelerator (buffer.h), and using low-latency notifications
 
 <dl class="cpp function">
 <dt id="_CPPv413fpgaUnmapMMIO11fpga_handle8uint32_t">
-<span id="_CPPv313fpgaUnmapMMIO11fpga_handle8uint32_t"></span><span id="_CPPv213fpgaUnmapMMIO11fpga_handle8uint32_t"></span><span id="fpgaUnmapMMIO__fpga_handle.uint32_t"></span><span class="target" id="opae-libs_2include_2opae_2mmio_8h_1a8c8db22506e1fbfd16440c660bfee28f"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaUnmapMMIO</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413fpgaUnmapMMIO11fpga_handle8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv313fpgaUnmapMMIO11fpga_handle8uint32_t"></span><span id="_CPPv213fpgaUnmapMMIO11fpga_handle8uint32_t"></span><span id="fpgaUnmapMMIO__fpga_handle.uint32_t"></span><span class="target" id="include_2opae_2mmio_8h_1a8c8db22506e1fbfd16440c660bfee28f"></span><a class="reference internal" href="#_CPPv411fpga_result" title="fpga_result">fpga_result</a> <code class="sig-name descname">fpgaUnmapMMIO</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411fpga_handle" title="fpga_handle">fpga_handle</a> <em>handle</em>, uint32_t <em>mmio_num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413fpgaUnmapMMIO11fpga_handle8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Unmap MMIO space</p>
 <p>This function will unmap a previously mapped MMIO space of the target object, rendering any pointers to it invalid.</p>
 <p><dl class="simple">
@@ -3149,8 +3148,8 @@ provided by the utilities API.</p>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
-<dt id="_CPPv4N16ras_inject_errorUt2_28E">
-<span id="_CPPv3N16ras_inject_errorUt2_28E"></span><span class="target" id="structras__inject__error_1a87940cb444cacce0edffccc9fc15eaae"></span><em class="property">union</em> <a class="reference internal" href="#_CPPv416ras_inject_error" title="ras_inject_error">ras_inject_error</a>::<strong>[anonymous]</strong> <strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4N16ras_inject_errorUt2_28E" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N16ras_inject_errorUt2_26E">
+<span id="_CPPv3N16ras_inject_errorUt2_26E"></span><span class="target" id="structras__inject__error_1ad58a5d1764bd77aae8b2411a23dcabc6"></span><em class="property">union</em> <a class="reference internal" href="#_CPPv416ras_inject_error" title="ras_inject_error">ras_inject_error</a>::<strong>[anonymous]</strong> <strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4N16ras_inject_errorUt2_26E" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -3158,17 +3157,17 @@ provided by the utilities API.</p>
 
 <dl class="cpp union">
 <dt>
-<span class="target" id="unionras__inject__error_8____unnamed28____"></span><code class="sig-name descname">ras_inject_error.__unnamed28__</code></dt>
+<span class="target" id="unionras__inject__error_8____unnamed26____"></span><code class="sig-name descname">ras_inject_error.__unnamed26__</code></dt>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
 <dt id="_CPPv4N19PhonyNameDueToError3csrE">
-<span id="_CPPv3N19PhonyNameDueToError3csrE"></span><span id="_CPPv2N19PhonyNameDueToError3csrE"></span><span id="PhonyNameDueToError::csr__uint64_t"></span><span class="target" id="unionras__inject__error_8____unnamed28_____1a1f8c50db95e9ead5645e32f8df5baa7b"></span>uint64_t <code class="sig-name descname">csr</code><a class="headerlink" href="#_CPPv4N19PhonyNameDueToError3csrE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N19PhonyNameDueToError3csrE"></span><span id="_CPPv2N19PhonyNameDueToError3csrE"></span><span id="PhonyNameDueToError::csr__uint64_t"></span><span class="target" id="unionras__inject__error_8____unnamed26_____1a1f8c50db95e9ead5645e32f8df5baa7b"></span>uint64_t <code class="sig-name descname">csr</code><a class="headerlink" href="#_CPPv4N19PhonyNameDueToError3csrE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
-<dt id="_CPPv4N19PhonyNameDueToErrorUt2_30E">
-<span id="_CPPv3N19PhonyNameDueToErrorUt2_30E"></span><span class="target" id="unionras__inject__error_8____unnamed28_____1a9d5c4fcc1e63ab1cc81003e56e9b9b16"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv416ras_inject_error" title="ras_inject_error">ras_inject_error</a>::<strong>[anonymous]</strong>::<strong>[anonymous]</strong> <strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4N19PhonyNameDueToErrorUt2_30E" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N19PhonyNameDueToErrorUt2_28E">
+<span id="_CPPv3N19PhonyNameDueToErrorUt2_28E"></span><span class="target" id="unionras__inject__error_8____unnamed26_____1a3feba5913a13f622bc3861d3fd3a7d5a"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv416ras_inject_error" title="ras_inject_error">ras_inject_error</a>::<strong>[anonymous]</strong>::<strong>[anonymous]</strong> <strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4N19PhonyNameDueToErrorUt2_28E" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -3176,27 +3175,27 @@ provided by the utilities API.</p>
 
 <dl class="cpp struct">
 <dt>
-<span class="target" id="structras__inject__error_8____unnamed28_____8____unnamed30____"></span><code class="sig-name descname">ras_inject_error.__unnamed28__.__unnamed30__</code></dt>
+<span class="target" id="structras__inject__error_8____unnamed26_____8____unnamed28____"></span><code class="sig-name descname">ras_inject_error.__unnamed26__.__unnamed28__</code></dt>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
 <dt id="_CPPv4N19PhonyNameDueToError19catastrophicr_errorE">
-<span id="_CPPv3N19PhonyNameDueToError19catastrophicr_errorE"></span><span id="_CPPv2N19PhonyNameDueToError19catastrophicr_errorE"></span><span id="PhonyNameDueToError::catastrophicr_error__uint64_t"></span><span class="target" id="structras__inject__error_8____unnamed28_____8____unnamed30_____1a2a0e5bc9b5c01998865d21cfc6acdd8b"></span>uint64_t <code class="sig-name descname">catastrophicr_error</code><a class="headerlink" href="#_CPPv4N19PhonyNameDueToError19catastrophicr_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N19PhonyNameDueToError19catastrophicr_errorE"></span><span id="_CPPv2N19PhonyNameDueToError19catastrophicr_errorE"></span><span id="PhonyNameDueToError::catastrophicr_error__uint64_t"></span><span class="target" id="structras__inject__error_8____unnamed26_____8____unnamed28_____1a2a0e5bc9b5c01998865d21cfc6acdd8b"></span>uint64_t <code class="sig-name descname">catastrophicr_error</code><a class="headerlink" href="#_CPPv4N19PhonyNameDueToError19catastrophicr_errorE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N19PhonyNameDueToError11fatal_errorE">
-<span id="_CPPv3N19PhonyNameDueToError11fatal_errorE"></span><span id="_CPPv2N19PhonyNameDueToError11fatal_errorE"></span><span id="PhonyNameDueToError::fatal_error__uint64_t"></span><span class="target" id="structras__inject__error_8____unnamed28_____8____unnamed30_____1a248d7cd65b618004dbd5f44e96b8cd61"></span>uint64_t <code class="sig-name descname">fatal_error</code><a class="headerlink" href="#_CPPv4N19PhonyNameDueToError11fatal_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N19PhonyNameDueToError11fatal_errorE"></span><span id="_CPPv2N19PhonyNameDueToError11fatal_errorE"></span><span id="PhonyNameDueToError::fatal_error__uint64_t"></span><span class="target" id="structras__inject__error_8____unnamed26_____8____unnamed28_____1a248d7cd65b618004dbd5f44e96b8cd61"></span>uint64_t <code class="sig-name descname">fatal_error</code><a class="headerlink" href="#_CPPv4N19PhonyNameDueToError11fatal_errorE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N19PhonyNameDueToError14nonfatal_errorE">
-<span id="_CPPv3N19PhonyNameDueToError14nonfatal_errorE"></span><span id="_CPPv2N19PhonyNameDueToError14nonfatal_errorE"></span><span id="PhonyNameDueToError::nonfatal_error__uint64_t"></span><span class="target" id="structras__inject__error_8____unnamed28_____8____unnamed30_____1a8da0039b80fc69ebb6f5f263320816ed"></span>uint64_t <code class="sig-name descname">nonfatal_error</code><a class="headerlink" href="#_CPPv4N19PhonyNameDueToError14nonfatal_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N19PhonyNameDueToError14nonfatal_errorE"></span><span id="_CPPv2N19PhonyNameDueToError14nonfatal_errorE"></span><span id="PhonyNameDueToError::nonfatal_error__uint64_t"></span><span class="target" id="structras__inject__error_8____unnamed26_____8____unnamed28_____1a8da0039b80fc69ebb6f5f263320816ed"></span>uint64_t <code class="sig-name descname">nonfatal_error</code><a class="headerlink" href="#_CPPv4N19PhonyNameDueToError14nonfatal_errorE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N19PhonyNameDueToError4rsvdE">
-<span id="_CPPv3N19PhonyNameDueToError4rsvdE"></span><span id="_CPPv2N19PhonyNameDueToError4rsvdE"></span><span id="PhonyNameDueToError::rsvd__uint64_t"></span><span class="target" id="structras__inject__error_8____unnamed28_____8____unnamed30_____1aa799822e734135bf270e704b72c08764"></span>uint64_t <code class="sig-name descname">rsvd</code><a class="headerlink" href="#_CPPv4N19PhonyNameDueToError4rsvdE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N19PhonyNameDueToError4rsvdE"></span><span id="_CPPv2N19PhonyNameDueToError4rsvdE"></span><span id="PhonyNameDueToError::rsvd__uint64_t"></span><span class="target" id="structras__inject__error_8____unnamed26_____8____unnamed28_____1aa799822e734135bf270e704b72c08764"></span>uint64_t <code class="sig-name descname">rsvd</code><a class="headerlink" href="#_CPPv4N19PhonyNameDueToError4rsvdE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>

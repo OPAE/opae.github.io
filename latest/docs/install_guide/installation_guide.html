@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                2.0.10
+                2.1.0
               </div>
             
           
@@ -104,7 +104,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fpga_api/prog_guide/readme.html">OPAE C API Programming Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ase_userguide/ase_userguide.html">Intel® Accelerator Functional Unit (AFU) Simulation Environment (ASE) User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyopae/README.html">OPAE Python Bindings</a></li>
 </ul>
 <p class="caption"><span class="caption-text">OPAE Libraries</span></p>
@@ -314,26 +313,23 @@ When the system login again, check the kernel version is correctly or not.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/OPAE/opae-sdk.git
 </pre></div>
 </div>
-<p>Compile and build the OPAE-SDK.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> opae-sdk
-<span class="gp">$ </span>mkdir build
-<span class="gp">$ </span><span class="nb">cd</span> build
-<span class="gp">$ </span>cmake .. -DCPACK_GENERATOR<span class="o">=</span>RPM -DOPAE_BUILD_LEGACY<span class="o">=</span>ON -DOPAE_PYTHON_VERSION<span class="o">=</span><span class="m">3</span>.6 -DOPAE_BUILD_EXTRA_TOOLS_FPGABIST<span class="o">=</span>ON -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/usr
-<span class="gp">$ </span>make
-<span class="gp">$ </span>make package_rpm
+<p>Compile and build the OPAE-SDK RPMs (Fedora, CentOS).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> opae-sdk/packaging/opae/rpm
+<span class="gp">$ </span>./create fedora
 </pre></div>
 </div>
-<p>After compile successful, there are 8 rpm packages generated.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opae-2.0.0-1.x86_64.rpm</span>
-<span class="go">opae-devel-2.0.0-1.x86_64.rpm</span>
-<span class="go">opae-libs-2.0.0-1.x86_64.rpm</span>
-<span class="go">opae-opae.admin-2.0.0-1.x86_64.rpm</span>
-<span class="go">opae-PACSign-2.0.0-1.x86_64.rpm</span>
-<span class="go">opae-tests-2.0.0-1.x86_64.rpm</span>
-<span class="go">opae-tools-2.0.0-1.x86_64.rpm</span>
-<span class="go">opae-tools-extra-2.0.0-1.x86_64.rpm</span>
+<p>Compile and build the OPAE-SDK RPMs (RHEL).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> opae-sdk/packaging/opae/rpm
+<span class="gp">$ </span>./create rhel
 </pre></div>
 </div>
+<p>After a successful compile, there are 3 rpm packages generated (Fedora, CentOS).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opae-2.1.0-1.fc34.x86_64.rpm</span>
+<span class="go">opae-devel-2.1.0-1.fc34.x86_64.rpm</span>
+<span class="go">opae-extra-tools-2.1.0-1.fc34.x86_64.rpm</span>
+</pre></div>
+</div>
+<p>Note that the RHEL RPM build does not produce a opae-extra-tools RPM.</p>
 </div>
 </div>
 <div class="section" id="opae-sdk-installation-with-rpm-packages">
